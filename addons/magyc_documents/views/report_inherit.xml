@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Angebot / Auftragsbestätigung -->
+    <template id="report_saleorder_magyc_text" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//table[hasclass('o_main_table')]" position="before">
+            <t t-set="magyc_doc_type" t-value="'order' if o.state in ('sale', 'done') else 'sale'"/>
+            <t t-set="magyc_txt" t-value="o.env['magyc.document.text']._get_text(magyc_doc_type)"/>
+            <div t-if="magyc_txt and magyc_txt.intro" class="mt-3" t-out="magyc_txt.intro"/>
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]" position="after">
+            <div t-if="magyc_txt and magyc_txt.outro" class="mt-3" t-out="magyc_txt.outro"/>
+        </xpath>
+    </template>
+
+    <!-- Rechnung / Gutschrift -->
+    <template id="report_invoice_magyc_text" inherit_id="account.report_invoice_document">
+        <xpath expr="//table[@name='invoice_line_table']" position="before">
+            <t t-set="magyc_doc_type" t-value="
+                'credit' if o.move_type == 'out_refund'
+                else ('invoice_kiosk' if o.partner_id.kundentyp == 'kiosk'
+                else ('invoice_shop' if o.partner_id.kundentyp == 'online' else 'invoice'))"/>
+            <t t-set="magyc_txt" t-value="o.env['magyc.document.text']._get_text(magyc_doc_type)"/>
+            <div t-if="magyc_txt and magyc_txt.intro" class="mt-3" t-out="magyc_txt.intro"/>
+        </xpath>
+        <xpath expr="//table[@name='invoice_line_table']" position="after">
+            <div t-if="magyc_txt and magyc_txt.outro" class="mt-3" t-out="magyc_txt.outro"/>
+        </xpath>
+    </template>
+
+    <!-- Lieferschein -->
+    <template id="report_delivery_magyc_text" inherit_id="stock.report_delivery_document">
+        <xpath expr="//table[@name='stock_move_table']" position="before">
+            <t t-set="magyc_txt" t-value="o.env['magyc.document.text']._get_text('delivery')"/>
+            <div t-if="magyc_txt and magyc_txt.intro" class="mt-3" t-out="magyc_txt.intro"/>
+        </xpath>
+        <xpath expr="//table[@name='stock_move_table']" position="after">
+            <div t-if="magyc_txt and magyc_txt.outro" class="mt-3">
+                <div t-out="magyc_txt.outro"/>
+                <div class="mt-4">Ware vollständig und unbeschädigt erhalten:</div>
+                <div class="mt-4">____________________________________ (Unterschrift)</div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

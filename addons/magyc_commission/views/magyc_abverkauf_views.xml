@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_magyc_abverkauf_form" model="ir.ui.view">
+        <field name="name">magyc.abverkauf.form</field>
+        <field name="model">magyc.abverkauf</field>
+        <field name="arch" type="xml">
+            <form string="Abverkaufsmeldung">
+                <header>
+                    <button name="action_confirm" type="object" string="Bestätigen"
+                            class="btn-primary" invisible="state != 'draft'"/>
+                    <button name="action_create_invoice" type="object" string="Rechnung erstellen"
+                            class="btn-primary" invisible="state != 'done'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="location_id"/>
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="invoice_id" invisible="not invoice_id"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="product_id"/>
+                            <field name="qty_sold"/>
+                            <field name="qty_returned"/>
+                            <field name="price_unit"/>
+                            <field name="currency_id" column_invisible="1"/>
+                        </list>
+                    </field>
+                    <field name="note" placeholder="Bemerkungen…"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_magyc_abverkauf_list" model="ir.ui.view">
+        <field name="name">magyc.abverkauf.list</field>
+        <field name="model">magyc.abverkauf</field>
+        <field name="arch" type="xml">
+            <list string="Abverkaufsmeldungen">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="state" widget="badge"/>
+                <field name="invoice_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_magyc_abverkauf_search" model="ir.ui.view">
+        <field name="name">magyc.abverkauf.search</field>
+        <field name="model">magyc.abverkauf</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <filter name="draft" string="Entwurf" domain="[('state','=','draft')]"/>
+                <filter name="done" string="Bestätigt" domain="[('state','=','done')]"/>
+                <group>
+                    <filter name="group_partner" string="Kiosk" context="{'group_by': 'partner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_magyc_abverkauf" model="ir.actions.act_window">
+        <field name="name">Abverkaufsmeldungen</field>
+        <field name="res_model">magyc.abverkauf</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_magyc_root" name="MAGYC" sequence="60"/>
+    <menuitem id="menu_magyc_abverkauf" name="Abverkauf Kiosk" parent="menu_magyc_root"
+              action="action_magyc_abverkauf" sequence="10"/>
+</odoo>

@@ -7,25 +7,28 @@ Odoo 20 customisations for MAGYC DRINKS GmbH (PassForm Digital, Auftrag S00132).
 | Module | Scope |
 |---|---|
 | `magyc_custom` | Kiosk/commission master data on partners (Kiosk-ID, Kundentyp, Gebiet, Akquisiteur, Store Success Manager) |
+| `magyc_commission` | Abverkaufsmeldung je Kiosk: bestätigt Abverkauf, bucht Ware aus dem Kommissionslager aus, erzeugt die Monatsrechnung; Übergabeprotokoll (QWeb) |
+| `magyc_pfand` | Einwegpfand 0,25 € als eigene Auftragszeile (19 % USt), automatisch je Getränkezeile |
+| `magyc_documents` | Belegtexte je Belegtyp (Angebot, AB, Lieferschein, Rechnung Kiosk/B2B/Shop, Gutschrift) als pflegbare Datensätze + QWeb-Einbindung |
 
-Planned, not yet implemented:
-
-- `magyc_commission` — Kommissionsware bei Kiosken, monatliche Abverkaufsabrechnung
-- `magyc_pfand` — Einwegpfand 0,25 € (eigene Zeile, 19 % USt), DPG-Clearing, Rückzahlungsverpflichtung
-- Belegtexte je Belegtyp (Angebot, AB, Lieferschein, Übergabeprotokoll, Rechnungen, Mahnungen)
+Open: Pfand-Rücknahme/DPG-Clearing (§17 UStG) und Pfandrückzahlungsverpflichtung, Mahnstufen-Texte.
 
 ## Installation
 
 ```
 addons_path = /path/to/odoo/addons,/path/to/magyc-odoo/addons
-odoo-bin -c odoo.conf -d <db> -i magyc_custom --stop-after-init
+odoo-bin -c odoo.conf -d <db> -i magyc_custom,magyc_commission,magyc_pfand,magyc_documents --stop-after-init
 ```
 
-## Layout
+Odoo 20 notes:
+
+- Rechte liegen in `security/ir.access.csv` (Modell `ir.access`, Spalten `operation` + `domain`) — `ir.model.access` gibt es nicht mehr.
+- `product.packaging` existiert nicht mehr; Gebinde über `stock.package.type` / `stock.package`.
+
+## Smoke test
 
 ```
-addons/magyc_custom/
-├── __manifest__.py
-├── models/res_partner.py
-└── views/res_partner_views.xml
+odoo-bin shell -c odoo.conf -d magyc_dev < scripts/smoke_test.py
 ```
+
+Legt Test-Kiosk, Kommissionslager und Artikel an, bestätigt eine Abverkaufsmeldung, erzeugt die Rechnung und prüft die automatische Pfandzeile. Rollt am Ende zurück.

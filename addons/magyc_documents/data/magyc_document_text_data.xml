@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="doc_sale" model="magyc.document.text">
+        <field name="doc_type">sale</field>
+        <field name="intro">&lt;p&gt;Vielen Dank für Ihr Interesse an MAGYC. Gerne bieten wir Ihnen an:&lt;/p&gt;</field>
+        <field name="outro">&lt;p&gt;Dieses Angebot ist 14 Tage gültig. Alle Preise netto zzgl. gesetzlicher USt und Pfand. Wir freuen uns auf Ihre Bestellung!&lt;/p&gt;</field>
+    </record>
+
+    <record id="doc_order" model="magyc.document.text">
+        <field name="doc_type">order</field>
+        <field name="intro">&lt;p&gt;Vielen Dank für Ihre Bestellung. Wir bestätigen Ihren Auftrag wie folgt:&lt;/p&gt;</field>
+        <field name="outro">&lt;p&gt;Die Lieferung erfolgt aus unserem Lager Rangsdorf. Bei Fragen erreichen Sie uns jederzeit.&lt;/p&gt;</field>
+    </record>
+
+    <record id="doc_invoice" model="magyc.document.text">
+        <field name="doc_type">invoice</field>
+        <field name="intro">&lt;p&gt;Wir berechnen Ihnen wie folgt:&lt;/p&gt;</field>
+        <field name="outro">&lt;p&gt;Zahlbar innerhalb von 14 Tagen ohne Abzug.&lt;/p&gt;</field>
+    </record>
+
+    <record id="doc_invoice_kiosk" model="magyc.document.text">
+        <field name="doc_type">invoice_kiosk</field>
+        <field name="intro">&lt;p&gt;Gemäß Ihrer Abverkaufsmeldung für den Zeitraum [Monat] rechnen wir den Verkauf unserer Kommissionsware wie folgt ab (Getränk und Pfand je 19 % USt):&lt;/p&gt;</field>
+        <field name="outro">&lt;p&gt;Bitte überweisen Sie den Betrag innerhalb von 14 Tagen unter Angabe der Rechnungsnummer. Danke für die Zusammenarbeit!&lt;/p&gt;</field>
+    </record>
+
+    <record id="doc_invoice_shop" model="magyc.document.text">
+        <field name="doc_type">invoice_shop</field>
+        <field name="intro">&lt;p&gt;Danke für deine Bestellung bei MAGYC!&lt;/p&gt;</field>
+        <field name="outro">&lt;p&gt;Der Betrag wurde bereits bei Bestellung bezahlt. Stay MAGYC.&lt;/p&gt;</field>
+    </record>
+
+    <record id="doc_delivery" model="magyc.document.text">
+        <field name="doc_type">delivery</field>
+        <field name="intro">&lt;p&gt;Wir liefern Ihnen heute:&lt;/p&gt;</field>
+    </record>
+
+    <record id="doc_credit" model="magyc.document.text">
+        <field name="doc_type">credit</field>
+        <field name="intro">&lt;p&gt;Wir schreiben Ihnen folgenden Betrag gut (Bezug: Rechnung [Nr.]):&lt;/p&gt;</field>
+        <field name="outro">&lt;p&gt;Der Betrag wird mit offenen Posten verrechnet bzw. erstattet.&lt;/p&gt;</field>
+    </record>
+</odoo>
