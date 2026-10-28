@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_magyc" model="ir.ui.view">
+        <field name="name">res.partner.form.magyc</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="MAGYC" name="magyc">
+                    <group>
+                        <group>
+                            <field name="kiosk_id"/>
+                            <field name="kundentyp"/>
+                            <field name="gebiet"/>
+                        </group>
+                        <group>
+                            <field name="akquisiteur"/>
+                            <field name="store_success_manager"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_magyc" model="ir.ui.view">
+        <field name="name">res.partner.list.magyc</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="after">
+                <field name="kiosk_id" optional="show"/>
+                <field name="kundentyp" optional="show"/>
+                <field name="gebiet" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
