@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_commission" model="ir.ui.view">
+        <field name="name">res.partner.form.commission</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="magyc_custom.view_partner_form_magyc"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='magyc']//field[@name='kundentyp']" position="after">
+                <field name="commission_location_id" invisible="kundentyp != 'kiosk'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

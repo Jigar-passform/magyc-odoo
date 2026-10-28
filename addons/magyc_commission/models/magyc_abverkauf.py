@@ -43,6 +43,12 @@ class MagycAbverkauf(models.Model):
             if rec.date_from and rec.date_to and rec.date_from > rec.date_to:
                 raise UserError("Der Zeitraum ist ungültig: 'von' liegt nach 'bis'.")
 
+    @api.onchange("partner_id")
+    def _onchange_partner_id(self):
+        for rec in self:
+            if rec.partner_id.commission_location_id and not rec.location_id:
+                rec.location_id = rec.partner_id.commission_location_id
+
     def _get_customer_location(self):
         return self.env.ref("stock.stock_location_customers")
 
