@@ -16,7 +16,7 @@ Open: Pfand-Rücknahme/DPG-Clearing (§17 UStG) und Pfandrückzahlungsverpflicht
 ## Installation
 
 ```
-addons_path = /path/to/odoo/addons,/path/to/magyc-odoo/addons
+addons_path = /path/to/odoo/addons,/path/to/magyc-odoo
 odoo-bin -c odoo.conf -d <db> -i magyc_custom,magyc_commission,magyc_pfand,magyc_documents --stop-after-init
 ```
 
@@ -25,10 +25,10 @@ Odoo 20 notes:
 - Rechte liegen in `security/ir.access.csv` (Modell `ir.access`, Spalten `operation` + `domain`) — `ir.model.access` gibt es nicht mehr.
 - `product.packaging` existiert nicht mehr; Gebinde über `stock.package.type` / `stock.package`.
 
-## Smoke test
+## Status report
+
+`docs/build_status.py` erzeugt den zweiseitigen Statusbericht (Englisch/Deutsch) mit Anforderungstabelle:
 
 ```
-odoo-bin shell -c odoo.conf -d magyc_dev < scripts/smoke_test.py
+uv run --with reportlab python docs/build_status.py "docs/Magyc Odoo Status Report.pdf"
 ```
-
-Legt Test-Kiosk, Kommissionslager und Artikel an, bestätigt eine Abverkaufsmeldung, erzeugt die Rechnung und prüft die automatische Pfandzeile. Rollt am Ende zurück.
