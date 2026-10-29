@@ -23,7 +23,7 @@ class MagycAbverkauf(models.Model):
     line_ids = fields.One2many("magyc.abverkauf.line", "abverkauf_id", string="Positionen")
     state = fields.Selection(
         [("draft", "Entwurf"), ("done", "Bestätigt"), ("invoiced", "Abgerechnet")],
-        default="draft", tracking=True, copy=False,
+        string="Status", default="draft", tracking=True, copy=False,
     )
     invoice_id = fields.Many2one("account.move", string="Rechnung", readonly=True, copy=False)
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company, required=True)
@@ -68,17 +68,56 @@ class MagycAbverkauf(models.Model):
             [("company_id", "=", self.company_id.id)], limit=1
         ).lot_stock_id
 
+    def _magyc_allocate_lots(self, product, qty):
+        """Split a quantity across the lots at the kiosk location, FEFO first."""
+        self.ensure_one()
+        quants = self.env["stock.quant"].search([
+            ("product_id", "=", product.id),
+            ("location_id", "=", self.location_id.id),
+            ("lot_id", "!=", False),
+            ("quantity", ">", 0),
+        ], order="removal_date asc, id asc") if "removal_date" in self.env["stock.quant"]._fields else \
+            self.env["stock.quant"].search([
+                ("product_id", "=", product.id),
+                ("location_id", "=", self.location_id.id),
+                ("lot_id", "!=", False),
+                ("quantity", ">", 0),
+            ])
+        allocation, remaining = [], qty
+        for quant in quants:
+            if remaining <= 0:
+                break
+            take = min(quant.quantity, remaining)
+            allocation.append((quant.lot_id, take))
+            remaining -= take
+        if remaining > 0:
+            base = "%s-%s" % (product.default_code or product.id, fields.Date.context_today(self))
+            name, counter = base, 1
+            while self.env["stock.lot"].search_count([
+                    ("name", "=", name), ("product_id", "=", product.id)], limit=1):
+                counter += 1
+                name = "%s-%s" % (base, counter)
+            allocation.append((self.env["stock.lot"].create({
+                "name": name,
+                "product_id": product.id,
+                "company_id": self.company_id.id,
+            }), remaining))
+        return allocation
+
     def _create_picking(self, rec, lines, dest_location, origin_suffix):
-        moves = []
+        moves, allocations = [], {}
         for line, qty in lines:
             if qty <= 0:
                 continue
+            product = line.product_id
             moves.append({
-                "product_id": line.product_id.id,
+                "product_id": product.id,
                 "product_uom_qty": qty,
                 "location_id": rec.location_id.id,
                 "location_dest_id": dest_location.id,
             })
+            if product.tracking != "none":
+                allocations[product.id] = rec._magyc_allocate_lots(product, qty)
         if not moves:
             return None
         picking_type = self.env["stock.picking.type"].search(
@@ -92,6 +131,19 @@ class MagycAbverkauf(models.Model):
             "origin": "%s %s" % (rec.name, origin_suffix),
             "move_ids": [(0, 0, m) for m in moves],
         })
+        for move in picking.move_ids:
+            allocation = allocations.get(move.product_id.id)
+            if not allocation:
+                continue
+            move.move_line_ids.unlink()
+            self.env["stock.move.line"].create([{
+                "move_id": move.id,
+                "product_id": move.product_id.id,
+                "lot_id": lot.id,
+                "quantity": allocated,
+                "location_id": rec.location_id.id,
+                "location_dest_id": dest_location.id,
+            } for lot, allocated in allocation])
         picking.action_confirm()
         picking.move_ids.picked = True
         picking.button_validate()

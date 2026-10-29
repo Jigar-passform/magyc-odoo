@@ -13,7 +13,7 @@ class MagycPfandReturn(models.Model):
     date = fields.Date(default=fields.Date.context_today, required=True, tracking=True)
     line_ids = fields.One2many("magyc.pfand.return.line", "return_id", string="Positionen")
     state = fields.Selection([("draft", "Entwurf"), ("done", "Abgerechnet")],
-                             default="draft", tracking=True, copy=False)
+                             string="Status", default="draft", tracking=True, copy=False)
     credit_note_id = fields.Many2one("account.move", string="Gutschrift", readonly=True, copy=False)
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company, required=True)
     qty_total = fields.Float(string="Menge gesamt", compute="_compute_totals", store=True)

@@ -5,7 +5,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
-from reportlab.platypus import (BaseDocTemplate, Frame, KeepTogether, PageBreak,
+from reportlab.platypus import (BaseDocTemplate, Frame, Image, KeepTogether, PageBreak,
                                 PageTemplate, Paragraph, Spacer, Table, TableStyle)
 
 TITLE = "MAGYC DRINKS GmbH – Odoo 20 Einrichtung und offene Angaben"
@@ -27,6 +27,8 @@ H2 = ParagraphStyle("h2", fontName="Helvetica-Bold", fontSize=14, leading=18,
                     spaceBefore=10, spaceAfter=6, textColor=NAVY)
 H3 = ParagraphStyle("h3", fontName="Helvetica-Bold", fontSize=10.2, leading=13.5,
                     spaceBefore=8, spaceAfter=3, textColor=BLUE)
+CAP = ParagraphStyle("cap", fontName="Helvetica-Oblique", fontSize=8, leading=10.5,
+                     textColor=GREY, spaceBefore=2, spaceAfter=10)
 SUB = ParagraphStyle("sub", fontName="Helvetica", fontSize=10, leading=14,
                      textColor=GREY, spaceAfter=10)
 CELL = ParagraphStyle("cell", fontName="Helvetica", fontSize=8.2, leading=10.6, textColor=INK)
@@ -127,6 +129,13 @@ QUESTIONS = [
 ]
 
 
+def figure(path, caption, width_mm=165):
+    width = width_mm * mm
+    return KeepTogether([
+        Image(path, width=width, height=width * 900.0 / 1440.0),
+        Paragraph(caption, CAP),
+    ])
+
 def bullets(items):
     return [Paragraph(t, BULLET, bulletText="\u2022") for t in items]
 
@@ -206,7 +215,18 @@ def build(out):
         Spacer(1, 4),
         questions_table(),
 
-        Paragraph("6. Nächste Schritte", H2),
+        Paragraph("6. Screenshots", H2),
+        Paragraph("Aufnahmen aus der eingerichteten Instanz. Die Dateien liegen im Projektordner "
+                  "unter docs/screenshots.", BODY),
+        figure("C:/Users/ABC/magyc-odoo/docs/screenshots/01-abverkauf-liste.png",
+               "Abbildung 1: Abverkaufsmeldungen je Kiosk mit Status und Rechnung"),
+        figure("C:/Users/ABC/magyc-odoo/docs/screenshots/02-abverkauf-formular.png",
+               "Abbildung 2: Abverkaufsmeldung mit Zeitraum, Summen, Positionen und Rechnung"),
+        figure("C:/Users/ABC/magyc-odoo/docs/screenshots/03-pfand-ruecknahme-liste.png",
+               "Abbildung 3: Pfand-Rücknahme mit Gutschrift"),
+        figure("C:/Users/ABC/magyc-odoo/docs/screenshots/05-belegtexte.png",
+               "Abbildung 4: Belegtexte je Belegart, pflegbar ohne Codeänderung"),
+        Paragraph("7. Nächste Schritte", H2),
         *bullets([
             "Angaben aus Abschnitt 5 einsammeln und im System ergänzen",
             "Pfand-Clearing und Rückzahlungsverpflichtung einrichten, sobald die Konten vorliegen",
