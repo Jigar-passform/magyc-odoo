@@ -85,7 +85,7 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <menuitem id="menu_magyc_root" name="MAGYC" sequence="60"/>
+    <menuitem id="menu_magyc_root" name="Kommission" sequence="60"/>
     <menuitem id="menu_magyc_abverkauf" name="Abverkauf Kiosk" parent="menu_magyc_root"
               action="action_magyc_abverkauf" sequence="10"/>
 </odoo>
