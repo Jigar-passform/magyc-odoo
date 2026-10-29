@@ -7,11 +7,11 @@ Odoo 20 customisations for MAGYC DRINKS GmbH (PassForm Digital, Auftrag S00132).
 | Module | Scope |
 |---|---|
 | `magyc_custom` | Kiosk/commission master data on partners (Kiosk-ID, Kundentyp, Gebiet, Akquisiteur, Store Success Manager) |
-| `magyc_commission` | Abverkaufsmeldung je Kiosk: bestätigt Abverkauf, bucht Ware aus dem Kommissionslager aus, erzeugt die Monatsrechnung; Übergabeprotokoll (QWeb) |
-| `magyc_pfand` | Einwegpfand 0,25 € als eigene Auftragszeile (19 % USt), automatisch je Getränkezeile |
-| `magyc_documents` | Belegtexte je Belegtyp (Angebot, AB, Lieferschein, Rechnung Kiosk/B2B/Shop, Gutschrift) als pflegbare Datensätze + QWeb-Einbindung |
+| `magyc_commission` | Abverkaufsmeldung je Kiosk: bestätigt Abverkauf, bucht Abverkauf an Kunden und Rückgaben ins Lager, erzeugt die Monatsrechnung; Übergabeprotokoll und Abverkaufsmeldung (QWeb) |
+| `magyc_pfand` | Einwegpfand 0,25 € als eigene Auftragszeile (19 % USt) je Getränkezeile; Pfand-Rücknahme mit Gutschrift |
+| `magyc_documents` | Belegtexte je Belegtyp (Angebot, AB, Lieferschein, Rechnung Kiosk/B2B/Shop, Gutschrift) als pflegbare Datensätze + QWeb-Einbindung; Mahnstufen (Zahlungserinnerung, 1./2. Mahnung) |
 
-Open: Pfand-Rücknahme/DPG-Clearing (§17 UStG) und Pfandrückzahlungsverpflichtung, Mahnstufen-Texte.
+Offen: DPG-Clearing (§ 17 UStG) und Pfandrückzahlungsverpflichtung — Konten von TU Treuhand.
 
 ## Installation
 

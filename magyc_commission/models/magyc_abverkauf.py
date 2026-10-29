@@ -28,6 +28,17 @@ class MagycAbverkauf(models.Model):
     invoice_id = fields.Many2one("account.move", string="Rechnung", readonly=True, copy=False)
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company, required=True)
     note = fields.Text()
+    qty_sold_total = fields.Float(string="Abverkauf gesamt", compute="_compute_totals", store=True)
+    qty_returned_total = fields.Float(string="Rückgabe gesamt", compute="_compute_totals", store=True)
+    amount_untaxed = fields.Monetary(string="Betrag netto", compute="_compute_totals", store=True)
+    currency_id = fields.Many2one(related="company_id.currency_id")
+
+    @api.depends("line_ids.qty_sold", "line_ids.qty_returned", "line_ids.price_unit")
+    def _compute_totals(self):
+        for rec in self:
+            rec.qty_sold_total = sum(rec.line_ids.mapped("qty_sold"))
+            rec.qty_returned_total = sum(rec.line_ids.mapped("qty_returned"))
+            rec.amount_untaxed = sum(l.qty_sold * l.price_unit for l in rec.line_ids)
 
     @api.depends("partner_id", "date_from", "date_to")
     def _compute_name(self):
@@ -52,36 +63,49 @@ class MagycAbverkauf(models.Model):
     def _get_customer_location(self):
         return self.env.ref("stock.stock_location_customers")
 
+    def _get_warehouse_location(self):
+        return self.env["stock.warehouse"].search(
+            [("company_id", "=", self.company_id.id)], limit=1
+        ).lot_stock_id
+
+    def _create_picking(self, rec, lines, dest_location, origin_suffix):
+        moves = []
+        for line, qty in lines:
+            if qty <= 0:
+                continue
+            moves.append({
+                "product_id": line.product_id.id,
+                "product_uom_qty": qty,
+                "location_id": rec.location_id.id,
+                "location_dest_id": dest_location.id,
+            })
+        if not moves:
+            return None
+        picking_type = self.env["stock.picking.type"].search(
+            [("code", "=", "outgoing"), ("warehouse_id.company_id", "=", rec.company_id.id)], limit=1
+        )
+        picking = self.env["stock.picking"].create({
+            "picking_type_id": picking_type.id,
+            "partner_id": rec.partner_id.id,
+            "location_id": rec.location_id.id,
+            "location_dest_id": dest_location.id,
+            "origin": "%s %s" % (rec.name, origin_suffix),
+            "move_ids": [(0, 0, m) for m in moves],
+        })
+        picking.action_confirm()
+        picking.move_ids.picked = True
+        picking.button_validate()
+        return picking
+
     def action_confirm(self):
-        """Move sold quantities out of the kiosk consignment location."""
+        """Book sold quantities out to the kiosk and returns back to the warehouse."""
         for rec in self:
             if rec.state != "draft":
                 continue
-            moves = []
-            for line in rec.line_ids:
-                if line.qty_sold <= 0:
-                    continue
-                moves.append({
-                    "product_id": line.product_id.id,
-                    "product_uom_qty": line.qty_sold,
-                    "location_id": rec.location_id.id,
-                    "location_dest_id": rec._get_customer_location().id,
-                })
-            if moves:
-                picking_type = self.env["stock.picking.type"].search(
-                    [("code", "=", "outgoing"), ("warehouse_id.company_id", "=", rec.company_id.id)], limit=1
-                )
-                picking = self.env["stock.picking"].create({
-                    "picking_type_id": picking_type.id,
-                    "partner_id": rec.partner_id.id,
-                    "location_id": rec.location_id.id,
-                    "location_dest_id": rec._get_customer_location().id,
-                    "origin": rec.name,
-                    "move_ids": [(0, 0, m) for m in moves],
-                })
-                picking.action_confirm()
-                picking.move_ids.picked = True
-                picking.button_validate()
+            self._create_picking(rec, [(l, l.qty_sold) for l in rec.line_ids],
+                                 rec._get_customer_location(), "Abverkauf")
+            self._create_picking(rec, [(l, l.qty_returned) for l in rec.line_ids],
+                                 rec._get_warehouse_location(), "Rückgabe")
             rec.state = "done"
 
     def action_create_invoice(self):

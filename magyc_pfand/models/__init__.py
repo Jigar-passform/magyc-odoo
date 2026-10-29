@@ -1,3 +1,4 @@
 from . import product_template
 from . import res_company
 from . import sale_order
+from . import magyc_pfand_return
