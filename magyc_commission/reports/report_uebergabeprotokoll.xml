@@ -51,16 +51,52 @@
                             <td><span t-field="move.product_id"/></td>
                             <td class="text-end"><span t-field="move.quantity"/></td>
                             <td>
-                                <span t-foreach="move.move_line_ids" t-as="ml" t-esc="ml.lot_id.name or ''"/>
+                                <t t-foreach="move.move_line_ids" t-as="ml">
+                                    <span t-out="ml.lot_id.name or ''"/>
+                                </t>
                             </td>
                             <td>
-                                <span t-foreach="move.move_line_ids" t-as="ml" t-esc="ml.lot_id.expiration_date or ''"/>
+                                <t t-foreach="move.move_line_ids" t-as="ml">
+                                    <span t-out="ml.lot_id.expiration_date or ''"/>
+                                </t>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <p class="mt-4">Abgerechnet wird monatlich nur der bestätigte Abverkauf. Unverkaufte Ware kann
                     zurückgegeben werden.</p>
+                <table class="table table-sm mt-3">
+                    <tr>
+                        <td style="width:35%">Erstbefüllung</td>
+                        <td><span t-field="o.magyc_first_fill_trays"/> Trays à 24 Dosen</td>
+                    </tr>
+                    <tr>
+                        <td>Ausgabe über Fahrzeuglager</td>
+                        <td><span t-field="o.magyc_vehicle_location_id"/></td>
+                    </tr>
+                    <tr>
+                        <td>Übergeben an</td>
+                        <td><span t-field="o.magyc_signer_name"/></td>
+                    </tr>
+                    <tr>
+                        <td>Anmerkung</td>
+                        <td><span t-field="o.magyc_handover_note"/></td>
+                    </tr>
+                </table>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <strong>Foto bei Übergabe</strong><br/>
+                        <img t-if="o.magyc_photo" t-att-src="'/web/image/stock.picking/%s/magyc_photo' % o.id"
+                             style="max-height:70mm; max-width:100%;"/>
+                        <span t-else="">Kein Foto hinterlegt.</span>
+                    </div>
+                    <div class="col-6">
+                        <strong>Unterschrift Kiosk</strong><br/>
+                        <img t-if="o.magyc_signature" t-att-src="'/web/image/stock.picking/%s/magyc_signature' % o.id"
+                             style="max-height:40mm; max-width:100%;"/>
+                        <span t-else="">Keine digitale Unterschrift hinterlegt.</span>
+                    </div>
+                </div>
                 <div class="row mt-5">
                     <div class="col-6">
                         Ware übernommen:<br/><br/>

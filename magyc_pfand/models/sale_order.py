@@ -25,6 +25,9 @@ class SaleOrder(models.Model):
         company = self.company_id
         if not (company.pfand_auto_add and company.pfand_product_id):
             return
+        if self.partner_id.kundentyp == "kiosk":
+            # Kioske zahlen Pfand mit der Abverkaufsrechnung, nicht auf dem Auftrag.
+            return
         pfand = company.pfand_product_id
         qty = self._magyc_pfand_qty()
         pfand_lines = self.order_line.filtered(lambda l: l.product_id == pfand)

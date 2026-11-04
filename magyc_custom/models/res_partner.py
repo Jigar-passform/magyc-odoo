@@ -1,4 +1,5 @@
-from odoo import fields, models
+from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -21,3 +22,56 @@ class ResPartner(models.Model):
     gebiet = fields.Char(string="Gebiet", help="Vertriebsgebiet, z. B. Berlin-Mitte.")
     akquisiteur = fields.Char(string="Akquisiteur")
     store_success_manager = fields.Char(string="Store Success Manager")
+
+    # Soll-Ablauf 01.11.2026: GLN und GTIN getrennt, Vertragslaufzeit, IBAN, Status
+    kiosk_gln = fields.Char(
+        string="GLN Kiosk",
+        size=13,
+        help="13-stellige GLN des Kiosks. Die GTIN der Artikel steht am Produkt, nicht hier.",
+    )
+    kiosk_iban = fields.Char(string="IBAN Kiosk", help="IBAN für die Auszahlung des Signing Bonus.")
+    contract_start = fields.Date(string="Vertragsbeginn")
+    contract_term_months = fields.Integer(string="Vertragslaufzeit (Monate)", default=12)
+    contract_signed = fields.Boolean(string="Vertrag unterschrieben")
+    contract_signed_on = fields.Date(string="Vertragsdatum")
+    contract_end = fields.Date(string="Vertragsende", compute="_compute_contract_end", store=True)
+    kiosk_status = fields.Selection(
+        selection=[("interessent", "Interessent"), ("aktiv", "Aktiv"), ("inaktiv", "Inaktiv")],
+        string="Kiosk-Status",
+        compute="_compute_kiosk_status",
+        store=True,
+    )
+
+    @api.depends("contract_start", "contract_term_months")
+    def _compute_contract_end(self):
+        for partner in self:
+            if partner.contract_start and partner.contract_term_months:
+                partner.contract_end = fields.Date.add(
+                    partner.contract_start, months=partner.contract_term_months
+                )
+            else:
+                partner.contract_end = False
+
+    @api.depends("kundentyp", "contract_signed")
+    def _compute_kiosk_status(self):
+        for partner in self:
+            if partner.kundentyp != "kiosk":
+                partner.kiosk_status = False
+            elif partner.contract_signed:
+                partner.kiosk_status = "aktiv"
+            else:
+                partner.kiosk_status = "interessent"
+
+    @api.constrains("kundentyp", "phone")
+    def _check_kiosk_phone(self):
+        for partner in self:
+            if partner.kundentyp == "kiosk" and not partner.phone:
+                raise ValidationError(
+                    "Für Kioske ist eine Telefonnummer Pflicht (Vorgabe aus dem Soll-Ablauf)."
+                )
+
+    @api.onchange("contract_signed")
+    def _onchange_contract_signed(self):
+        for partner in self:
+            if partner.contract_signed and not partner.contract_signed_on:
+                partner.contract_signed_on = fields.Date.context_today(partner)

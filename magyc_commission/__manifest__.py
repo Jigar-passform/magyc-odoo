@@ -5,13 +5,14 @@
     "author": "PassForm Digital",
     "category": "Sales/Sales",
     "license": "LGPL-3",
-    "depends": ["magyc_custom", "sale_management", "stock", "account"],
+    "depends": ["magyc_custom", "sale_management", "stock", "account", "product_expiry"],
     "data": [
         "security/ir.access.csv",
         "reports/report_uebergabeprotokoll.xml",
         "reports/report_abverkauf.xml",
         "views/magyc_abverkauf_views.xml",
         "views/res_partner_views.xml",
+        "views/stock_picking_views.xml",
     ],
     "installable": True,
 }

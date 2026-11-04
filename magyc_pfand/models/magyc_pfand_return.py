@@ -36,6 +36,11 @@ class MagycPfandReturn(models.Model):
         for rec in self:
             if rec.state != "draft":
                 continue
+            if rec.partner_id.kundentyp == "kiosk":
+                raise UserError(
+                    "Keine Pfandrückgabe an Kioske. Das Pfand wird mit der Abverkaufsrechnung "
+                    "abgerechnet, die DPG-Rücknahme erfolgt über MAGYC."
+                )
             lines = [(0, 0, {
                 "product_id": line.product_id.id,
                 "name": line.product_id.display_name,

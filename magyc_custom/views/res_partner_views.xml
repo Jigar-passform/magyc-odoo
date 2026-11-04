@@ -11,11 +11,26 @@
                         <group>
                             <field name="kiosk_id"/>
                             <field name="kundentyp"/>
+                            <field name="kiosk_status"/>
                             <field name="gebiet"/>
+                            <field name="kiosk_gln"/>
                         </group>
                         <group>
                             <field name="akquisiteur"/>
                             <field name="store_success_manager"/>
+                            <field name="kiosk_iban"/>
+                            <field name="magyc_delivery_block_override"/>
+                        </group>
+                    </group>
+                    <group string="Vertrag">
+                        <group>
+                            <field name="contract_start"/>
+                            <field name="contract_term_months"/>
+                            <field name="contract_end"/>
+                        </group>
+                        <group>
+                            <field name="contract_signed"/>
+                            <field name="contract_signed_on"/>
                         </group>
                     </group>
                 </page>

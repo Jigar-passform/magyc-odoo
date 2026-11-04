@@ -22,7 +22,8 @@ class MagycAbverkauf(models.Model):
     date_to = fields.Date(string="Zeitraum bis", required=True)
     line_ids = fields.One2many("magyc.abverkauf.line", "abverkauf_id", string="Positionen")
     state = fields.Selection(
-        [("draft", "Entwurf"), ("done", "Bestätigt"), ("invoiced", "Abgerechnet")],
+        [("draft", "Entwurf"), ("review", "Prüfung Differenz"),
+         ("done", "Bestätigt"), ("invoiced", "Abgerechnet")],
         string="Status", default="draft", tracking=True, copy=False,
     )
     invoice_id = fields.Many2one("account.move", string="Rechnung", readonly=True, copy=False)
@@ -30,14 +31,19 @@ class MagycAbverkauf(models.Model):
     note = fields.Text()
     qty_sold_total = fields.Float(string="Abverkauf gesamt", compute="_compute_totals", store=True)
     qty_returned_total = fields.Float(string="Rückgabe gesamt", compute="_compute_totals", store=True)
+    qty_shortfall_total = fields.Float(string="Differenz gesamt", compute="_compute_totals", store=True)
+    shortfall_cleared = fields.Boolean(string="Differenz geklärt", tracking=True, copy=False,
+                                       help="Ohne Klärung wird keine Rechnung erstellt.")
     amount_untaxed = fields.Monetary(string="Betrag netto", compute="_compute_totals", store=True)
     currency_id = fields.Many2one(related="company_id.currency_id")
 
-    @api.depends("line_ids.qty_sold", "line_ids.qty_returned", "line_ids.price_unit")
+    @api.depends("line_ids.qty_sold", "line_ids.qty_returned", "line_ids.qty_shortfall",
+                 "line_ids.price_unit")
     def _compute_totals(self):
         for rec in self:
             rec.qty_sold_total = sum(rec.line_ids.mapped("qty_sold"))
             rec.qty_returned_total = sum(rec.line_ids.mapped("qty_returned"))
+            rec.qty_shortfall_total = sum(rec.line_ids.mapped("qty_shortfall"))
             rec.amount_untaxed = sum(l.qty_sold * l.price_unit for l in rec.line_ids)
 
     @api.depends("partner_id", "date_from", "date_to")
@@ -149,11 +155,33 @@ class MagycAbverkauf(models.Model):
         picking.button_validate()
         return picking
 
+    def action_flag_shortfall(self):
+        """Differenz der Bestandsaufnahme als Prüfaufgabe beim Kiosk anlegen."""
+        for rec in self:
+            if not rec.qty_shortfall_total:
+                continue
+            rec.activity_schedule(
+                "mail.mail_activity_data_todo",
+                summary="Bestandsdifferenz prüfen",
+                note="Gezählter Bestand ist höher als der Systembestand. Vor der Rechnung klären.",
+                user_id=(rec.partner_id.user_id.id or self.env.user.id),
+            )
+            rec.state = "review"
+            rec.message_post(body="Differenz von %.0f Stück erkannt, Rechnung gesperrt." % rec.qty_shortfall_total)
+
+    def action_clear_shortfall(self):
+        for rec in self:
+            rec.shortfall_cleared = True
+            rec.state = "draft" if rec.state == "review" else rec.state
+            rec.activity_feedback(["mail.mail_activity_data_todo"], feedback="Differenz geklärt.")
+
     def action_confirm(self):
         """Book sold quantities out to the kiosk and returns back to the warehouse."""
         for rec in self:
-            if rec.state != "draft":
-                continue
+            if rec.state not in ("draft",):
+                raise UserError("Nur Entwürfe können bestätigt werden. Zuerst die Differenz klären.")
+            if rec.qty_shortfall_total and not rec.shortfall_cleared:
+                raise UserError("Bestandsdifferenz offen. Bitte zuerst prüfen und freigeben.")
             self._create_picking(rec, [(l, l.qty_sold) for l in rec.line_ids],
                                  rec._get_customer_location(), "Abverkauf")
             self._create_picking(rec, [(l, l.qty_returned) for l in rec.line_ids],
@@ -166,6 +194,13 @@ class MagycAbverkauf(models.Model):
                 raise UserError("Nur bestätigte Abverkaufsmeldungen können abgerechnet werden.")
             if rec.invoice_id:
                 raise UserError("Für diese Meldung existiert bereits eine Rechnung.")
+            if rec.qty_shortfall_total and not rec.shortfall_cleared:
+                raise UserError("Bestandsdifferenz ist noch nicht geklärt.")
+            if rec.qty_sold_total < 24:
+                raise UserError(
+                    "Rechnung erst ab 24 Dosen. Aktuell sind %.0f Stück erfasst, "
+                    "die Meldung bleibt offen." % rec.qty_sold_total
+                )
             lines = []
             for line in rec.line_ids:
                 if line.qty_sold <= 0:
@@ -176,6 +211,15 @@ class MagycAbverkauf(models.Model):
                     "quantity": line.qty_sold,
                     "price_unit": line.price_unit,
                     "tax_ids": [(6, 0, line.product_id.taxes_id.ids)],
+                }))
+            pfand = rec.company_id.pfand_product_id
+            if (rec.partner_id.kundentyp == "kiosk" and rec.company_id.pfand_auto_add and pfand):
+                lines.append((0, 0, {
+                    "product_id": pfand.id,
+                    "name": pfand.display_name,
+                    "quantity": rec.qty_sold_total,
+                    "price_unit": pfand.lst_price,
+                    "tax_ids": [(6, 0, pfand.taxes_id.ids)],
                 }))
             if not lines:
                 raise UserError("Keine Abverkaufsmenge erfasst.")
@@ -197,13 +241,48 @@ class MagycAbverkaufLine(models.Model):
 
     abverkauf_id = fields.Many2one("magyc.abverkauf", required=True, ondelete="cascade")
     product_id = fields.Many2one("product.product", string="Artikel", required=True)
-    qty_sold = fields.Float(string="Abverkauf (Stk)", default=0.0)
+    qty_expected = fields.Float(string="Bestand laut System", default=0.0)
+    qty_counted = fields.Float(
+        string="Gezählt (SSM)", default=0.0,
+        help="Bestand, den der Store Success Manager beim Kiosk gezählt hat.",
+    )
+    qty_sold = fields.Float(
+        string="Abverkauf (Stk)", default=0.0,
+        help="Menge, die in Rechnung gestellt wird. Basis ist die Bestandsaufnahme.",
+    )
     qty_returned = fields.Float(string="Rückgabe (Stk)", default=0.0)
+    qty_shortfall = fields.Float(
+        string="Differenz", compute="_compute_shortfall", store=True,
+        help="Ware, die weder gezählt noch abgerechnet noch zurückgemeldet ist.",
+    )
     price_unit = fields.Float(string="Preis netto")
     currency_id = fields.Many2one(related="abverkauf_id.company_id.currency_id")
+
+    @api.depends("qty_expected", "qty_counted", "qty_sold", "qty_returned")
+    def _compute_shortfall(self):
+        for line in self:
+            line.qty_shortfall = max(
+                (line.qty_expected or 0.0) - (line.qty_counted or 0.0)
+                - (line.qty_sold or 0.0) - (line.qty_returned or 0.0), 0.0)
+
+    @api.onchange("qty_expected", "qty_counted", "qty_returned")
+    def _onchange_qty_counted(self):
+        for line in self:
+            if line.qty_counted:
+                line.qty_sold = max(
+                    (line.qty_expected or 0.0) - (line.qty_counted or 0.0)
+                    - (line.qty_returned or 0.0), 0.0)
 
     @api.onchange("product_id")
     def _onchange_product_id(self):
         for line in self:
-            if line.product_id:
-                line.price_unit = line.product_id.lst_price
+            if not line.product_id:
+                continue
+            line.price_unit = line.product_id.lst_price
+            location = line.abverkauf_id.location_id
+            if location:
+                quant = self.env["stock.quant"].search([
+                    ("product_id", "=", line.product_id.id),
+                    ("location_id", "=", location.id),
+                ], limit=1)
+                line.qty_expected = quant.quantity or 0.0
