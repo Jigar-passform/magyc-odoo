@@ -155,6 +155,40 @@ def t_handover_report():
         assert needle in text, "missing %s in handover report" % needle
 
 
+def t_return_to_quality():
+    rec = _new_abverkauf(100, 76, 20, returned=4)
+    rec.action_confirm()
+    pickings = env["stock.picking"].search([("origin", "like", rec.name)])
+    returns = pickings.filtered(lambda p: "Rückgabe" in (p.origin or ""))
+    assert returns, "no return picking"
+    quality = company._magyc_default_quality_location()
+    if quality:
+        assert returns.location_dest_id == quality, returns.location_dest_id.name
+    else:
+        raise AssertionError("no quality location found")
+
+
+def t_pick_list_report():
+    picking = env["stock.picking"].search([("partner_id", "=", kiosk.id)], limit=1)
+    html, _ = env["ir.actions.report"]._render_qweb_html(
+        "magyc_commission.report_lieferschein", picking.ids)
+    text = html.decode("utf-8")
+    for needle in ("Lieferschein Kommission", "GTIN", "MHD", "Unterschrift"):
+        assert needle in text, "missing %s in pick list" % needle
+
+
+def t_contract_report():
+    html, _ = env["ir.actions.report"]._render_qweb_html(
+        "magyc_commission.report_kiosk_contract", kiosk.ids)
+    text = html.decode("utf-8")
+    for needle in ("Kommissions- und Liefervertrag", "Laufzeit", "IBAN"):
+        assert needle in text, "missing %s in contract" % needle
+
+
+def t_missing_count_cron():
+    env["magyc.abverkauf"]._cron_missing_counts()
+
+
 for name, fn in [
     ("fields", t_fields),
     ("phone required", t_phone_required),
@@ -165,6 +199,10 @@ for name, fn in [
     ("kiosk deposit return blocked", t_kiosk_pfand_block),
     ("delivery block", t_delivery_block),
     ("handover report", t_handover_report),
+    ("returns to quality hold", t_return_to_quality),
+    ("pick list report", t_pick_list_report),
+    ("kiosk contract report", t_contract_report),
+    ("missing count cron", t_missing_count_cron),
 ]:
     check(name, fn)
 

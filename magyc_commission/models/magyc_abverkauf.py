@@ -74,6 +74,15 @@ class MagycAbverkauf(models.Model):
             [("company_id", "=", self.company_id.id)], limit=1
         ).lot_stock_id
 
+    def _get_return_location(self):
+        """Rückgaben gehen in die Qualitätssperre, nicht direkt in den Verkauf."""
+
+        company = self.company_id
+        quality = company._magyc_default_quality_location()
+        if quality:
+            return quality
+        return self._get_warehouse_location()
+
     def _magyc_allocate_lots(self, product, qty):
         """Split a quantity across the lots at the kiosk location, FEFO first."""
         self.ensure_one()
@@ -155,6 +164,33 @@ class MagycAbverkauf(models.Model):
         picking.button_validate()
         return picking
 
+    @api.model
+    def _cron_missing_counts(self):
+        """Kioske ohne Abverkaufsmeldung für den Vormonat erinnern."""
+
+        today = fields.Date.context_today(self)
+        first_this_month = today.replace(day=1)
+        last_month_end = fields.Date.subtract(first_this_month, days=1)
+        last_month_start = last_month_end.replace(day=1)
+        kiosks = self.env["res.partner"].search([
+            ("kundentyp", "=", "kiosk"), ("kiosk_status", "=", "aktiv")])
+        for kiosk in kiosks:
+            exists = self.search_count([
+                ("partner_id", "=", kiosk.id),
+                ("date_from", "<=", last_month_end),
+                ("date_to", ">=", last_month_start),
+            ])
+            if exists:
+                continue
+            self.env["mail.activity"].create({
+                "activity_type_id": self.env.ref("mail.mail_activity_data_todo").id,
+                "summary": "Abverkauf %s fehlt" % last_month_start.strftime("%m/%Y"),
+                "note": "Für diesen Kiosk liegt keine Bestandsaufnahme vor.",
+                "res_model_id": self.env["ir.model"]._get_id("res.partner"),
+                "res_id": kiosk.id,
+                "user_id": (kiosk.user_id.id or self.env.user.id),
+            })
+
     def action_flag_shortfall(self):
         """Differenz der Bestandsaufnahme als Prüfaufgabe beim Kiosk anlegen."""
         for rec in self:
@@ -185,7 +221,7 @@ class MagycAbverkauf(models.Model):
             self._create_picking(rec, [(l, l.qty_sold) for l in rec.line_ids],
                                  rec._get_customer_location(), "Abverkauf")
             self._create_picking(rec, [(l, l.qty_returned) for l in rec.line_ids],
-                                 rec._get_warehouse_location(), "Rückgabe")
+                                 rec._get_return_location(), "Rückgabe")
             rec.state = "done"
 
     def action_create_invoice(self):

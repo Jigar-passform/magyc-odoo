@@ -10,9 +10,11 @@
         "security/ir.access.csv",
         "reports/report_uebergabeprotokoll.xml",
         "reports/report_abverkauf.xml",
+        "reports/report_lieferschein.xml",
         "views/magyc_abverkauf_views.xml",
         "views/res_partner_views.xml",
         "views/stock_picking_views.xml",
+        "views/res_company_views.xml",
     ],
     "installable": True,
 }
