@@ -21,6 +21,8 @@
         "views/res_partner_views.xml",
         "views/stock_picking_views.xml",
         "views/magyc_ops_menus.xml",
+        "views/magyc_kiosk_application_views.xml",
+        "data/mail_alias.xml",
         "data/ir_cron.xml",
     ],
     "installable": True,

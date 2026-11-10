@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Postfach-Alias: eingehende Mails landen als Bewerbung im Kiosk-Postfach.
+         Domain/Weiterleitung wird beim Hosting gesetzt (kiosk@magyc-drinks.de). -->
+    <record id="alias_magyc_kiosk" model="mail.alias">
+        <field name="alias_name">kiosk</field>
+        <field name="alias_model_id" ref="magyc_ops.model_magyc_kiosk_application"/>
+        <field name="alias_defaults">{'state': 'new'}</field>
+        <field name="alias_contact">everyone</field>
+    </record>
+</odoo>

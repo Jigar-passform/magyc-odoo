@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_magyc_kiosk_application_list" model="ir.ui.view">
+        <field name="name">magyc.kiosk.application.list</field>
+        <field name="model">magyc.kiosk.application</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="create_date"/>
+                <field name="name"/>
+                <field name="email_from"/>
+                <field name="phone"/>
+                <field name="city"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'converted'"
+                       decoration-muted="state == 'rejected'"/>
+                <field name="partner_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_magyc_kiosk_application_form" model="ir.ui.view">
+        <field name="name">magyc.kiosk.application.form</field>
+        <field name="model">magyc.kiosk.application</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_create_kiosk" type="object" string="Kiosk anlegen"
+                            class="btn-primary" invisible="state != 'new'"/>
+                    <button name="action_reject" type="object" string="Ablehnen"
+                            invisible="state != 'new'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email_from"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="street"/>
+                            <field name="zip"/>
+                            <field name="city"/>
+                            <field name="partner_id"/>
+                        </group>
+                    </group>
+                    <field name="message" placeholder="Inhalt der Nachricht"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_magyc_kiosk_application" model="ir.actions.act_window">
+        <field name="name">Kiosk-Postfach</field>
+        <field name="res_model">magyc.kiosk.application</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_magyc_kiosk_application" name="Kiosk-Postfach"
+              parent="magyc_commission.menu_magyc_root"
+              action="action_magyc_kiosk_application" sequence="4"/>
+</odoo>

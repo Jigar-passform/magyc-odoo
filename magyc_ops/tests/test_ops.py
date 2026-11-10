@@ -270,6 +270,29 @@ class TestMagycOps(TransactionCase):
         self.assertEqual(stops[0].magyc_stop_sequence, 10)
         self.assertEqual(stops[1].magyc_stop_sequence, 20)
 
+    def test_14_kiosk_postfach(self):
+        application = self.env["magyc.kiosk.application"].create({
+            "name": "Neuer Kiosk Hauptstraße",
+            "email_from": "kiosk@example.com",
+            "phone": "+49 30 5554443",
+            "city": "Berlin",
+            "message": "Wir möchten MAGYC führen.",
+        })
+        self.assertEqual(application.state, "new")
+        self.assertFalse(application.partner_id)
+        action = application.action_create_kiosk()
+        kiosk = self.env["res.partner"].browse(action["res_id"])
+        self.assertEqual(kiosk.kundentyp, "kiosk")
+        self.assertEqual(kiosk.kiosk_status, "interessent")
+        self.assertEqual(kiosk.phone, "+49 30 5554443")
+        self.assertEqual(application.partner_id, kiosk)
+        self.assertEqual(application.state, "converted")
+        # ohne Telefon keine Kiosk-Anlage (Pflichtfeld aus dem Soll-Ablauf)
+        with self.assertRaises(Exception):
+            self.env["magyc.kiosk.application"].create({
+                "name": "Kiosk ohne Nummer"}).action_create_kiosk()
+        self.assertTrue(self.env.ref("magyc_ops.alias_magyc_kiosk"))
+
     def test_13_scrap_tags_and_damage_approval(self):
         muster = self.env.ref("magyc_ops.scrap_tag_muster")
         schaden = self.env.ref("magyc_ops.scrap_tag_schaden")
