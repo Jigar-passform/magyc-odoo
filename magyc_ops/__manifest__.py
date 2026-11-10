@@ -13,6 +13,7 @@
         "mail",
     ],
     "data": [
+        "security/ir.access.csv",
         "data/ir_sequence.xml",
         "wizard/magyc_delivery_wizard_views.xml",
         "wizard/magyc_transfer_wizard_views.xml",

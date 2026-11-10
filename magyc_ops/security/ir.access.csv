@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_magyc_ops_user,magyc_ops_user,magyc.ops,base.group_user,crud,
+access_magyc_tour_user,magyc_tour_user,magyc.tour,base.group_user,crud,
+access_magyc_kiosk_application_user,magyc_kiosk_application_user,magyc.kiosk.application,base.group_user,crud,
+access_magyc_delivery_wizard_user,magyc_delivery_wizard_user,magyc.delivery.wizard,base.group_user,crud,
+access_magyc_transfer_wizard_user,magyc_transfer_wizard_user,magyc.transfer.wizard,base.group_user,crud,
