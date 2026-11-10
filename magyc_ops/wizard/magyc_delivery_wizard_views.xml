@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_magyc_delivery_wizard_form" model="ir.ui.view">
+        <field name="name">magyc.delivery.wizard.form</field>
+        <field name="model">magyc.delivery.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lieferung an Kiosk">
+                <group>
+                    <field name="partner_id"/>
+                    <field name="mode"/>
+                    <field name="vehicle_location_id"/>
+                </group>
+                <group string="Mengen">
+                    <field name="lemon_trays"/>
+                    <field name="berry_trays"/>
+                    <field name="min_trays" invisible="1"/>
+                </group>
+                <p class="text-muted">Je Tray 24 Dosen. Nachschub erst ab
+                    <field name="min_trays" class="oe_inline"/> Trays.</p>
+                <footer>
+                    <button name="action_create" type="object" string="Lieferung anlegen" class="btn-primary"/>
+                    <button string="Abbrechen" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,28 @@
+{
+    "name": "MAGYC Operations",
+    "version": "20.0.1.0.0",
+    "author": "PassForm Digital",
+    "summary": "Kiosk-Anlage, Erstbestückung, Nachschub, Touren, Prämien, 6-Monats-Rücknahme",
+    "depends": [
+        "magyc_custom",
+        "magyc_commission",
+        "magyc_pfand",
+        "stock",
+        "sale_management",
+        "account",
+        "mail",
+    ],
+    "data": [
+        "data/ir_sequence.xml",
+        "wizard/magyc_delivery_wizard_views.xml",
+        "wizard/magyc_transfer_wizard_views.xml",
+        "data/ir_scrap_tags.xml",
+        "views/res_company_views.xml",
+        "views/res_partner_views.xml",
+        "views/stock_picking_views.xml",
+        "views/magyc_ops_menus.xml",
+        "data/ir_cron.xml",
+    ],
+    "installable": True,
+    "license": "LGPL-3",
+}

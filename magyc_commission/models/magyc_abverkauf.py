@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 
@@ -91,13 +93,9 @@ class MagycAbverkauf(models.Model):
             ("location_id", "=", self.location_id.id),
             ("lot_id", "!=", False),
             ("quantity", ">", 0),
-        ], order="removal_date asc, id asc") if "removal_date" in self.env["stock.quant"]._fields else \
-            self.env["stock.quant"].search([
-                ("product_id", "=", product.id),
-                ("location_id", "=", self.location_id.id),
-                ("lot_id", "!=", False),
-                ("quantity", ">", 0),
-            ])
+        ])
+        # MHD sitzt am Los, nicht am Quant (Odoo 20 kennt kein quant.removal_date).
+        quants = quants.sorted(lambda q: (q.lot_id.removal_date or datetime.max, q.id))
         allocation, remaining = [], qty
         for quant in quants:
             if remaining <= 0:

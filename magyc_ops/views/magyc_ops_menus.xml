@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_magyc_tour_tree" model="ir.ui.view">
+        <field name="name">magyc.tour.list</field>
+        <field name="model">magyc.tour</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="area"/>
+                <field name="driver_id"/>
+                <field name="stop_count"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_magyc_tour_form" model="ir.ui.view">
+        <field name="name">magyc.tour.form</field>
+        <field name="model">magyc.tour</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_fill_open_pickings" type="object"
+                            string="Offene Lieferungen übernehmen" class="btn-primary"/>
+                    <button name="action_mark_done" type="object" string="Tour abschließen"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date"/>
+                            <field name="area"/>
+                        </group>
+                        <group>
+                            <field name="driver_id"/>
+                            <field name="vehicle_location_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Stopps">
+                            <field name="picking_ids">
+                                <list>
+                                    <field name="magyc_stop_sequence"/>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="scheduled_date"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notiz">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_magyc_tour" model="ir.actions.act_window">
+        <field name="name">Touren</field>
+        <field name="res_model">magyc.tour</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_magyc_kiosk" model="ir.actions.act_window">
+        <field name="name">Kioske</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('kundentyp', '=', 'kiosk')]</field>
+        <field name="context">{'default_kundentyp': 'kiosk'}</field>
+    </record>
+
+    <record id="action_magyc_bonus_open" model="ir.actions.act_window">
+        <field name="name">Startprämien offen</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('kundentyp', '=', 'kiosk'), ('magyc_bonus_state', '=', 'open')]</field>
+    </record>
+
+    <record id="action_magyc_delivery_wizard" model="ir.actions.act_window">
+        <field name="name">Lieferung an Kiosk</field>
+        <field name="res_model">magyc.delivery.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_magyc_transfer_wizard" model="ir.actions.act_window">
+        <field name="name">Speditionstransfer</field>
+        <field name="res_model">magyc.transfer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_magyc_kiosk" name="Kioske"
+              parent="magyc_commission.menu_magyc_root"
+              action="action_magyc_kiosk" sequence="5"/>
+    <menuitem id="menu_magyc_delivery" name="Nachschub / Erstbestückung"
+              parent="magyc_commission.menu_magyc_root"
+              action="action_magyc_delivery_wizard" sequence="10"/>
+    <menuitem id="menu_magyc_transfer" name="Speditionstransfer"
+              parent="magyc_commission.menu_magyc_root"
+              action="action_magyc_transfer_wizard" sequence="15"/>
+    <menuitem id="menu_magyc_tour" name="Touren"
+              parent="magyc_commission.menu_magyc_root"
+              action="action_magyc_tour" sequence="20"/>
+    <menuitem id="menu_magyc_bonus" name="Startprämien"
+              parent="magyc_commission.menu_magyc_root"
+              action="action_magyc_bonus_open" sequence="30"/>
+</odoo>

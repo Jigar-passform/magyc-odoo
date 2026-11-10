@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_ops" model="ir.ui.view">
+        <field name="name">res.partner.form.ops</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="magyc_custom.view_partner_form_magyc"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='magyc']" position="inside">
+                <div class="d-flex flex-wrap gap-2 mb-3" invisible="kundentyp != 'kiosk'">
+                    <button name="action_open_count" type="object" string="Bestand zählen"
+                            class="btn-primary"/>
+                    <button name="action_create_refill" type="object" string="Nachschub"
+                            class="btn-secondary"/>
+                    <button name="action_mark_contract_received" type="object"
+                            string="Vertrag eingegangen" class="btn-secondary"/>
+                    <button name="action_plan_first_fill" type="object"
+                            string="Erstbestückung planen" class="btn-secondary"/>
+                    <button name="action_activate" type="object" string="Aktivieren"
+                            class="btn-secondary"/>
+                </div>
+                <group string="Betrieb">
+                    <group>
+                        <field name="kiosk_area"/>
+                        <field name="akquisiteur_id"/>
+                        <field name="is_akquisiteur"/>
+                        <field name="magyc_akquisiteur_fee"
+                               invisible="not is_akquisiteur"/>
+                    </group>
+                    <group>
+                        <field name="placement_rows"/>
+                        <field name="placement_ok"/>
+                        <field name="placement_photo" widget="image" class="oe_avatar"/>
+                        <field name="open_shortfall_count"/>
+                    </group>
+                </group>
+                <group string="Startprämie">
+                    <group>
+                        <field name="magyc_bonus_state"/>
+                        <field name="magyc_bonus_paid_on"
+                               invisible="magyc_bonus_state != 'paid'"/>
+                    </group>
+                    <group>
+                        <button name="action_mark_bonus_paid" type="object"
+                                string="Als ausgezahlt markieren" class="btn-secondary"
+                                invisible="magyc_bonus_state != 'open'"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

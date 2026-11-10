@@ -20,6 +20,15 @@ class SaleOrder(models.Model):
             qty += line.product_uom_qty
         return qty
 
+    def _magyc_pfand_price(self, pfand):
+        """Onlineshop: 0,25 EUR brutto. Kiosk/B2B: 0,25 EUR netto (Listenpreis)."""
+        self.ensure_one()
+        shop_price = self.company_id.magyc_pfand_shop_price or 0.0
+        if self.partner_id.kundentyp != "online" or not shop_price:
+            return pfand.lst_price
+        rate = sum(pfand.taxes_id.mapped("amount")) / 100.0
+        return shop_price / (1.0 + rate) if rate else shop_price
+
     def _magyc_sync_pfand_line(self):
         self.ensure_one()
         company = self.company_id
@@ -37,7 +46,7 @@ class SaleOrder(models.Model):
         vals = {
             "product_id": pfand.id,
             "product_uom_qty": qty,
-            "price_unit": pfand.lst_price,
+            "price_unit": self._magyc_pfand_price(pfand),
             "tax_ids": [(6, 0, pfand.taxes_id.ids)],
             "name": pfand.display_name,
         }

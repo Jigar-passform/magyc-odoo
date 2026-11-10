@@ -36,10 +36,18 @@ class ResPartner(models.Model):
     contract_signed_on = fields.Date(string="Vertragsdatum")
     contract_end = fields.Date(string="Vertragsende", compute="_compute_contract_end", store=True)
     kiosk_status = fields.Selection(
-        selection=[("interessent", "Interessent"), ("aktiv", "Aktiv"), ("inaktiv", "Inaktiv")],
+        selection=[
+            ("interessent", "Interessent"),
+            ("vertrag_eingegangen", "Vertrag eingegangen"),
+            ("erstbestueckung_geplant", "Erstbestückung geplant"),
+            ("aktiv", "Aktiv"),
+            ("inaktiv", "Inaktiv"),
+        ],
         string="Kiosk-Status",
-        compute="_compute_kiosk_status",
-        store=True,
+        default="interessent",
+        tracking=True,
+        copy=False,
+        help="Wird über die Aktionen im MAGYC-Tab geführt, nicht berechnet.",
     )
 
     @api.depends("contract_start", "contract_term_months")
@@ -52,15 +60,18 @@ class ResPartner(models.Model):
             else:
                 partner.contract_end = False
 
-    @api.depends("kundentyp", "contract_signed")
-    def _compute_kiosk_status(self):
-        for partner in self:
-            if partner.kundentyp != "kiosk":
-                partner.kiosk_status = False
-            elif partner.contract_signed:
-                partner.kiosk_status = "aktiv"
+    def write(self, vals):
+        res = super().write(vals)
+        # Vertragsflag hält den Status nach, ohne die Pipeline-Stufen zu überspringen.
+        if "kiosk_status" not in vals and "contract_signed" in vals:
+            if vals["contract_signed"]:
+                self.filtered(
+                    lambda p: p.kiosk_status in ("interessent", "vertrag_eingegangen")
+                ).write({"kiosk_status": "aktiv"})
             else:
-                partner.kiosk_status = "interessent"
+                self.filtered(lambda p: p.kiosk_status != "interessent").write(
+                    {"kiosk_status": "interessent"})
+        return res
 
     @api.constrains("kundentyp", "phone")
     def _check_kiosk_phone(self):

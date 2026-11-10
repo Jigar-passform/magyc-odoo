@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_ops" model="ir.ui.view">
+        <field name="name">stock.picking.form.ops</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_confirm_handover" type="object"
+                        string="Übergabe bestätigen" class="btn-primary"
+                        invisible="not magyc_is_handover or magyc_handover_confirmed"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="MAGYC" name="magyc" invisible="not magyc_is_handover and not magyc_is_first_fill and not magyc_is_return_6m">
+                    <group>
+                        <group>
+                            <field name="magyc_is_first_fill" readonly="1"/>
+                            <field name="magyc_is_return_6m" readonly="1"/>
+                            <field name="magyc_tour_id"/>
+                        </group>
+                        <group>
+                            <field name="magyc_handover_confirmed" readonly="1"/>
+                            <field name="magyc_handover_date" readonly="1"/>
+                            <field name="magyc_vehicle_location_id"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
