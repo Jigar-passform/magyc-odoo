@@ -148,9 +148,8 @@ cd "/d/Program Files/Odoo/20/server"
 | Datei | Zweck |
 | --- | --- |
 | `tools/demo_seed.py` | Beispieldaten und DATEV-Probelauf |
-| `docs/build_manual_de.py` | erzeugt das Handbuch als PDF |
-| `docs/build_status_de.py` | erzeugt den Statusbericht als PDF |
-| `docs/build_manual.py`, `docs/build_status.py` | frühere Fassungen |
+| `docs/build_docs.py` | erzeugt Handbuch und Liste der offenen Angaben als PDF |
 | `oca-addons/PORTING-20.0.md` | Portierungsnotizen DATEV |
 
-PDF-Erzeugung: `uv run --with reportlab python docs/build_manual_de.py "MAGYC-Handbuch-De.pdf"`.
+PDF-Erzeugung: `cd docs && uv run --with reportlab python build_docs.py` (schreibt
+`MAGYC-Handbuch-De.pdf` und `MAGYC-Offene-Angaben-De.pdf`).
