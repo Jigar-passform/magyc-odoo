@@ -24,6 +24,17 @@
                             <field name="magyc_vehicle_location_id"/>
                         </group>
                     </group>
+                    <group string="Übergabeprotokoll" invisible="not magyc_is_handover">
+                        <group>
+                            <field name="magyc_signer_name"/>
+                            <field name="magyc_handover_note"/>
+                        </group>
+                        <group>
+                            <field name="magyc_signature" widget="signature"
+                                   options="{'size': [400, 150]}"/>
+                            <field name="magyc_photo" widget="image" options="{'size': [0, 160]}"/>
+                        </group>
+                    </group>
                 </page>
             </xpath>
         </field>
