@@ -97,22 +97,12 @@ class StockPicking(models.Model):
             "magyc_vehicle_location_id": (vehicle_location or source).id,
             "move_ids": moves,
         })
-        for move in picking.move_ids:
-            if move.product_id.tracking == "none":
-                continue
-            move.move_line_ids.unlink()
-            allocation = self._magyc_lot_lines(move.product_id, source, move.product_uom_qty)
-            self.env["stock.move.line"].create([{
-                "move_id": move.id,
-                "product_id": move.product_id.id,
-                "lot_id": lot.id,
-                "quantity": qty,
-                "location_id": source.id,
-                "location_dest_id": dest.id,
-            } for lot, qty in allocation])
-        picking.action_confirm()
-        picking.move_ids.picked = True
         if validate:
+            # Chargen erst beim Buchen ziehen: Stufe 1 plant nur den Auftrag.
+            picking._magyc_allocate_missing_lots()
+        picking.action_confirm()
+        if validate:
+            picking.move_ids.picked = True
             picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
         return picking
 
@@ -196,6 +186,24 @@ class StockPicking(models.Model):
         picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
         return picking
 
+    def _magyc_allocate_missing_lots(self):
+        """FEFO-Chargen fuer alle Moves ohne Zeilen nachziehen."""
+        for picking in self:
+            for move in picking.move_ids:
+                if move.product_id.tracking == "none" or move.move_line_ids:
+                    continue
+                allocation = self.env["stock.picking"]._magyc_lot_lines(
+                    move.product_id, picking.location_id, move.product_uom_qty)
+                self.env["stock.move.line"].create([{
+                    "move_id": move.id,
+                    "product_id": move.product_id.id,
+                    "lot_id": lot.id,
+                    "quantity": qty,
+                    "location_id": picking.location_id.id,
+                    "location_dest_id": picking.location_dest_id.id,
+                } for lot, qty in allocation])
+        return True
+
     # --------------------------------------------------------------- handover
     def action_confirm_handover(self):
         for picking in self:
@@ -215,6 +223,7 @@ class StockPicking(models.Model):
             })
             # Erst die Unterschrift bucht die Ware vom Fahrzeug ins Kommissionslager.
             if picking.state not in ("done", "cancel"):
+                picking._magyc_allocate_missing_lots()
                 picking.move_ids.picked = True
                 picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
             kiosk = picking.partner_id
