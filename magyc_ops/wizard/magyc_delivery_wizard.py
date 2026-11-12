@@ -63,6 +63,8 @@ class MagycDeliveryWizard(models.TransientModel):
             lines,
             "%s %s" % (label, partner.kiosk_id or partner.name),
             vehicle_location=self.vehicle_location_id,
+            first_fill=self.mode == "first_fill",
+            validate=False,
         )
         return {
             "type": "ir.actions.act_window",

@@ -59,8 +59,13 @@ class StockPicking(models.Model):
 
     @api.model
     def _magyc_create_kiosk_delivery(self, partner, lines, origin,
-                                     vehicle_location=None, first_fill=False):
-        """Lieferung an einen Kiosk: Ware bleibt MAGYC-Bestand im Kommissionslager."""
+                                     vehicle_location=None, first_fill=False,
+                                     validate=True):
+        """Lieferung an einen Kiosk: Ware bleibt MAGYC-Bestand im Kommissionslager.
+
+        validate=False laesst die Lieferung bestaetigt stehen. Sie wird erst mit
+        dem unterschriebenen Uebergabeprotokoll gebucht (Stufe 2 des Ablaufs).
+        """
         partner.ensure_one()
         company = partner.company_id or self.env.company
         warehouse = self.env["stock.warehouse"].search(
@@ -107,7 +112,8 @@ class StockPicking(models.Model):
             } for lot, qty in allocation])
         picking.action_confirm()
         picking.move_ids.picked = True
-        picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
+        if validate:
+            picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
         return picking
 
     @api.model
@@ -197,13 +203,48 @@ class StockPicking(models.Model):
                 raise UserError("Nur Kommissionslieferungen an Kioske haben ein Übergabeprotokoll.")
             if picking.magyc_handover_confirmed:
                 continue
+            if not picking.magyc_signature:
+                raise UserError(
+                    "Ohne Unterschrift im Uebergabeprotokoll wird nicht gebucht.")
+            if not picking.magyc_photo:
+                raise UserError(
+                    "Foto des bestueckten Kuehlschranks fehlt im Uebergabeprotokoll.")
             picking.write({
                 "magyc_handover_confirmed": True,
                 "magyc_handover_date": fields.Date.context_today(picking),
             })
+            # Erst die Unterschrift bucht die Ware vom Fahrzeug ins Kommissionslager.
+            if picking.state not in ("done", "cancel"):
+                picking.move_ids.picked = True
+                picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
             kiosk = picking.partner_id
-            kiosk.kiosk_status = "aktiv"
+            kiosk.write({
+                "kiosk_status": "aktiv",
+                "magyc_activation_date": fields.Date.context_today(picking),
+            })
             picking._magyc_trigger_bonus()
+            picking._magyc_trigger_akquisiteur_bonus()
+        return True
+
+    def _magyc_trigger_akquisiteur_bonus(self):
+        """Provision des Akquisiteurs (Primewave) je aktiviertem Kiosk."""
+        self.ensure_one()
+        kiosk = self.partner_id
+        company = kiosk.company_id or self.env.company
+        akquisiteur = kiosk.akquisiteur_id
+        if not akquisiteur:
+            return False
+        fee = kiosk.magyc_akquisiteur_fee or company.magyc_akquisiteur_fee
+        finance = company.magyc_finance_user_id or self.env.user
+        self.env["mail.activity"].create({
+            "activity_type_id": self.env.ref("mail.mail_activity_data_todo").id,
+            "summary": "Akquisiteur-Provision buchen (%s)" % (kiosk.kiosk_id or kiosk.name),
+            "note": "%.2f EUR fuer %s, Kiosk %s. Monatliche Sammelrechnung."
+                    % (fee, akquisiteur.name, kiosk.kiosk_id or kiosk.name),
+            "res_model_id": self.env["ir.model"]._get_id("res.partner"),
+            "res_id": akquisiteur.id,
+            "user_id": finance.id,
+        })
         return True
 
     def _magyc_trigger_bonus(self):

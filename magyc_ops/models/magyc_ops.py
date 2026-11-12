@@ -25,10 +25,10 @@ class MagycOps(models.AbstractModel):
         by_partner = {}
         for picking in pickings:
             kiosk = picking.partner_id
-            by_partner.setdefault(kiosk.akquisiteur_id, set()).add(kiosk.id)
+            by_partner.setdefault(kiosk.akquisiteur_id, []).append(kiosk)
 
         created = self.env["account.move"]
-        for akquisiteur, kiosk_ids in by_partner.items():
+        for akquisiteur, kiosks in by_partner.items():
             company = akquisiteur.company_id or self.env.company
             product = company.magyc_akquisiteur_product_id
             if not product:
@@ -41,19 +41,23 @@ class MagycOps(models.AbstractModel):
             ]):
                 continue
             fee = akquisiteur.magyc_akquisiteur_fee or company.magyc_akquisiteur_fee
+            seen = []
+            for kiosk in kiosks:
+                if kiosk not in seen:
+                    seen.append(kiosk)
             move = self.env["account.move"].create({
                 "move_type": "in_invoice",
                 "partner_id": akquisiteur.id,
                 "invoice_date": period_end,
                 "invoice_origin": origin,
-                "ref": "Provision %s Kioske %s" % (len(kiosk_ids), label),
+                "ref": "Provision %s Kioske %s" % (len(seen), label),
                 "invoice_line_ids": [(0, 0, {
                     "product_id": product.id,
-                    "name": "%s: %s neue Kioske" % (label, len(kiosk_ids)),
-                    "quantity": len(kiosk_ids),
-                    "price_unit": fee,
+                    "name": "%s %s" % (kiosk.kiosk_id or kiosk.name, label),
+                    "quantity": 1,
+                    "price_unit": kiosk.magyc_akquisiteur_fee or fee,
                     "tax_ids": [(6, 0, product.supplier_taxes_id.ids)],
-                })],
+                }) for kiosk in seen],
             })
             created |= move
         return created

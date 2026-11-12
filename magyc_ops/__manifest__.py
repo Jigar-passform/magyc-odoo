@@ -1,6 +1,6 @@
 {
     "name": "MAGYC Operations",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.1.0",
     "author": "PassForm Digital",
     "summary": "Kiosk-Anlage, Erstbestückung, Nachschub, Touren, Prämien, 6-Monats-Rücknahme",
     "depends": [

@@ -25,6 +25,11 @@ class ResCompany(models.Model):
         "product.product", string="Artikel Akquisiteur-Provision",
         help="Wird als Position auf der Monatsrechnung des Akquisiteurs verwendet.",
     )
+    magyc_akquisiteur_partner_id = fields.Many2one(
+        "res.partner", string="Akquisiteur (Standard)",
+        domain="[('is_akquisiteur', '=', True)]",
+        help="Wird bei neuen Kiosken aus dem Postfach automatisch gesetzt (Primewave).",
+    )
     magyc_bonus_amount = fields.Monetary(
         string="Startprämie Kiosk", default=50.0, currency_field="currency_id",
     )

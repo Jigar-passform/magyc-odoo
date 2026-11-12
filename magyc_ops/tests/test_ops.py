@@ -1,9 +1,14 @@
 from datetime import timedelta
+import base64
 
 from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase, tagged
+from odoo.tools.binary import BinaryBytes
 
+# 1x1 PNG: die Image-Felder des Uebergabeprotokolls brauchen eine gueltige Datei.
+PNG = base64.b64decode(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==")
 
 @tagged("post_install", "-at_install")
 class TestMagycOps(TransactionCase):
@@ -63,6 +68,14 @@ class TestMagycOps(TransactionCase):
             "akquisiteur_id": cls.akquisiteur.id,
         })
 
+    def _sign(self, picking):
+        """Uebergabeprotokoll: Unterschrift und Kuehlschrankfoto sind Pflicht."""
+        picking.write({
+            "magyc_signer_name": "Kiosk Test",
+            "magyc_signature": BinaryBytes(PNG),
+            "magyc_photo": BinaryBytes(PNG),
+        })
+
     # ------------------------------------------------------------------ tests
     def test_01_kiosk_id_from_sequence(self):
         self.assertRegex(self.kiosk.kiosk_id, r"^K-BER-\d{4}$")
@@ -117,6 +130,10 @@ class TestMagycOps(TransactionCase):
         wizard.write({"lemon_trays": 2, "berry_trays": 2})
         action = wizard.action_create()
         picking = self.env["stock.picking"].browse(action["res_id"])
+        # Stufe 2: die Lieferung steht bestaetigt, gebucht wird erst bei Unterschrift.
+        self.assertNotEqual(picking.state, "done")
+        self._sign(picking)
+        picking.action_confirm_handover()
         self.assertEqual(picking.state, "done")
         self.assertEqual(sum(picking.move_ids.mapped("product_uom_qty")), 4 * 24)
 
@@ -139,6 +156,9 @@ class TestMagycOps(TransactionCase):
         picking = self.env["stock.picking"].search([
             ("partner_id", "=", self.kiosk.id), ("magyc_is_first_fill", "=", True)])
         self.assertTrue(picking.magyc_is_handover)
+        with self.assertRaises(UserError):
+            picking.action_confirm_handover()
+        self._sign(picking)
         picking.action_confirm_handover()
         self.assertTrue(picking.magyc_handover_confirmed)
         self.assertEqual(self.kiosk.magyc_bonus_state, "open")
@@ -150,6 +170,7 @@ class TestMagycOps(TransactionCase):
         self.kiosk.action_plan_first_fill()
         picking = self.env["stock.picking"].search([
             ("partner_id", "=", self.kiosk.id), ("magyc_is_first_fill", "=", True)])
+        self._sign(picking)
         picking.action_confirm_handover()
         last_month = fields.Date.subtract(fields.Date.context_today(self), months=1)
         picking.magyc_handover_date = last_month
@@ -275,6 +296,8 @@ class TestMagycOps(TransactionCase):
             "name": "Neuer Kiosk Hauptstraße",
             "email_from": "kiosk@example.com",
             "phone": "+49 30 5554443",
+            "street": "Hauptstraße 1",
+            "zip": "10115",
             "city": "Berlin",
             "message": "Wir möchten MAGYC führen.",
         })
@@ -283,15 +306,55 @@ class TestMagycOps(TransactionCase):
         action = application.action_create_kiosk()
         kiosk = self.env["res.partner"].browse(action["res_id"])
         self.assertEqual(kiosk.kundentyp, "kiosk")
-        self.assertEqual(kiosk.kiosk_status, "interessent")
+        # Stufe 1 legt direkt den Lieferauftrag fuer die Erstbestueckung an.
+        self.assertEqual(kiosk.kiosk_status, "erstbestueckung_geplant")
         self.assertEqual(kiosk.phone, "+49 30 5554443")
         self.assertEqual(application.partner_id, kiosk)
         self.assertEqual(application.state, "converted")
-        # ohne Telefon keine Kiosk-Anlage (Pflichtfeld aus dem Soll-Ablauf)
-        with self.assertRaises(Exception):
-            self.env["magyc.kiosk.application"].create({
-                "name": "Kiosk ohne Nummer"}).action_create_kiosk()
+        # ohne Telefon kein Kiosk, sondern eine Aufgabe zum Pruefen
+        ohne_nummer = self.env["magyc.kiosk.application"].create({
+            "name": "Kiosk ohne Nummer"})
+        ohne_nummer.action_create_kiosk()
+        self.assertEqual(ohne_nummer.state, "check")
+        self.assertFalse(ohne_nummer.partner_id)
         self.assertTrue(self.env.ref("magyc_ops.alias_magyc_kiosk"))
+
+    def test_17_postfach_auto_intake(self):
+        app = self.env["magyc.kiosk.application"].create({
+            "name": "Kiosk Flixcheck Test",
+            "email_from": "flixcheck-test@example.com",
+            "phone": "+49 30 999888",
+            "street": "Teststr. 1",
+            "zip": "10115",
+            "city": "Berlin",
+            "iban": "DE02120300000000202051",
+        })
+        app._magyc_auto_process()
+        self.assertEqual(app.state, "converted")
+        kiosk = app.partner_id
+        self.assertEqual(kiosk.kundentyp, "kiosk")
+        self.assertEqual(kiosk.kiosk_iban, "DE02120300000000202051")
+        self.assertEqual(kiosk.kiosk_status, "erstbestueckung_geplant")
+        picking = self.env["stock.picking"].search([
+            ("partner_id", "=", kiosk.id), ("magyc_is_first_fill", "=", True)])
+        self.assertTrue(picking, "Erstbestueckung muss als Lieferauftrag entstehen")
+        self.assertNotEqual(picking.state, "done", "Stufe 1 darf noch nicht buchen")
+
+    def test_18_postfach_dublette(self):
+        vals = {
+            "name": "Kiosk Dublette",
+            "email_from": "dublette@example.com",
+            "phone": "+49 30 111222",
+            "street": "Doppelweg 2",
+            "zip": "10117",
+            "city": "Berlin",
+        }
+        first = self.env["magyc.kiosk.application"].create(vals)
+        first._magyc_auto_process()
+        second = self.env["magyc.kiosk.application"].create(vals)
+        second._magyc_auto_process()
+        self.assertEqual(second.state, "check")
+        self.assertEqual(second.duplicate_partner_id, first.partner_id)
 
     def test_13_scrap_tags_and_damage_approval(self):
         muster = self.env.ref("magyc_ops.scrap_tag_muster")

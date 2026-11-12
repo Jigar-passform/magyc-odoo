@@ -1,0 +1,363 @@
+[
+ {
+  "file": "de-01-start.png",
+  "title": "Startseite und Hauptmenü",
+  "intro": "Nach der Anmeldung erscheint die App-Uebersicht. Die App Kommission enthält alle MAGYC-Funktionen.",
+  "legend": [
+   [
+    1,
+    "App Kommission öffnen"
+   ]
+  ]
+ },
+ {
+  "file": "de-02a-firma-datev.png",
+  "title": "Firma: DATEV-Nummern",
+  "intro": "Einstellungen > Unternehmen > Firma öffnen. Berater- und Mandantennummer für den DATEV-Export eintragen.",
+  "legend": [
+   [
+    1,
+    "Beraternummer"
+   ],
+   [
+    2,
+    "Mandantennummer"
+   ],
+   [
+    3,
+    "USt-IdNr. der Firma"
+   ]
+  ]
+ },
+ {
+  "file": "de-02b-firma-pfand.png",
+  "title": "Firma: Reiter Pfand (MAGYC)",
+  "intro": "Legt fest, welcher Artikel als Pfand dient und ob er automatisch an Rechnungen kommt.",
+  "legend": [
+   [
+    1,
+    "Reiter öffnen"
+   ],
+   [
+    2,
+    "Pfand automatisch ergänzen"
+   ],
+   [
+    3,
+    "Pfandartikel wählen"
+   ]
+  ]
+ },
+ {
+  "file": "de-02c-firma-kommission.png",
+  "title": "Firma: Reiter Kommission (MAGYC)",
+  "intro": "Lager für zurückgenommene, qualitätsgesperrte Ware.",
+  "legend": [
+   [
+    1,
+    "Reiter öffnen"
+   ],
+   [
+    2,
+    "Lagerort Qualitätssperre"
+   ]
+  ]
+ },
+ {
+  "file": "de-02d-firma-kioskprozess.png",
+  "title": "Firma: Reiter Kiosk-Prozess (MAGYC)",
+  "intro": "Mengen und Beträge für Erstbestückung, Nachschub, Rücknahme, Provision und Startprämie.",
+  "legend": [
+   [
+    1,
+    "Erstbestückung Trays"
+   ],
+   [
+    2,
+    "Mindestmenge Nachschub"
+   ],
+   [
+    3,
+    "Rücknahme in Monaten"
+   ],
+   [
+    4,
+    "Akquisiteur-Provision"
+   ],
+   [
+    5,
+    "Startprämie"
+   ],
+   [
+    6,
+    "Trays je Palette"
+   ]
+  ]
+ },
+ {
+  "file": "de-03-kontakt-kiosk.png",
+  "title": "Kontakt: Reiter MAGYC (Kiosk-Stammdaten)",
+  "intro": "Jeder Kiosk ist ein Kontakt. Die Kiosk-Felder stehen im Reiter MAGYC.",
+  "legend": [
+   [
+    1,
+    "Reiter MAGYC"
+   ],
+   [
+    2,
+    "Kiosk-ID"
+   ],
+   [
+    3,
+    "Gebiet (Kürzel)"
+   ],
+   [
+    4,
+    "Kommissionslager des Kiosks"
+   ],
+   [
+    5,
+    "Kiosk-Status"
+   ]
+  ]
+ },
+ {
+  "file": "de-04-artikel-pfand.png",
+  "title": "Artikel: Pfandartikel",
+  "intro": "Am Artikel wird Pfand gekennzeichnet. Nur so kommt der Pfandbetrag auf Rechnung und Gutschrift.",
+  "legend": [
+   [
+    1,
+    "Haken Pfandartikel"
+   ],
+   [
+    2,
+    "Preis des Pfandartikels"
+   ]
+  ]
+ },
+ {
+  "file": "de-05-postfach-liste.png",
+  "title": "Kiosk-Postfach: Eingänge",
+  "intro": "Neue Kiosk-Anfragen aus dem Webformular landen hier. Offene Anfragen zuerst bearbeiten.",
+  "legend": [
+   [
+    1,
+    "Menü Kommission"
+   ],
+   [
+    2,
+    "Anfrage öffnen"
+   ],
+   [
+    3,
+    "Eingang manuell erfassen"
+   ]
+  ]
+ },
+ {
+  "file": "de-06-postfach-formular.png",
+  "title": "Kiosk-Postfach: Anfrage bearbeiten",
+  "intro": "Aus der Anfrage entsteht per Knopfdruck der Kiosk samt Kontakt, oder die Anfrage wird abgelehnt.",
+  "legend": [
+   [
+    1,
+    "Kiosk aus Anfrage anlegen"
+   ],
+   [
+    2,
+    "Anfrage ablehnen"
+   ],
+   [
+    3,
+    "Status: Neu, Kiosk angelegt, Abgelehnt"
+   ]
+  ]
+ },
+ {
+  "file": "de-07-abverkauf-liste.png",
+  "title": "Abverkauf Kiosk: Liste",
+  "intro": "Eine Abverkaufsmeldung je Kiosk und Zeitraum. Die Menge kommt aus dem Bestand, nie aus Handeingabe.",
+  "legend": [
+   [
+    1,
+    "Neue Meldung"
+   ],
+   [
+    2,
+    "Meldung öffnen"
+   ]
+  ]
+ },
+ {
+  "file": "de-08-abverkauf-formular.png",
+  "title": "Abverkauf Kiosk: Meldung prüfen und abrechnen",
+  "intro": "Zeitraum wählen, Zeilen prüfen, bestätigen. Beim Abrechnen entsteht die Rechnung mit Pfand und Steuer.",
+  "legend": [
+   [
+    1,
+    "Kiosk"
+   ],
+   [
+    2,
+    "Status der Meldung"
+   ],
+   [
+    3,
+    "Abverkaufsliste drucken"
+   ],
+   [
+    4,
+    "Zeile ergänzen"
+   ]
+  ]
+ },
+ {
+  "file": "de-09-pfand-ruecknahme.png",
+  "title": "Pfand-Rücknahme",
+  "intro": "Zurückgenommenes Leergut wird gezählt, daraus entsteht eine Pfand-Gutschrift an den Kiosk.",
+  "legend": [
+   [
+    1,
+    "Kunde oder Kiosk"
+   ],
+   [
+    2,
+    "Status Entwurf, Abgerechnet"
+   ],
+   [
+    3,
+    "Leergut-Position erfassen"
+   ]
+  ]
+ },
+ {
+  "file": "de-10-tour.png",
+  "title": "Tour planen und abschließen",
+  "intro": "Eine Tour bündelt offene Lieferungen eines Gebiets für einen Fahrer.",
+  "legend": [
+   [
+    1,
+    "Offene Lieferungen automatisch übernehmen"
+   ],
+   [
+    2,
+    "Tour abschließen"
+   ],
+   [
+    3,
+    "Fahrer"
+   ],
+   [
+    4,
+    "Reiter Stopps"
+   ]
+  ]
+ },
+ {
+  "file": "de-11-belegtexte.png",
+  "title": "Belegtexte",
+  "intro": "Einleitungs- und Schlusstext je Belegtyp. Änderung gilt für alle neuen Belege.",
+  "legend": [
+   [
+    1,
+    "Belegtyp öffnen und Text anpassen"
+   ],
+   [
+    2,
+    "Weiteren Belegtyp anlegen"
+   ]
+  ]
+ },
+ {
+  "file": "de-12-nachschub-wizard.png",
+  "title": "Nachschub / Erstbestückung",
+  "intro": "Der Assistent erzeugt die Lieferung an den Kiosk nach den Mengen aus den Einstellungen.",
+  "legend": [
+   [
+    1,
+    "Kiosk wählen"
+   ],
+   [
+    2,
+    "Lieferung erzeugen"
+   ]
+  ]
+ },
+ {
+  "file": "de-13-speditionstransfer.png",
+  "title": "Speditionstransfer",
+  "intro": "Palettenweise Lieferung an die Spedition mit Gebiet und Mengen.",
+  "legend": [
+   [
+    1,
+    "Erstes Pflichtfeld"
+   ],
+   [
+    2,
+    "Transfer anlegen"
+   ]
+  ]
+ },
+ {
+  "file": "de-14-verkaufsauftrag.png",
+  "title": "Verkaufsauftrag mit Pfandzeile",
+  "intro": "Preis immer aus der Preisliste. Pfand wird als eigene Zeile angefügt.",
+  "legend": [
+   [
+    1,
+    "Status"
+   ],
+   [
+    2,
+    "Preisliste"
+   ],
+   [
+    3,
+    "Position"
+   ]
+  ]
+ },
+ {
+  "file": "de-15-rechnung.png",
+  "title": "Rechnung nach Abverkauf",
+  "intro": "Steuer und Pfand entstehen erst beim Abverkauf. Hier prüfen und buchen.",
+  "legend": [
+   [
+    1,
+    "Status der Rechnung"
+   ],
+   [
+    2,
+    "Kunde"
+   ],
+   [
+    3,
+    "PDF mit Belegtexten drucken"
+   ]
+  ]
+ },
+ {
+  "file": "de-16-datev-export.png",
+  "title": "DATEV-Export (DTVF)",
+  "intro": "Geschäftsjahr und Perioden wählen, Journale festlegen, dann Generate.",
+  "legend": [
+   [
+    1,
+    "Geschäftsjahr"
+   ],
+   [
+    2,
+    "Perioden"
+   ],
+   [
+    3,
+    "Journale"
+   ],
+   [
+    4,
+    "Export erzeugen"
+   ]
+  ]
+ }
+]

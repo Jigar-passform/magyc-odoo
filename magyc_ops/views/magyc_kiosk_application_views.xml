@@ -10,6 +10,7 @@
                 <field name="email_from"/>
                 <field name="phone"/>
                 <field name="city"/>
+                <field name="duplicate_partner_id"/>
                 <field name="state" widget="badge"
                        decoration-success="state == 'converted'"
                        decoration-muted="state == 'rejected'"/>
@@ -25,7 +26,7 @@
             <form>
                 <header>
                     <button name="action_create_kiosk" type="object" string="Kiosk anlegen"
-                            class="btn-primary" invisible="state != 'new'"/>
+                            class="btn-primary" invisible="state not in ('new', 'check')"/>
                     <button name="action_reject" type="object" string="Ablehnen"
                             invisible="state != 'new'"/>
                     <field name="state" widget="statusbar"/>
@@ -42,6 +43,19 @@
                             <field name="zip"/>
                             <field name="city"/>
                             <field name="partner_id"/>
+                            <field name="duplicate_partner_id" invisible="not duplicate_partner_id"/>
+                        </group>
+                    </group>
+                    <group string="Vertrag (Flixcheck)">
+                        <group>
+                            <field name="iban"/>
+                            <field name="tax_id"/>
+                            <field name="small_business"/>
+                        </group>
+                        <group>
+                            <field name="contract_date"/>
+                            <field name="salesperson"/>
+                            <field name="akquisiteur_id"/>
                         </group>
                     </group>
                     <field name="message" placeholder="Inhalt der Nachricht"/>

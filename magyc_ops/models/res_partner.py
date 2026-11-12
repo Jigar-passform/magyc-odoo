@@ -26,6 +26,11 @@ class ResPartner(models.Model):
         string="Startprämie", default="none", copy=False, tracking=True,
     )
     magyc_bonus_paid_on = fields.Date(string="Startprämie ausgezahlt am", copy=False)
+    magyc_activation_date = fields.Date(
+        string="Aktiv seit", copy=False, readonly=True,
+        help="Datum des unterschriebenen Übergabeprotokolls. Grundlage der "
+             "Akquisiteur-Abrechnung.",
+    )
     placement_rows = fields.Integer(string="Kühlschrankreihen", default=0)
     placement_ok = fields.Boolean(
         string="Platzierung ok", compute="_compute_placement_ok", store=True,
@@ -120,9 +125,11 @@ class ResPartner(models.Model):
                 continue
             trays = company.magyc_first_fill_trays_per_product or 4
             lines = [(product, trays * 24) for product in company._magyc_drink_products()]
+            # Stufe 1: nur der Lieferauftrag entsteht. Gebucht wird erst mit
+            # dem unterschriebenen Übergabeprotokoll.
             partner._magyc_deliver(
                 lines, "Erstbestückung %s" % (partner.kiosk_id or partner.name),
-                first_fill=True)
+                first_fill=True, validate=False)
         return True
 
     def action_create_refill(self):
@@ -171,9 +178,10 @@ class ResPartner(models.Model):
             })
         return True
 
-    def _magyc_deliver(self, lines, origin, vehicle_location=None, first_fill=False):
+    def _magyc_deliver(self, lines, origin, vehicle_location=None, first_fill=False,
+                       validate=True):
         self.ensure_one()
         return self.env["stock.picking"]._magyc_create_kiosk_delivery(
             self, lines, origin, vehicle_location=vehicle_location,
-            first_fill=first_fill,
+            first_fill=first_fill, validate=validate,
         )

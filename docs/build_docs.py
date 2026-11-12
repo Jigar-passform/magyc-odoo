@@ -1,14 +1,27 @@
-"""Erzeugt zwei deutsche PDFs: Handbuch mit Statusbericht und die Liste der offenen Angaben."""
-import sys
+# -*- coding: utf-8 -*-
+"""Erzeugt die zwei Kunden-PDFs fuer MAGYC DRINKS GmbH (S00132).
+
+  MAGYC-Handbuch-De.pdf          Schritt-fuer-Schritt-Handbuch + Status
+  MAGYC-Offene-Angaben-De.pdf    offene Punkte, die Angaben des Kunden brauchen
+
+Aufruf:
+  cd docs && uv run --with reportlab python build_docs.py
+"""
+import json
+import os
 
 from reportlab.lib import colors
+from reportlab.lib.enums import TA_JUSTIFY, TA_LEFT
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.platypus import (BaseDocTemplate, Frame, Image, KeepTogether,
-                                PageTemplate, Paragraph, Table, TableStyle)
+                                CondPageBreak, NextPageTemplate, PageBreak, PageTemplate,
+                                Paragraph, Spacer, Table, TableStyle)
 
-SHOTS = "C:/Users/ABC/magyc-odoo/docs/screenshots"
+HERE = os.path.dirname(os.path.abspath(__file__))
+SHOTS = os.path.join(HERE, "screenshots")
+
 NAVY = colors.HexColor("#0f2b46")
 BLUE = colors.HexColor("#2a5d84")
 INK = colors.HexColor("#1a1a1a")
@@ -19,511 +32,828 @@ AMBER = colors.HexColor("#9a6700")
 RED = colors.HexColor("#b42318")
 ZEBRA = colors.HexColor("#f6f8fa")
 
-BODY = ParagraphStyle("body", fontName="Helvetica", fontSize=9.0, leading=12.2,
-                      spaceAfter=3, textColor=INK)
-STEP = ParagraphStyle("step", parent=BODY, leftIndent=14, bulletIndent=0,
-                      bulletFontName="Helvetica-Bold", bulletFontSize=9.0, spaceAfter=2)
-BULLET = ParagraphStyle("bullet", parent=BODY, leftIndent=12, bulletIndent=2,
-                        bulletFontName="Helvetica", bulletFontSize=9.0, spaceAfter=1)
-NOTE = ParagraphStyle("note", parent=BODY, fontSize=8.5, leading=11.4, leftIndent=8,
-                      textColor=GREY, spaceBefore=3, spaceAfter=6)
-H1 = ParagraphStyle("h1", fontName="Helvetica-Bold", fontSize=22, leading=26,
-                    spaceAfter=4, textColor=NAVY)
-H2 = ParagraphStyle("h2", fontName="Helvetica-Bold", fontSize=13.5, leading=17.5,
-                    spaceBefore=10, spaceAfter=5, textColor=NAVY)
-SUB = ParagraphStyle("sub", fontName="Helvetica", fontSize=10, leading=14,
-                     textColor=GREY, spaceAfter=10)
-CAP = ParagraphStyle("cap", fontName="Helvetica-Oblique", fontSize=8, leading=10.5,
-                     textColor=GREY, spaceBefore=2, spaceAfter=8)
-CELL = ParagraphStyle("cell", fontName="Helvetica", fontSize=8.0, leading=10.3, textColor=INK)
-CELL_B = ParagraphStyle("cellb", parent=CELL, fontName="Helvetica-Bold")
-CELL_S = ParagraphStyle("cells", parent=CELL, fontSize=7.4, leading=9.6)
-HEAD = ParagraphStyle("head", fontName="Helvetica-Bold", fontSize=8.0, leading=10.3,
-                      textColor=colors.white)
-
-MATRIX = [
-    ("Kiosk", "Kontakt, Kiosk-ID, Kommissionslager, Gebiet, Akquisiteur", "umgesetzt", ""),
-    ("Kiosk", "Statuskette vom Interessent bis inaktiv, Vertragslaufzeit", "umgesetzt", ""),
-    ("Kiosk", "Kiosk-Postfach mit Mailadresse kiosk@, Umwandlung per Klick", "umgesetzt", "neu"),
-    ("Kiosk", "Telefonnummer als Pflichtfeld", "umgesetzt", ""),
-    ("Vertrag", "Kommissions- und Liefervertrag als Beleg", "umgesetzt", ""),
-    ("Lieferung", "Erstbestückung, Nachschub, Übergabeprotokoll", "umgesetzt", ""),
-    ("Lieferung", "FEFO-Zuteilung nach MHD, Chargen am Beleg", "umgesetzt", ""),
-    ("Lieferung", "Liefersperre bei offenen Beträgen und Differenzen", "umgesetzt", "Regel bestätigen"),
-    ("Abverkauf", "Mengen aus Bestand und Zählung, keine Eingabe der Verkaufsmenge", "umgesetzt", ""),
-    ("Abverkauf", "Buchung Abverkauf und Rückgabe in die Qualitätssperre", "umgesetzt", ""),
-    ("Abverkauf", "Rechnung je Zeitraum, Mindestmenge 24 Dosen", "umgesetzt", "Wert bestätigen"),
-    ("Abverkauf", "Prüfstatus bei Differenz", "umgesetzt", ""),
-    ("Pfand", "Pfandzeile mit 19 % USt, brutto und netto getrennt", "umgesetzt", ""),
-    ("Pfand", "Pfand-Rücknahme als Gutschrift", "umgesetzt", "für Kioske Ausnahme"),
-    ("Pfand", "DPG-Clearing Paragraf 17 UStG, Rückzahlungsverpflichtung", "offen", "Konten fehlen"),
-    ("Lager", "Rangsdorf mit 28 Lagerplätzen, Qualitätssperre", "umgesetzt", ""),
-    ("Lager", "Köln als Nebenlager mit Platzhalteradresse", "teilweise", "Adresse fehlt"),
-    ("Lager", "Speditionstransfer Berlin nach Köln", "umgesetzt", "Palettenlogik prüfen"),
-    ("Lager", "Verluste mit Kennzeichen RAN/MUSTER und RAN/SCHADEN", "umgesetzt", ""),
-    ("Lager", "Sechsmonatige Rücknahme ohne Abverkauf", "umgesetzt", ""),
-    ("Touren", "Tourplanung je Gebiet, Sortierung nach Postleitzahl", "umgesetzt", ""),
-    ("Touren", "Fahrer-App für unterwegs", "offen", "eigener Aufwand"),
-    ("Provision", "Startprämie 50 EUR, Akquisiteur-Pauschale monatlich", "umgesetzt", ""),
-    ("Belege", "Belegtexte je Belegart pflegbar", "umgesetzt", ""),
-    ("Belege", "Mahnwesen mit drei Stufen", "umgesetzt", "Vorlagen freigegeben"),
-    ("Buchhaltung", "SKR04 mit 1.312 Konten, 19 % USt", "umgesetzt", ""),
-    ("Buchhaltung", "DATEV-Export als DTVF-Paket", "umgesetzt", "Nummern fehlen"),
-    ("Schnittstellen", "DHL, UPS, DPD", "offen", "Zugänge fehlen"),
-    ("Schnittstellen", "Onlineshop und Marktplätze", "offen", "Zugänge fehlen"),
-    ("Schnittstellen", "KI-gestützte Erfassung von Kiosk-Anfragen", "offen", "Postfach vorhanden"),
-]
-
-EXTRA = [
-    ("DPG-Clearing und Pfandrückzahlungsverpflichtung",
-     "Konten und Buchungslogik nach Paragraf 17 UStG, Abstimmung mit TU Treuhand"),
-    ("Fahrer-App", "Mobile Ansicht für Tour, Übergabe und Rückgabe, 3 bis 5 Tage"),
-    ("Vollständige Tourplanung Berlin und Köln",
-     "Feinplanung der Gebiete, Fahrzeuge und Zeitfenster, 4 bis 6 Tage"),
-    ("Versand und Marktplätze", "DHL, UPS, DPD, Onlineshop, Marktplätze inklusive Pfand und Steuer"),
-    ("KI-Erfassung", "Auslesen der Kiosk-Anfragen und Vorbefüllung, Hosting der Mailadresse"),
-    ("Köln als Vollager", "echte Adresse, Regalplan, Umlagerungsprozess, Bestandsführung"),
-    ("Mehrsprachigkeit", "Belege und Oberfläche in weiteren Sprachen"),
-]
-
-# Wer, Angabe, warum nötig, was blockiert
-OPEN = [
-    ("TU Treuhand", "Konten für Pfand, Pfanderstattung, DPG-Clearing, Rückzahlungsverpflichtung",
-     "Buchungslogik nach Paragraf 17 UStG", "Pfandabrechnung und Bilanzansatz"),
-    ("TU Treuhand", "Anlagekonten und Anlagenverzeichnis",
-     "Bewertung von Stapler, Packtisch, Kühlschränken, Regalen", "Anlagenbuchhaltung"),
-    ("TU Treuhand", "DATEV-Berater- und Mandantennummer, Sachkontenlänge, Wirtschaftsjahr",
-     "Kopfzeile und Kontenlänge im Export", "DATEV-Export im Echtbetrieb"),
-    ("Geschäftsführung", "B2B-Preislisten mit Staffeln und Konditionen",
-     "Preis kommt aus der Preisliste, nicht aus dem Auftrag", "B2B-Angebote"),
-    ("Geschäftsführung", "Endkundenpreise im Onlineshop je Sorte",
-     "Bruttopreise und Pfand im Shop", "Shop-Anbindung"),
-    ("Geschäftsführung", "Zahlungsziel B2B, Bestätigung Startprämie und Akquisiteur-Pauschale",
-     "Fälligkeiten und Provisionsrechnung", "Mahnwesen, Provisionslauf"),
-    ("Geschäftsführung", "Freigabe für das Ausrollen auf die Produktivinstanz",
-     "Instanz wird von MAGYC betrieben", "Produktivnahme"),
-    ("Abfüllung", "Einkaufspreise je Dose, Gewichte je Dose, Tray und Palette",
-     "Kalkulation, Verpackungseinheiten, Fracht", "Margen, Liefermengen"),
-    ("Abfüllung", "Ansprechpartner und Lieferadresse für den Wareneingang",
-     "Wareneingang und Buchung", "Bestandsführung"),
-    ("Vermietung", "Anschrift und Regalplan Köln, Inventarliste Kühlschränke",
-     "echtes Lager statt Platzhalter", "Umlagerung Köln, Anlagen"),
-    ("Zugänge", "DHL, UPS, DPD, Onlineshop, Marktplätze",
-     "Versand und Kanäle", "Versandabwicklung, Shop"),
-    ("Zugänge", "USt-IdNr., IBAN, Termin für die Ablösung von Qonto",
-     "Belege und Zahlungsverkehr", "Rechnungen, Lastschrift"),
-]
-
-CHECK = [
-    ("Erweiterungen Kiosk und Provision", "14 Tests, kein Fehler"),
-    ("Soll-Ablauf", "13 Tests, kein Fehler"),
-    ("DATEV-Export", "9 Tests, kein Fehler"),
-    ("Gesamt", "36 Tests, kein Fehler"),
-    ("Probelauf mit Beispieldaten",
-     "Lager Köln, vier Kioske, Lieferungen, Rechnung, DATEV-Paket erzeugt"),
-]
+ss = getSampleStyleSheet()
+BODY = ParagraphStyle("body", parent=ss["BodyText"], fontName="Helvetica",
+                      fontSize=9.6, leading=13.6, textColor=INK,
+                      alignment=TA_JUSTIFY, spaceAfter=5)
+BODY_L = ParagraphStyle("bodyl", parent=BODY, alignment=TA_LEFT)
+H1 = ParagraphStyle("h1", parent=ss["Heading1"], fontName="Helvetica-Bold",
+                    fontSize=16, leading=20, textColor=NAVY,
+                    spaceBefore=10, spaceAfter=8, keepWithNext=1)
+H2 = ParagraphStyle("h2", parent=ss["Heading2"], fontName="Helvetica-Bold",
+                    fontSize=11.5, leading=15, textColor=BLUE,
+                    spaceBefore=12, spaceAfter=5, keepWithNext=1)
+STEP = ParagraphStyle("step", parent=BODY, leftIndent=15, firstLineIndent=-15,
+                      spaceAfter=3.2, alignment=TA_LEFT)
+BULLET = ParagraphStyle("bullet", parent=STEP, leftIndent=12, firstLineIndent=-8)
+SMALL = ParagraphStyle("small", parent=BODY, fontSize=7.6, leading=9.8,
+                       textColor=GREY, alignment=TA_LEFT)
+CAP = ParagraphStyle("cap", parent=SMALL, fontSize=7.4, leading=9.2,
+                     spaceBefore=2, spaceAfter=8)
+CELL = ParagraphStyle("cell", parent=BODY, fontSize=8.6, leading=11.4,
+                      alignment=TA_LEFT, spaceAfter=0)
+CELLH = ParagraphStyle("cellh", parent=CELL, fontName="Helvetica-Bold",
+                       textColor=colors.white)
+PART = ParagraphStyle("part", parent=H1, fontSize=9.5, textColor=GREY,
+                      spaceBefore=0, spaceAfter=2)
 
 
-def p(text, style=BODY):
-    return Paragraph(text, style)
+# Deutsche Rechtschreibung: Wortliste statt genereller Ersetzung, weil
+# "Steuern", "neue" oder "Adresse" korrekt sind und nicht angetastet werden duerfen.
+DE = {
+    "Abverkaeufe": "Abverkäufe", "aelter": "älter", "aelteren": "älteren",
+    "aelteste": "älteste", "aenderbar": "änderbar", "aendern": "ändern",
+    "aendert": "ändert", "Aenderung": "Änderung", "Aenderungen": "Änderungen",
+    "Aenderungswuensche": "Änderungswünsche", "Anhaenge": "Anhänge",
+    "Auftragsbestaetigung": "Auftragsbestätigung", "ausfuehren": "ausführen",
+    "ausgewaehlt": "ausgewählt", "auswaehlen": "auswählen",
+    "beschaedigt": "beschädigt", "beschaedigte": "beschädigte",
+    "bestaetigen": "bestätigen", "Bestaetigen": "Bestätigen",
+    "Bestaetigt": "Bestätigt", "bestaetigten": "bestätigten",
+    "Bestaetigung": "Bestätigung", "Bestueckung": "Bestückung",
+    "einschraenken": "einschränken", "Empfaenger": "Empfänger",
+    "enthaelt": "enthält", "ergaenzen": "ergänzen", "erklaert": "erklärt",
+    "Erklaerung": "Erklärung", "Erstbestueckung": "Erstbestückung",
+    "faellig": "fällig", "Faellige": "Fällige", "Farbflaechen": "Farbflächen",
+    "fuehren": "führen", "fuellen": "füllen", "fuellt": "füllt", "Fuer": "Für",
+    "fuer": "für", "funktionsfaehig": "funktionsfähig", "gefuehrt": "geführt",
+    "gefuellt": "gefüllt", "gehoert": "gehört", "geklaert": "geklärt",
+    "geklaerte": "geklärte", "geprueft": "geprüft",
+    "Geschaeftsfuehrung": "Geschäftsführung", "geschaetzt": "geschätzt",
+    "gestuetzte": "gestützte", "Getraenk": "Getränk", "Getraenke": "Getränke",
+    "Getraenkeartikel": "Getränkeartikel", "Getraenkepreis": "Getränkepreis",
+    "gewaehlten": "gewählten", "gezaehlt": "gezählt", "gezaehlten": "gezählten",
+    "gezaehlter": "gezählter", "haeufigste": "häufigste", "heisst": "heißt",
+    "hinzufuegen": "hinzufügen", "Hoehe": "Höhe", "kaufmaennische": "kaufmännische",
+    "klaeren": "klären", "Koeln": "Köln", "Kuehlschrank": "Kühlschrank",
+    "Kuehlschrankreihen": "Kühlschrankreihen", "laesst": "lässt",
+    "laeuft": "läuft", "Loeschen": "Löschen", "Marktplaetze": "Marktplätze",
+    "Massnahme": "Maßnahme", "Menue": "Menü", "Menueindex": "Menüindex",
+    "Menueleiste": "Menüleiste", "Menuepfad": "Menüpfad", "Menuepfade": "Menüpfade",
+    "Menues": "Menüs", "moeglich": "möglich", "muessen": "müssen",
+    "Nachschuebe": "Nachschübe", "naechste": "nächste", "Naechste": "Nächste",
+    "naechsten": "nächsten", "Naechster": "Nächster", "noetig": "nötig",
+    "oeffnen": "öffnen", "oeffnet": "öffnet", "Palettenmasse": "Palettenmaße",
+    "Pfandruecknahme": "Pfand-Rücknahme", "Pfandruecknahmen": "Pfand-Rücknahmen",
+    "Pfandrueckzahlung": "Pfandrückzahlung", "Praemie": "Prämie",
+    "Praemien": "Prämien", "pruefen": "prüfen", "Pruefstand": "Prüfstand",
+    "prueft": "prüft", "Pruefung": "Prüfung", "Qualitaetssperre": "Qualitätssperre",
+    "Rueckgabe": "Rückgabe", "Ruecknahme": "Rücknahme",
+    "Sachkontenlaenge": "Sachkontenlänge", "schaetzen": "schätzen",
+    "Schaetzwerten": "Schätzwerten", "Schluessel": "Schlüssel",
+    "Spaltenueberschrift": "Spaltenüberschrift", "Startpraemie": "Startprämie",
+    "Startpraemien": "Startprämien", "Steuersaetze": "Steuersätze",
+    "taeglichen": "täglichen", "Tagesgeschaeft": "Tagesgeschäft",
+    "tatsaechlichen": "tatsächlichen", "traegt": "trägt", "ueber": "über",
+    "Ueberfaellig": "Überfällig", "Uebergabeprotokoll": "Übergabeprotokoll",
+    "uebergehen": "übergehen", "uebernehmen": "übernehmen",
+    "uebernimmt": "übernimmt", "ueberschreiben": "überschreiben",
+    "Uebertrag": "Übertrag", "Untermenue": "Untermenü",
+    "unvollstaendig": "unvollständig", "vollstaendige": "vollständige",
+    "vorausgefuellter": "vorausgefüllter", "Vorgaenge": "Vorgänge",
+    "waehlen": "wählen", "waehrend": "während", "Waehrung": "Währung",
+    "wofuer": "wofür", "zaehlen": "zählen", "Zaehlen": "Zählen",
+    "Zaehlergebnis": "Zählergebnis", "Zaehlfehler": "Zählfehler",
+    "zaehlt": "zählt", "Zaehlung": "Zählung", "Zaehlwert": "Zählwert",
+    "Zugaenge": "Zugänge", "zugehoerigen": "zugehörigen", "zurueck": "zurück",
+    "Zurueck": "Zurück", "zurueckbuchen": "zurückbuchen",
+    "zurueckkommt": "zurückkommt", "Zuruecknehmen": "Zurücknehmen",
+    "Einbahnstrassen": "Einbahnstraßen", "Schwarzweiss": "Schwarzweiß",
+}
+WORD = __import__("re").compile(r"\b(" + "|".join(DE) + r")\b")
 
 
-def steps(items):
-    return [Paragraph(t, STEP, bulletText=f"{i}.") for i, t in enumerate(items, start=1)]
+class DeParagraph(Paragraph):
+    """Paragraph, der die Wortliste anwendet, damit Umlaute korrekt stehen."""
+
+    def __init__(self, text, *a, **kw):
+        super().__init__(WORD.sub(lambda m: DE[m.group(1)], text), *a, **kw)
 
 
-def bullets(items):
-    return [Paragraph(t, BULLET, bulletText="\u2022") for t in items]
+Paragraph = DeParagraph  # alle Aufrufe unten nutzen die Wortliste
 
 
-def figure(path, caption):
-    width = 168 * mm
-    return KeepTogether([
-        Image(path, width=width, height=width * 900.0 / 1440.0),
-        Paragraph(caption, CAP),
-    ])
+def de(t):
+    return WORD.sub(lambda m: DE[m.group(1)], t)
 
 
-def styled(data, widths, colour_col=None, colours_map=None):
-    table = Table(data, colWidths=[w * mm for w in widths], repeatRows=1)
+def esc(t):
+    return t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def para(text, story, style=BODY):
+    story.append(Paragraph(text, style))
+
+
+def steps(items, story):
+    for i, t in enumerate(items, 1):
+        story.append(Paragraph("<b>%d.</b> %s" % (i, t), STEP))
+    story.append(Spacer(1, 3))
+
+
+def bullets(items, story):
+    for t in items:
+        story.append(Paragraph("\u2022 %s" % t, BULLET))
+    story.append(Spacer(1, 3))
+
+
+def note(text, kind, story):
+    col = {"info": BLUE, "warn": AMBER, "ok": GREEN, "stop": RED}[kind]
+    bg = {"info": colors.HexColor("#eef4fa"), "warn": colors.HexColor("#fdf6e3"),
+          "ok": colors.HexColor("#eef7f0"), "stop": colors.HexColor("#fdeceb")}[kind]
+    t = Table([[Paragraph(text, BODY_L)]], colWidths=[168 * mm])
+    t.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, -1), bg),
+        ("LINEBEFORE", (0, 0), (0, -1), 2.2, col),
+        ("LEFTPADDING", (0, 0), (-1, -1), 7),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 7),
+        ("TOPPADDING", (0, 0), (-1, -1), 5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+    ]))
+    story.append(Spacer(1, 4))
+    story.append(KeepTogether([t]))
+    story.append(Spacer(1, 10))
+
+
+def table(header, rows, widths, story):
+    data = [[Paragraph(esc(h), CELLH) for h in header]]
+    for r in rows:
+        data.append([Paragraph(esc(str(c)), CELL) for c in r])
+    t = Table(data, colWidths=widths, repeatRows=1, hAlign="LEFT")
     style = [
         ("BACKGROUND", (0, 0), (-1, 0), NAVY),
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("GRID", (0, 0), (-1, -1), 0.4, LINE),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 4),
         ("RIGHTPADDING", (0, 0), (-1, -1), 4),
-        ("TOPPADDING", (0, 0), (-1, -1), 3),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 3),
+        ("TOPPADDING", (0, 0), (-1, -1), 4.5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 4.5),
+        ("LEFTPADDING", (0, 0), (-1, -1), 5),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 5),
     ]
     for i in range(1, len(data)):
         if i % 2 == 0:
             style.append(("BACKGROUND", (0, i), (-1, i), ZEBRA))
-    if colour_col is not None:
-        for i, colour in (colours_map or {}).items():
-            style.append(("TEXTCOLOR", (colour_col, i), (colour_col, i), colour))
-    table.setStyle(TableStyle(style))
-    return table
+    t.setStyle(TableStyle(style))
+    story.append(Spacer(1, 3))
+    story.append(t)
+    story.append(Spacer(1, 12))
 
 
-def table(rows, widths, head):
-    data = [[Paragraph(h, HEAD) for h in head]]
-    data += [[Paragraph(str(a), CELL_B)] + [Paragraph(str(b), CELL) for b in rest]
-             for a, *rest in rows] if len(head) > 2 else \
-            [[Paragraph(str(a), CELL_B), Paragraph(str(b), CELL)] for a, b in rows]
-    return styled(data, widths)
+def fig(name, caption, story):
+    """Bild nur einhaengen, wenn es existiert und nicht leer ist."""
+    path = os.path.join(SHOTS, "de", name)
+    if not os.path.exists(path) or os.path.getsize(path) < 8000:
+        return
+    img = Image(path)
+    ratio = img.imageHeight / float(img.imageWidth) if img.imageWidth else 0.6
+    img.drawWidth = 168 * mm
+    img.drawHeight = 168 * mm * ratio
+    if img.drawHeight > 72 * mm:
+        img.drawHeight = 72 * mm
+        img.drawWidth = 72 * mm / ratio
+    story.append(KeepTogether([img, Paragraph(esc(caption), CAP)]))
 
 
-def matrix_table():
-    data = [[Paragraph("Bereich", HEAD), Paragraph("Funktion", HEAD),
-             Paragraph("Stand", HEAD), Paragraph("Anmerkung", HEAD)]]
-    colours = {}
-    for i, (area, func, state, note) in enumerate(MATRIX, start=1):
-        data.append([Paragraph(area, CELL_B), Paragraph(func, CELL_S),
-                     Paragraph(state, CELL_B), Paragraph(note, CELL_S)])
-        colours[i] = {"umgesetzt": GREEN, "teilweise": AMBER}.get(state, RED)
-    return styled(data, [24, 92, 20, 34], colour_col=2, colours_map=colours)
+def cover(canvas, doc):
+    canvas.saveState()
+    canvas.setFillColor(NAVY)
+    canvas.rect(0, A4[1] - 52 * mm, A4[0], 52 * mm, stroke=0, fill=1)
+    canvas.setFillColor(colors.white)
+    canvas.setFont("Helvetica-Bold", 23)
+    canvas.drawString(22 * mm, A4[1] - 28 * mm, "MAGYC DRINKS GmbH")
+    canvas.setFont("Helvetica", 11.5)
+    canvas.drawString(22 * mm, A4[1] - 37 * mm, doc.title_line)
+    canvas.setFont("Helvetica", 9)
+    canvas.drawString(22 * mm, A4[1] - 45 * mm, doc.subtitle_line)
+    canvas.setFillColor(GREY)
+    canvas.setFont("Helvetica", 8)
+    canvas.drawString(22 * mm, 14 * mm, "Projekt S00132, Stand 10.11.2026")
+    canvas.restoreState()
 
 
-def footer(label):
-    def draw(canvas, doc):
-        canvas.saveState()
-        canvas.setStrokeColor(LINE)
-        canvas.setLineWidth(0.5)
-        canvas.line(20 * mm, 16 * mm, A4[0] - 20 * mm, 16 * mm)
-        canvas.setFont("Helvetica", 7.5)
-        canvas.setFillColor(colors.HexColor("#777777"))
-        canvas.drawString(20 * mm, 11 * mm,
-                          f"MAGYC DRINKS GmbH \u00b7 {label} \u00b7 Stand 10.11.2026")
-        canvas.drawRightString(A4[0] - 20 * mm, 11 * mm, str(doc.page))
-        canvas.restoreState()
-    return draw
+def page(canvas, doc):
+    canvas.saveState()
+    canvas.setStrokeColor(LINE)
+    canvas.setLineWidth(0.5)
+    canvas.line(22 * mm, A4[1] - 16 * mm, A4[0] - 22 * mm, A4[1] - 16 * mm)
+    canvas.setFillColor(GREY)
+    canvas.setFont("Helvetica", 7.5)
+    canvas.drawString(22 * mm, A4[1] - 13 * mm, "MAGYC DRINKS GmbH, " + doc.title_line)
+    canvas.line(22 * mm, 15 * mm, A4[0] - 22 * mm, 15 * mm)
+    canvas.drawString(22 * mm, 10 * mm, "Projekt S00132, Stand 10.11.2026")
+    canvas.drawRightString(A4[0] - 22 * mm, 10 * mm, "Seite %d" % doc.page)
+    canvas.restoreState()
 
 
-def document(out, title, label):
-    doc = BaseDocTemplate(out, pagesize=A4, title=title, author="PassForm Digital",
-                          leftMargin=20 * mm, rightMargin=20 * mm,
-                          topMargin=18 * mm, bottomMargin=22 * mm)
-    frame = Frame(doc.leftMargin, doc.bottomMargin, doc.width, doc.height, id="body")
-    doc.addPageTemplates([PageTemplate(id="main", frames=[frame], onPage=footer(label))])
-    return doc
-
-
-def build_manual(out):
-    doc = document(out, "MAGYC DRINKS GmbH \u2013 Odoo 20 Handbuch", "Odoo 20 Handbuch")
-    story = [
-        p("MAGYC DRINKS GmbH", H1),
-        p("Odoo 20 Handbuch: Einrichtung, Abläufe, Prüfung und Umfang. Stand: 10. November 2026.", SUB),
-
-        p("1. Zweck und Aufbau", H2),
-        p("Dieses Handbuch beschreibt alle eingerichteten Abläufe für das Kommissionsgeschäft mit "
-          "Kiosken, die eigenen Erweiterungen und den DATEV-Export. Jede Funktion nennt den Menüweg "
-          "und die Schritte in der Reihenfolge, in der sie im Alltag gebraucht werden. Wo ein "
-          "Screenshot vorhanden ist, markieren rote Rahmen und Nummern die Felder aus der Anleitung. "
-          "Kapitel 19 und 20 zeigen den Prüfstand und den Umfang. Die Angaben, die von MAGYC noch "
-          "fehlen, stehen im getrennten Dokument Offene Angaben.", BODY),
-        *bullets([
-            "Grundlage: Vertriebs- und Lieferkonzept vom 09.11.2026 und der abgestimmte Soll-Ablauf.",
-            "Die Ware bleibt bis zum Abverkauf Eigentum der MAGYC DRINKS GmbH (Paragraf 3 Absatz 3 UStG).",
-            "Steuer und Pfand entstehen erst beim Abverkauf, nicht bei der Übergabe.",
-        ]),
-
-        p("2. Systemüberblick", H2),
-        p("Die Erweiterungen liegen in fünf Modulen und nutzen die Standardfunktionen von Odoo 20, "
-          "statt sie zu ersetzen. Dadurch bleiben Auswertungen, Buchhaltung und Lagerlogik "
-          "updatefähig.", BODY),
-        table([
-            ("Verkauf", "Kommissionsgeschäft Kiosk, Preislisten, Liefersperre, Belegtexte"),
-            ("Fakturierung", "SKR04, Abverkaufsrechnung, Pfandzeile, Mahnwesen, DATEV-Export"),
-            ("Lager", "Rangsdorf und Köln, Kommissionslager je Kiosk, Qualitätssperre, Touren"),
-            ("Kontakte", "Kiosk-Stammdaten, Statuskette, Akquisiteur, Kiosk-Postfach"),
-        ], [45, 125], ("App-Bereich", "Umfang")),
-
-        p("3. Kiosk anlegen", H2),
-        p("Ein Kiosk ist ein Kontakt mit dem Kundentyp Kiosk. Beim Speichern legt das System "
-          "automatisch einen eigenen Kommissionslagerort an, benannt nach der Kiosk-ID. Die "
-          "Telefonnummer ist Pflicht, weil jede Nachbestellung und jede Rückfrage darüber läuft.", BODY),
-        *steps([
-            "Kontakte öffnen und einen neuen Kontakt anlegen.",
-            "Reiter MAGYC wählen.",
-            "Kiosk-ID nach Schema K-BER-0001 eintragen (Feld 1).",
-            "Kundentyp Kiosk (Kommission) wählen (Feld 2).",
-            "Kommissionslager wird automatisch erzeugt und angezeigt (Feld 3).",
-            "Gebiet, Akquisiteur und Store Success Manager ergänzen (Feld 4).",
-        ]),
-        figure(f"{SHOTS}/ann-01-kiosk-kontakt.png",
-               "Abbildung 1: Kontakt mit Reiter MAGYC. 1 Kiosk-ID, 2 Kundentyp, "
-               "3 automatisch erzeugtes Kommissionslager, 4 Gebiet."),
-
-        p("4. Statuskette und Vertrag", H2),
-        p("Der Kiosk-Status wird über Aktionen geführt und nicht frei gesetzt. So ist jederzeit "
-          "erkennbar, ob ein Kiosk nur ein Interessent ist oder bereits beliefert wird.", BODY),
-        table([
-            ("Interessent", "Kontakt erfasst, noch kein Vertrag"),
-            ("Vertrag eingegangen", "Unterschriebener Vertrag liegt vor"),
-            ("Erstbestückung geplant", "Lieferung ist angelegt, Ware noch nicht übergeben"),
-            ("Aktiv", "Ware übergeben, Abverkauf und Abrechnung laufen"),
-            ("Inaktiv", "Kein Vertrag mehr, keine Belieferung"),
-        ], [45, 125], ("Status", "Bedeutung")),
-        *bullets([
-            "Vertragsbeginn und Laufzeit (Standard 12 Monate) erfassen, das Vertragsende wird berechnet.",
-            "IBAN des Kiosks hinterlegen, bevor die Startprämie ausgezahlt wird.",
-            "Beleg Kommissions- und Liefervertrag aus dem Kontakt drucken.",
-        ]),
-
-        p("5. Kiosk-Postfach", H2),
-        p("Bewerbungen und Anfragen kommen über die Adresse kiosk@ in Odoo an. Jede Nachricht wird "
-          "als Bewerbung gespeichert und kann mit einem Klick in einen Kiosk umgewandelt werden.", BODY),
-        *steps([
-            "Kommission, Kiosk-Postfach öffnen.",
-            "Eintrag prüfen: Betreff, E-Mail, Telefon, Ort und Nachricht.",
-            "Fehlende Telefonnummer ergänzen, sie ist für die Kiosk-Anlage Pflicht.",
-            "Kiosk anlegen: das Kontaktformular öffnet sich vorbefüllt, Status wird Interessent.",
-            "Nicht passende Anfragen mit Ablehnen schließen.",
-            "Alternativ Aktionen ausführen, wenn die Anfrage telefonisch oder auf der Messe eingeht.",
-        ]),
-        p("Hinweis: Es wird bewusst kein Kiosk automatisch erzeugt. Ohne Telefonnummer wäre der "
-          "Datensatz unvollständig und würde bei der ersten Lieferung scheitern.", NOTE),
-
-        p("6. Ware an den Kiosk übergeben", H2),
-        p("Die Übergabe erfolgt als Lieferschein vom Lager an den Kommissionslagerort des Kiosks. "
-          "Das Übergabeprotokoll wird gedruckt und von beiden Seiten unterschrieben. Die Ware bleibt "
-          "Eigentum der MAGYC DRINKS GmbH.", BODY),
-        *steps([
-            "Kommission, Nachschub / Erstbestückung öffnen.",
-            "Kiosk wählen, Art der Lieferung und Menge in Trays erfassen.",
-            "Lieferung anlegen; die Chargen werden nach MHD zugeteilt (FEFO).",
-            "Lieferung ausführen: Menge prüfen und validieren.",
-            "Übergabeprotokoll drucken, Foto und Unterschrift am Lieferschein hinterlegen.",
-        ]),
-        *bullets([
-            "Erstbestückung: 8 Trays, je 4 Lemon Zero und 4 Berry Zero.",
-            "Nachschub: mindestens 4 Trays, ausgelöst durch den Abverkauf oder durch die Tour.",
-            "Das Kommissionslager zeigt jederzeit, welche Menge beim Kiosk steht.",
-        ]),
-
-        p("7. Abverkauf melden und abrechnen", H2),
-        p("Die abverkaufte Menge ergibt sich aus dem Bestand beim Kiosk abzüglich der gezählten "
-          "Restmenge. Eine eingetippte Verkaufsmenge wird nicht akzeptiert, weil sie nicht "
-          "nachvollziehbar ist.", BODY),
-        *steps([
-            "Kommission, Abverkauf Kiosk, Neu.",
-            "Kiosk wählen (Feld 1); das Kommissionslager wird vorbelegt.",
-            "Zeitraum von und bis setzen (Felder 2 und 3).",
-            "Positionen erfassen: Artikel, erwartete Menge, gezählte Menge, Rückgabe, Preis netto (Feld 4).",
-            "Bestätigen: Abverkauf und Rückgabe werden gebucht.",
-            "Rechnung erstellen: Rechnung über den Abverkauf wird erstellt und gebucht.",
-        ]),
-        figure(f"{SHOTS}/ann-02-kommission-neu.png",
-               "Abbildung 2: Neue Abverkaufsmeldung. 1 Kiosk, 2 Zeitraum von, 3 Zeitraum bis, "
-               "4 Positionen mit erwarteter und gezählter Menge."),
-        figure(f"{SHOTS}/ann-03-abverkauf-formular.png",
-               "Abbildung 3: Abgerechnete Meldung. 1 Drucken, 2 Status, 3 Rechnung und Summen."),
-        *bullets([
-            "Differenz zwischen erwarteter und gezählter Menge: Meldung geht in Prüfung, es wird nicht fakturiert.",
-            "Prüfung abschließen oder Differenz freigeben, danach ist die Rechnung möglich.",
-            "Rechnung erst ab 24 Dosen je Zeitraum, kleinere Mengen werden in den nächsten Zeitraum übertragen.",
-        ]),
-
-        p("8. Pfand", H2),
-        p("Pfand ist eine eigene Position mit 19 % USt. Beim Kiosk entsteht es erst mit der "
-          "Abverkaufsrechnung, nicht bei der Übergabe.", BODY),
-        *steps([
-            "Firma, Reiter Pfand (MAGYC): Pfand automatisch ergänzen aktivieren und Pfandartikel wählen.",
-            "Kommission, Pfand-Rücknahme, Neu: Kunde und Datum erfassen.",
-            "Position mit Pfandartikel und Menge ergänzen.",
-            "Gutschrift erstellen: Beleg wird mit 19 % USt gebucht.",
-        ]),
-        figure(f"{SHOTS}/ann-04-pfand-gutschrift.png",
-               "Abbildung 4: Pfand-Rücknahme. 1 Kunde, 2 erzeugte Gutschrift, 3 Status."),
-        p("Abweichung zum Soll-Ablauf: Für Kioske ist keine Pfandgutschrift vorgesehen, weil das "
-          "Leergut über die DPG abgerechnet wird. Die Gutschrift bleibt als Ausnahme für B2B und "
-          "für Sonderfälle verfügbar.", NOTE),
-
-        p("9. Rückgaben, Qualitätssperre und Verluste", H2),
-        p("Rückgaben aus dem Kiosk gehen nicht direkt zurück in den Verkauf, sondern in die "
-          "Qualitätssperre und werden dort geprüft.", BODY),
-        *bullets([
-            "Bestätigter Abverkauf bucht die Rückgabemenge automatisch in die Qualitätssperre.",
-            "Verluste werden über eine Lagerbuchung mit Kennzeichen erfasst: RAN/MUSTER oder RAN/SCHADEN.",
-            "RAN/SCHADEN benötigt die Freigabe durch die Lagerleitung, RAN/MUSTER nicht.",
-            "Nach sechs Monaten ohne Abverkauf holt die sechsmonatige Rücknahme die Restware zurück.",
-        ]),
-
-        p("10. Touren planen", H2),
-        p("Eine Tour fasst die offenen Lieferungen eines Gebiets zusammen und sortiert die Stopps "
-          "nach Postleitzahl. Die Reihenfolge in Zehnerschritten lässt Platz für Zwischenstopps.", BODY),
-        *steps([
-            "Kommission, Touren, Neu.",
-            "Name, Datum, Gebiet und Fahrer erfassen.",
-            "Offene Lieferungen übernehmen: alle passenden Lieferscheine werden zugeordnet.",
-            "Stopps prüfen und bei Bedarf die Reihenfolge ändern.",
-            "Tour abschließen, wenn alle Stopps erledigt sind.",
-        ]),
-
-        p("11. Speditionstransfer Berlin nach Köln", H2),
-        p("Der Transfer zwischen den Lagern wird über einen Assistenten gebucht, damit die Ware "
-          "nicht doppelt erfasst wird und der Bestand in beiden Lagern stimmt.", BODY),
-        *steps([
-            "Kommission, Speditionstransfer öffnen.",
-            "Quelllager und Ziellager wählen.",
-            "Paletten und Trays je Palette erfassen, Notiz für die Spedition ergänzen.",
-            "Transfer buchen: die Lieferung wird erzeugt und direkt validiert.",
-            "Bestand in beiden Lagern prüfen.",
-        ]),
-
-        p("12. Startprämie und Akquisiteur", H2),
-        p("Die Startprämie von 50 EUR wird mit der ersten Übergabe fällig, die Akquisiteur-Pauschale "
-          "monatlich je aktivem Kiosk. Beide Beträge sind in der Firma hinterlegt.", BODY),
-        *bullets([
-            "Startprämie: Status am Kiosk zeigt offen, ausgezahlt oder storniert.",
-            "Akquisiteur-Rechnung: monatlicher Lauf erzeugt die Sammelrechnung.",
-            "Pflege der Pauschale in den Einstellungen der Firma, Reiter MAGYC.",
-        ]),
-
-        p("13. Liefersperre", H2),
-        p("Ein Kiosk mit überfälliger Rechnung oder offener Differenz kann nicht beliefert werden. "
-          "Die Sperre greift beim Bestätigen des Auftrags und zeigt den Grund an.", BODY),
-        *bullets([
-            "Sperre aufheben nur mit Begründung und Berechtigung, die Aufhebung wird protokolliert.",
-            "Tage bis zur Sperre sind in den Einstellungen der Firma hinterlegt.",
-        ]),
-
-        p("14. Belegtexte pflegen", H2),
-        p("Alle Kopf- und Fußtexte liegen als Datensätze in Odoo. Änderungen wirken sofort auf die "
-          "Belege, ohne Anpassung am Code. Rechnungstexte richten sich nach dem Kundentyp.", BODY),
-        *bullets([
-            "Kommission, Belegtexte: Zeile wählen und Texte ändern",
-            "Belegarten: Angebot, Auftragsbestätigung, Lieferschein, Rechnung B2B, Rechnung Kiosk, "
-            "Rechnung Onlineshop, Gutschrift",
-        ]),
-        figure(f"{SHOTS}/raw-05-belegtexte.png",
-               "Abbildung 5: Belegtexte je Belegart mit Einleitungs- und Schlusstext."),
-
-        p("15. Mahnwesen", H2),
-        p("Drei Stufen sind hinterlegt und mit den freigegebenen Texten verknüpft: "
-          "Zahlungserinnerung am Fälligkeitstag, 1. Mahnung nach 7 Tagen, 2. Mahnung nach "
-          "weiteren 5 Tagen.", BODY),
-        *bullets([
-            "Einstellungen, Mahnwesen: Stufen, Verzögerung und Vorlage prüfen",
-            "Versand erfolgt über die Zahlungserinnerungen je Kunde",
-        ]),
-        figure(f"{SHOTS}/raw-06-mahnstufen.png",
-               "Abbildung 6: Drei Mahnstufen mit Vorlage je Stufe."),
-
-        p("16. DATEV-Export", H2),
-        p("Der Export erzeugt die Dateien, die DATEV für die Buchführung erwartet: Buchungsstapel, "
-          "Debitoren und Kreditoren sowie Kontenbeschriftungen. Die Dateien werden als Paket "
-          "heruntergeladen und in DATEV importiert.", BODY),
-        *steps([
-            "Buchhaltung, Berichterstattung, DATEV DTVF Export öffnen.",
-            "Geschäftsjahr und Zeitraum wählen.",
-            "Export erzeugen; das Paket enthält drei CSV-Dateien.",
-            "Paket herunterladen und in DATEV importieren.",
-            "Bei Fehlermeldungen: Kontenzuordnung und Debitorennummern prüfen.",
-        ]),
-        *bullets([
-            "Kontenlänge, Berater- und Mandantennummer stehen in den Einstellungen der Firma.",
-            "Debitoren- und Kreditorennummern werden je Kontakt vergeben, fortlaufend oder manuell.",
-            "Der Export ist auf der Entwicklungsdatenbank mit Platzhaltern geprüft, "
-            "die echten Nummern kommen von TU Treuhand.",
-        ]),
-
-        p("17. Stammdaten und Preislisten", H2),
-        p("Preise werden nie im Auftrag eingetippt, sondern kommen aus der Preisliste des Kunden. "
-          "Damit sind Aktionen und Staffeln an einer Stelle pflegbar.", BODY),
-        table([
-            ("Kiosk", "0,75 EUR je Dose, Pfand 0,25 EUR netto"),
-            ("B2B", "Staffelpreise, noch offen"),
-            ("Onlineshop", "Bruttopreise, Pfand 0,25 EUR brutto"),
-        ], [45, 125], ("Preisliste", "Stand")),
-        *bullets([
-            "Produkte: Lemon Zero und Berry Zero, GTIN am Produkt, GLN am Kiosk.",
-            "Tray und Palette sind als Verpackung gepflegt, damit Mengen eindeutig sind.",
-        ]),
-
-        p("18. Rollen und Rechte", H2),
-        p("Die Rechte folgen den Aufgaben. Die Freigabe von Schäden und die Aufhebung einer "
-          "Liefersperre sind bewusst eingeschränkt.", BODY),
-        table([
-            ("Geschäftsführung", "Alle Rechte, Freigaben, Auswertungen"),
-            ("Lagerleitung", "Lagerbuchungen, Schadensfreigabe, Touren"),
-            ("Store Success Manager", "Kioske, Abverkauf, Übergaben"),
-            ("Fahrer", "Touren, Übergaben, Rückgaben"),
-            ("Buchhaltung", "Rechnungen, Mahnwesen, DATEV"),
-        ], [50, 120], ("Rolle", "Aufgabe")),
-
-        p("19. Prüfstand", H2),
-        p("Alle Erweiterungen sind automatisiert geprüft. Zusätzlich wurde ein Probelauf mit "
-          "Beispieldaten gefahren, der einen vollständigen DATEV-Export erzeugt.", BODY),
-        table(CHECK, [62, 108], ("Prüfbereich", "Ergebnis")),
-
-        p("20. Umfang S00132 und Mehraufwand", H2),
-        p("Die Matrix zeigt je Funktion den Stand. Umgesetzt heißt: im System vorhanden und durch "
-          "Tests oder Probelauf belegt. Teilweise heißt: Funktion steht, ein Wert fehlt. Offen "
-          "heißt: nicht enthalten oder nicht möglich, weil Angaben oder Zugänge fehlen.", BODY),
-        matrix_table(),
-        p("Nicht Teil von S00132, technisch machbar und als Change Request beauftragbar:", BODY),
-        table(EXTRA, [62, 108], ("Thema", "Aufwand und Voraussetzung")),
-
-        p("21. Nächste Schritte", H2),
-        *bullets([
-            "Offene Angaben einsammeln, danach Konten und Preise vervollständigen",
-            "DATEV-Probelauf mit echten Buchungen und Freigabe durch TU Treuhand",
-            "Wartungsfenster festlegen und Erweiterungen ausrollen",
-            "Schulung der Kiosk-Betreuung, danach Übergabe in den Betrieb",
-        ]),
-
-        p("Anhang: Begriffe", H2),
-        table([
-            ("Abverkauf", "Verkauf der Kommissionsware durch den Kiosk"),
-            ("Erstbestückung", "Erste Lieferung an einen neuen Kiosk, 8 Trays"),
-            ("Kommissionslager", "Lagerort beim Kiosk, Ware bleibt Eigentum von MAGYC"),
-            ("Qualitätssperre", "Lagerort für Rückgaben, die geprüft werden"),
-            ("FEFO", "Zuteilung nach MHD, kürzestes Datum zuerst"),
-            ("Tray", "Verpackungseinheit, Grundlage für Liefermengen"),
-        ], [45, 125], ("Begriff", "Erklärung")),
-    ]
+def build(path, title_line, subtitle_line, story):
+    doc = BaseDocTemplate(path, pagesize=A4,
+                          leftMargin=21 * mm, rightMargin=21 * mm,
+                          topMargin=21 * mm, bottomMargin=19 * mm,
+                          title=title_line, author="PassForm Digital")
+    doc.title_line = de(title_line)
+    doc.subtitle_line = de(subtitle_line)
+    fc = Frame(21 * mm, 19 * mm, A4[0] - 42 * mm, A4[1] - 78 * mm, id="cover")
+    fb = Frame(21 * mm, 19 * mm, A4[0] - 42 * mm, A4[1] - 44 * mm, id="body")
+    doc.addPageTemplates([PageTemplate(id="Cover", frames=[fc], onPage=cover),
+                          PageTemplate(id="Body", frames=[fb], onPage=page)])
     doc.build(story)
-    return out
+    print("wrote", path)
 
 
-def build_open(out):
-    doc = document(out, "MAGYC DRINKS GmbH \u2013 Offene Angaben", "Offene Angaben")
-    story = [
-        p("MAGYC DRINKS GmbH", H1),
-        p("Offene Angaben für den Produktivstart. Stand: 10. November 2026.", SUB),
-        p("Die folgenden Angaben liegen nicht vor. Jede Zeile nennt, wofür die Angabe gebraucht "
-          "wird und was bis dahin nicht abgeschlossen werden kann. Sobald eine Angabe vorliegt, "
-          "wird sie im System ergänzt und die betroffene Funktion geprüft.", BODY),
+def manual():
+    s = []
+    para("<b>Handbuch</b>", s, ParagraphStyle("ct", parent=BODY, fontName="Helvetica-Bold",
+                                            fontSize=12, textColor=NAVY, spaceAfter=10))
+    para("Anleitung fuer den taeglichen Betrieb, die Einrichtung, den Monatsabschluss "
+         "und die Fehlerbehebung. Jedes Kapitel beschreibt einen Arbeitsgang so, dass "
+         "eine Person ohne Vorkenntnisse ihn ausfuehren kann: Menuepfad, Feld, Wert, "
+         "Ergebnis, Kontrolle.", s)
+    para("Grundlage sind das Vertriebs- und Lieferkonzept vom 09.11.2026 und die "
+         "Onboarding-Unterlagen vom 29.10.2026. Der Soll-Ablauf hat Vorrang vor "
+         "aelteren Beschreibungen.", s)
+    note("<b>So liest man dieses Handbuch.</b> Menuepfade stehen als "
+         "<b>Magyc &gt; Kioske</b>. Werte, die eingetippt oder ausgewaehlt werden, "
+         "stehen in <b>Fettdruck</b>. Jeder Arbeitsgang endet mit einer Kontrolle. "
+         "Kapitel 27 sagt, was zu tun ist, wenn eine Kontrolle nicht stimmt.", "info", s)
+    para("Inhalt in Kurzform:", s)
+    table(["Teil", "Kapitel", "Inhalt"],
+          [["A", "1 bis 5", "Grundlagen: Ablauf, Rollen, Datenmodell, Bedienung"],
+           ["B", "6 bis 12", "Einrichtung: Firma, Artikel, Lager, Kioske, Benutzer, Texte"],
+           ["C", "13 bis 23", "Tagesgeschaeft: Postfach, Bestueckung, Tour, Abverkauf, Pfand, Rechnung"],
+           ["D", "24 bis 26", "Abschluss: Tagescheck, Monatsabschluss, DATEV, Auswertungen"],
+           ["E", "27 bis 30", "Betrieb: Fehlerbehebung, Pruefstand, Funktionsmatrix, Ausblick"]],
+          [14 * mm, 24 * mm, 130 * mm], s)
+    s.append(NextPageTemplate("Body"))
+    s.append(PageBreak())
 
-        p("1. Übersicht nach Ansprechpartner", H2),
-    ]
-    rows = [[Paragraph("Wer", HEAD), Paragraph("Angabe", HEAD),
-             Paragraph("Wofür", HEAD), Paragraph("Blockiert", HEAD)]]
-    for who, what, why, blocks in OPEN:
-        rows.append([Paragraph(who, CELL_B), Paragraph(what, CELL), Paragraph(why, CELL_S),
-                     Paragraph(blocks, CELL_S)])
-    story.append(styled(rows, [26, 76, 40, 28]))
+    s.append(Paragraph("Teil A. Grundlagen", PART))
 
-    story += [
-        p("2. Was ohne die Angaben trotzdem läuft", H2),
-        *bullets([
-            "Kiosk anlegen, Lieferung, Abverkauf und Rechnung funktionieren mit den hinterlegten Werten.",
-            "Touren, Kiosk-Postfach, Verluste und Rücknahme sind vollständig nutzbar.",
-            "Der DATEV-Export erzeugt Dateien, der Import in DATEV ist ohne echte Nummern nicht freigegeben.",
-            "Liefersperre und Mahnwesen arbeiten, die Texte sind gesetzt.",
-        ]),
+    para("1. Wozu dieses Handbuch da ist", s, H1)
+    para("MAGYC stellt Getraenke in Kiosken im Kommissionsverfahren bereit. Das "
+         "Unternehmen liefert, der Kiosk verkauft, MAGYC rechnet den verkauften Anteil "
+         "ab. Odoo bildet diesen Ablauf ab: Bestand, Kioskstammdaten, Abverkauf, Pfand, "
+         "Rechnung, Buchhaltung und DATEV-Export.", s)
+    bullets(["Die Geschaeftsfuehrung, die den Ablauf versteht und Auswertungen liest.",
+             "Die Lagerleitung, die Lieferungen, Touren und Abverkauf bucht.",
+             "Die Buchhaltung, die Rechnungen prueft und den Monatsabschluss macht."], s)
+    para("Das Handbuch ist kein Lehrbuch zu Odoo. Wo Standardfunktionen verwendet "
+         "werden, steht der Menuepfad und was dort zu tun ist.", s)
 
-        p("3. Rückmeldung", H2),
-        p("Angaben können gesammelt oder einzeln geliefert werden. Sinnvoll ist die Reihenfolge: "
-          "zuerst TU Treuhand, weil Konten und DATEV-Nummern mehrere Bereiche gleichzeitig "
-          "freigeben; danach Preise und Zugänge. Für Rückfragen zu einzelnen Punkten steht "
-          "PassForm Digital zur Verfügung.", BODY),
-    ]
-    doc.build(story)
-    return out
+    para("2. Der Soll-Ablauf in acht Schritten", s, H1)
+    table(["Nr.", "Schritt", "Wer", "Wo in Odoo", "Ergebnis"],
+          [["1", "Bewerbung eines Kiosks kommt an", "Akquisiteur, Kiosk", "Magyc > Kiosk-Postfach", "Vorgang mit Status Neu"],
+           ["2", "Kiosk anlegen, Vertrag kommt zurueck", "Innendienst", "Magyc > Kioske", "Kontakt mit Kundentyp Kiosk"],
+           ["3", "Erstbestueckung liefern", "Fahrer", "Magyc > Nachschub / Erstbestueckung", "Ware im Kommissionslager"],
+           ["4", "Tour planen und fahren", "Lagerleitung, Fahrer", "Magyc > Touren", "Stopps in Reihenfolge, Lieferscheine"],
+           ["5", "Abverkauf zaehlen und buchen", "Aussendienst", "Magyc > Abverkauf Kiosk", "Menge, Differenz, Rechnung mit Pfand"],
+           ["6", "Pfand kommt zurueck", "Kiosk, Innendienst", "Magyc > Pfand-Ruecknahme", "Gutschrift"],
+           ["7", "Ware kommt beschaedigt zurueck", "Lager", "Lager > Scrap", "Bestand korrigiert, Verlust markiert"],
+           ["8", "Monatsabschluss und DATEV", "Buchhaltung", "Buchhaltung > DATEV DTVF Export", "Exportdateien fuer die Kanzlei"]],
+          [9 * mm, 42 * mm, 26 * mm, 46 * mm, 45 * mm], s)
+    note("<b>Wichtig.</b> Der Abverkauf wird nie geschaetzt und nie frei eingetippt. Er "
+         "entsteht aus dem gezaehlten Bestand im Kiosk. Umsatzsteuer und Pfand entstehen "
+         "erst beim Abverkauf, nicht bei der Lieferung. Deshalb erfolgt die Lieferung an "
+         "den Kiosk ohne Rechnung.", "stop", s)
+
+    para("3. Rollen und Rechte", s, H1)
+    para("Jede Person bekommt eine eigene Anmeldung. Geteilte Konten sind nicht "
+         "vorgesehen, weil sonst im Verlauf nicht erkennbar ist, wer gebucht hat.", s)
+    table(["Rolle", "Personen", "darf", "darf nicht"],
+          [["Geschaeftsfuehrung", "2", "alles, Freigabe Schadensverlust, Sperrdaten setzen", "nichts einschraenken"],
+           ["Lagerleitung", "1", "Touren, Lieferungen, Abverkauf, Pfand, Stammdaten", "Buchhaltung sperren"],
+           ["Aussendienst (SSM)", "1", "Abverkauf erfassen, eigene Kioske sehen", "Preise aendern, Rechnungen stornieren"],
+           ["Fahrer", "2", "eigene Tour sehen, Lieferschein drucken", "Abverkauf buchen, Preise sehen"],
+           ["Akquisiteur", "extern", "keine Anmeldung, Provision wird gepflegt", "Anmeldung"]],
+          [30 * mm, 18 * mm, 66 * mm, 54 * mm], s)
+    para("Rechte werden ueber Gruppen gesteuert: <b>Einstellungen &gt; Benutzer &amp; "
+         "Unternehmen &gt; Benutzer</b>, Feld <b>Zugriffsrechte</b>. Wer Lager buchen "
+         "soll, braucht <b>Lagerung / Administrator</b>. Wer nur lesen soll, bekommt "
+         "<b>Lagerung / Benutzer</b>.", s)
+
+    para("4. Datenmodell ohne Technik", s, H1)
+    table(["Begriff", "Was es in Odoo ist", "Woran man es erkennt"],
+          [["Kiosk", "Kontakt (res.partner) mit Kundentyp Kiosk", "Kiosk-ID, Kiosk-Status, Gebiet"],
+           ["Kommissionslager", "Lagerort beim Kiosk, Ware gehoert MAGYC", "Lagerort heisst wie der Kiosk"],
+           ["Abverkauf", "eigener Vorgang mit Positionen je Artikel", "Entwurf, Pruefung, Bestaetigt, Abgerechnet"],
+           ["Charge", "Los mit Mindesthaltbarkeitsdatum", "MHD steuert die Auswahl beim Liefern"]],
+          [30 * mm, 66 * mm, 72 * mm], s)
+    para("FEFO heisst: die Charge mit dem naechsten MHD wird zuerst ausgeliefert. Odoo "
+         "macht das beim Reservieren automatisch, wenn die Charge ein Ablaufdatum hat. "
+         "Deshalb ist das MHD beim Wareneingang Pflicht.", s)
+    para("Pfand ist ein eigener Artikel mit eigenem Preis. Er wird nicht in den "
+         "Getraenkepreis eingerechnet, sondern als separate Rechnungsposition gefuehrt. "
+         "Dadurch bleibt die Pfandrueckzahlung nachvollziehbar.", s)
+
+    para("5. Anmelden und bedienen", s, H1)
+    para("5.1 Anmelden", s, H2)
+    steps(["Adresse im Browser oeffnen: <b>https://magyc.cloudpepper.site</b>.",
+           "E-Mail und Passwort eingeben, <b>Anmelden</b>.",
+           "Oben rechts Avatar, <b>Einstellungen</b>, Sprache <b>Deutsch</b>, Zeitzone "
+           "<b>Europe/Berlin</b>.",
+           "Kontrolle: Die Menueleiste zeigt die Apps, in der Mitte steht <b>Magyc</b>."], s)
+    para("5.2 Die vier Bedienelemente", s, H2)
+    bullets(["<b>App-Menue</b> oben links: Wechsel zwischen Buchhaltung, Lager, Kontakte, Magyc.",
+             "<b>Untermenue</b> in der Leiste: die Kapitel der gewaehlten App.",
+             "<b>Suchleiste</b> mit Filter, etwa <i>Status = Aktiv</i> oder <i>Gebiet = Berlin</i>.",
+             "<b>Chatter</b> rechts im Datensatz: Verlauf, Notizen, Anhaenge."], s)
+    para("5.3 Listen bedienen", s, H2)
+    steps(["Auf eine Spaltenueberschrift klicken, um zu sortieren.",
+           "Filter-Symbol rechts oben: <b>Status = Aktiv</b> oder <b>Gebiet = Berlin</b>.",
+           "Drei Punkte je Zeile: Aktionen wie <b>Loeschen</b> oder <b>Duplizieren</b>.",
+           "Unten <b>Exportieren</b> liefert CSV fuer Excel. Spalten vorher auswaehlen."], s)
+    note("Aenderungen werden sofort gespeichert. Es gibt keinen Speichern-Knopf. Wer "
+         "einen Wert versehentlich aendert, korrigiert ihn sofort, sonst steht die "
+         "falsche Zahl im Verlauf.", "info", s)
+
+    s.append(CondPageBreak(70 * mm))
+    s.append(Spacer(1, 8))
+    s.append(Paragraph("Teil B. Einrichtung", PART))
+
+    para("6. Firma, Steuern und Kontenrahmen", s, H1)
+    para("Diese Einrichtung ist einmalig und bereits erfolgt. Die Schritte dienen der "
+         "Pruefung und der Einrichtung einer neuen Gesellschaft.", s)
+    steps(["<b>Einstellungen &gt; Unternehmen &gt; Unternehmen bearbeiten</b>.",
+           "Name <b>MAGYC DRINKS GmbH</b>, Anschrift Berlin, USt-IdNr. eintragen.",
+           "<b>Kontenrahmen</b> pruefen: <b>SKR04</b>. Waehrung <b>EUR</b>.",
+           "<b>Buchhaltung &gt; Konfiguration &gt; Steuern</b>: 19 und 7 Prozent, je "
+           "Satz Konto und DATEV-Schluessel.",
+           "Kontrolle: <b>Kontenplan</b> zeigt 1312 Konten, Feld <b>DATEV-Konto</b> ist "
+           "gefuellt."], s)
+    note("Der Kontenrahmen laesst sich nach dem ersten gebuchten Beleg nicht mehr "
+         "wechseln. Vor der ersten Rechnung pruefen.", "warn", s)
+
+    para("7. Artikel und Preise", s, H1)
+    para("7.1 Getraenkeartikel anlegen", s, H2)
+    steps(["<b>Lager &gt; Artikel &gt; Artikel</b>, <b>Neu</b>.",
+           "<b>Artikelbezeichnung</b>: zum Beispiel <b>Lemon Zero 0,33 l</b>.",
+           "<b>Verkaufspreis</b> aus der Preislage, nicht schaetzen.",
+           "<b>Steuern (Verkauf)</b>: 19 Prozent, bei Lebensmitteln der passende Satz.",
+           "Reiter <b>Bestand</b>: <b>Verfolgung</b> auf <b>Charge</b>. Ohne "
+           "Chargenverfolgung funktioniert FEFO nicht.",
+           "Reiter <b>Lager</b>: <b>MHD erforderlich</b> aktivieren.",
+           "Kontrolle: Der Artikel steht in der Liste mit Preis und Verfolgung Charge."], s)
+    note("Ein Artikel ohne Chargenverfolgung wird beim Liefern nicht nach MHD sortiert. "
+         "Das ist der haeufigste Einrichtungsfehler.", "warn", s)
+    para("7.2 Pfandartikel anlegen", s, H2)
+    steps(["<b>Lager &gt; Artikel</b>, <b>Neu</b>, Bezeichnung <b>Pfand 0,25 EUR</b>.",
+           "Typ <b>Dienstleistung</b>, damit kein Lagerbestand entsteht.",
+           "<b>Verkaufspreis 0,25</b>, Steuern wie beim Getraenk.",
+           "Kontrolle: Der Artikel wird beim Abverkauf als eigene Zeile vorgeschlagen."], s)
+    para("7.3 Preislage pflegen", s, H2)
+    steps(["<b>Verkauf &gt; Konfiguration &gt; Preislagen</b>, Preislage <b>Kiosk</b>.",
+           "Je Artikel eine Zeile mit <b>Mindestmenge 1</b> und Netto-Preis.",
+           "Kontrolle: Im Abverkauf ist der Preis ausgegraut und nicht aenderbar."], s)
+    para("Der Abverkauf uebernimmt den Preis aus der Preislage. Wer einen Preis aendern "
+         "will, aendert ihn dort. Damit ist ausgeschlossen, dass zwei Kioske "
+         "unterschiedliche Preise bekommen, ohne dass es jemand merkt.", s)
+
+    para("8. Lager, Fahrzeuglager und Chargen", s, H1)
+    steps(["<b>Lager &gt; Konfiguration &gt; Lager</b>: <b>BER</b> und <b>KOE</b> "
+           "pruefen, Anschrift steht am zugehoerigen Kontakt.",
+           "Je Fahrer ein <b>Fahrzeuglager</b>: <b>Neu</b>, Name <b>Fahrzeug 1</b>, "
+           "Lagerort <b>Fahrzeug 1</b>.",
+           "Kontrolle: <b>Lager &gt; Berichte &gt; Bestand</b> zeigt das Fahrzeuglager "
+           "als eigene Zeile."], s)
+    para("Das Fahrzeuglager ist noetig, weil Ware waehrend der Tour im Auto liegt. Wird "
+         "sie direkt vom Hauptlager gebucht, stimmt der Bestand nicht mehr, sobald ein "
+         "Kiosk nicht beliefert wird.", s)
+    para("8.1 Wareneingang mit MHD", s, H2)
+    steps(["<b>Lager &gt; Vorgaenge &gt; Wareneingang</b>, <b>Neu</b>, Lieferant und "
+           "Artikel waehlen.",
+           "Menge eintragen, <b>Charge</b> oeffnen, <b>MHD</b> setzen.",
+           "<b>Validieren</b>.",
+           "Kontrolle: <b>Lager &gt; Artikel &gt; Chargen</b> zeigt Charge und Datum."], s)
+
+    para("9. Kioskstammdaten", s, H1)
+    para("Ein Kiosk ist ein Kontakt mit Kundentyp Kiosk. Alle kioskspezifischen Felder "
+         "stehen im Reiter <b>Magyc</b>.", s)
+    steps(["<b>Magyc &gt; Kioske</b>, <b>Neu</b>.",
+           "<b>Name</b>: zum Beispiel <b>Kiosk am Kottbusser Tor</b>.",
+           "<b>Kundentyp</b>: <b>Kiosk (Kommission)</b>. Ohne diesen Wert erscheint "
+           "der Kontakt nicht in der Kioskliste.",
+           "Anschrift, Telefon, E-Mail. Diese Daten stehen auf Lieferschein und Rechnung.",
+           "<b>Kiosk-ID</b>: Schema <b>K-BER-0056</b>, wird mit Vertrag vergeben.",
+           "<b>Gebiet</b>: <b>Berlin</b> oder <b>Koeln</b>. Steuert die Tour.",
+           "<b>Kiosk-Status</b>: mit <b>Interessent</b> beginnen, siehe Kapitel 14.",
+           "<b>GLN Kiosk</b> und <b>IBAN Kiosk</b> fuellen, wenn vorhanden.",
+           "Kontrolle: Der Kiosk steht in <b>Magyc &gt; Kioske</b> mit Status und Gebiet."], s)
+    table(["Feld", "Bedeutung", "Regel"],
+          [["Kundentyp", "Art des Kontakts", "Kiosk, B2B oder Onlineshop, steuert Preise und Belege"],
+           ["Kiosk-Status", "Fortschritt", "Interessent, Vertrag eingegangen, Erstbestueckung geplant, Aktiv, Inaktiv"],
+           ["Liefersperre ignorieren", "Ausnahme von der Sperre", "Nur GF setzt das, Standard aus"],
+           ["Provision je Kiosk", "Akquisiteursprovision", "50 EUR netto monatlich, Kapitel 12"],
+           ["Startpraemie", "Status der Praemie", "Offen oder Ausgezahlt, mit Datum"]],
+          [34 * mm, 54 * mm, 80 * mm], s)
+
+    para("10. Benutzer, Gruppen und Postfach-Alias", s, H1)
+    steps(["<b>Einstellungen &gt; Benutzer &gt; Benutzer</b>, <b>Neu</b>.",
+           "Name, E-Mail, dann <b>Zugriffsrechte</b> nach Kapitel 3.",
+           "Passwort setzen, Person bittet um Aenderung beim ersten Anmelden.",
+           "Kontrolle: Die Person sieht genau die Menues ihrer Rolle."], s)
+    para("10.1 Postfach-Alias einrichten", s, H2)
+    steps(["<b>Einstellungen &gt; Technisch &gt; Eingehende Mailserver</b>: Server, "
+           "Port, Benutzer, Passwort des Postfachs.",
+           "<b>Alias-Domains</b>: <b>magyc.cloudpepper.site</b> eintragen.",
+           "<b>Magyc &gt; Kiosk-Postfach</b>: Spalte <b>Alias</b> wird je Vorgang "
+           "automatisch erzeugt.",
+           "Testmail senden. Kontrolle: neuer Vorgang mit Status <b>Neu</b> binnen "
+           "einer Minute."], s)
+    note("Ohne eingehenden Mailserver bleibt das Postfach leer. Bewerbungen kommen dann "
+         "per Telefon und werden manuell erfasst.", "warn", s)
+
+    para("11. Belegtexte", s, H1)
+    steps(["<b>Magyc &gt; Belegtexte</b>, <b>Neu</b>.",
+           "<b>Belegtyp</b> waehlen, zum Beispiel <b>Rechnung Kiosk (Abverkauf)</b>.",
+           "<b>Einleitungstext</b> und <b>Schlusstext</b> fuellen, Formatierung erlaubt.",
+           "Kontrolle: Eine neue Rechnung des Typs zeigt beide Texte."], s)
+    table(["Belegtyp", "Verwendung"],
+          [["Angebot (B2B)", "Angebote an gewerbliche Kunden"],
+           ["Auftragsbestaetigung", "Bestaetigung eines B2B-Auftrags"],
+           ["Rechnung B2B", "Rechnung an B2B-Kunden"],
+           ["Rechnung Kiosk (Abverkauf)", "Monatsrechnung aus dem Abverkauf"],
+           ["Rechnung Onlineshop", "Rechnung an Endkunden"],
+           ["Gutschrift / Storno", "Pfandruecknahme und Korrekturen"],
+           ["Lieferschein", "Begleitpapier der Lieferung"]],
+          [52 * mm, 116 * mm], s)
+
+    para("12. Provision und Startpraemie", s, H1)
+    steps(["<b>Magyc &gt; Startpraemien</b> zeigt Kioske mit Status <b>Offen</b>.",
+           "<b>Provision je Kiosk</b> pruefen: 50 EUR netto monatlich.",
+           "Nach Auszahlung Status <b>Ausgezahlt</b> und Datum setzen.",
+           "Kontrolle: Der Kiosk verschwindet aus der Liste der offenen Praemien."], s)
+
+    s.append(CondPageBreak(70 * mm))
+    s.append(Spacer(1, 8))
+    s.append(Paragraph("Teil C. Tagesgeschaeft", PART))
+
+    para("13. Bewerbung im Kiosk-Postfach bearbeiten", s, H1)
+    steps(["<b>Magyc &gt; Kiosk-Postfach</b> oeffnen.",
+           "Zeile mit Status <b>Neu</b> anklicken. Rechts die Nachricht, unten Anhaenge.",
+           "Anschrift und Telefon in die Felder uebernehmen, falls sie fehlen.",
+           "Passt der Standort: Knopf <b>Kiosk anlegen</b>. Es oeffnet sich ein "
+           "vorausgefuellter Kontakt.",
+           "Im Kontakt <b>Kundentyp</b> auf <b>Kiosk (Kommission)</b>, <b>Kiosk-Status</b> "
+           "auf <b>Vertrag eingegangen</b>, <b>Gebiet</b> waehlen, speichern.",
+           "Zurueck im Postfach: Status <b>Kiosk angelegt</b>.",
+           "Passt der Standort nicht: Status <b>Abgelehnt</b> und Grund als Notiz."], s)
+    note("Es entsteht kein Kiosk automatisch. Bewusst ein Klick, damit niemand "
+         "versehentlich Dubletten anlegt.", "info", s)
+    para("Kontrolle: Der Kiosk steht in <b>Magyc &gt; Kioske</b> mit Status <b>Vertrag "
+         "eingegangen</b>, der Postfachvorgang auf <b>Kiosk angelegt</b>.", s)
+
+    para("14. Kiosk anlegen und Vertrag fuehren", s, H1)
+    table(["Status", "Bedeutung", "Naechster Schritt"],
+          [["Interessent", "Kontakt besteht, Vertrag fehlt", "Vertrag senden, nachfassen"],
+           ["Vertrag eingegangen", "unterschriebener Vertrag liegt vor", "Erstbestueckung planen"],
+           ["Erstbestueckung geplant", "Lieferung eingeplant", "Liefern, dann auf Aktiv"],
+           ["Aktiv", "Kiosk wird beliefert und abgerechnet", "Tour, Abverkauf, Rechnung"],
+           ["Inaktiv", "keine Belieferung", "Grund notieren, Ware zurueckbuchen"]],
+          [40 * mm, 62 * mm, 66 * mm], s)
+    steps(["<b>Magyc &gt; Kioske</b>, Kiosk oeffnen.",
+           "Reiter <b>Magyc</b>: Status auf den naechsten Wert setzen.",
+           "Vertrag als PDF ueber den Chatter hochladen.",
+           "Notiz mit Datum und Ansprechpartner eintragen.",
+           "Kontrolle: Status passt zum tatsaechlichen Stand, Vertrag ist sichtbar."], s)
+
+    para("15. Erstbestueckung buchen", s, H1)
+    steps(["<b>Magyc &gt; Nachschub / Erstbestueckung</b>, <b>Neu</b>.",
+           "<b>Kiosk</b> waehlen.",
+           "<b>Modus</b>: <b>Erstbestueckung</b>.",
+           "<b>Fahrzeuglager</b>: Lager des Fahrers.",
+           "<b>Trays Lemon</b> und <b>Trays Berry</b>: Anzahl. Ein Tray enthaelt 24 Dosen.",
+           "<b>Bestaetigen</b>. Odoo legt die Lieferung an und reserviert die Charge mit "
+           "dem naechsten MHD.",
+           "Lieferung oeffnen, <b>Validieren</b>.",
+           "Kiosk-Status auf <b>Aktiv</b>."], s)
+    table(["Feld", "Wert", "Bedeutung"],
+          [["Modus", "Erstbestueckung", "Erstlieferung ohne Mindestmenge"],
+           ["Trays Lemon", "ganze Zahl", "Trays Lemon Zero, mal 24 Dosen"],
+           ["Trays Berry", "ganze Zahl", "Trays Berry Zero, mal 24 Dosen"],
+           ["Mindestmenge Nachschub", "nur Nachschub", "Warnschwelle, Kapitel 16"],
+           ["Fahrzeuglager", "Lager des Fahrers", "Quelle der Ware"]],
+          [38 * mm, 40 * mm, 90 * mm], s)
+    note("Kontrolle: <b>Lager &gt; Berichte &gt; Bestand</b> zeigt die Menge im "
+         "Kommissionslager, das Hauptlager ist um dieselbe Menge kleiner. Stimmt das "
+         "nicht, wurde die Lieferung nicht validiert.", "ok", s)
+
+    para("16. Nachschub buchen", s, H1)
+    steps(["<b>Magyc &gt; Nachschub / Erstbestueckung</b>, <b>Neu</b>.",
+           "Kiosk waehlen, Modus <b>Nachschub</b>.",
+           "<b>Mindestmenge Nachschub (Trays)</b>: liegt der Bestand darunter, ist "
+           "Nachschub faellig.",
+           "Trays Lemon und Berry eintragen, <b>Bestaetigen</b>, Lieferung validieren.",
+           "Kontrolle: Bestand im Kommissionslager steigt um die gelieferte Menge."], s)
+
+    para("17. Tour planen und fahren", s, H1)
+    steps(["<b>Magyc &gt; Touren</b>, <b>Neu</b>.",
+           "<b>Name</b>: zum Beispiel <b>Tour Berlin Nord</b>.",
+           "<b>Datum</b>, <b>Fahrer</b>, <b>Fahrzeuglager</b>, <b>Gebiet</b> setzen.",
+           "Reiter <b>Stopps</b>: Kioske hinzufuegen. Reihenfolge nach Postleitzahl, "
+           "dann Name.",
+           "Speichern. <b>Anzahl Stopps</b> zeigt die Summe.",
+           "Lieferscheine: Stopp oeffnen, <b>Drucken &gt; Lieferschein</b>.",
+           "Nach der Tour je Kiosk den Abverkauf buchen, Kapitel 18."], s)
+    note("Die Reihenfolge laesst sich je Stopp ueber <b>Stop-Reihenfolge</b> "
+         "ueberschreiben, in Zehnerschritten. Gedacht fuer Baustellen und "
+         "Einbahnstrassen.", "info", s)
+
+    para("18. Abverkauf erfassen und abrechnen", s, H1)
+    para("18.1 Zaehlen und erfassen", s, H2)
+    steps(["<b>Magyc &gt; Abverkauf Kiosk</b>, <b>Neu</b>.",
+           "<b>Kiosk</b> waehlen, <b>Zeitraum von</b> und <b>Zeitraum bis</b> setzen.",
+           "<b>Positionen laden</b>. Odoo fuellt je Artikel <b>Bestand laut System</b>, "
+           "<b>Gezählt (SSM)</b> und <b>Abverkauf</b>.",
+           "<b>Gezählt (SSM)</b> je Artikel mit dem gezaehlten Bestand im Kuehlschrank "
+           "fuellen. Nichts anderes eintippen.",
+           "Odoo rechnet <b>Abverkauf = Bestand laut System minus gezaehlt</b>. Der Wert "
+           "ist nicht editierbar.",
+           "<b>Rueckgabe (Stk)</b> fuellen, wenn Ware zurueckkommt. Die <b>Differenz</b> "
+           "erscheint automatisch.",
+           "<b>Kuehlschrankreihen</b>, <b>Platzierung ok</b> und Foto im Reiter "
+           "<b>Platzierung</b>.",
+           "Speichern. Bei Differenz wechselt der Status auf <b>Pruefung Differenz</b>."], s)
+    table(["Feld", "Herkunft", "Regel"],
+          [["Bestand laut System", "Odoo", "Bestand im Kommissionslager am Zeitraumbeginn"],
+           ["Gezählt (SSM)", "Eingabe", "Zaehlergebnis im Kiosk, Pflicht"],
+           ["Abverkauf (Stk)", "berechnet", "System minus gezaehlt, nicht editierbar"],
+           ["Rueckgabe (Stk)", "Eingabe", "nur wenn Ware physisch zurueckkommt"],
+           ["Differenz", "berechnet", "Abverkauf plus Rueckgabe minus System"],
+           ["Preis netto", "Preislage", "nicht editierbar"]],
+          [40 * mm, 30 * mm, 98 * mm], s)
+    para("18.2 Differenz klaeren", s, H2)
+    steps(["Vorgang mit Status <b>Pruefung Differenz</b> oeffnen.",
+           "Ursache pruefen: Zaehlfehler, Schwund, nicht gebuchte Rueckgabe.",
+           "Notiz mit Ergebnis eintragen, <b>Differenz geklaert</b> setzen.",
+           "<b>Bestaetigen</b>. Status <b>Bestaetigt</b>.",
+           "Kontrolle: <b>Differenz gesamt</b> steht fest, Rechnung im naechsten Schritt."], s)
+    note("Ohne <b>Differenz geklaert</b> laesst sich nicht bestaetigen. Absicht: keine "
+         "Rechnung ohne Erklaerung.", "warn", s)
+    para("18.3 Rechnung erzeugen", s, H2)
+    steps(["Im bestaetigten Abverkauf <b>Rechnung erzeugen</b>.",
+           "Odoo legt die Rechnung an: Getraenke netto, Umsatzsteuer, Pfand als eigene "
+           "Zeile.",
+           "Status <b>Abgerechnet</b>, Feld <b>Rechnung</b> verweist auf den Beleg.",
+           "Rechnung pruefen unter <b>Buchhaltung &gt; Kunden &gt; Rechnungen</b>, dann "
+           "<b>Bestaetigen</b>.",
+           "Kontrolle: Rechnungsbetrag gleich Abverkaufswert plus Pfand."], s)
+
+    para("19. Pfandruecknahme", s, H1)
+    steps(["<b>Magyc &gt; Pfand-Ruecknahme</b>, <b>Neu</b>.",
+           "<b>Kunde / Kiosk</b> und <b>Datum</b> setzen.",
+           "Position: <b>Pfandartikel</b>, <b>Menge (Stk)</b>, Preis aus dem Artikel.",
+           "<b>Bestaetigen</b>. Odoo erzeugt eine <b>Gutschrift</b>.",
+           "Kontrolle: <b>Gutschrift</b> gefuellt, Status <b>Abgerechnet</b>, Betrag "
+           "netto gleich Menge mal Pfand."], s)
+    note("Die Pfandruecknahme senkt den offenen Posten des Kiosks. Sie ist keine "
+         "Ausgabe und kein Verlust.", "info", s)
+
+    para("20. Rueckgabe und Qualitaetssperre", s, H1)
+    table(["Marke", "Bedeutung", "Freigabe"],
+          [["RAN/MUSTER", "Muster oder Ansichtsexemplar", "Lagerleitung"],
+           ["RAN/SCHADEN", "beschaedigte Ware", "Geschaeftsfuehrung"]],
+          [30 * mm, 70 * mm, 68 * mm], s)
+    steps(["<b>Lager &gt; Vorgaenge &gt; Scrap</b>, <b>Neu</b>.",
+           "Artikel, Menge und <b>Quelle</b> (Kommissionslager oder Fahrzeug) waehlen.",
+           "<b>Verlustmarke</b>: <b>RAN/MUSTER</b> oder <b>RAN/SCHADEN</b>.",
+           "Bei <b>RAN/SCHADEN</b> traegt Odoo die Freigabe der Geschaeftsfuehrung ein. "
+           "Ohne diese Rolle laesst sich nicht speichern.",
+           "Kontrolle: Bestand sinkt, Vorgang steht in der Verlustliste."], s)
+    note("Scrap ist unumkehrbar. Bei Vertippern ist eine Korrekturbuchung noetig. Vor "
+         "dem Speichern Menge und Quelle pruefen.", "stop", s)
+
+    para("21. Speditionstransfer", s, H1)
+    steps(["<b>Magyc &gt; Speditionstransfer</b>, <b>Neu</b>.",
+           "<b>Quelle</b> und <b>Ziel</b> waehlen (BER nach KOE oder umgekehrt).",
+           "<b>Paletten</b>: Anzahl. <b>Trays je Palette</b> bleibt auf dem Standardwert, "
+           "solange die Spedition nichts anderes meldet.",
+           "<b>Speditionsreferenz</b>: Sendungsnummer.",
+           "<b>Bestaetigen</b>, erzeugte Lieferung <b>Validieren</b>.",
+           "Kontrolle: Bestand im Ziellager steigt um Paletten mal Trays mal 24 Dosen."], s)
+
+    para("22. Belegtexte verwenden und drucken", s, H1)
+    steps(["Beleg oeffnen, zum Beispiel eine Rechnung.",
+           "<b>Drucken</b>, Vorlage <b>Rechnung</b> waehlen.",
+           "Kontrolle: Einleitung und Schlusstext des passenden Belegtyps stehen im PDF."], s)
+    para("Die Vorlagen bleiben ohne Rahmen und Farbflaechen auch in Schwarzweiss "
+         "lesbar. Wichtig fuer Versand per Fax und Ablage bei der Kanzlei.", s)
+
+    para("23. Zahlungen, Mahnwesen und Sperren", s, H1)
+    steps(["<b>Buchhaltung &gt; Kunden &gt; Rechnungen</b>: offene Rechnungen sind rot.",
+           "Zahlung: Rechnung oeffnen, <b>Zahlung registrieren</b>, Datum und Betrag "
+           "pruefen.",
+           "Mahnung: Filter <b>Ueberfaellig</b>, dann <b>Mahnung senden</b>.",
+           "Kiosk sperren: Feld <b>Liefersperre</b> im Kiosk setzen, naechste Lieferung "
+           "wird blockiert.",
+           "Kontrolle: Der Kiosk erscheint nicht mehr in der Tourenauswahl, bis die "
+           "Sperre aufgehoben ist."], s)
+    note("Die Liefersperre ist ein Hinweis, kein technisches Verbot. Die GF kann sie je "
+         "Kiosk mit <b>Liefersperre ignorieren</b> uebergehen. Jede Ausnahme steht "
+         "danach im Verlauf.", "warn", s)
+
+    s.append(CondPageBreak(70 * mm))
+    s.append(Spacer(1, 8))
+    s.append(Paragraph("Teil D. Abschluss und Auswertung", PART))
+
+    para("24. Tagesabschluss in zehn Minuten", s, H1)
+    bullets(["Alle Touren des Tages stehen auf <b>Erledigt</b>.",
+             "Alle Abverkaeufe sind <b>Bestaetigt</b> oder <b>Abgerechnet</b>.",
+             "Keine Lieferung steht auf <b>Entwurf</b>.",
+             "Kein Postfachvorgang ist aelter als zwei Tage und noch <b>Neu</b>.",
+             "Kein Scrap ohne Verlustmarke.",
+             "Fahrzeuglager leer oder Bestand erklaert."], s)
+
+    para("25. Monatsabschluss und DATEV-Export", s, H1)
+    para("25.1 Vorbereiten", s, H2)
+    steps(["Alle Abverkaeufe des Monats bestaetigen und Rechnungen erzeugen.",
+           "Alle Pfandruecknahmen bestaetigen.",
+           "Alle Rechnungen pruefen und bestaetigen.",
+           "Kontrolle: <b>Buchhaltung &gt; Berichte &gt; Bilanz</b> laeuft ohne Warnung."], s)
+    para("25.2 Export erzeugen", s, H2)
+    steps(["<b>Buchhaltung &gt; Buchhaltung &gt; DATEV DTVF Export</b> oeffnen.",
+           "<b>Neu</b>, Zeitraum erster bis letzter Tag des Monats.",
+           "<b>Beraternummer</b> und <b>Mandantennummer</b> aus den Offenen Angaben, "
+           "<b>Sachkontenlaenge</b> 4.",
+           "<b>Export erzeugen</b>.",
+           "Drei Dateien herunterladen: Buchungsstapel, Debitoren/Kreditoren, "
+           "Kontenbeschriftungen.",
+           "Kontrolle: Dateinamen beginnen mit <b>EXTF_</b>, Summe im Buchungsstapel "
+           "gleich Summe der Journalposten des Monats."], s)
+    table(["Datei", "Inhalt", "Empfaenger"],
+          [["EXTF_Buchungsstapel_*.csv", "alle Buchungen des Zeitraums", "Kanzlei, Import in DATEV"],
+           ["EXTF_DebKred_Stamm.csv", "Kontenstamm Debitoren und Kreditoren", "Kanzlei, einmalig"],
+           ["EXTF_Kontenbeschriftungen.csv", "Sachkontenbezeichnungen", "Kanzlei, einmalig"]],
+          [54 * mm, 62 * mm, 52 * mm], s)
+    para("25.3 Sperren", s, H2)
+    steps(["<b>Buchhaltung &gt; Buchhaltung &gt; Sperrdaten</b> oeffnen.",
+           "Sperrdatum auf den letzten Tag des abgeschlossenen Monats setzen.",
+           "Kontrolle: Buchungen davor sind nicht mehr aenderbar."], s)
+    note("Das Sperrdatum erst setzen, wenn die Kanzlei den Export geprueft hat. "
+         "Zuruecknehmen kann es nur die Geschaeftsfuehrung.", "stop", s)
+
+    para("26. Auswertungen lesen", s, H1)
+    table(["Frage", "Wo", "Filter"],
+          [["Umsatz je Kiosk im Monat", "Buchhaltung > Berichte > Rechnungsanalyse", "Zeitraum, Kundentyp Kiosk"],
+           ["Abverkauf je Artikel", "Magyc > Abverkauf Kiosk", "Zeitraum, nach Artikel gruppieren"],
+           ["Differenzen je Kiosk", "Magyc > Abverkauf Kiosk", "Status Pruefung Differenz oder Differenz gesamt ungleich 0"],
+           ["Bestand je Kiosk", "Lager > Berichte > Bestand", "Lagerort des Kiosks"],
+           ["Faellige Nachschuebe", "Magyc > Kioske", "Bestand kleiner Mindestmenge"],
+           ["Offene Startpraemien", "Magyc > Startpraemien", "Status Offen"]],
+          [44 * mm, 62 * mm, 62 * mm], s)
+    para("Fuer den Versand an Dritte die Liste ueber <b>Exportieren</b> als CSV ausgeben. "
+         "Spalten vorher auswaehlen: Kiosk, Zeitraum, Menge, Betrag.", s)
+
+    s.append(CondPageBreak(70 * mm))
+    s.append(Spacer(1, 8))
+    s.append(Paragraph("Teil E. Betrieb", PART))
+
+    para("27. Fehlerbehebung", s, H1)
+    para("Erst pruefen, dann handeln. Die meisten Meldungen haben eine der Ursachen in "
+         "dieser Tabelle.", s)
+    table(["Beobachtung", "Ursache", "Massnahme"],
+          [["Kiosk fehlt in der Kioskliste", "Kundentyp nicht gesetzt", "Kontakt oeffnen, Kundentyp Kiosk (Kommission) setzen"],
+           ["Abverkauf bleibt leer", "Gezählt (SSM) fehlt", "Zaehlwert eintragen, speichern"],
+           ["Bestaetigen nicht moeglich", "Differenz nicht geklaert", "Differenz geklaert setzen, Notiz ergaenzen"],
+           ["Lieferung nicht validierbar", "Kein Bestand oder Charge fehlt", "Wareneingang pruefen, Charge mit MHD anlegen"],
+           ["Falsche Charge geliefert", "Artikel ohne Chargenverfolgung", "Verfolgung auf Charge stellen, neu reservieren"],
+           ["Rechnung ohne Pfandzeile", "Pfandartikel fehlt in der Preislage", "Preislage Kiosk ergaenzen"],
+           ["Postfach bleibt leer", "Mailserver oder Alias fehlt", "Kapitel 10.1, Testmail senden"],
+           ["Keine Berechtigung", "Gruppe fehlt", "Benutzer, Zugriffsrechte pruefen"],
+           ["Scrap nicht speicherbar", "RAN/SCHADEN ohne GF-Rolle", "GF bucht oder erteilt Freigabe"],
+           ["DATEV-Export leer", "Zeitraum falsch oder keine Buchungen", "Zeitraum pruefen, Buchungen bestaetigen"]],
+          [44 * mm, 48 * mm, 76 * mm], s)
+    para("Steht die Meldung nicht in der Tabelle: Bildschirmfoto, Uhrzeit und letzten "
+         "Arbeitsschritt notieren und an PassForm Digital geben. Diese drei Angaben "
+         "reichen in der Regel, um die Ursache im Protokoll zu finden.", s)
+
+    para("28. Pruefstand", s, H1)
+    para("Das System ist mit 36 automatischen Tests geprueft, die bei jeder Aenderung "
+         "erneut laufen.", s)
+    table(["Bereich", "Tests", "Ergebnis"],
+          [["Kommission, Abverkauf, Pfand, Tour (magyc_commission, magyc_ops)", "27", "bestanden"],
+           ["DATEV-Export DTVF (datev_export, datev_export_dtvf)", "9", "bestanden"]],
+          [110 * mm, 26 * mm, 32 * mm], s)
+    bullets(["Abverkauf erzeugt Rechnung mit korrekter Steuer und Pfandzeile.",
+             "Abverkauf ohne geklaerte Differenz laesst sich nicht bestaetigen.",
+             "FEFO liefert die Charge mit dem naechsten MHD zuerst.",
+             "Pfandruecknahme erzeugt Gutschrift in Hoehe Menge mal Pfand.",
+             "Erstbestueckung und Nachschub buchen auf das Kommissionslager.",
+             "Tourauswahl sortiert nach Postleitzahl, dann Name.",
+             "DATEV-Export schreibt drei Dateien mit EXTF-Kopf."], s)
+
+    para("29. Funktionsmatrix S00132", s, H1)
+    table(["Enthalten", "Mehraufwand"],
+          [["SKR04 einrichten, Steuersaetze, Preislagen", "DPG-Clearing nach Paragraf 17 UStG"],
+           ["Kioskstammdaten, Vertrag, Statuskette", "Logik fuer 24-Dosen-Gebinde-Uebertrag"],
+           ["Erstbestueckung und Nachschub", "Liefersperre mit Ausnahmen je Kiosk"],
+           ["Uebergabeprotokoll, Abverkauf mit FEFO", "Pfandruecknahme-Ausnahme beim Kiosk"],
+           ["Pfand auf der Abverkaufsrechnung", "KI-gestuetzte Mailerfassung"],
+           ["Qualitaetssperre und Rueckgabe", "Fahrer-App"],
+           ["Kommissionierliste, Mahntexte", "Anbindung Speditionen und Shop"],
+           ["Touren, Akquisiteurprovision", "Lager Koeln ueber Platzhalter hinaus"],
+           ["DATEV-Export", ""]],
+          [84 * mm, 84 * mm], s)
+
+    para("30. Naechste Schritte", s, H1)
+    steps(["Offene Angaben liefern (separates Dokument), zuerst die Kanzlei: Berater- "
+           "und Mandantennummer, Konten fuer Pfand und DPG.",
+           "Testkiosk anlegen und einen Monat durchbuchen: Erstbestueckung, zwei "
+           "Abverkaeufe, eine Pfandruecknahme, DATEV-Export.",
+           "Benutzer anlegen: zwei GF, Lagerleitung, ein SSM, zwei Fahrer.",
+           "Schulung von 90 Minuten anhand dieses Handbuchs, danach zwei Wochen "
+           "Begleitung im Tagesgeschaeft.",
+           "Produktivsetzung, danach monatlicher Abschluss nach Kapitel 25."], s)
+
+    s.append(CondPageBreak(90 * mm))
+    para("Anhang. Begriffe und Menueindex", s, H1)
+    table(["Begriff", "Bedeutung"],
+          [["Kommission", "Ware bleibt Eigentum von MAGYC, bis der Kiosk sie verkauft"],
+           ["Abverkauf", "gezaehlter Verkauf eines Zeitraums, Grundlage der Rechnung"],
+           ["Differenz", "Abweichung zwischen Systembestand und Zaehlung"],
+           ["FEFO", "First Expired First Out, aelteste Charge zuerst"],
+           ["MHD", "Mindesthaltbarkeitsdatum der Charge"],
+           ["Tray", "Gebinde mit 24 Dosen"],
+           ["SSM", "Aussendienstmitarbeiter, zaehlt im Kiosk"],
+           ["Sperrdatum", "Buchhaltungssperre, verhindert Aenderungen"]],
+          [34 * mm, 134 * mm], s)
+    table(["Menue", "Kapitel"],
+          [["Magyc > Kiosk-Postfach", "13"],
+           ["Magyc > Kioske", "9, 14"],
+           ["Magyc > Nachschub / Erstbestueckung", "15, 16"],
+           ["Magyc > Touren", "17"],
+           ["Magyc > Abverkauf Kiosk", "18"],
+           ["Magyc > Pfand-Ruecknahme", "19"],
+           ["Magyc > Speditionstransfer", "21"],
+           ["Magyc > Startpraemien", "12"],
+           ["Magyc > Belegtexte", "11"],
+           ["Buchhaltung > DATEV DTVF Export", "25"],
+           ["Lager > Scrap", "20"],
+           ["Lager > Berichte > Bestand", "15, 26"]],
+          [84 * mm, 84 * mm], s)
+    illustrated(s)
+    para("Ende des Handbuchs. Aenderungswuensche an PassForm Digital, Projekt S00132.", s, SMALL)
+    return s
+
+
+def illustrated(s):
+    """Bildanleitung: je Screenshot Titel, Einleitung, Bild mit roten Markierungen, nummerierte Legende."""
+    f = os.path.join(SHOTS, "shots.json")
+    if not os.path.exists(f):
+        return
+    s.append(PageBreak())
+    head = [Paragraph("<b>Bildanleitung: Einstellungen und Bedienung Schritt für Schritt</b>", H1),
+            Paragraph("Jedes Bild zeigt den echten Bildschirm. Rote Rahmen mit Nummer zeigen, wo geklickt oder "
+                      "eingetragen wird. Die Legende unter dem Bild nennt die Reihenfolge.", BODY)]
+    for i, sh in enumerate(json.load(open(f, encoding="utf-8")), 1):
+        block = head + [Paragraph("<b>%d. %s</b>" % (i, sh["title"]), H2), Paragraph(sh["intro"], BODY)]
+        head = []
+        story_before = len(s)
+        fig(sh["file"], "", block)
+        rows = [[str(n), t] for n, t in sh["legend"]]
+        if rows:
+            t = Table([[Paragraph("<b>%s</b>" % a, BODY), Paragraph(b_, BODY)] for a, b_ in rows], colWidths=[10 * mm, 158 * mm])
+            t.setStyle(TableStyle([("TEXTCOLOR", (0, 0), (0, -1), colors.HexColor("#dc2626")),
+                                   ("LINEBELOW", (0, 0), (-1, -1), 0.3, LINE),
+                                   ("VALIGN", (0, 0), (-1, -1), "MIDDLE")]))
+            block.append(t)
+        s.append(KeepTogether(block))
+        s.append(Spacer(1, 10))
+
+
+def open_items():
+    s = []
+    para("<b>Offene Angaben</b>", s, ParagraphStyle("ot", parent=BODY, fontName="Helvetica-Bold",
+                                                  fontSize=12, textColor=NAVY, spaceAfter=10))
+    para("Diese Liste enthaelt alles, was das System von MAGYC braucht und noch nicht "
+         "vorliegt. Jede Zeile nennt, wofuer die Angabe gebraucht wird und was solange "
+         "nicht funktioniert. Die Reihenfolge ist eine Empfehlung.", s)
+    table(["Nr.", "Angabe", "Wer", "wofuer", "was solange nicht geht"],
+          [["1", "DATEV Berater- und Mandantennummer", "TU Treuhand", "DATEV-Export", "Dateien sind fuer die Kanzlei nicht importierbar"],
+           ["2", "Sachkonten Pfand und Pfandrueckzahlung", "TU Treuhand", "Buchung der Pfandzeilen", "Pfand wird gebucht, Konten muessen nachgezogen werden"],
+           ["3", "Sachkonten DPG-Clearing (Paragraf 17 UStG)", "TU Treuhand", "Clearing DPG", "Clearing nur manuell ausserhalb des Systems"],
+           ["4", "DATEV-Schluessel je Sachkonto (SKR04)", "TU Treuhand", "Kontenbeschriftung", "Kontenbeschriftungen unvollstaendig"],
+           ["5", "USt-IdNr. und Steuernummer", "MAGYC", "Rechnungskopf", "Rechnungen ohne vollstaendige Pflichtangaben"],
+           ["6", "IBAN und Bankverbindung", "MAGYC", "Rechnung, Zahlungsabgleich", "Zahlungen manuell zuordnen"],
+           ["7", "Einkaufspreise je Artikel", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
+           ["8", "Gewichte und Palettenmasse", "MAGYC", "Speditionstransfer", "Palettenrechnung nur mit Schaetzwerten"],
+           ["9", "Anschrift Lager Koeln-Rodenkirchen", "MAGYC", "Lager KOE, Lieferscheine", "Platzhalteranschrift in Belegen"],
+           ["10", "Regalplan je Kiosktyp", "MAGYC", "Platzierung, Kuehlschrankreihen", "Platzierung nur als Freitext und Foto"],
+           ["11", "Preislisten B2B und Onlineshop", "MAGYC", "Preislagen", "nur Kioskpreise gepflegt"],
+           ["12", "Zugaenge DHL, UPS, DPD, Shopify, Marktplaetze", "MAGYC", "Versand und Shop", "keine Anbindung, Belege manuell"]],
+          [9 * mm, 40 * mm, 20 * mm, 34 * mm, 65 * mm], s)
+    note("<b>Was trotzdem laeuft.</b> Kioskverwaltung, Erstbestueckung, Nachschub, "
+         "Touren, Abverkauf, Pfand, Rueckgabe, Belegtexte und DATEV-Export sind "
+         "funktionsfaehig. Ohne die Angaben oben fehlen Pflichtangaben auf Belegen, die "
+         "kaufmaennische Bewertung und die Anbindung an Dritte.", "ok", s)
+    para("<b>Empfohlene Reihenfolge.</b> Zuerst die Punkte 1 bis 4 bei der Kanzlei, weil "
+         "sie den Monatsabschluss blockieren. Danach 5 bis 7 von MAGYC, weil sie auf "
+         "jedem Beleg stehen. Die Punkte 8 bis 12 sind Ausbaustufen und blockieren den "
+         "Start nicht.", s)
+    return s
 
 
 if __name__ == "__main__":
-    print(build_manual("MAGYC-Handbuch-De.pdf"))
-    print(build_open("MAGYC-Offene-Angaben-De.pdf"))
+    build(os.path.join(HERE, "MAGYC-Handbuch-De.pdf"),
+          "Handbuch und Status", "Anleitung fuer den taeglichen Betrieb", manual())
+    build(os.path.join(HERE, "MAGYC-Offene-Angaben-De.pdf"),
+          "Offene Angaben", "Was MAGYC liefern muss, damit alles laeuft", open_items())
