@@ -63,5 +63,5 @@
     </record>
 
     <menuitem id="menu_magyc_pfand_return" name="Pfand-Rücknahme"
-              parent="magyc_commission.menu_magyc_root" action="action_magyc_pfand_return" sequence="30"/>
+              parent="magyc_commission.menu_magyc_grp_abrechnung" action="action_magyc_pfand_return" sequence="20"/>
 </odoo>

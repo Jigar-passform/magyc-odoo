@@ -94,18 +94,18 @@
     </record>
 
     <menuitem id="menu_magyc_kiosk" name="Kioske"
-              parent="magyc_commission.menu_magyc_root"
+              parent="magyc_commission.menu_magyc_grp_kiosk"
               action="action_magyc_kiosk" sequence="5"/>
     <menuitem id="menu_magyc_delivery" name="Nachschub / Erstbestückung"
-              parent="magyc_commission.menu_magyc_root"
+              parent="magyc_commission.menu_magyc_grp_logistik"
               action="action_magyc_delivery_wizard" sequence="10"/>
     <menuitem id="menu_magyc_transfer" name="Speditionstransfer"
-              parent="magyc_commission.menu_magyc_root"
+              parent="magyc_commission.menu_magyc_grp_logistik"
               action="action_magyc_transfer_wizard" sequence="15"/>
     <menuitem id="menu_magyc_tour" name="Touren"
-              parent="magyc_commission.menu_magyc_root"
+              parent="magyc_commission.menu_magyc_grp_logistik"
               action="action_magyc_tour" sequence="20"/>
     <menuitem id="menu_magyc_bonus" name="Startprämien"
-              parent="magyc_commission.menu_magyc_root"
+              parent="magyc_commission.menu_magyc_grp_abrechnung"
               action="action_magyc_bonus_open" sequence="30"/>
 </odoo>

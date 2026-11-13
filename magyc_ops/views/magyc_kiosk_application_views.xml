@@ -72,6 +72,6 @@
     </record>
 
     <menuitem id="menu_magyc_kiosk_application" name="Kiosk-Postfach"
-              parent="magyc_commission.menu_magyc_root"
+              parent="magyc_commission.menu_magyc_grp_kiosk"
               action="action_magyc_kiosk_application" sequence="4"/>
 </odoo>

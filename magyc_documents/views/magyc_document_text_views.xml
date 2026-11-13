@@ -37,6 +37,6 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <menuitem id="menu_magyc_document_text" name="Belegtexte" parent="magyc_commission.menu_magyc_root"
+    <menuitem id="menu_magyc_document_text" name="Belegtexte" parent="magyc_commission.menu_magyc_grp_stammdaten"
               action="action_magyc_document_text" sequence="20"/>
 </odoo>
