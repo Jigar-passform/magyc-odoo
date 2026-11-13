@@ -841,14 +841,22 @@ msgstr "Übergabeprotokoll Kommission"
 msgid "Übergeben an"
 msgstr "Übergeben an"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_kiosk
 msgid "Kioskbetrieb"
 msgstr "Kioskbetrieb"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_logistik
 msgid "Logistik"
 msgstr "Logistik"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_abrechnung
 msgid "Abrechnung"
 msgstr "Abrechnung"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_stammdaten
 msgid "Stammdaten"
 msgstr "Stammdaten"

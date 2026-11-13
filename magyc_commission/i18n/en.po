@@ -841,14 +841,22 @@ msgstr "Consignment handover protocol"
 msgid "Übergeben an"
 msgstr "Handed over to"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_kiosk
 msgid "Kioskbetrieb"
 msgstr "Kiosk operations"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_logistik
 msgid "Logistik"
 msgstr "Logistics"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_abrechnung
 msgid "Abrechnung"
 msgstr "Billing"
 
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_stammdaten
 msgid "Stammdaten"
 msgstr "Master data"
