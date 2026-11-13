@@ -1,0 +1,252 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* magyc_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20261016\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 13:58+0000\n"
+"PO-Revision-Date: 2026-11-13 15:00+0000\n"
+"Last-Translator: MAGYC <info@magyc.de>\n"
+"Language-Team: English <info@magyc.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: \n"
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_gln
+#: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_gln
+msgid ""
+"13-stellige GLN des Kiosks. Die GTIN der Artikel steht am Produkt, nicht "
+"hier."
+msgstr "13-digit GLN of the kiosk. The item GTIN is stored on the product, not here."
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__akquisiteur
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__akquisiteur
+msgid "Akquisiteur"
+msgstr "Sales partner"
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kiosk_status__aktiv
+msgid "Aktiv"
+msgstr "Active"
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_company__magyc_delivery_block_days
+msgid "Anzahl Tage nach Fälligkeit, bevor die Liefersperre greift."
+msgstr "Number of days after the due date before the delivery block applies."
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_partner__magyc_delivery_block_override
+#: model:ir.model.fields,help:magyc_custom.field_res_users__magyc_delivery_block_override
+msgid ""
+"Ausnahme: Aufträge dieses Kunden werden trotz überfälliger Rechnungen "
+"bestätigt."
+msgstr "Exception: orders for this customer are confirmed despite overdue invoices."
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__b2b
+msgid "B2B"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_company__magyc_delivery_block
+msgid ""
+"Bestätigen eines Auftrags wird blockiert, wenn der Kunde überfällige "
+"Rechnungen hat."
+msgstr "Confirming an order is blocked when the customer has overdue invoices."
+
+#. module: magyc_custom
+#: model:ir.model,name:magyc_custom.model_res_company
+msgid "Company"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model,name:magyc_custom.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_company__display_name
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__display_name
+#: model:ir.model.fields,field_description:magyc_custom.field_sale_order__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kiosk_status__erstbestueckung_geplant
+msgid "Erstbestückung geplant"
+msgstr "First fill planned"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kiosk_gln
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__kiosk_gln
+msgid "GLN Kiosk"
+msgstr "Kiosk GLN"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__gebiet
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__gebiet
+msgid "Gebiet"
+msgstr "Area"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kiosk_iban
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__kiosk_iban
+msgid "IBAN Kiosk"
+msgstr "Kiosk IBAN"
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_iban
+#: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_iban
+msgid "IBAN für die Auszahlung des Signing Bonus."
+msgstr "IBAN for the payout of the signing bonus."
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_company__id
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__id
+#: model:ir.model.fields,field_description:magyc_custom.field_sale_order__id
+msgid "ID"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kiosk_status__inaktiv
+msgid "Inaktiv"
+msgstr "Inactive"
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kiosk_status__interessent
+msgid "Interessent"
+msgstr "Prospect"
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_id
+#: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_id
+msgid "Interne Kundennummer, z. B. K-BER-0001."
+msgstr "Internal customer number, e.g. K-BER-0001."
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__kiosk
+msgid "Kiosk (Kommission)"
+msgstr "Kiosk (consignment)"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kiosk_id
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__kiosk_id
+msgid "Kiosk-ID"
+msgstr "Kiosk ID"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kiosk_status
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__kiosk_status
+msgid "Kiosk-Status"
+msgstr "Kiosk status"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kundentyp
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__kundentyp
+msgid "Kundentyp"
+msgstr "Customer type"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_company__magyc_delivery_block
+msgid "Liefersperre bei überfälligen Rechnungen"
+msgstr "Delivery block for overdue invoices"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__magyc_delivery_block_override
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__magyc_delivery_block_override
+msgid "Liefersperre ignorieren"
+msgstr "Ignore delivery block"
+
+#. module: magyc_custom
+#: model_terms:ir.ui.view,arch_db:magyc_custom.view_partner_form_magyc
+msgid "MAGYC"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.module.module,shortdesc:base.module_magyc_custom
+msgid "MAGYC Custom"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.module.module,summary:base.module_magyc_custom
+msgid "MAGYC DRINKS: Kiosk/Kommission, Pfand und Belegwesen"
+msgstr "MAGYC DRINKS: kiosk/consignment, deposit and document management"
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__online
+msgid "Onlineshop"
+msgstr "Online shop"
+
+#. module: magyc_custom
+#: model:ir.model,name:magyc_custom.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__store_success_manager
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__store_success_manager
+msgid "Store Success Manager"
+msgstr ""
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_company__magyc_delivery_block_days
+msgid "Toleranz in Tagen"
+msgstr "Tolerance in days"
+
+#. module: magyc_custom
+#: model_terms:ir.ui.view,arch_db:magyc_custom.view_partner_form_magyc
+msgid "Vertrag"
+msgstr "Contract"
+
+#. module: magyc_custom
+#: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kiosk_status__vertrag_eingegangen
+msgid "Vertrag eingegangen"
+msgstr "Contract received"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__contract_signed
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__contract_signed
+msgid "Vertrag unterschrieben"
+msgstr "Contract signed"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__contract_start
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__contract_start
+msgid "Vertragsbeginn"
+msgstr "Contract start"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__contract_signed_on
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__contract_signed_on
+msgid "Vertragsdatum"
+msgstr "Contract date"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__contract_end
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__contract_end
+msgid "Vertragsende"
+msgstr "Contract end"
+
+#. module: magyc_custom
+#: model:ir.model.fields,field_description:magyc_custom.field_res_partner__contract_term_months
+#: model:ir.model.fields,field_description:magyc_custom.field_res_users__contract_term_months
+msgid "Vertragslaufzeit (Monate)"
+msgstr "Contract term (months)"
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_partner__gebiet
+#: model:ir.model.fields,help:magyc_custom.field_res_users__gebiet
+msgid "Vertriebsgebiet, z. B. Berlin-Mitte."
+msgstr "Sales area, e.g. Berlin-Mitte."
+
+#. module: magyc_custom
+#: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_status
+#: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_status
+msgid "Wird über die Aktionen im MAGYC-Tab geführt, nicht berechnet."
+msgstr "Managed via the actions in the MAGYC tab, not calculated."

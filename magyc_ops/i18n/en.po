@@ -1,0 +1,996 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* magyc_ops
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20261016\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 13:58+0000\n"
+"PO-Revision-Date: 2026-11-13 15:00+0000\n"
+"Last-Translator: MAGYC <info@magyc.de>\n"
+"Language-Team: English <info@magyc.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: \n"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_is_return_6m
+msgid "6-Monats-Rücknahme"
+msgstr "6-month take-back"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_defaults
+msgid ""
+"A Python dictionary that will be evaluated to provide default values when "
+"creating new records for this alias."
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_transfer_wizard_form
+msgid "Abbrechen"
+msgstr "Cancel"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_kiosk_application__state__rejected
+msgid "Abgelehnt"
+msgstr "Rejected"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_kiosk_application_form
+msgid "Ablehnen"
+msgstr "Reject"
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_magyc_abverkauf
+msgid "Abverkaufsmeldung Kiosk"
+msgstr "Kiosk sell-through report"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__akquisiteur_id
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__is_akquisiteur
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__is_akquisiteur
+msgid "Akquisiteur"
+msgstr "Sales partner"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__akquisiteur_id
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__akquisiteur_id
+msgid "Akquisiteur (Provision)"
+msgstr "Sales partner (commission)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_akquisiteur_partner_id
+msgid "Akquisiteur (Standard)"
+msgstr "Sales partner (default)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_akquisiteur_fee
+msgid "Akquisiteur-Provision je Kiosk"
+msgstr "Sales partner commission per kiosk"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__magyc_activation_date
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__magyc_activation_date
+msgid "Aktiv seit"
+msgstr "Active since"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Aktivieren"
+msgstr "Activate"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_id
+msgid "Alias"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_contact
+msgid "Alias Contact Security"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_domain_id
+msgid "Alias Domain"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_domain
+msgid "Alias Domain Name"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_full_name
+msgid "Alias Email"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_name
+msgid "Alias Name"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_status
+msgid "Alias Status"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_status
+msgid "Alias status assessed on the last message received."
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_model_id
+msgid "Aliased Model"
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Als ausgezahlt markieren"
+msgstr "Mark as paid out"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__area
+msgid "Area"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_akquisiteur_product_id
+msgid "Artikel Akquisiteur-Provision"
+msgstr "Sales partner commission item"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__magyc_bonus_state__paid
+msgid "Ausgezahlt"
+msgstr "Paid out"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_tour__area__ber
+#: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__kiosk_area__ber
+msgid "Berlin"
+msgstr "Berlin"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Bestand zählen"
+msgstr "Count stock"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__name
+msgid "Betreff"
+msgstr "Subject"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Betrieb"
+msgstr "Business"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_pfand_shop_price
+msgid "Bruttopreis im Onlineshop. Kiosk und B2B rechnen 0,25 EUR netto ab."
+msgstr "Gross price in the online shop. Kiosk and B2B are billed 0.25 EUR net."
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_res_company
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__company_id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__company_id
+msgid "Company"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__create_uid
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__create_uid
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__create_uid
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__create_date
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__create_date
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__create_date
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_bounced_content
+msgid "Custom Bounced Message"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__date
+msgid "Date"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__contract_date
+msgid "Datum der Unterschrift"
+msgstr "Date of signature"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_partner__magyc_activation_date
+#: model:ir.model.fields,help:magyc_ops.field_res_users__magyc_activation_date
+msgid ""
+"Datum des unterschriebenen Übergabeprotokolls. Grundlage der Akquisiteur-"
+"Abrechnung."
+msgstr "Date of the signed handover protocol. Basis for the sales partner settlement."
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_defaults
+msgid "Default Values"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_abverkauf__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_ops__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_move__display_name
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__duplicate_partner_id
+msgid "Dublette von"
+msgstr "Duplicate of"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__email_from
+msgid "E-Mail"
+msgstr "Email"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_email
+msgid "Email Alias"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_domain
+msgid "Email domain e.g. 'example.com' in 'odoo@example.com'"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_finance_user_id
+msgid "Erhält Aufgaben für Startprämie und Akquisiteur-Abrechnung."
+msgstr "Receives tasks for the start bonus and sales partner settlement."
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_is_first_fill
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_delivery_wizard__mode__first_fill
+msgid "Erstbestückung"
+msgstr "First fill"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_first_fill_trays
+msgid "Erstbestückung Trays"
+msgstr "First fill trays"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_first_fill_trays_per_product
+msgid "Erstbestückung Trays je Sorte"
+msgstr "First fill trays per variety"
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_magyc_delivery_wizard
+msgid "Erstbestückung oder Nachschub"
+msgstr "First fill or refill"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Erstbestückung planen"
+msgstr "Plan first fill"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_company_form_magyc_ops
+msgid "Erstbestückung und Nachschub"
+msgstr "First fill and refill"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__driver_id
+msgid "Fahrer"
+msgstr "Driver"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__vehicle_location_id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__vehicle_location_id
+msgid "Fahrzeuglager"
+msgstr "Vehicle stock"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_abverkauf__placement_photo
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__placement_photo
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__placement_photo
+msgid "Foto Platzierung"
+msgstr "Placement photo"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_trays_per_pallet
+msgid ""
+"Für den Speditionstransfer. ponytail: Annahme 12 Trays; von MAGYC bestätigen"
+" lassen."
+msgstr "For the freight transfer. ponytail: assumption 12 trays; to be confirmed by MAGYC."
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__kiosk_area
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__kiosk_area
+msgid "Gebiet (Kürzel)"
+msgstr "Area (code)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__iban
+msgid "IBAN"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_abverkauf__id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_ops__id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__id
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__id
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__id
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_move__id
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_parent_thread_id
+msgid ""
+"ID of the parent record holding the alias (example: project holding the task"
+" creation alias)"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_has_error
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_bounced_content
+msgid ""
+"If set, this content will automatically be sent out to unauthorized users "
+"instead of the default message."
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_kiosk_application_form
+msgid "Inhalt der Nachricht"
+msgstr "Message content"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
+msgid "Je Tray 24 Dosen. Nachschub erst ab"
+msgstr "24 cans per tray. Refill only from"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__magyc_bonus_state__none
+msgid "Keine"
+msgstr "None"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__partner_id
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__partner_id
+msgid "Kiosk"
+msgstr "Kiosk"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_kiosk_application__state__converted
+msgid "Kiosk angelegt"
+msgstr "Kiosk created"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_kiosk_application_form
+msgid "Kiosk anlegen"
+msgstr "Create kiosk"
+
+#. module: magyc_ops
+#: model:ir.module.module,summary:base.module_magyc_ops
+msgid ""
+"Kiosk-Anlage, Erstbestückung, Nachschub, Touren, Prämien, 6-Monats-Rücknahme"
+msgstr "Kiosk setup, first fill, refill, tours, bonuses, 6-month take-back"
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_magyc_kiosk_application
+msgid "Kiosk-Bewerbung (Postfach)"
+msgstr "Kiosk application (mailbox)"
+
+#. module: magyc_ops
+#: model:ir.actions.act_window,name:magyc_ops.action_magyc_kiosk_application
+#: model:ir.ui.menu,name:magyc_ops.menu_magyc_kiosk_application
+msgid "Kiosk-Postfach"
+msgstr "Kiosk mailbox"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_company_form_magyc_ops
+msgid "Kiosk-Prozess (MAGYC)"
+msgstr "Kiosk process (MAGYC)"
+
+#. module: magyc_ops
+#: model:ir.actions.act_window,name:magyc_ops.action_magyc_kiosk
+#: model:ir.ui.menu,name:magyc_ops.menu_magyc_kiosk
+msgid "Kioske"
+msgstr "Kiosks"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__small_business
+msgid "Kleinunternehmer"
+msgstr "Small business"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_tour__area__koe
+#: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__kiosk_area__koe
+msgid "Köln"
+msgstr "Cologne"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_abverkauf__placement_rows
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__placement_rows
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__placement_rows
+msgid "Kühlschrankreihen"
+msgstr "Fridge rows"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__write_uid
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__write_uid
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__write_uid
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__write_date
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__write_date
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__write_date
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_partner__magyc_akquisiteur_fee
+#: model:ir.model.fields,help:magyc_ops.field_res_users__magyc_akquisiteur_fee
+msgid "Leer lassen, dann gilt der Firmenwert."
+msgstr "Leave empty to use the company value."
+
+#. module: magyc_ops
+#: model:ir.actions.act_window,name:magyc_ops.action_magyc_delivery_wizard
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
+msgid "Lieferung an Kiosk"
+msgstr "Delivery to kiosk"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
+msgid "Lieferung anlegen"
+msgstr "Create delivery"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_incoming_local
+msgid "Local-part based incoming detection"
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_company_form_magyc_ops
+msgid "Logistik"
+msgstr "Logistics"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_picking_form_ops
+msgid "MAGYC"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_magyc_ops
+msgid "MAGYC Abläufe (Cron)"
+msgstr "MAGYC processes (cron)"
+
+#. module: magyc_ops
+#: model:ir.module.module,shortdesc:base.module_magyc_ops
+msgid "MAGYC Operations"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.actions.server,name:magyc_ops.cron_six_month_returns_ir_actions_server
+msgid "MAGYC: 6-Monats-Rücknahme"
+msgstr "MAGYC: 6-month take-back"
+
+#. module: magyc_ops
+#: model:ir.actions.server,name:magyc_ops.cron_akquisiteur_bills_ir_actions_server
+msgid "MAGYC: Akquisiteur-Monatsrechnung"
+msgstr "MAGYC: sales partner monthly invoice"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
+msgid "Mengen"
+msgstr "Quantities"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__min_trays
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_refill_min_trays
+msgid "Mindestmenge Nachschub (Trays)"
+msgstr "Minimum refill quantity (trays)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__mode
+msgid "Mode"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message
+msgid "Nachricht"
+msgstr "Message"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_delivery_wizard__mode__refill
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Nachschub"
+msgstr "Refill"
+
+#. module: magyc_ops
+#: model:ir.ui.menu,name:magyc_ops.menu_magyc_delivery
+msgid "Nachschub / Erstbestückung"
+msgstr "Refill / first fill"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__name
+msgid "Name"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_kiosk_application__state__new
+msgid "Neu"
+msgstr "New"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__note
+msgid "Note"
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_tour_form
+msgid "Notiz"
+msgstr "Note"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_stock_move__magyc_loss_approved_by
+msgid ""
+"Odoo 20 bucht Verluste als Stock Move. Freigabe wird beim Scrap gesetzt."
+msgstr "Odoo 20 posts losses as a stock move. Approval is set on scrap."
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__magyc_bonus_state__open
+msgid "Offen"
+msgstr "Open"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__open_shortfall_count
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__open_shortfall_count
+msgid "Offene Differenzen"
+msgstr "Open differences"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_tour_form
+msgid "Offene Lieferungen übernehmen"
+msgstr "Take over open deliveries"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_force_thread_id
+msgid ""
+"Optional ID of a thread (record) to which all incoming messages will be "
+"attached, even if they did not reply to it. If set, this will disable the "
+"creation of new records completely."
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__city
+msgid "Ort"
+msgstr "City"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__zip
+msgid "PLZ"
+msgstr "Postal code"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__pallets
+msgid "Paletten"
+msgstr "Pallets"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_parent_model_id
+msgid "Parent Model"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_parent_thread_id
+msgid "Parent Record Thread ID"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_parent_model_id
+msgid ""
+"Parent model holding the alias. The model holding the alias reference is not"
+" necessarily the model given by alias_model_id (example: project "
+"(parent_model) and task (model))"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_pfand_shop_price
+msgid "Pfand Onlineshop (brutto)"
+msgstr "Online shop deposit (gross)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_abverkauf__placement_ok
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__placement_ok
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__placement_ok
+msgid "Platzierung ok"
+msgstr "Placement ok"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_contact
+msgid ""
+"Policy to post a message on the document using the mailgateway.\n"
+"- everyone: everyone can post\n"
+"- partners: only authenticated partners\n"
+"- followers: only followers of the related document or members of following channels\n"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__magyc_akquisiteur_fee
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__magyc_akquisiteur_fee
+msgid "Provision je Kiosk"
+msgstr "Commission per kiosk"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_company_form_magyc_ops
+msgid "Provisionen und Prämien"
+msgstr "Commissions and bonuses"
+
+#. module: magyc_ops
+#: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_kiosk_application__state__check
+msgid "Prüfen"
+msgstr "Check"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__source_warehouse_id
+msgid "Quelle"
+msgstr "Source"
+
+#. module: magyc_ops
+#: model:stock.scrap.reason.tag,name:magyc_ops.scrap_tag_muster
+msgid "RAN/MUSTER"
+msgstr ""
+
+#. module: magyc_ops
+#: model:stock.scrap.reason.tag,name:magyc_ops.scrap_tag_schaden
+msgid "RAN/SCHADEN"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_force_thread_id
+msgid "Record Thread ID"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_return_months
+msgid "Rücknahme unverkaufter Ware (Monate)"
+msgstr "Return of unsold goods (months)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__note
+msgid "Speditionsreferenz"
+msgstr "Freight reference"
+
+#. module: magyc_ops
+#: model:ir.actions.act_window,name:magyc_ops.action_magyc_transfer_wizard
+#: model:ir.ui.menu,name:magyc_ops.menu_magyc_transfer
+msgid "Speditionstransfer"
+msgstr "Freight transfer"
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_magyc_transfer_wizard
+msgid "Speditionstransfer zwischen Lägern"
+msgstr "Freight transfer between warehouses"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__magyc_bonus_state
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__magyc_bonus_state
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Startprämie"
+msgstr "Start bonus"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_bonus_amount
+msgid "Startprämie Kiosk"
+msgstr "Kiosk start bonus"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_partner__magyc_bonus_paid_on
+#: model:ir.model.fields,field_description:magyc_ops.field_res_users__magyc_bonus_paid_on
+msgid "Startprämie ausgezahlt am"
+msgstr "Start bonus paid on"
+
+#. module: magyc_ops
+#: model:ir.ui.menu,name:magyc_ops.menu_magyc_bonus
+msgid "Startprämien"
+msgstr "Start bonuses"
+
+#. module: magyc_ops
+#: model:ir.actions.act_window,name:magyc_ops.action_magyc_bonus_open
+msgid "Startprämien offen"
+msgstr "Open start bonuses"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__state
+msgid "Status"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__tax_id
+msgid "Steuernummer / USt-IdNr."
+msgstr "Tax number / VAT ID"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_partner__kiosk_area
+#: model:ir.model.fields,help:magyc_ops.field_res_users__kiosk_area
+msgid "Steuert die Kiosk-ID: K-BER-0001 bzw. K-KOE-0001."
+msgstr "Controls the kiosk ID: K-BER-0001 or K-KOE-0001."
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__stop_count
+msgid "Stop Count"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_stop_sequence
+msgid "Stopp-Reihenfolge"
+msgstr "Stop sequence"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_tour__picking_ids
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_tour_form
+msgid "Stopps"
+msgstr "Stops"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__street
+msgid "Straße"
+msgstr "Street"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__phone
+msgid "Telefon"
+msgstr "Phone"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_model_id
+msgid ""
+"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
+" email that does not reply to an existing record will cause the creation of "
+"a new record of this model (e.g. a Project Task)"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_name
+msgid ""
+"The name of the email alias, e.g. 'jobs' if you want to catch emails for "
+"<jobs@example.odoo.com>"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_magyc_tour
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_tour_id
+msgid "Tour"
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_tour_form
+msgid "Tour abschließen"
+msgstr "Complete tour"
+
+#. module: magyc_ops
+#: model:ir.actions.act_window,name:magyc_ops.action_magyc_tour
+#: model:ir.ui.menu,name:magyc_ops.menu_magyc_tour
+msgid "Touren"
+msgstr "Tours"
+
+#. module: magyc_ops
+#: model:ir.model,name:magyc_ops.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_transfer_wizard_form
+msgid "Transfer buchen"
+msgstr "Post transfer"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__berry_trays
+msgid "Trays Berry"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__lemon_trays
+msgid "Trays Lemon"
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_first_fill_trays
+msgid ""
+"Trays bei der Erstbestückung, je 24 Dosen, hälftig auf die Sorten verteilt."
+msgstr "Trays for the first fill, 24 cans each, split evenly between varieties."
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__trays_per_pallet
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_trays_per_pallet
+msgid "Trays je Palette"
+msgstr "Trays per pallet"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
+msgid "Trays."
+msgstr ""
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_stock_picking__magyc_handover_confirmed
+msgid ""
+"Unterschriebenes Übergabeprotokoll liegt vor. Löst Startprämie und "
+"Akquisiteur-Provision aus."
+msgstr "Signed handover protocol is available. Triggers the start bonus and sales partner commission."
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_move__magyc_loss_approved_by
+msgid "Verlust freigegeben von"
+msgstr "Loss approved by"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_kiosk_application_form
+msgid "Vertrag (Flixcheck)"
+msgstr "Contract (Flixcheck)"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
+msgid "Vertrag eingegangen"
+msgstr "Contract received"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__salesperson
+msgid "Vertriebler (Flixcheck)"
+msgstr "Sales rep (Flixcheck)"
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_magyc_abverkauf__placement_rows
+msgid "Vom SSM beim Kiosk gezählte Reihen. Vorgabe: mindestens 2."
+msgstr "Rows counted at the kiosk by the SSM. Minimum: 2."
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_akquisiteur_product_id
+msgid "Wird als Position auf der Monatsrechnung des Akquisiteurs verwendet."
+msgstr "Used as a line on the sales partner's monthly invoice."
+
+#. module: magyc_ops
+#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_akquisiteur_partner_id
+msgid ""
+"Wird bei neuen Kiosken aus dem Postfach automatisch gesetzt (Primewave)."
+msgstr "Set automatically from the mailbox for new kiosks (Primewave)."
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__dest_warehouse_id
+msgid "Ziel"
+msgstr "Target"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_finance_user_id
+msgid "Zuständig für Auszahlungen"
+msgstr "Responsible for payouts"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_picking_form_ops
+msgid "Übergabe bestätigen"
+msgstr "Confirm handover"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_handover_confirmed
+msgid "Übergabe bestätigt"
+msgstr "Handover confirmed"
+
+#. module: magyc_ops
+#: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_handover_date
+msgid "Übergabedatum"
+msgstr "Handover date"
+
+#. module: magyc_ops
+#: model_terms:ir.ui.view,arch_db:magyc_ops.view_picking_form_ops
+msgid "Übergabeprotokoll"
+msgstr "Handover protocol"

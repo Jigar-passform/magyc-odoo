@@ -1,0 +1,351 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* magyc_documents
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20261016\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 13:58+0000\n"
+"PO-Revision-Date: 2026-11-13 15:00+0000\n"
+"Last-Translator: MAGYC <info@magyc.de>\n"
+"Language-Team: German <info@magyc.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: \n"
+
+#. module: magyc_documents
+#: model:mail.template,subject:magyc_documents.tpl_reminder_2
+msgid "1. Mahnung – Zahlungsverzug"
+msgstr "1. Mahnung – Zahlungsverzug"
+
+#. module: magyc_documents
+#: model:mail.template,subject:magyc_documents.tpl_reminder_3
+msgid "2. Mahnung – letzte Zahlungsaufforderung"
+msgstr "2. Mahnung – letzte Zahlungsaufforderung"
+
+#. module: magyc_documents
+#: model:mail.template,body_html:magyc_documents.tpl_reminder_2
+msgid ""
+"<div style=\"margin:0;padding:0;font-size:13px;\">\n"
+"                <p>Sehr geehrte Damen und Herren,</p>\n"
+"                <p>Leider konnten wir bis heute keinen Zahlungseingang feststellen.</p>\n"
+"                <p>Offener Betrag:\n"
+"                    <b>\n"
+"                        <t t-if=\"ctx.get('amount_due')\">\n"
+"                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n"
+"                        </t>\n"
+"                        <t t-else=\"\">\n"
+"                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n"
+"                        </t>\n"
+"                    </b>\n"
+"                </p>\n"
+"                <p>Bitte begleichen Sie den Betrag innerhalb von 7 Tagen. Bis zum Ausgleich sind weitere\n"
+"                    Lieferungen gesperrt.</p>\n"
+"                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n"
+"            </div>\n"
+"        "
+msgstr "<div style=\"margin:0;padding:0;font-size:13px;\">\n                <p>Sehr geehrte Damen und Herren,</p>\n                <p>Leider konnten wir bis heute keinen Zahlungseingang feststellen.</p>\n                <p>Offener Betrag:\n                    <b>\n                        <t t-if=\"ctx.get('amount_due')\">\n                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n                        </t>\n                        <t t-else=\"\">\n                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n                        </t>\n                    </b>\n                </p>\n                <p>Bitte begleichen Sie den Betrag innerhalb von 7 Tagen. Bis zum Ausgleich sind weitere\n                    Lieferungen gesperrt.</p>\n                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n            </div>\n        "
+
+#. module: magyc_documents
+#: model:mail.template,body_html:magyc_documents.tpl_reminder_1
+msgid ""
+"<div style=\"margin:0;padding:0;font-size:13px;\">\n"
+"                <p>Sehr geehrte Damen und Herren,</p>\n"
+"                <p>Sicher ist es Ihrer Aufmerksamkeit entgangen: Die folgende Rechnung ist noch offen.</p>\n"
+"                <p>Offener Betrag:\n"
+"                    <b>\n"
+"                        <t t-if=\"ctx.get('amount_due')\">\n"
+"                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n"
+"                        </t>\n"
+"                        <t t-else=\"\">\n"
+"                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n"
+"                        </t>\n"
+"                    </b>\n"
+"                </p>\n"
+"                <p>Bitte überweisen Sie den Betrag in den nächsten 7 Tagen. Hat sich Ihre Zahlung\n"
+"                    überschnitten, betrachten Sie dieses Schreiben als gegenstandslos.</p>\n"
+"                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n"
+"            </div>\n"
+"        "
+msgstr "<div style=\"margin:0;padding:0;font-size:13px;\">\n                <p>Sehr geehrte Damen und Herren,</p>\n                <p>Sicher ist es Ihrer Aufmerksamkeit entgangen: Die folgende Rechnung ist noch offen.</p>\n                <p>Offener Betrag:\n                    <b>\n                        <t t-if=\"ctx.get('amount_due')\">\n                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n                        </t>\n                        <t t-else=\"\">\n                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n                        </t>\n                    </b>\n                </p>\n                <p>Bitte überweisen Sie den Betrag in den nächsten 7 Tagen. Hat sich Ihre Zahlung\n                    überschnitten, betrachten Sie dieses Schreiben als gegenstandslos.</p>\n                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n            </div>\n        "
+
+#. module: magyc_documents
+#: model:mail.template,body_html:magyc_documents.tpl_reminder_3
+msgid ""
+"<div style=\"margin:0;padding:0;font-size:13px;\">\n"
+"                <p>Sehr geehrte Damen und Herren,</p>\n"
+"                <p>Trotz Erinnerung ist die folgende Rechnung weiterhin offen.</p>\n"
+"                <p>Offener Betrag:\n"
+"                    <b>\n"
+"                        <t t-if=\"ctx.get('amount_due')\">\n"
+"                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n"
+"                        </t>\n"
+"                        <t t-else=\"\">\n"
+"                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n"
+"                        </t>\n"
+"                    </b>\n"
+"                </p>\n"
+"                <p>Bitte zahlen Sie innerhalb von 5 Tagen. Andernfalls behalten wir uns weitere Schritte\n"
+"                    vor, einschließlich Rückholung der Kommissionsware.</p>\n"
+"                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n"
+"            </div>\n"
+"        "
+msgstr "<div style=\"margin:0;padding:0;font-size:13px;\">\n                <p>Sehr geehrte Damen und Herren,</p>\n                <p>Trotz Erinnerung ist die folgende Rechnung weiterhin offen.</p>\n                <p>Offener Betrag:\n                    <b>\n                        <t t-if=\"ctx.get('amount_due')\">\n                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n                        </t>\n                        <t t-else=\"\">\n                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n                        </t>\n                    </b>\n                </p>\n                <p>Bitte zahlen Sie innerhalb von 5 Tagen. Andernfalls behalten wir uns weitere Schritte\n                    vor, einschließlich Rückholung der Kommissionsware.</p>\n                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n            </div>\n        "
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__active
+msgid "Active"
+msgstr "Active"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__sale
+msgid "Angebot (B2B)"
+msgstr "Angebot (B2B)"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__order
+msgid "Auftragsbestätigung"
+msgstr "Auftragsbestätigung"
+
+#. module: magyc_documents
+#: model:ir.model,name:magyc_documents.model_magyc_document_text
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
+msgid "Belegtext"
+msgstr "Belegtext"
+
+#. module: magyc_documents
+#: model:ir.actions.act_window,name:magyc_documents.action_magyc_document_text
+#: model:ir.ui.menu,name:magyc_documents.menu_magyc_document_text
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_list
+msgid "Belegtexte"
+msgstr "Belegtexte"
+
+#. module: magyc_documents
+#: model:ir.module.module,summary:base.module_magyc_documents
+msgid "Belegtexte je Belegtyp (Angebot, AB, Rechnung, Gutschrift)"
+msgstr "Belegtexte je Belegtyp (Angebot, AB, Rechnung, Gutschrift)"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__doc_type
+msgid "Belegtyp"
+msgstr "Belegtyp"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_kiosk
+msgid ""
+"Bitte überweisen Sie den Betrag innerhalb von 14 Tagen unter Angabe der "
+"Rechnungsnummer. Danke für die Zusammenarbeit!"
+msgstr "Bitte überweisen Sie den Betrag innerhalb von 14 Tagen unter Angabe der Rechnungsnummer. Danke für die Zusammenarbeit!"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__company_id
+msgid "Company"
+msgstr "Company"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_shop
+msgid "Danke für deine Bestellung bei MAGYC!"
+msgstr "Danke für deine Bestellung bei MAGYC!"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_credit
+msgid "Der Betrag wird mit offenen Posten verrechnet bzw. erstattet."
+msgstr "Der Betrag wird mit offenen Posten verrechnet bzw. erstattet."
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_shop
+msgid "Der Betrag wurde bereits bei Bestellung bezahlt. Stay MAGYC."
+msgstr "Der Betrag wurde bereits bei Bestellung bezahlt. Stay MAGYC."
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_order
+msgid ""
+"Die Lieferung erfolgt aus unserem Lager Rangsdorf. Bei Fragen erreichen Sie "
+"uns jederzeit."
+msgstr "Die Lieferung erfolgt aus unserem Lager Rangsdorf. Bei Fragen erreichen Sie uns jederzeit."
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_sale
+msgid ""
+"Dieses Angebot ist 14 Tage gültig. Alle Preise netto zzgl. gesetzlicher USt "
+"und Pfand. Wir freuen uns auf Ihre Bestellung!"
+msgstr "Dieses Angebot ist 14 Tage gültig. Alle Preise netto zzgl. gesetzlicher USt und Pfand. Wir freuen uns auf Ihre Bestellung!"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_account_followup_followup_line__display_name
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__intro
+msgid "Einleitungstext"
+msgstr "Einleitungstext"
+
+#. module: magyc_documents
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
+msgid "Einleitungstext…"
+msgstr "Einleitungstext…"
+
+#. module: magyc_documents
+#: model:mail.template,description:magyc_documents.tpl_reminder_2
+msgid "Erste Mahnung (MAGYC)"
+msgstr "Erste Mahnung (MAGYC)"
+
+#. module: magyc_documents
+#: model:ir.model,name:magyc_documents.model_account_followup_followup_line
+msgid "Follow-up Criteria"
+msgstr "Follow-up Criteria"
+
+#. module: magyc_documents
+#: model:mail.template,description:magyc_documents.tpl_reminder_1
+msgid "Freundliche Zahlungserinnerung (MAGYC)"
+msgstr "Freundliche Zahlungserinnerung (MAGYC)"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_kiosk
+msgid ""
+"Gemäß Ihrer Abverkaufsmeldung für den Zeitraum [Monat] rechnen wir den "
+"Verkauf unserer Kommissionsware wie folgt ab (Getränk und Pfand je 19 % "
+"USt):"
+msgstr "Gemäß Ihrer Abverkaufsmeldung für den Zeitraum [Monat] rechnen wir den Verkauf unserer Kommissionsware wie folgt ab (Getränk und Pfand je 19 % USt):"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__credit
+msgid "Gutschrift / Storno"
+msgstr "Gutschrift / Storno"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_account_followup_followup_line__id
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__id
+msgid "ID"
+msgstr "ID"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__delivery
+msgid "Lieferschein"
+msgstr "Lieferschein"
+
+#. module: magyc_documents
+#: model:mail.template,name:magyc_documents.tpl_reminder_2
+msgid "MAGYC 1. Mahnung"
+msgstr "MAGYC 1. Mahnung"
+
+#. module: magyc_documents
+#: model:mail.template,name:magyc_documents.tpl_reminder_3
+msgid "MAGYC 2. Mahnung"
+msgstr "MAGYC 2. Mahnung"
+
+#. module: magyc_documents
+#: model:ir.module.module,shortdesc:base.module_magyc_documents
+msgid "MAGYC Documents"
+msgstr "MAGYC Documents"
+
+#. module: magyc_documents
+#: model:mail.template,name:magyc_documents.tpl_reminder_1
+msgid "MAGYC Zahlungserinnerung"
+msgstr "MAGYC Zahlungserinnerung"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice
+msgid "Rechnung B2B"
+msgstr "Rechnung B2B"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice_kiosk
+msgid "Rechnung Kiosk (Abverkauf)"
+msgstr "Rechnung Kiosk (Abverkauf)"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice_shop
+msgid "Rechnung Onlineshop"
+msgstr "Rechnung Onlineshop"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__outro
+msgid "Schlusstext"
+msgstr "Schlusstext"
+
+#. module: magyc_documents
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
+msgid "Schlusstext…"
+msgstr "Schlusstext…"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__sequence
+msgid "Sequence"
+msgstr "Sequence"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_sale
+msgid "Vielen Dank für Ihr Interesse an MAGYC. Gerne bieten wir Ihnen an:"
+msgstr "Vielen Dank für Ihr Interesse an MAGYC. Gerne bieten wir Ihnen an:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_order
+msgid ""
+"Vielen Dank für Ihre Bestellung. Wir bestätigen Ihren Auftrag wie folgt:"
+msgstr "Vielen Dank für Ihre Bestellung. Wir bestätigen Ihren Auftrag wie folgt:"
+
+#. module: magyc_documents
+#: model_terms:ir.ui.view,arch_db:magyc_documents.report_delivery_magyc_text
+msgid "Ware vollständig und unbeschädigt erhalten:"
+msgstr "Ware vollständig und unbeschädigt erhalten:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice
+msgid "Wir berechnen Ihnen wie folgt:"
+msgstr "Wir berechnen Ihnen wie folgt:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_delivery
+msgid "Wir liefern Ihnen heute:"
+msgstr "Wir liefern Ihnen heute:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_credit
+msgid "Wir schreiben Ihnen folgenden Betrag gut (Bezug: Rechnung [Nr.]):"
+msgstr "Wir schreiben Ihnen folgenden Betrag gut (Bezug: Rechnung [Nr.]):"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice
+msgid "Zahlbar innerhalb von 14 Tagen ohne Abzug."
+msgstr "Zahlbar innerhalb von 14 Tagen ohne Abzug."
+
+#. module: magyc_documents
+#: model:mail.template,subject:magyc_documents.tpl_reminder_1
+msgid "Zahlungserinnerung – offene Rechnung"
+msgstr "Zahlungserinnerung – offene Rechnung"
+
+#. module: magyc_documents
+#: model:mail.template,description:magyc_documents.tpl_reminder_3
+msgid "Zweite Mahnung (MAGYC)"
+msgstr "Zweite Mahnung (MAGYC)"
+
+#. module: magyc_documents
+#: model_terms:ir.ui.view,arch_db:magyc_documents.report_delivery_magyc_text
+msgid "____________________________________ (Unterschrift)"
+msgstr "____________________________________ (Unterschrift)"

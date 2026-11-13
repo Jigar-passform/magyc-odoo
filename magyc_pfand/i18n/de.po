@@ -1,0 +1,304 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* magyc_pfand
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20261016\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 13:59+0000\n"
+"PO-Revision-Date: 2026-11-13 15:00+0000\n"
+"Last-Translator: MAGYC <info@magyc.de>\n"
+"Language-Team: German <info@magyc.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: \n"
+
+#. module: magyc_pfand
+#: model:ir.model.fields.selection,name:magyc_pfand.selection__magyc_pfand_return__state__done
+msgid "Abgerechnet"
+msgstr "Abgerechnet"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_needaction
+msgid "Action Needed"
+msgstr "Action Needed"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_res_company__pfand_product_id
+msgid "Artikel, der als Pfandzeile auf Aufträgen ergänzt wird."
+msgstr "Artikel, der als Pfandzeile auf Aufträgen ergänzt wird."
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_attachment_count
+msgid "Attachment Count"
+msgstr "Attachment Count"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_res_company__pfand_auto_add
+msgid ""
+"Beim Bestätigen eines Auftrags je Getränkezeile eine Pfandzeile in gleicher "
+"Menge anlegen."
+msgstr "Beim Bestätigen eines Auftrags je Getränkezeile eine Pfandzeile in gleicher Menge anlegen."
+
+#. module: magyc_pfand
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_form
+msgid "Bemerkungen…"
+msgstr "Bemerkungen…"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__amount_untaxed
+msgid "Betrag netto"
+msgstr "Betrag netto"
+
+#. module: magyc_pfand
+#: model:ir.model,name:magyc_pfand.model_res_company
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__company_id
+msgid "Company"
+msgstr "Company"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__create_uid
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__create_uid
+msgid "Created by"
+msgstr "Created by"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__create_date
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__create_date
+msgid "Created on"
+msgstr "Created on"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__currency_id
+msgid "Currency"
+msgstr "Currency"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__date
+msgid "Date"
+msgstr "Date"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__display_name
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__display_name
+#: model:ir.model.fields,field_description:magyc_pfand.field_product_template__display_name
+#: model:ir.model.fields,field_description:magyc_pfand.field_res_company__display_name
+#: model:ir.model.fields,field_description:magyc_pfand.field_sale_order__display_name
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: magyc_pfand
+#: model:ir.module.module,summary:base.module_magyc_pfand
+msgid "Einwegpfand 0,25 € als eigene Belegzeile, 19 % USt"
+msgstr "Einwegpfand 0,25 € als eigene Belegzeile, 19 % USt"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_product_product__is_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_product_template__is_pfand
+msgid "Einwegpfand: wird auf Verkaufsbelegen als eigene Zeile geführt."
+msgstr "Einwegpfand: wird auf Verkaufsbelegen als eigene Zeile geführt."
+
+#. module: magyc_pfand
+#: model:ir.model.fields.selection,name:magyc_pfand.selection__magyc_pfand_return__state__draft
+msgid "Entwurf"
+msgstr "Entwurf"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_follower_ids
+msgid "Followers"
+msgstr "Followers"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Followers (Partners)"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__credit_note_id
+msgid "Gutschrift"
+msgstr "Gutschrift"
+
+#. module: magyc_pfand
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_form
+msgid "Gutschrift erstellen"
+msgstr "Gutschrift erstellen"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__has_message
+msgid "Has Message"
+msgstr "Has Message"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__id
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__id
+#: model:ir.model.fields,field_description:magyc_pfand.field_product_template__id
+#: model:ir.model.fields,field_description:magyc_pfand.field_res_company__id
+#: model:ir.model.fields,field_description:magyc_pfand.field_sale_order__id
+msgid "ID"
+msgstr "ID"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_return__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "If checked, new messages require your attention."
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_return__message_has_error
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_return__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "If checked, some messages have a delivery error."
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_is_follower
+msgid "Is Follower"
+msgstr "Is Follower"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__partner_id
+msgid "Kunde / Kiosk"
+msgstr "Kunde / Kiosk"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__write_uid
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__write_date
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: magyc_pfand
+#: model:ir.module.module,shortdesc:base.module_magyc_pfand
+msgid "MAGYC Pfand"
+msgstr "MAGYC Pfand"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__qty
+msgid "Menge (Stk)"
+msgstr "Menge (Stk)"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__qty_total
+msgid "Menge gesamt"
+msgstr "Menge gesamt"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_has_error
+msgid "Message Delivery error"
+msgstr "Message Delivery error"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_ids
+msgid "Messages"
+msgstr "Messages"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__name
+msgid "Name"
+msgstr "Name"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__note
+msgid "Note"
+msgstr "Note"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Number of Actions"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_has_error_counter
+msgid "Number of errors"
+msgstr "Number of errors"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_return__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Number of messages requiring action"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_return__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Number of messages with delivery error"
+
+#. module: magyc_pfand
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_company_form_pfand
+msgid "Pfand (MAGYC)"
+msgstr "Pfand (MAGYC)"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_res_company__pfand_auto_add
+msgid "Pfand automatisch ergänzen"
+msgstr "Pfand automatisch ergänzen"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__price_unit
+msgid "Pfand je Stk"
+msgstr "Pfand je Stk"
+
+#. module: magyc_pfand
+#: model:ir.actions.act_window,name:magyc_pfand.action_magyc_pfand_return
+#: model:ir.ui.menu,name:magyc_pfand.menu_magyc_pfand_return
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_form
+msgid "Pfand-Rücknahme"
+msgstr "Pfand-Rücknahme"
+
+#. module: magyc_pfand
+#: model:ir.model,name:magyc_pfand.model_magyc_pfand_return
+msgid "Pfand-Rücknahme (Leergut)"
+msgstr "Pfand-Rücknahme (Leergut)"
+
+#. module: magyc_pfand
+#: model:ir.model,name:magyc_pfand.model_magyc_pfand_return_line
+msgid "Pfand-Rücknahme Position"
+msgstr "Pfand-Rücknahme Position"
+
+#. module: magyc_pfand
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_list
+msgid "Pfand-Rücknahmen"
+msgstr "Pfand-Rücknahmen"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__product_id
+#: model:ir.model.fields,field_description:magyc_pfand.field_product_product__is_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_product_template__is_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_res_company__pfand_product_id
+msgid "Pfandartikel"
+msgstr "Pfandartikel"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__line_ids
+msgid "Positionen"
+msgstr "Positionen"
+
+#. module: magyc_pfand
+#: model:ir.model,name:magyc_pfand.model_product_template
+msgid "Product"
+msgstr "Product"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__return_id
+msgid "Return"
+msgstr "Return"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "SMS Delivery error"
+
+#. module: magyc_pfand
+#: model:ir.model,name:magyc_pfand.model_sale_order
+msgid "Sales Order"
+msgstr "Sales Order"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__state
+msgid "Status"
+msgstr "Status"
