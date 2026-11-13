@@ -840,3 +840,15 @@ msgstr "Übergabeprotokoll Kommission"
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
 msgid "Übergeben an"
 msgstr "Übergeben an"
+
+msgid "Kioskbetrieb"
+msgstr "Kioskbetrieb"
+
+msgid "Logistik"
+msgstr "Logistik"
+
+msgid "Abrechnung"
+msgstr "Abrechnung"
+
+msgid "Stammdaten"
+msgstr "Stammdaten"

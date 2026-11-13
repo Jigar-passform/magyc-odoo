@@ -840,3 +840,15 @@ msgstr "Consignment handover protocol"
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
 msgid "Übergeben an"
 msgstr "Handed over to"
+
+msgid "Kioskbetrieb"
+msgstr "Kiosk operations"
+
+msgid "Logistik"
+msgstr "Logistics"
+
+msgid "Abrechnung"
+msgstr "Billing"
+
+msgid "Stammdaten"
+msgstr "Master data"
