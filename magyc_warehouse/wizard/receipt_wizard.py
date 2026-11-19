@@ -75,7 +75,7 @@ class MagycReceiptWizard(models.TransientModel):
                 move_lines = self.env["stock.move.line"].create(dict(vals, move_id=move.id))
             used |= move_lines
         picking.move_ids.picked = True
-        picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
+        picking.with_context(skip_backorder=True, cancel_backorder=True, skip_sms=True).button_validate()
         if self.label_count:
             return {
                 "type": "ir.actions.act_window",

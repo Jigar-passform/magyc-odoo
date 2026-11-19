@@ -159,7 +159,7 @@ class MagycAbverkauf(models.Model):
             } for lot, allocated in allocation])
         picking.action_confirm()
         picking.move_ids.picked = True
-        picking.button_validate()
+        picking.with_context(skip_sms=True).button_validate()
         return picking
 
     @api.model

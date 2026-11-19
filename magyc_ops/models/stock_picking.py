@@ -103,7 +103,7 @@ class StockPicking(models.Model):
         picking.action_confirm()
         if validate:
             picking.move_ids.picked = True
-            picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
+            picking.with_context(skip_backorder=True, cancel_backorder=True, skip_sms=True).button_validate()
         return picking
 
     @api.model
@@ -142,7 +142,7 @@ class StockPicking(models.Model):
             } for lot, qty in allocation])
         picking.action_confirm()
         picking.move_ids.picked = True
-        picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
+        picking.with_context(skip_backorder=True, cancel_backorder=True, skip_sms=True).button_validate()
         return picking
 
     @api.model
@@ -183,7 +183,7 @@ class StockPicking(models.Model):
             } for lot, qty in allocation])
         picking.action_confirm()
         picking.move_ids.picked = True
-        picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
+        picking.with_context(skip_backorder=True, cancel_backorder=True, skip_sms=True).button_validate()
         return picking
 
     def _magyc_allocate_missing_lots(self):
@@ -225,7 +225,7 @@ class StockPicking(models.Model):
             if picking.state not in ("done", "cancel"):
                 picking._magyc_allocate_missing_lots()
                 picking.move_ids.picked = True
-                picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
+                picking.with_context(skip_backorder=True, cancel_backorder=True, skip_sms=True).button_validate()
             kiosk = picking.partner_id
             kiosk.write({
                 "kiosk_status": "aktiv",
