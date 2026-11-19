@@ -59,7 +59,6 @@ class MagycReceiptWizard(models.TransientModel):
                     "location_id": picking.location_id.id,
                     "location_dest_id": line.location_dest_id.id,
                 })
-            move.location_dest_id = line.location_dest_id
             # Bestehende Reservierungszeile weiterverwenden, sonst entsteht eine
             # zweite Zeile ohne Charge und die Buchung scheitert.
             move_lines = (move.move_line_ids - used).filtered(lambda ml: ml.quantity > 0)[:1]
