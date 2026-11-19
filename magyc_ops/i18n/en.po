@@ -6,14 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20261016\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 13:58+0000\n"
-"PO-Revision-Date: 2026-11-13 15:00+0000\n"
-"Last-Translator: MAGYC <info@magyc.de>\n"
-"Language-Team: English <info@magyc.de>\n"
+"POT-Creation-Date: 2026-11-19 09:49+0000\n"
+"PO-Revision-Date: 2026-11-19 09:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: magyc_ops
@@ -25,13 +24,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_is_return_6m
 msgid "6-Monats-Rücknahme"
 msgstr "6-month take-back"
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_defaults
-msgid ""
-"A Python dictionary that will be evaluated to provide default values when "
-"creating new records for this alias."
-msgstr ""
 
 #. module: magyc_ops
 #: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_kiosk_application__state__rejected
@@ -135,7 +127,7 @@ msgstr ""
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_akquisiteur_product_id
 msgid "Artikel Akquisiteur-Provision"
-msgstr "Sales partner commission item"
+msgstr "Sales partner commission product"
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_attachment_count
@@ -151,7 +143,7 @@ msgstr "Paid out"
 #: model:ir.model.fields.selection,name:magyc_ops.selection__magyc_tour__area__ber
 #: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__kiosk_area__ber
 msgid "Berlin"
-msgstr "Berlin"
+msgstr ""
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__name
@@ -162,8 +154,6 @@ msgstr "Subject"
 #: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_pfand_shop_price
 msgid "Bruttopreis im Onlineshop. Kiosk und B2B rechnen 0,25 EUR netto ab."
 msgstr "Gross price in the online shop. Kiosk and B2B settle 0.25 EUR net."
-"Gross price in the online shop. Kiosk and B2B are billed 0.25 EUR "
-"net."
 
 #. module: magyc_ops
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
@@ -260,16 +250,6 @@ msgid "Datum der Unterschrift"
 msgstr "Date of signature"
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_res_partner__magyc_activation_date
-#: model:ir.model.fields,help:magyc_ops.field_res_users__magyc_activation_date
-msgid ""
-"Datum des unterschriebenen Übergabeprotokolls. Grundlage der Akquisiteur-"
-"Abrechnung."
-msgstr ""
-"Date of the signed handover protocol. Basis for the sales partner "
-"settlement."
-
-#. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_defaults
 msgid "Default Values"
 msgstr ""
@@ -316,7 +296,7 @@ msgstr ""
 #. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_finance_user_id
 msgid "Erhält Aufgaben für Startprämie und Akquisiteur-Abrechnung."
-msgstr "Receives tasks for the start bonus and sales partner settlement."
+msgstr "Receives tasks for the start bonus and the sales partner statement."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_is_first_fill
@@ -373,15 +353,6 @@ msgid "Foto Platzierung"
 msgstr "Placement photo"
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_trays_per_pallet
-msgid ""
-"Für den Speditionstransfer. ponytail: Annahme 12 Trays; von MAGYC bestätigen"
-" lassen."
-msgstr ""
-"For the freight transfer. ponytail: assumption 12 trays; to be "
-"confirmed by MAGYC."
-
-#. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_res_partner__kiosk_area
 #: model:ir.model.fields,field_description:magyc_ops.field_res_users__kiosk_area
 msgid "Gebiet (Kürzel)"
@@ -417,13 +388,6 @@ msgid "ID"
 msgstr ""
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_parent_thread_id
-msgid ""
-"ID of the parent record holding the alias (example: project holding the task"
-" creation alias)"
-msgstr ""
-
-#. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
@@ -432,13 +396,6 @@ msgstr ""
 #: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_has_error
 #: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_bounced_content
-msgid ""
-"If set, this content will automatically be sent out to unauthorized users "
-"instead of the default message."
 msgstr ""
 
 #. module: magyc_ops
@@ -466,12 +423,6 @@ msgstr "Kiosk created"
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_company_form_magyc_ops
 msgid "Kiosk process (MAGYC)"
 msgstr "Kiosk process (MAGYC)"
-
-#. module: magyc_ops
-#: model:ir.module.module,summary:base.module_magyc_ops
-msgid ""
-"Kiosk-Anlage, Erstbestückung, Nachschub, Touren, Prämien, 6-Monats-Rücknahme"
-msgstr "Kiosk setup, first fill, refill, tours, bonuses, 6-month take-back"
 
 #. module: magyc_ops
 #: model:ir.model,name:magyc_ops.model_magyc_kiosk_application
@@ -551,13 +502,13 @@ msgid "MAGYC"
 msgstr ""
 
 #. module: magyc_ops
-#: model:ir.module.module,shortdesc:base.module_magyc_ops
-msgid "MAGYC Operations"
-msgstr ""
+#: model:ir.model,name:magyc_ops.model_magyc_ops
+msgid "MAGYC Abläufe (Cron)"
+msgstr "MAGYC processes (cron)"
 
 #. module: magyc_ops
-#: model:ir.model,name:magyc_ops.model_magyc_ops
-msgid "MAGYC processes (cron)"
+#: model:ir.module.module,shortdesc:base.module_magyc_ops
+msgid "MAGYC Operations"
 msgstr ""
 
 #. module: magyc_ops
@@ -653,12 +604,6 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_stock_move__magyc_loss_approved_by
-msgid ""
-"Odoo 20 bucht Verluste als Stock Move. Freigabe wird beim Scrap gesetzt."
-msgstr "Odoo 20 posts losses as a stock move. Approval is set on scrap."
-
-#. module: magyc_ops
 #: model:ir.model.fields.selection,name:magyc_ops.selection__res_partner__magyc_bonus_state__open
 msgid "Offen"
 msgstr "Open"
@@ -668,14 +613,6 @@ msgstr "Open"
 #: model:ir.model.fields,field_description:magyc_ops.field_res_users__open_shortfall_count
 msgid "Offene Differenzen"
 msgstr "Open differences"
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_force_thread_id
-msgid ""
-"Optional ID of a thread (record) to which all incoming messages will be "
-"attached, even if they did not reply to it. If set, this will disable the "
-"creation of new records completely."
-msgstr ""
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__city
@@ -703,17 +640,9 @@ msgid "Parent Record Thread ID"
 msgstr ""
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_parent_model_id
-msgid ""
-"Parent model holding the alias. The model holding the alias reference is not"
-" necessarily the model given by alias_model_id (example: project "
-"(parent_model) and task (model))"
-msgstr ""
-
-#. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_pfand_shop_price
 msgid "Pfand Onlineshop (brutto)"
-msgstr "Online shop deposit (gross)"
+msgstr "Deposit online shop (gross)"
 
 #. module: magyc_ops
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
@@ -726,15 +655,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:magyc_ops.field_res_users__placement_ok
 msgid "Platzierung ok"
 msgstr "Placement ok"
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_contact
-msgid ""
-"Policy to post a message on the document using the mailgateway.\n"
-"- everyone: everyone can post\n"
-"- partners: only authenticated partners\n"
-"- followers: only followers of the related document or members of following channels\n"
-msgstr ""
 
 #. module: magyc_ops
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_transfer_wizard_form
@@ -790,7 +710,7 @@ msgstr ""
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_return_months
 msgid "Rücknahme unverkaufter Ware (Monate)"
-msgstr "Return of unsold goods (months)"
+msgstr "Take-back of unsold goods (months)"
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__message_has_sms_error
@@ -859,7 +779,7 @@ msgstr "Tax number / VAT ID"
 #: model:ir.model.fields,help:magyc_ops.field_res_partner__kiosk_area
 #: model:ir.model.fields,help:magyc_ops.field_res_users__kiosk_area
 msgid "Steuert die Kiosk-ID: K-BER-0001 bzw. K-KOE-0001."
-msgstr "Controls the kiosk ID: K-BER-0001 or K-KOE-0001."
+msgstr "Drives the kiosk ID: K-BER-0001 or K-KOE-0001."
 
 #. module: magyc_ops
 #: model:ir.model,name:magyc_ops.model_stock_move
@@ -902,21 +822,6 @@ msgid "Telefon"
 msgstr "Phone"
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_model_id
-msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming"
-" email that does not reply to an existing record will cause the creation of "
-"a new record of this model (e.g. a Project Task)"
-msgstr ""
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_magyc_kiosk_application__alias_name
-msgid ""
-"The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
-msgstr ""
-
-#. module: magyc_ops
 #: model:ir.model,name:magyc_ops.model_magyc_tour
 #: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_tour_id
 msgid "Tour"
@@ -944,14 +849,6 @@ msgid "Trays Lemon"
 msgstr "Lemon trays"
 
 #. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_first_fill_trays
-msgid ""
-"Trays bei der Erstbestückung, je 24 Dosen, hälftig auf die Sorten verteilt."
-msgstr ""
-"Trays for the first fill, 24 cans each, split evenly between "
-"varieties."
-
-#. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__trays_per_pallet
 #: model:ir.model.fields,field_description:magyc_ops.field_res_company__magyc_trays_per_pallet
 msgid "Trays je Palette"
@@ -961,15 +858,6 @@ msgstr "Trays per pallet"
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
 msgid "Trays."
 msgstr "trays."
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_stock_picking__magyc_handover_confirmed
-msgid ""
-"Unterschriebenes Übergabeprotokoll liegt vor. Löst Startprämie und "
-"Akquisiteur-Provision aus."
-msgstr ""
-"Signed handover protocol is available. Triggers the start bonus and "
-"sales partner commission."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_stock_move__magyc_loss_approved_by
@@ -984,18 +872,12 @@ msgstr "Sales rep (Flixcheck)"
 #. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_magyc_abverkauf__placement_rows
 msgid "Vom SSM beim Kiosk gezählte Reihen. Vorgabe: mindestens 2."
-msgstr "Rows counted at the kiosk by the SSM. Minimum: 2."
+msgstr "Rows counted at the kiosk by the SSM. Minimum 2."
 
 #. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_akquisiteur_product_id
 msgid "Wird als Position auf der Monatsrechnung des Akquisiteurs verwendet."
 msgstr "Used as a line on the sales partner's monthly invoice."
-
-#. module: magyc_ops
-#: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_akquisiteur_partner_id
-msgid ""
-"Wird bei neuen Kiosken aus dem Postfach automatisch gesetzt (Primewave)."
-msgstr "Set automatically from the mailbox for new kiosks (Primewave)."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__dest_warehouse_id
@@ -1016,3 +898,4 @@ msgstr "Handover confirmed"
 #: model:ir.model.fields,field_description:magyc_ops.field_stock_picking__magyc_handover_date
 msgid "Übergabedatum"
 msgstr "Handover date"
+

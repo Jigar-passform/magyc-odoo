@@ -6,14 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20261016\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 13:59+0000\n"
-"PO-Revision-Date: 2026-11-13 15:00+0000\n"
-"Last-Translator: MAGYC <info@magyc.de>\n"
-"Language-Team: English <info@magyc.de>\n"
+"POT-Creation-Date: 2026-11-19 09:49+0000\n"
+"PO-Revision-Date: 2026-11-19 09:49+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: magyc_pfand
@@ -29,21 +28,12 @@ msgstr ""
 #. module: magyc_pfand
 #: model:ir.model.fields,help:magyc_pfand.field_res_company__pfand_product_id
 msgid "Artikel, der als Pfandzeile auf Aufträgen ergänzt wird."
-msgstr "Item added as a deposit line on orders."
+msgstr "Product added as the deposit line on orders."
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
-
-#. module: magyc_pfand
-#: model:ir.model.fields,help:magyc_pfand.field_res_company__pfand_auto_add
-msgid ""
-"Beim Bestätigen eines Auftrags je Getränkezeile eine Pfandzeile in gleicher "
-"Menge anlegen."
-msgstr ""
-"When confirming an order, add a deposit line with the same quantity "
-"for each beverage line."
 
 #. module: magyc_pfand
 #: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_form
@@ -53,7 +43,7 @@ msgstr "Remarks…"
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__account_change_id
 msgid "Bestandsveränderung Pfand (4000 SKR04)"
-msgstr "Change in deposit inventory (4000 SKR04)"
+msgstr "Change in deposit liabilities (4000 SKR04)"
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__amount_untaxed
@@ -115,7 +105,7 @@ msgstr "Single-use deposit 0.25 € as a separate document line, 19 % VAT"
 #: model:ir.model.fields,help:magyc_pfand.field_product_product__is_pfand
 #: model:ir.model.fields,help:magyc_pfand.field_product_template__is_pfand
 msgid "Einwegpfand: wird auf Verkaufsbelegen als eigene Zeile geführt."
-msgstr "Single-use deposit: shown as a separate line on sales documents."
+msgstr "One-way deposit: carried as its own line on sales documents."
 
 #. module: magyc_pfand
 #: model:ir.model.fields.selection,name:magyc_pfand.selection__magyc_pfand_return__state__draft
@@ -186,7 +176,7 @@ msgstr ""
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__journal_id
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__partner_id
@@ -290,7 +280,7 @@ msgstr "Add deposit automatically"
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__deposit_per_can
 msgid "Pfand je Dose brutto"
-msgstr "Deposit per can gross"
+msgstr "Deposit per can, gross"
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__price_unit
@@ -328,7 +318,7 @@ msgstr "Deposit provision"
 #. module: magyc_pfand
 #: model:ir.model,name:magyc_pfand.model_magyc_pfand_provision
 msgid "Pfand-Rückstellung buchen"
-msgstr "Post deposit provision"
+msgstr "Book deposit provision"
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__product_id
@@ -374,24 +364,6 @@ msgid "Status"
 msgstr ""
 
 #. module: magyc_pfand
-#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_provision__account_liability_id
-msgid ""
-"TU Treuhand: 3071 Offene Pfandrücknahmen. Kontonummer haengt am "
-"Kontenrahmen, deshalb keine feste Auswahl."
-msgstr ""
-"TU Treuhand: 3071 Open deposit returns. The account number depends on "
-"the chart of accounts, so there is no fixed selection."
-
-#. module: magyc_pfand
-#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_provision__account_change_id
-msgid ""
-"TU Treuhand: 4000 Bestandsveränderung Pfandverbindlichkeiten. Saldo muss dem"
-" Konto 4401 entsprechen."
-msgstr ""
-"TU Treuhand: 4000 Change in deposit liabilities. The balance must "
-"match account 4401."
-
-#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__tax_rate
 msgid "USt-Satz %"
 msgstr "VAT rate %"
@@ -410,3 +382,4 @@ msgstr "Returned (cans)"
 #: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_provision__period_label
 msgid "z. B. 11/2026"
 msgstr "e.g. 11/2026"
+

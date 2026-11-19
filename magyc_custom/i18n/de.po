@@ -6,25 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20261016\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 13:58+0000\n"
-"PO-Revision-Date: 2026-11-13 15:00+0000\n"
-"Last-Translator: MAGYC <info@magyc.de>\n"
-"Language-Team: German <info@magyc.de>\n"
+"POT-Creation-Date: 2026-11-19 09:48+0000\n"
+"PO-Revision-Date: 2026-11-19 09:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: magyc_custom
-#: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_gln
-#: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_gln
-msgid ""
-"13-stellige GLN des Kiosks. Die GTIN der Artikel steht am Produkt, nicht "
-"hier."
-msgstr ""
-"13-stellige GLN des Kiosks. Die GTIN der Artikel steht am Produkt, "
-"nicht hier."
 
 #. module: magyc_custom
 #: model:ir.model.fields,field_description:magyc_custom.field_res_partner__akquisiteur
@@ -43,28 +32,9 @@ msgid "Anzahl Tage nach Fälligkeit, bevor die Liefersperre greift."
 msgstr "Anzahl Tage nach Fälligkeit, bevor die Liefersperre greift."
 
 #. module: magyc_custom
-#: model:ir.model.fields,help:magyc_custom.field_res_partner__magyc_delivery_block_override
-#: model:ir.model.fields,help:magyc_custom.field_res_users__magyc_delivery_block_override
-msgid ""
-"Ausnahme: Aufträge dieses Kunden werden trotz überfälliger Rechnungen "
-"bestätigt."
-msgstr ""
-"Ausnahme: Aufträge dieses Kunden werden trotz überfälliger Rechnungen "
-"bestätigt."
-
-#. module: magyc_custom
 #: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__b2b
 msgid "B2B"
 msgstr "B2B"
-
-#. module: magyc_custom
-#: model:ir.model.fields,help:magyc_custom.field_res_company__magyc_delivery_block
-msgid ""
-"Bestätigen eines Auftrags wird blockiert, wenn der Kunde überfällige "
-"Rechnungen hat."
-msgstr ""
-"Bestätigen eines Auftrags wird blockiert, wenn der Kunde überfällige "
-"Rechnungen hat."
 
 #. module: magyc_custom
 #: model:ir.model,name:magyc_custom.model_res_company
@@ -155,7 +125,7 @@ msgstr "Kiosk-ID"
 #: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kiosk_status
 #: model:ir.model.fields,field_description:magyc_custom.field_res_users__kiosk_status
 msgid "Kiosk-Status"
-msgstr "Kiosk-Status"
+msgstr "Kiosk status"
 
 #. module: magyc_custom
 #: model:ir.model.fields,field_description:magyc_custom.field_res_partner__kundentyp
@@ -256,3 +226,4 @@ msgstr "Vertriebsgebiet, z. B. Berlin-Mitte."
 #: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_status
 msgid "Wird über die Aktionen im MAGYC-Tab geführt, nicht berechnet."
 msgstr "Wird über die Aktionen im MAGYC-Tab geführt, nicht berechnet."
+

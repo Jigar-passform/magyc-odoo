@@ -6,14 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20261016\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 13:58+0000\n"
-"PO-Revision-Date: 2026-11-13 15:00+0000\n"
-"Last-Translator: MAGYC <info@magyc.de>\n"
-"Language-Team: German <info@magyc.de>\n"
+"POT-Creation-Date: 2026-11-19 09:48+0000\n"
+"PO-Revision-Date: 2026-11-19 09:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: magyc_documents
@@ -27,93 +26,14 @@ msgid "2. Mahnung – letzte Zahlungsaufforderung"
 msgstr "2. Mahnung – letzte Zahlungsaufforderung"
 
 #. module: magyc_documents
-#: model:mail.template,body_html:magyc_documents.tpl_reminder_2
-msgid ""
-"<div style=\"margin:0;padding:0;font-size:13px;\">\n"
-"                <p>Sehr geehrte Damen und Herren,</p>\n"
-"                <p>Leider konnten wir bis heute keinen Zahlungseingang feststellen.</p>\n"
-"                <p>Offener Betrag:\n"
-"                    <b>\n"
-"                        <t t-if=\"ctx.get('amount_due')\">\n"
-"                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n"
-"                        </t>\n"
-"                        <t t-else=\"\">\n"
-"                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n"
-"                        </t>\n"
-"                    </b>\n"
-"                </p>\n"
-"                <p>Bitte begleichen Sie den Betrag innerhalb von 7 Tagen. Bis zum Ausgleich sind weitere\n"
-"                    Lieferungen gesperrt.</p>\n"
-"                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n"
-"            </div>\n"
-"        "
-msgstr "<div style=\"margin:0;padding:0;font-size:13px;\">\n                <p>Sehr geehrte Damen und Herren,</p>\n                <p>Leider konnten wir bis heute keinen Zahlungseingang feststellen.</p>\n                <p>Offener Betrag:\n                    <b>\n                        <t t-if=\"ctx.get('amount_due')\">\n                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n                        </t>\n                        <t t-else=\"\">\n                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n                        </t>\n                    </b>\n                </p>\n                <p>Bitte begleichen Sie den Betrag innerhalb von 7 Tagen. Bis zum Ausgleich sind weitere\n                    Lieferungen gesperrt.</p>\n                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n            </div>\n        "
-
-#. module: magyc_documents
-#: model:mail.template,body_html:magyc_documents.tpl_reminder_1
-msgid ""
-"<div style=\"margin:0;padding:0;font-size:13px;\">\n"
-"                <p>Sehr geehrte Damen und Herren,</p>\n"
-"                <p>Sicher ist es Ihrer Aufmerksamkeit entgangen: Die folgende Rechnung ist noch offen.</p>\n"
-"                <p>Offener Betrag:\n"
-"                    <b>\n"
-"                        <t t-if=\"ctx.get('amount_due')\">\n"
-"                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n"
-"                        </t>\n"
-"                        <t t-else=\"\">\n"
-"                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n"
-"                        </t>\n"
-"                    </b>\n"
-"                </p>\n"
-"                <p>Bitte überweisen Sie den Betrag in den nächsten 7 Tagen. Hat sich Ihre Zahlung\n"
-"                    überschnitten, betrachten Sie dieses Schreiben als gegenstandslos.</p>\n"
-"                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n"
-"            </div>\n"
-"        "
-msgstr "<div style=\"margin:0;padding:0;font-size:13px;\">\n                <p>Sehr geehrte Damen und Herren,</p>\n                <p>Sicher ist es Ihrer Aufmerksamkeit entgangen: Die folgende Rechnung ist noch offen.</p>\n                <p>Offener Betrag:\n                    <b>\n                        <t t-if=\"ctx.get('amount_due')\">\n                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n                        </t>\n                        <t t-else=\"\">\n                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n                        </t>\n                    </b>\n                </p>\n                <p>Bitte überweisen Sie den Betrag in den nächsten 7 Tagen. Hat sich Ihre Zahlung\n                    überschnitten, betrachten Sie dieses Schreiben als gegenstandslos.</p>\n                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n            </div>\n        "
-
-#. module: magyc_documents
-#: model:mail.template,body_html:magyc_documents.tpl_reminder_3
-msgid ""
-"<div style=\"margin:0;padding:0;font-size:13px;\">\n"
-"                <p>Sehr geehrte Damen und Herren,</p>\n"
-"                <p>Trotz Erinnerung ist die folgende Rechnung weiterhin offen.</p>\n"
-"                <p>Offener Betrag:\n"
-"                    <b>\n"
-"                        <t t-if=\"ctx.get('amount_due')\">\n"
-"                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n"
-"                        </t>\n"
-"                        <t t-else=\"\">\n"
-"                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n"
-"                        </t>\n"
-"                    </b>\n"
-"                </p>\n"
-"                <p>Bitte zahlen Sie innerhalb von 5 Tagen. Andernfalls behalten wir uns weitere Schritte\n"
-"                    vor, einschließlich Rückholung der Kommissionsware.</p>\n"
-"                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n"
-"            </div>\n"
-"        "
-msgstr "<div style=\"margin:0;padding:0;font-size:13px;\">\n                <p>Sehr geehrte Damen und Herren,</p>\n                <p>Trotz Erinnerung ist die folgende Rechnung weiterhin offen.</p>\n                <p>Offener Betrag:\n                    <b>\n                        <t t-if=\"ctx.get('amount_due')\">\n                            <t t-out=\"format_amount(ctx.get('amount_due'), object.currency_id)\"/>\n                        </t>\n                        <t t-else=\"\">\n                            <t t-out=\"format_amount(object.total_overdue_followup, object.currency_id)\"/>\n                        </t>\n                    </b>\n                </p>\n                <p>Bitte zahlen Sie innerhalb von 5 Tagen. Andernfalls behalten wir uns weitere Schritte\n                    vor, einschließlich Rückholung der Kommissionsware.</p>\n                <p>Freundliche Grüße<br/><t t-out=\"object.company_id.name\"/></p>\n            </div>\n        "
-
-#. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__active
 msgid "Active"
-msgstr "Active"
+msgstr "Aktiv"
 
 #. module: magyc_documents
 #: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice
 msgid "B2B invoice"
 msgstr "B2B invoice"
-
-#. module: magyc_documents
-#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_kiosk
-msgid ""
-"Based on your sell-through report for the period [month], we settle the sale"
-" of our consignment goods as follows (beverage and deposit 19 % VAT each):"
-msgstr ""
-"Based on your sell-through report for the period [month], we settle "
-"the sale of our consignment goods as follows (beverage and deposit 19 "
-"% VAT each):"
 
 #. module: magyc_documents
 #: model:ir.module.module,summary:base.module_magyc_documents
@@ -149,15 +69,6 @@ msgstr "Created on"
 #: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__credit
 msgid "Credit note / cancellation"
 msgstr "Credit note / cancellation"
-
-#. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_order
-msgid ""
-"Delivery is made from our Rangsdorf warehouse. You can reach us at any time "
-"with questions."
-msgstr ""
-"Delivery is made from our Rangsdorf warehouse. You can reach us at "
-"any time with questions."
 
 #. module: magyc_documents
 #: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__delivery
@@ -275,15 +186,6 @@ msgid "Payable within 14 days without deduction."
 msgstr "Payable within 14 days without deduction."
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_kiosk
-msgid ""
-"Please transfer the amount within 14 days quoting the invoice number. Thank "
-"you for your cooperation!"
-msgstr ""
-"Please transfer the amount within 14 days quoting the invoice number. "
-"Thank you for your cooperation!"
-
-#. module: magyc_documents
 #: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__sale
 msgid "Quotation (B2B)"
 msgstr "Quotation (B2B)"
@@ -319,15 +221,6 @@ msgid "The amount was already paid at the time of ordering. Stay MAGYC."
 msgstr "The amount was already paid at the time of ordering. Stay MAGYC."
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_sale
-msgid ""
-"This quotation is valid for 14 days. All prices are net plus statutory VAT "
-"and deposit. We look forward to your order!"
-msgstr ""
-"This quotation is valid for 14 days. All prices are net plus "
-"statutory VAT and deposit. We look forward to your order!"
-
-#. module: magyc_documents
 #: model_terms:magyc.document.text,intro:magyc_documents.doc_credit
 msgid "We credit you the following amount (reference: invoice [no.]):"
 msgstr "We credit you the following amount (reference: invoice [no.]):"
@@ -356,3 +249,4 @@ msgstr "Zweite Mahnung (MAGYC)"
 #: model_terms:ir.ui.view,arch_db:magyc_documents.report_delivery_magyc_text
 msgid "____________________________________ (signature)"
 msgstr "____________________________________ (signature)"
+

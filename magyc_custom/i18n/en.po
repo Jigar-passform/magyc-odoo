@@ -6,25 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20261016\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-13 13:58+0000\n"
-"PO-Revision-Date: 2026-11-13 15:00+0000\n"
-"Last-Translator: MAGYC <info@magyc.de>\n"
-"Language-Team: English <info@magyc.de>\n"
+"POT-Creation-Date: 2026-11-19 09:48+0000\n"
+"PO-Revision-Date: 2026-11-19 09:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: magyc_custom
-#: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_gln
-#: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_gln
-msgid ""
-"13-stellige GLN des Kiosks. Die GTIN der Artikel steht am Produkt, nicht "
-"hier."
-msgstr ""
-"13-digit GLN of the kiosk. The item GTIN is stored on the product, "
-"not here."
 
 #. module: magyc_custom
 #: model:ir.model.fields,field_description:magyc_custom.field_res_partner__akquisiteur
@@ -40,31 +29,12 @@ msgstr "Active"
 #. module: magyc_custom
 #: model:ir.model.fields,help:magyc_custom.field_res_company__magyc_delivery_block_days
 msgid "Anzahl Tage nach Fälligkeit, bevor die Liefersperre greift."
-msgstr "Number of days after the due date before the delivery block applies."
-
-#. module: magyc_custom
-#: model:ir.model.fields,help:magyc_custom.field_res_partner__magyc_delivery_block_override
-#: model:ir.model.fields,help:magyc_custom.field_res_users__magyc_delivery_block_override
-msgid ""
-"Ausnahme: Aufträge dieses Kunden werden trotz überfälliger Rechnungen "
-"bestätigt."
-msgstr ""
-"Exception: orders for this customer are confirmed despite overdue "
-"invoices."
+msgstr "Number of days past due before the delivery block applies."
 
 #. module: magyc_custom
 #: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__b2b
 msgid "B2B"
 msgstr ""
-
-#. module: magyc_custom
-#: model:ir.model.fields,help:magyc_custom.field_res_company__magyc_delivery_block
-msgid ""
-"Bestätigen eines Auftrags wird blockiert, wenn der Kunde überfällige "
-"Rechnungen hat."
-msgstr ""
-"Confirming an order is blocked when the customer has overdue "
-"invoices."
 
 #. module: magyc_custom
 #: model:ir.model,name:magyc_custom.model_res_company
@@ -115,7 +85,7 @@ msgstr "Kiosk IBAN"
 #: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_iban
 #: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_iban
 msgid "IBAN für die Auszahlung des Signing Bonus."
-msgstr "IBAN for the payout of the signing bonus."
+msgstr "IBAN for the start bonus payout."
 
 #. module: magyc_custom
 #: model:ir.model.fields,field_description:magyc_custom.field_res_company__id
@@ -187,7 +157,7 @@ msgstr ""
 #. module: magyc_custom
 #: model:ir.module.module,summary:base.module_magyc_custom
 msgid "MAGYC DRINKS: Kiosk/Kommission, Pfand und Belegwesen"
-msgstr "MAGYC DRINKS: kiosk/consignment, deposit and document management"
+msgstr "MAGYC DRINKS: kiosk consignment, deposit and documents"
 
 #. module: magyc_custom
 #: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__online
@@ -255,4 +225,5 @@ msgstr "Sales area, e.g. Berlin-Mitte."
 #: model:ir.model.fields,help:magyc_custom.field_res_partner__kiosk_status
 #: model:ir.model.fields,help:magyc_custom.field_res_users__kiosk_status
 msgid "Wird über die Aktionen im MAGYC-Tab geführt, nicht berechnet."
-msgstr "Managed via the actions in the MAGYC tab, not calculated."
+msgstr "Driven by the actions on the MAGYC tab, not computed."
+
