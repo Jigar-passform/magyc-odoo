@@ -802,7 +802,7 @@ def manual():
            "und Mandantennummer, Konten fuer Pfand und DPG.",
            "Testkiosk anlegen und einen Monat durchbuchen: Erstbestueckung, zwei "
            "Abverkaeufe, eine Pfandruecknahme, DATEV-Export.",
-           "Entscheidung der Kanzlei: Kontenrahmen SKR03 oder SKR04 (siehe Offene Angaben, Punkt 1).",
+           "Mit der Kanzlei klaeren: verbindliche Kontennummern fuer Pfand im SKR04, danach Umstellung von SKR03 (Offene Angaben, Punkt 1).",
            "Benutzer anlegen: zwei GF, Lagerleitung, ein SSM, zwei Fahrer.",
            "Schulung von 90 Minuten anhand dieses Handbuchs, danach zwei Wochen "
            "Begleitung im Tagesgeschaeft.",
@@ -869,28 +869,28 @@ def open_items():
     s = []
     para("<b>Offene Angaben</b>", s, ParagraphStyle("ot", parent=BODY, fontName="Helvetica-Bold",
                                                   fontSize=12, textColor=NAVY, spaceAfter=10))
-    para("Diese Liste enthaelt alles, was das System von MAGYC braucht und noch nicht "
-         "vorliegt. Jede Zeile nennt, wofuer die Angabe gebraucht wird und was solange "
+    para("Diese Liste enthaelt nur, was in den vorliegenden Unterlagen fehlt oder sich widerspricht. "
+         "Beraternummer, Mandantennummer, Pfandkonten, DPG-Buendelung und Anlagekonten stehen im Schreiben "
+         "der Kanzlei vom 13.11. und sind im System hinterlegt. Jede Zeile nennt, wofuer die Angabe gebraucht wird und was solange "
          "nicht funktioniert. Die Reihenfolge ist eine Empfehlung.", s)
     table(["Nr.", "Angabe", "Wer", "wofuer", "was solange nicht geht"],
-          [["1", "Kontenrahmen: Mandant nutzt SKR04, System laeuft auf SKR03. Entscheidung und Umstellung", "TU Treuhand", "Pfand- und Steuerkonten nach Schreiben vom 13.11.", "Konten 4401, 3071, 4000, 3806 sind angelegt, aber im SKR03-Rahmen"],
-           ["2", "Bestaetigung DPG-Clearing: eigene Konten oder gebuendelt mit Pfand", "TU Treuhand", "Clearing DPG", "Clearing nur ueber die Pfandkonten"],
-           ["3", "DATEV-Schluessel je Sachkonto", "TU Treuhand", "Kontenbeschriftung", "Kanzlei wusste nicht, was gemeint ist, Rueckfrage noetig"],
-           ["4", "USt-IdNr. und Steuernummer", "MAGYC", "Rechnungskopf", "Rechnungen ohne vollstaendige Pflichtangaben"],
-           ["5", "IBAN und Bankverbindung", "MAGYC", "Rechnung, Zahlungsabgleich", "Zahlungen manuell zuordnen"],
-           ["6", "Einkaufspreise je Artikel", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
-           ["7", "Anschrift Lager Koeln-Rodenkirchen", "MAGYC", "Lager KOE, Lieferscheine", "Platzhalteranschrift in Belegen"],
-           ["8", "Regalplan je Kiosktyp", "MAGYC", "Platzierung, Kuehlschrankreihen", "Platzierung nur als Freitext und Foto"],
-           ["9", "Preislisten B2B und Onlineshop", "MAGYC", "Preislagen", "nur Kioskpreise gepflegt"],
+          [["1", "Kontenrahmen SKR04: Konto 4000 ist im SKR04 Umsatzerloese, im Schreiben vom 13.11. aber Bestandsveraenderung Pfand. Konten 4401 und 3071 gibt es im SKR04 nicht. 560, 630, 670 haben 3 statt 4 Stellen", "TU Treuhand", "Pfandbuchung, Anlagekonten, Umstellung von SKR03", "SKR04 laedt fehlerfrei (auf Kopie geprueft), die Pfandkonten brauchen vorher eine verbindliche Nummer"],
+           ["2", "USt-IdNr. und Steuernummer MAGYC", "MAGYC", "Rechnungskopf, Belegtexte", "nicht in den Unterlagen, die Fusszeile endet bei der HRB-Nummer"],
+           ["3", "IBAN: Konto Berliner Sparkasse ist in Eroeffnung, Qonto lief bis 11.11.", "MAGYC", "Rechnung, Zahlungsabgleich", "Zahlungen manuell zuordnen"],
+           ["4", "Einkaufspreis je Dose (Eko-Vit, Karl, Queen of Beverage)", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
+           ["5", "Echte Gewichte Dose, Tray, Palette und Palettenmasse vom Abfueller", "Eko-Vit", "Versandgewicht, Frachtkosten", "hinterlegt sind Schaetzwerte (0,35 kg, 8,4 kg, 25 kg)"],
+           ["6", "Anschrift Lager Koeln-Rodenkirchen", "MAGYC", "Lager KOE, Lieferscheine", "Anschrift steht noch auf Berlin"],
+           ["7", "Anschriften und Bankdaten der Lieferanten (Eko-Vit, Karl, Queen of Beverage, Ardagh, DPG, Clearing Solution)", "MAGYC", "Kreditorenstamm, Zahlung", "Lieferanten ohne Adresse und IBAN"],
+           ["8", "B2B-Preislisten und Endkundenpreise Shop", "MAGYC", "Preislagen", "nur der Kioskpreis 0,75 EUR ist gepflegt"],
+           ["9", "Zahlungsziel B2B (Belegtexte: OFFEN)", "MAGYC", "Rechnung B2B", "kein Zahlungsziel auf B2B-Rechnungen"],
            ["10", "Eine echte Flixcheck-Mail", "MAGYC", "Felder der Kiosk-Mail zuordnen", "Postfach legt Kiosk nach Standardfeldern an"],
-           ["11", "Eingehende Mail (Catch-all) auf der Testumgebung", "MAGYC", "Test des Kiosk-Postfachs", "Postfach nur lokal getestet"],
-           ["12", "Zugaenge DSV, UPS, DPD, DHL, Shopify, Marktplaetze", "MAGYC", "Versandetiketten, Shop", "Etikettenaufruf meldet fehlende Zugangsdaten, Belege manuell"]],
+           ["11", "Zugaenge DSV, UPS, DPD, DHL, Shopify, Marktplaetze", "MAGYC", "Versandetiketten, Shop", "Etikettenaufruf meldet fehlende Zugangsdaten"]],
           [9 * mm, 40 * mm, 20 * mm, 34 * mm, 65 * mm], s)
     note("<b>Was trotzdem laeuft.</b> Kioskverwaltung, Erstbestueckung, Nachschub, "
          "Touren, Abverkauf, Pfand, Rueckgabe, Lagerzonen, Stellplaetze und DATEV-Export sind "
          "funktionsfaehig. Ohne die Angaben oben fehlen Pflichtangaben auf Belegen, die "
          "kaufmaennische Bewertung und die Anbindung an Dritte.", "ok", s)
-    para("<b>Empfohlene Reihenfolge.</b> Zuerst die Punkte 1 bis 3 bei der Kanzlei, weil "
+    para("<b>Empfohlene Reihenfolge.</b> Zuerst Punkt 1 bei der Kanzlei, weil "
          "sie den Monatsabschluss blockieren. Danach 5 bis 7 von MAGYC, weil sie auf "
          "jedem Beleg stehen. Die Punkte 8 bis 12 sind Ausbaustufen und blockieren den "
          "Start nicht.", s)

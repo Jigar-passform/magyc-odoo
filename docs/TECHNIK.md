@@ -150,10 +150,11 @@ cd "/d/Program Files/Odoo/20/server"
 
 | Thema | Stand |
 | --- | --- |
+| Pfand-Artikel | Zwei Datensätze auf Staging: `Pfand 0,25 EUR` (bucht 4401) und `Pfand Einweg (DPG) 0,25 €` (`PFAND-025`, Stammdaten der Kanzlei). Zusammenführen offen |
 | `stock.scrap` | In Odoo 20 nicht vorhanden, Verluste laufen über `stock.move`, Verbrauch über `magyc_write_off_consumption` |
 | Palettenlogik | Transfer rechnet 24 Dosen je Tray als festen Wert, echte Palettenkonfiguration offen |
 | Köln | Lager mit Platzhalteradresse, Regalplan und echte Anlieferung offen |
-| Kontenrahmen | Staging läuft auf SKR03, Schreiben der Kanzlei nennt SKR04. Konten 4401, 3071, 4000, 3806 sind angelegt, Entscheidung offen |
+| Kontenrahmen | Staging läuft auf SKR03, Mandant nutzt SKR04. `de_skr04` steckt in `l10n_de` und lädt auf einer Kopie fehlerfrei (2247 Konten, vorher alte Steuern und Journale umbenennen, eigene Pfandkonten per SQL parken). Nicht angewendet: in SKR04 ist 4000 Umsatzerlöse, 4401 und 3071 existieren nicht, 560/630/670 sind dreistellig |
 | Pfand-Clearing | DPG-Konten nach Paragraf 17 UStG fehlen |
 | Versand | DSV/UPS/DPD/DHL: Felder und `magyc_create_label` vorhanden, ohne Zugangsdaten Fehlermeldung |
 | Scanner | Kein Hardwareanschluss, Stellplatzcodes sind zugleich Barcodes für `stock_barcode` |
