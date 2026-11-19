@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class StockPicking(models.Model):
@@ -25,3 +26,19 @@ class StockPicking(models.Model):
             "target": "new",
             "context": {"default_picking_id": self.id, "default_purchase_id": po.id},
         }
+
+    def button_validate(self):
+        """Tray-Bestaetigung gegen die bewegte Menge pruefen."""
+        for picking in self:
+            if picking.picking_type_code != "outgoing" or not picking.magyc_tray_count:
+                continue
+            cans = sum(picking.move_ids.mapped("product_uom_qty"))
+            trays_per = picking.company_id.magyc_first_fill_trays_per_product or 4
+            expected = picking.magyc_tray_count * 24
+            if abs(cans - expected) > 0.01:
+                raise UserError(
+                    "Tray-Bestaetigung passt nicht zur Menge: %s Trays sind %s Dosen, "
+                    "bewegt werden %s. Bitte Trays oder Menge korrigieren."
+                    % (picking.magyc_tray_count, expected, cans)
+                )
+        return super().button_validate()

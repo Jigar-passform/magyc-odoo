@@ -41,7 +41,9 @@ msgstr "Attachment Count"
 msgid ""
 "Beim Bestätigen eines Auftrags je Getränkezeile eine Pfandzeile in gleicher "
 "Menge anlegen."
-msgstr "Beim Bestätigen eines Auftrags je Getränkezeile eine Pfandzeile in gleicher Menge anlegen."
+msgstr ""
+"Beim Bestätigen eines Auftrags je Getränkezeile eine Pfandzeile in "
+"gleicher Menge anlegen."
 
 #. module: magyc_pfand
 #: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_form
@@ -49,9 +51,19 @@ msgid "Bemerkungen…"
 msgstr "Bemerkungen…"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__account_change_id
+msgid "Bestandsveränderung Pfand (4000 SKR04)"
+msgstr "Bestandsveränderung Pfand (4000 SKR04)"
+
+#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__amount_untaxed
 msgid "Betrag netto"
 msgstr "Betrag netto"
+
+#. module: magyc_pfand
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_provision_form
+msgid "Buchung netto"
+msgstr "Buchung netto"
 
 #. module: magyc_pfand
 #: model:ir.model,name:magyc_pfand.model_res_company
@@ -60,12 +72,14 @@ msgid "Company"
 msgstr "Company"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__create_uid
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__create_uid
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__create_uid
 msgid "Created by"
 msgstr "Created by"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__create_date
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__create_date
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__create_date
 msgid "Created on"
@@ -77,11 +91,13 @@ msgid "Currency"
 msgstr "Currency"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__date
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__date
 msgid "Date"
 msgstr "Date"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__display_name
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__display_name
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__display_name
 #: model:ir.model.fields,field_description:magyc_pfand.field_product_template__display_name
@@ -117,6 +133,11 @@ msgid "Followers (Partners)"
 msgstr "Followers (Partners)"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__gross_open
+msgid "Gross Open"
+msgstr "Gross Open"
+
+#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__credit_note_id
 msgid "Gutschrift"
 msgstr "Gutschrift"
@@ -132,6 +153,7 @@ msgid "Has Message"
 msgstr "Has Message"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__id
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__id
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__id
 #: model:ir.model.fields,field_description:magyc_pfand.field_product_template__id
@@ -152,9 +174,19 @@ msgid "If checked, some messages have a delivery error."
 msgstr "If checked, some messages have a delivery error."
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__issued_cans
+msgid "In Verkehr gebracht (Dosen)"
+msgstr "In Verkehr gebracht (Dosen)"
+
+#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_is_follower
 msgid "Is Follower"
 msgstr "Is Follower"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__journal_id
+msgid "Journal"
+msgstr "Journal"
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__partner_id
@@ -162,12 +194,14 @@ msgid "Kunde / Kiosk"
 msgstr "Kunde / Kiosk"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__write_uid
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__write_uid
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__write_uid
 msgid "Last Updated by"
 msgstr "Last Updated by"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__write_date
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__write_date
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__write_date
 msgid "Last Updated on"
@@ -204,6 +238,11 @@ msgid "Name"
 msgstr "Name"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__net_open
+msgid "Net Open"
+msgstr "Net Open"
+
+#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__note
 msgid "Note"
 msgstr "Note"
@@ -229,6 +268,16 @@ msgid "Number of messages with delivery error"
 msgstr "Number of messages with delivery error"
 
 #. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__account_liability_id
+msgid "Offene Pfandrücknahmen (3071 SKR04)"
+msgstr "Offene Pfandrücknahmen (3071 SKR04)"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__period_label
+msgid "Periode"
+msgstr "Periode"
+
+#. module: magyc_pfand
 #: model_terms:ir.ui.view,arch_db:magyc_pfand.view_company_form_pfand
 msgid "Pfand (MAGYC)"
 msgstr "Pfand (MAGYC)"
@@ -237,6 +286,11 @@ msgstr "Pfand (MAGYC)"
 #: model:ir.model.fields,field_description:magyc_pfand.field_res_company__pfand_auto_add
 msgid "Pfand automatisch ergänzen"
 msgstr "Pfand automatisch ergänzen"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__deposit_per_can
+msgid "Pfand je Dose brutto"
+msgstr "Pfand je Dose brutto"
 
 #. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__price_unit
@@ -266,6 +320,17 @@ msgid "Pfand-Rücknahmen"
 msgstr "Pfand-Rücknahmen"
 
 #. module: magyc_pfand
+#: model:ir.actions.act_window,name:magyc_pfand.action_magyc_pfand_provision
+#: model:ir.ui.menu,name:magyc_pfand.menu_magyc_pfand_provision
+msgid "Pfand-Rückstellung"
+msgstr "Pfand-Rückstellung"
+
+#. module: magyc_pfand
+#: model:ir.model,name:magyc_pfand.model_magyc_pfand_provision
+msgid "Pfand-Rückstellung buchen"
+msgstr "Pfand-Rückstellung buchen"
+
+#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return_line__product_id
 #: model:ir.model.fields,field_description:magyc_pfand.field_product_product__is_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_product_template__is_pfand
@@ -289,6 +354,11 @@ msgid "Return"
 msgstr "Return"
 
 #. module: magyc_pfand
+#: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_provision_form
+msgid "Rückstellung buchen"
+msgstr "Rückstellung buchen"
+
+#. module: magyc_pfand
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr "SMS Delivery error"
@@ -302,3 +372,41 @@ msgstr "Sales Order"
 #: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_return__state
 msgid "Status"
 msgstr "Status"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_provision__account_liability_id
+msgid ""
+"TU Treuhand: 3071 Offene Pfandrücknahmen. Kontonummer haengt am "
+"Kontenrahmen, deshalb keine feste Auswahl."
+msgstr ""
+"TU Treuhand: 3071 Offene Pfandrücknahmen. Kontonummer haengt am "
+"Kontenrahmen, deshalb keine feste Auswahl."
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_provision__account_change_id
+msgid ""
+"TU Treuhand: 4000 Bestandsveränderung Pfandverbindlichkeiten. Saldo muss dem"
+" Konto 4401 entsprechen."
+msgstr ""
+"TU Treuhand: 4000 Bestandsveränderung Pfandverbindlichkeiten. Saldo "
+"muss dem Konto 4401 entsprechen."
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__tax_rate
+msgid "USt-Satz %"
+msgstr "USt-Satz %"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__currency_id
+msgid "Währung"
+msgstr "Währung"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,field_description:magyc_pfand.field_magyc_pfand_provision__returned_cans
+msgid "Zurückgenommen (Dosen)"
+msgstr "Zurückgenommen (Dosen)"
+
+#. module: magyc_pfand
+#: model:ir.model.fields,help:magyc_pfand.field_magyc_pfand_provision__period_label
+msgid "z. B. 11/2026"
+msgstr "z. B. 11/2026"

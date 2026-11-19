@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_delivery_carrier_form_warehouse" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.magyc</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="MAGYC Versand" name="magyc_carrier">
+                    <group>
+                        <field name="magyc_carrier_kind"/>
+                        <field name="magyc_customer_number"/>
+                    </group>
+                    <group>
+                        <field name="magyc_api_user"/>
+                        <field name="magyc_api_key" password="True"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

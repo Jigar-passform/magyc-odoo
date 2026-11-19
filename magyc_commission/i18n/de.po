@@ -17,40 +17,35 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: magyc_commission
-#: model:ir.actions.report,print_report_name:magyc_commission.action_report_abverkauf
-msgid "'Abverkauf-%s' % (object.name)"
-msgstr "'Abverkauf-%s' % (object.name)"
-
-#. module: magyc_commission
-#: model:ir.actions.report,print_report_name:magyc_commission.action_report_kiosk_contract
-msgid "'Kioskvertrag-%s' % (object.kiosk_id or object.name)"
-msgstr "'Kioskvertrag-%s' % (object.kiosk_id or object.name)"
-
-#. module: magyc_commission
 #: model:ir.actions.report,print_report_name:magyc_commission.action_report_lieferschein
-msgid "'Lieferschein-%s' % (object.name)"
-msgstr "'Lieferschein-%s' % (object.name)"
+msgid "'Delivery slip-%s' % (object.name)"
+msgstr "'Delivery slip-%s' % (object.name)"
 
 #. module: magyc_commission
 #: model:ir.actions.report,print_report_name:magyc_commission.action_report_uebergabeprotokoll
-msgid "'Uebergabeprotokoll-%s' % (object.name)"
-msgstr "'Uebergabeprotokoll-%s' % (object.name)"
+msgid "'Handover protocol-%s' % (object.name)"
+msgstr "'Handover protocol-%s' % (object.name)"
+
+#. module: magyc_commission
+#: model:ir.actions.report,print_report_name:magyc_commission.action_report_kiosk_contract
+msgid "'Kiosk contract-%s' % (object.kiosk_id or object.name)"
+msgstr "'Kiosk contract-%s' % (object.kiosk_id or object.name)"
+
+#. module: magyc_commission
+#: model:ir.actions.report,print_report_name:magyc_commission.action_report_abverkauf
+msgid "'Sell-through-%s' % (object.name)"
+msgstr "'Sell-through-%s' % (object.name)"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "<strong>Beleg</strong>"
-msgstr "<strong>Beleg</strong>"
+msgid "<strong>Document</strong>"
+msgstr "<strong>Document</strong>"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "<strong>Foto bei Übergabe</strong><br/>"
-msgstr "<strong>Foto bei Übergabe</strong><br/>"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "<strong>Gesamt netto</strong>"
-msgstr "<strong>Gesamt netto</strong>"
+msgid "<strong>Kiosk signature</strong><br/>"
+msgstr "<strong>Kiosk signature</strong><br/>"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
@@ -60,14 +55,19 @@ msgid "<strong>Kiosk</strong>"
 msgstr "<strong>Kiosk</strong>"
 
 #. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid "<strong>Period</strong>"
+msgstr "<strong>Period</strong>"
+
+#. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "<strong>Unterschrift Kiosk</strong><br/>"
-msgstr "<strong>Unterschrift Kiosk</strong><br/>"
+msgid "<strong>Photo at handover</strong><br/>"
+msgstr "<strong>Photo at handover</strong><br/>"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "<strong>Zeitraum</strong>"
-msgstr "<strong>Zeitraum</strong>"
+msgid "<strong>Total net</strong>"
+msgstr "<strong>Total net</strong>"
 
 #. module: magyc_commission
 #: model:ir.model.fields.selection,name:magyc_commission.selection__magyc_abverkauf__state__invoiced
@@ -75,35 +75,9 @@ msgid "Abgerechnet"
 msgstr "Abgerechnet"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid ""
-"Abgerechnet wird monatlich nur der bestätigte Abverkauf. Unverkaufte Ware kann\n"
-"                    zurückgegeben werden."
-msgstr "Abgerechnet wird monatlich nur der bestätigte Abverkauf. Unverkaufte Ware kann\n                    zurückgegeben werden."
-
-#. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__abverkauf_id
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "Abverkauf"
-msgstr "Abverkauf"
-
-#. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_sold
-msgid "Abverkauf (Stk)"
-msgstr "Abverkauf (Stk)"
-
-#. module: magyc_commission
-#: model:ir.ui.menu,name:magyc_commission.menu_magyc_abverkauf
-msgid "Abverkauf Kiosk"
-msgstr "Abverkauf Kiosk"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid ""
-"Abverkauf bestätigt:<br/><br/>\n"
-"                        ______________________________<br/>\n"
-"                        Unterschrift Kiosk, Datum"
-msgstr "Abverkauf bestätigt:<br/><br/>\n                        ______________________________<br/>\n                        Unterschrift Kiosk, Datum"
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_abrechnung
+msgid "Abrechnung"
+msgstr "Abrechnung"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__qty_sold_total
@@ -111,27 +85,9 @@ msgid "Abverkauf gesamt"
 msgstr "Abverkauf gesamt"
 
 #. module: magyc_commission
-#: model:ir.actions.report,name:magyc_commission.action_report_abverkauf
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
-msgid "Abverkaufsmeldung"
-msgstr "Abverkaufsmeldung"
-
-#. module: magyc_commission
 #: model:ir.model,name:magyc_commission.model_magyc_abverkauf
 msgid "Abverkaufsmeldung Kiosk"
 msgstr "Abverkaufsmeldung Kiosk"
-
-#. module: magyc_commission
-#: model:ir.actions.act_window,name:magyc_commission.action_magyc_abverkauf
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_list
-msgid "Abverkaufsmeldungen"
-msgstr "Abverkaufsmeldungen"
-
-#. module: magyc_commission
-#: model:ir.model,name:magyc_commission.model_magyc_abverkauf_line
-msgid "Abverkaufszeile"
-msgstr "Abverkaufszeile"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__message_needaction
@@ -164,9 +120,9 @@ msgid "Activity Type Icon"
 msgstr "Activity Type Icon"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Anmerkung"
-msgstr "Anmerkung"
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
+msgid "Address"
+msgstr "Address"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_stock_picking__magyc_handover_note
@@ -174,22 +130,9 @@ msgid "Anmerkung Übergabe"
 msgstr "Anmerkung Übergabe"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Anschrift"
-msgstr "Anschrift"
-
-#. module: magyc_commission
 #: model:ir.model.fields,help:magyc_commission.field_stock_picking__magyc_first_fill_trays
 msgid "Anzahl Trays bei der Erstbefüllung, je 24 Dosen."
 msgstr "Anzahl Trays bei der Erstbefüllung, je 24 Dosen."
-
-#. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__product_id
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Artikel"
-msgstr "Artikel"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__message_attachment_count
@@ -197,33 +140,13 @@ msgid "Attachment Count"
 msgstr "Attachment Count"
 
 #. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Ausgabe über Fahrzeuglager"
-msgstr "Ausgabe über Fahrzeuglager"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
-msgid "Bemerkungen…"
-msgstr "Bemerkungen…"
-
-#. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_expected
-msgid "Bestand laut System"
-msgstr "Bestand laut System"
-
-#. module: magyc_commission
-#: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf_line__qty_counted
-msgid "Bestand, den der Store Success Manager beim Kiosk gezählt hat."
-msgstr "Bestand, den der Store Success Manager beim Kiosk gezählt hat."
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
-msgid "Bestätigen"
-msgstr "Bestätigen"
+msgid "Best before"
+msgstr "Best before"
 
 #. module: magyc_commission
 #: model:ir.model.fields.selection,name:magyc_commission.selection__magyc_abverkauf__state__done
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_search
 msgid "Bestätigt"
 msgstr "Bestätigt"
 
@@ -233,10 +156,28 @@ msgid "Betrag netto"
 msgstr "Betrag netto"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
+msgid ""
+"Between MAGYC DRINKS GmbH and the kiosk named below, a contract for\n"
+"                    consignment goods with a term of"
+msgstr "Between MAGYC DRINKS GmbH and the kiosk named below, a contract for\n                    consignment goods with a term of"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid ""
+"Beverage and deposit 19 % VAT each. Only confirmed sell-through is settled;\n"
+"                    unsold goods can be returned."
+msgstr "Beverage and deposit 19 % VAT each. Only confirmed sell-through is settled;\n                    unsold goods can be returned."
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
+msgid "Check difference"
+msgstr "Check difference"
+
+#. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Charge"
-msgstr "Charge"
+msgid "Comment"
+msgstr "Comment"
 
 #. module: magyc_commission
 #: model:ir.model,name:magyc_commission.model_res_company
@@ -245,9 +186,71 @@ msgid "Company"
 msgstr "Company"
 
 #. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
+msgid "Confirm"
+msgstr "Confirm"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_search
+msgid "Confirmed"
+msgstr "Confirmed"
+
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_root
+msgid "Consignment"
+msgstr "Consignment"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_company_form_magyc_commission
+msgid "Consignment (MAGYC)"
+msgstr "Consignment (MAGYC)"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
+msgid "Consignment and delivery agreement"
+msgstr "Consignment and delivery agreement"
+
+#. module: magyc_commission
+#: model:ir.actions.report,name:magyc_commission.action_report_lieferschein
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
+msgid "Consignment delivery slip"
+msgstr "Consignment delivery slip"
+
+#. module: magyc_commission
+#: model:ir.actions.report,name:magyc_commission.action_report_uebergabeprotokoll
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid "Consignment handover protocol"
+msgstr "Consignment handover protocol"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid "Consignment location:"
+msgstr "Consignment location:"
+
+#. module: magyc_commission
 #: model:ir.model,name:magyc_commission.model_res_partner
 msgid "Contact"
 msgstr "Contact"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
+msgid "Contract end"
+msgstr "Contract end"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
+msgid "Contract start"
+msgstr "Contract start"
+
+#. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_counted
+msgid "Counted (SSM)"
+msgstr "Counted (SSM)"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
+msgid "Create invoice"
+msgstr "Create invoice"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__create_uid
@@ -268,26 +271,17 @@ msgid "Currency"
 msgstr "Currency"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-msgid "Die Ware bleibt bis zum Abverkauf Eigentum der MAGYC DRINKS GmbH."
-msgstr "Die Ware bleibt bis zum Abverkauf Eigentum der MAGYC DRINKS GmbH."
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid ""
-"Die Ware bleibt bis zum Verkauf Eigentum der MAGYC DRINKS GmbH. Abgerechnet wird\n"
-"                    monatlich auf Basis der Bestandsaufnahme, Rechnungen werden ab 24 Dosen erstellt. Ein Pfand wird\n"
-"                    mit der Abverkaufsrechnung abgerechnet."
-msgstr "Die Ware bleibt bis zum Verkauf Eigentum der MAGYC DRINKS GmbH. Abgerechnet wird\n                    monatlich auf Basis der Bestandsaufnahme, Rechnungen werden ab 24 Dosen erstellt. Ein Pfand wird\n                    mit der Abverkaufsrechnung abgerechnet."
-
-#. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_shortfall
-msgid "Differenz"
-msgstr "Differenz"
+msgid "Difference"
+msgstr "Difference"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
+msgid "Difference resolved"
+msgstr "Difference resolved"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__shortfall_cleared
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
 msgid "Differenz geklärt"
 msgstr "Differenz geklärt"
 
@@ -295,11 +289,6 @@ msgstr "Differenz geklärt"
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__qty_shortfall_total
 msgid "Differenz gesamt"
 msgstr "Differenz gesamt"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
-msgid "Differenz prüfen"
-msgstr "Differenz prüfen"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__display_name
@@ -311,20 +300,14 @@ msgid "Display Name"
 msgstr "Display Name"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
-msgid "Drucken"
-msgstr "Drucken"
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_search
+msgid "Draft"
+msgstr "Draft"
 
 #. module: magyc_commission
 #: model:ir.model.fields.selection,name:magyc_commission.selection__magyc_abverkauf__state__draft
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_search
 msgid "Entwurf"
 msgstr "Entwurf"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Erstbefüllung"
-msgstr "Erstbefüllung"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_stock_picking__magyc_first_fill_trays
@@ -337,16 +320,9 @@ msgid "Fahrzeuglager"
 msgstr "Fahrzeuglager"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-msgid "Fahrzeuglager:"
-msgstr "Fahrzeuglager:"
-
-#. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid ""
-"Folgende Ware wird Ihnen als Kommissionsware übergeben. Die Ware bleibt bis zum Verkauf\n"
-"                    Eigentum der MAGYC DRINKS GmbH."
-msgstr "Folgende Ware wird Ihnen als Kommissionsware übergeben. Die Ware bleibt bis zum Verkauf\n                    Eigentum der MAGYC DRINKS GmbH."
+msgid "First fill"
+msgstr "First fill"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__message_follower_ids
@@ -359,19 +335,19 @@ msgid "Followers (Partners)"
 msgstr "Followers (Partners)"
 
 #. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_stock_picking__magyc_photo
-msgid "Foto Übergabe"
-msgstr "Foto Übergabe"
-
-#. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
 msgid ""
-"Für MAGYC DRINKS GmbH:<br/><br/>\n"
+"For MAGYC DRINKS GmbH:<br/><br/>\n"
 "                        ______________________________<br/>\n"
-"                        Unterschrift, Datum"
-msgstr "Für MAGYC DRINKS GmbH:<br/><br/>\n                        ______________________________<br/>\n                        Unterschrift, Datum"
+"                        Signature, date"
+msgstr "For MAGYC DRINKS GmbH:<br/><br/>\n                        ______________________________<br/>\n                        Signature, date"
+
+#. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_stock_picking__magyc_photo
+msgid "Foto Übergabe"
+msgstr "Foto Übergabe"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
@@ -389,16 +365,28 @@ msgid "GTIN"
 msgstr "GTIN"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
 msgid ""
-"Getränk und Pfand je 19 % USt. Abgerechnet wird nur der bestätigte Abverkauf;\n"
-"                    unverkaufte Ware kann zurückgegeben werden."
-msgstr "Getränk und Pfand je 19 % USt. Abgerechnet wird nur der bestätigte Abverkauf;\n                    unverkaufte Ware kann zurückgegeben werden."
+"Goods accepted:<br/><br/>\n"
+"                        ______________________________<br/>\n"
+"                        Signature, date"
+msgstr "Goods accepted:<br/><br/>\n                        ______________________________<br/>\n                        Signature, date"
 
 #. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_counted
-msgid "Gezählt (SSM)"
-msgstr "Gezählt (SSM)"
+#: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf_line__qty_shortfall
+msgid "Goods that have neither been counted, settled nor reported back."
+msgstr "Goods that have neither been counted, settled nor reported back."
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid "Handed over to"
+msgstr "Handed over to"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_picking_form_magyc_handover
+msgid "Handover"
+msgstr "Handover"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__has_message
@@ -447,13 +435,16 @@ msgstr "Is Follower"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Kein Foto hinterlegt."
-msgstr "Kein Foto hinterlegt."
+msgid "Issue from vehicle stock"
+msgstr "Issue from vehicle stock"
 
 #. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__product_id
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Keine digitale Unterschrift hinterlegt."
-msgstr "Keine digitale Unterschrift hinterlegt."
+msgid "Item"
+msgstr "Item"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__partner_id
@@ -464,36 +455,31 @@ msgstr "Kiosk"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Kiosk-ID"
-msgstr "Kiosk-ID"
+msgid "Kiosk ID"
+msgstr "Kiosk ID"
 
 #. module: magyc_commission
 #: model:ir.actions.report,name:magyc_commission.action_report_kiosk_contract
-msgid "Kiosk-Vertrag"
-msgstr "Kiosk-Vertrag"
+msgid "Kiosk contract"
+msgstr "Kiosk contract"
+
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_abverkauf
+msgid "Kiosk sell-through"
+msgstr "Kiosk sell-through"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
 msgid ""
 "Kiosk<br/><br/>\n"
 "                        ______________________________<br/>\n"
-"                        Unterschrift, Datum"
-msgstr "Kiosk<br/><br/>\n                        ______________________________<br/>\n                        Unterschrift, Datum"
+"                        Signature, date"
+msgstr "Kiosk<br/><br/>\n                        ______________________________<br/>\n                        Signature, date"
 
 #. module: magyc_commission
-#: model:ir.ui.menu,name:magyc_commission.menu_magyc_root
-msgid "Kommission"
-msgstr "Kommission"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_company_form_magyc_commission
-msgid "Kommission (MAGYC)"
-msgstr "Kommission (MAGYC)"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Kommissions- und Liefervertrag"
-msgstr "Kommissions- und Liefervertrag"
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_kiosk
+msgid "Kioskbetrieb"
+msgstr "Kioskbetrieb"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__location_id
@@ -503,15 +489,12 @@ msgid "Kommissionslager"
 msgstr "Kommissionslager"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "Kommissionslager:"
-msgstr "Kommissionslager:"
-
-#. module: magyc_commission
 #: model:ir.model.fields,help:magyc_commission.field_stock_picking__magyc_is_handover
 msgid ""
 "Kommissionslieferung an einen Kiosk, für die ein Protokoll gedruckt wird."
-msgstr "Kommissionslieferung an einen Kiosk, für die ein Protokoll gedruckt wird."
+msgstr ""
+"Kommissionslieferung an einen Kiosk, für die ein Protokoll gedruckt "
+"wird."
 
 #. module: magyc_commission
 #: model:ir.module.module,summary:base.module_magyc_commission
@@ -523,7 +506,9 @@ msgstr "Kommissionsware bei Kiosken und monatliche Abverkaufsabrechnung"
 #: model:ir.model.fields,help:magyc_commission.field_res_users__commission_location_id
 msgid ""
 "Lagerort beim Kiosk, an dem die Kommissionsware bis zum Abverkauf liegt."
-msgstr "Lagerort beim Kiosk, an dem die Kommissionsware bis zum Abverkauf liegt."
+msgstr ""
+"Lagerort beim Kiosk, an dem die Kommissionsware bis zum Abverkauf "
+"liegt."
 
 #. module: magyc_commission
 #: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf__location_id
@@ -548,10 +533,15 @@ msgid "Last Updated on"
 msgstr "Last Updated on"
 
 #. module: magyc_commission
-#: model:ir.actions.report,name:magyc_commission.action_report_lieferschein
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_logistik
+msgid "Logistik"
+msgstr "Logistik"
+
+#. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-msgid "Lieferschein Kommission"
-msgstr "Lieferschein Kommission"
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid "Lot/Serial Number"
+msgstr "Lot/Serial Number"
 
 #. module: magyc_commission
 #: model:ir.module.module,shortdesc:base.module_magyc_commission
@@ -563,35 +553,18 @@ msgstr "MAGYC Commission"
 msgid ""
 "MAGYC DRINKS GmbH<br/><br/>\n"
 "                        ______________________________<br/>\n"
-"                        Unterschrift, Datum"
-msgstr "MAGYC DRINKS GmbH<br/><br/>\n                        ______________________________<br/>\n                        Unterschrift, Datum"
+"                        Signature, date"
+msgstr "MAGYC DRINKS GmbH<br/><br/>\n                        ______________________________<br/>\n                        Signature, date"
 
 #. module: magyc_commission
 #: model:ir.actions.server,name:magyc_commission.ir_cron_magyc_missing_counts_ir_actions_server
-msgid "MAGYC: fehlende Abverkaufsmeldungen erinnern"
-msgstr "MAGYC: fehlende Abverkaufsmeldungen erinnern"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "MHD"
-msgstr "MHD"
+msgid "MAGYC: remind about missing sell-through reports"
+msgstr "MAGYC: remind about missing sell-through reports"
 
 #. module: magyc_commission
 #: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf__activity_type_icon
 msgid "Material Symbols icon e.g. checklist"
 msgstr "Material Symbols icon e.g. checklist"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Menge"
-msgstr "Menge"
-
-#. module: magyc_commission
-#: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf_line__qty_sold
-msgid "Menge, die in Rechnung gestellt wird. Basis ist die Bestandsaufnahme."
-msgstr "Menge, die in Rechnung gestellt wird. Basis ist die Bestandsaufnahme."
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__message_has_error
@@ -604,19 +577,9 @@ msgid "Messages"
 msgstr "Messages"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Monaten geschlossen."
-msgstr "Monaten geschlossen."
-
-#. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr "My Activity Deadline"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_picking_form_magyc_handover
-msgid "Nachweis"
-msgstr "Nachweis"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__name
@@ -627,6 +590,17 @@ msgstr "Name"
 #: model:ir.model.fields,field_description:magyc_commission.field_stock_picking__magyc_signer_name
 msgid "Name bei Übergabe"
 msgstr "Name bei Übergabe"
+
+#. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__price_unit
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid "Net price"
+msgstr "Net price"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid "Net total"
+msgstr "Net total"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__activity_date_deadline
@@ -642,6 +616,16 @@ msgstr "Next Activity Summary"
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__activity_type_id
 msgid "Next Activity Type"
 msgstr "Next Activity Type"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid "No digital signature stored."
+msgstr "No digital signature stored."
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid "No photo stored."
+msgstr "No photo stored."
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__note
@@ -674,15 +658,31 @@ msgid "Ohne Klärung wird keine Rechnung erstellt."
 msgstr "Ohne Klärung wird keine Rechnung erstellt."
 
 #. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid ""
+"Only confirmed sell-through is settled monthly. Unsold goods can\n"
+"                    be returned."
+msgstr "Only confirmed sell-through is settled monthly. Unsold goods can\n                    be returned."
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
+msgid "Phone"
+msgstr "Phone"
+
+#. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__line_ids
 msgid "Positionen"
 msgstr "Positionen"
 
 #. module: magyc_commission
-#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__price_unit
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "Preis netto"
-msgstr "Preis netto"
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
+msgid "Print"
+msgstr "Print"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_picking_form_magyc_handover
+msgid "Proof"
+msgstr "Proof"
 
 #. module: magyc_commission
 #: model:ir.model.fields.selection,name:magyc_commission.selection__magyc_abverkauf__state__review
@@ -695,14 +695,25 @@ msgid "Qualitätssperre Rückgaben"
 msgstr "Qualitätssperre Rückgaben"
 
 #. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid "Quantity"
+msgstr "Quantity"
+
+#. module: magyc_commission
+#: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf_line__qty_sold
+msgid "Quantity to be invoiced. Based on the stock count."
+msgstr "Quantity to be invoiced. Based on the stock count."
+
+#. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__invoice_id
 msgid "Rechnung"
 msgstr "Rechnung"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
-msgid "Rechnung erstellen"
-msgstr "Rechnung erstellen"
+msgid "Remarks…"
+msgstr "Remarks…"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__activity_user_id
@@ -711,13 +722,13 @@ msgstr "Responsible User"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "Rückgabe"
-msgstr "Rückgabe"
+msgid "Return"
+msgstr "Return"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_returned
-msgid "Rückgabe (Stk)"
-msgstr "Rückgabe (Stk)"
+msgid "Return (pcs)"
+msgstr "Return (pcs)"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__qty_returned_total
@@ -728,6 +739,48 @@ msgstr "Rückgabe gesamt"
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr "SMS Delivery error"
+
+#. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__abverkauf_id
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid "Sell-through"
+msgstr "Sell-through"
+
+#. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_sold
+msgid "Sell-through (pcs)"
+msgstr "Sell-through (pcs)"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+msgid ""
+"Sell-through confirmed:<br/><br/>\n"
+"                        ______________________________<br/>\n"
+"                        Kiosk signature, date"
+msgstr "Sell-through confirmed:<br/><br/>\n                        ______________________________<br/>\n                        Kiosk signature, date"
+
+#. module: magyc_commission
+#: model:ir.model,name:magyc_commission.model_magyc_abverkauf_line
+msgid "Sell-through line"
+msgstr "Sell-through line"
+
+#. module: magyc_commission
+#: model:ir.actions.report,name:magyc_commission.action_report_abverkauf
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_form
+msgid "Sell-through report"
+msgstr "Sell-through report"
+
+#. module: magyc_commission
+#: model:ir.actions.act_window,name:magyc_commission.action_magyc_abverkauf
+#: model_terms:ir.ui.view,arch_db:magyc_commission.view_magyc_abverkauf_list
+msgid "Sell-through reports"
+msgstr "Sell-through reports"
+
+#. module: magyc_commission
+#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_stammdaten
+msgid "Stammdaten"
+msgstr "Stammdaten"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__state
@@ -745,14 +798,36 @@ msgid ""
 msgstr "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities."
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_abverkauf_document
-msgid "Summe netto"
-msgstr "Summe netto"
+#: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf_line__qty_counted
+msgid "Stock counted at the kiosk by the Store Success Manager."
+msgstr "Stock counted at the kiosk by the Store Success Manager."
+
+#. module: magyc_commission
+#: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf_line__qty_expected
+msgid "System stock"
+msgstr "System stock"
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
+msgid ""
+"The following goods are handed over to you as consignment goods. The goods remain the property\n"
+"                    of MAGYC DRINKS GmbH until sale."
+msgstr "The following goods are handed over to you as consignment goods. The goods remain the property\n                    of MAGYC DRINKS GmbH until sale."
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Telefon"
-msgstr "Telefon"
+msgid ""
+"The goods remain the property of MAGYC DRINKS GmbH until sale. Settlement is\n"
+"                    monthly based on the stock count; invoices are created from 24 cans. A deposit is\n"
+"                    settled with the sell-through invoice."
+msgstr "The goods remain the property of MAGYC DRINKS GmbH until sale. Settlement is\n                    monthly based on the stock count; invoices are created from 24 cans. A deposit is\n                    settled with the sell-through invoice."
+
+#. module: magyc_commission
+#: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
+msgid "The goods remain the property of MAGYC DRINKS GmbH until sell-through."
+msgstr ""
+"The goods remain the property of MAGYC DRINKS GmbH until "
+"sell-through."
 
 #. module: magyc_commission
 #: model:ir.model,name:magyc_commission.model_stock_picking
@@ -761,8 +836,8 @@ msgstr "Transfer"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Trays à 24 Dosen"
-msgstr "Trays à 24 Dosen"
+msgid "Trays of 24 cans"
+msgstr "Trays of 24 cans"
 
 #. module: magyc_commission
 #: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf__activity_exception_decoration
@@ -775,28 +850,9 @@ msgid "Unterschrift"
 msgstr "Unterschrift"
 
 #. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Vertragsbeginn"
-msgstr "Vertragsbeginn"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid "Vertragsende"
-msgstr "Vertragsende"
-
-#. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_lieferschein_document
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid ""
-"Ware übernommen:<br/><br/>\n"
-"                        ______________________________<br/>\n"
-"                        Unterschrift, Datum"
-msgstr "Ware übernommen:<br/><br/>\n                        ______________________________<br/>\n                        Unterschrift, Datum"
-
-#. module: magyc_commission
-#: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf_line__qty_shortfall
-msgid "Ware, die weder gezählt noch abgerechnet noch zurückgemeldet ist."
-msgstr "Ware, die weder gezählt noch abgerechnet noch zurückgemeldet ist."
+msgid "Vehicle stock:"
+msgstr "Vehicle stock:"
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_magyc_abverkauf__date_to
@@ -815,48 +871,10 @@ msgstr "Zielort für zurückgenommene Kommissionsware, z. B. RAN/QS."
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
-msgid ""
-"Zwischen der MAGYC DRINKS GmbH und dem nachstehenden Kiosk wird ein Vertrag über\n"
-"                    Kommissionsware mit einer Laufzeit von"
-msgstr "Zwischen der MAGYC DRINKS GmbH und dem nachstehenden Kiosk wird ein Vertrag über\n                    Kommissionsware mit einer Laufzeit von"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.view_picking_form_magyc_handover
-msgid "Übergabe"
-msgstr "Übergabe"
+msgid "months."
+msgstr "months."
 
 #. module: magyc_commission
 #: model:ir.model.fields,field_description:magyc_commission.field_stock_picking__magyc_is_handover
 msgid "Übergabeprotokoll"
 msgstr "Übergabeprotokoll"
-
-#. module: magyc_commission
-#: model:ir.actions.report,name:magyc_commission.action_report_uebergabeprotokoll
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Übergabeprotokoll Kommission"
-msgstr "Übergabeprotokoll Kommission"
-
-#. module: magyc_commission
-#: model_terms:ir.ui.view,arch_db:magyc_commission.report_uebergabeprotokoll_document
-msgid "Übergeben an"
-msgstr "Übergeben an"
-
-#. module: magyc_commission
-#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_kiosk
-msgid "Kioskbetrieb"
-msgstr "Kioskbetrieb"
-
-#. module: magyc_commission
-#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_logistik
-msgid "Logistik"
-msgstr "Logistik"
-
-#. module: magyc_commission
-#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_abrechnung
-msgid "Abrechnung"
-msgstr "Abrechnung"
-
-#. module: magyc_commission
-#: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_stammdaten
-msgid "Stammdaten"
-msgstr "Stammdaten"

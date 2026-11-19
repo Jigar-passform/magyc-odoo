@@ -101,27 +101,19 @@ msgid "Active"
 msgstr "Active"
 
 #. module: magyc_documents
-#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__sale
-msgid "Angebot (B2B)"
-msgstr "Angebot (B2B)"
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice
+msgid "B2B invoice"
+msgstr "B2B invoice"
 
 #. module: magyc_documents
-#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__order
-msgid "Auftragsbestätigung"
-msgstr "Auftragsbestätigung"
-
-#. module: magyc_documents
-#: model:ir.model,name:magyc_documents.model_magyc_document_text
-#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
-msgid "Belegtext"
-msgstr "Belegtext"
-
-#. module: magyc_documents
-#: model:ir.actions.act_window,name:magyc_documents.action_magyc_document_text
-#: model:ir.ui.menu,name:magyc_documents.menu_magyc_document_text
-#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_list
-msgid "Belegtexte"
-msgstr "Belegtexte"
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_kiosk
+msgid ""
+"Based on your sell-through report for the period [month], we settle the sale"
+" of our consignment goods as follows (beverage and deposit 19 % VAT each):"
+msgstr ""
+"Based on your sell-through report for the period [month], we settle "
+"the sale of our consignment goods as follows (beverage and deposit 19 "
+"% VAT each):"
 
 #. module: magyc_documents
 #: model:ir.module.module,summary:base.module_magyc_documents
@@ -129,16 +121,14 @@ msgid "Belegtexte je Belegtyp (Angebot, AB, Rechnung, Gutschrift)"
 msgstr "Belegtexte je Belegtyp (Angebot, AB, Rechnung, Gutschrift)"
 
 #. module: magyc_documents
-#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__doc_type
-msgid "Belegtyp"
-msgstr "Belegtyp"
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__outro
+msgid "Closing text"
+msgstr "Closing text"
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_kiosk
-msgid ""
-"Bitte überweisen Sie den Betrag innerhalb von 14 Tagen unter Angabe der "
-"Rechnungsnummer. Danke für die Zusammenarbeit!"
-msgstr "Bitte überweisen Sie den Betrag innerhalb von 14 Tagen unter Angabe der Rechnungsnummer. Danke für die Zusammenarbeit!"
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
+msgid "Closing text…"
+msgstr "Closing text…"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__company_id
@@ -156,33 +146,23 @@ msgid "Created on"
 msgstr "Created on"
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_shop
-msgid "Danke für deine Bestellung bei MAGYC!"
-msgstr "Danke für deine Bestellung bei MAGYC!"
-
-#. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_credit
-msgid "Der Betrag wird mit offenen Posten verrechnet bzw. erstattet."
-msgstr "Der Betrag wird mit offenen Posten verrechnet bzw. erstattet."
-
-#. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_shop
-msgid "Der Betrag wurde bereits bei Bestellung bezahlt. Stay MAGYC."
-msgstr "Der Betrag wurde bereits bei Bestellung bezahlt. Stay MAGYC."
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__credit
+msgid "Credit note / cancellation"
+msgstr "Credit note / cancellation"
 
 #. module: magyc_documents
 #: model_terms:magyc.document.text,outro:magyc_documents.doc_order
 msgid ""
-"Die Lieferung erfolgt aus unserem Lager Rangsdorf. Bei Fragen erreichen Sie "
-"uns jederzeit."
-msgstr "Die Lieferung erfolgt aus unserem Lager Rangsdorf. Bei Fragen erreichen Sie uns jederzeit."
+"Delivery is made from our Rangsdorf warehouse. You can reach us at any time "
+"with questions."
+msgstr ""
+"Delivery is made from our Rangsdorf warehouse. You can reach us at "
+"any time with questions."
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_sale
-msgid ""
-"Dieses Angebot ist 14 Tage gültig. Alle Preise netto zzgl. gesetzlicher USt "
-"und Pfand. Wir freuen uns auf Ihre Bestellung!"
-msgstr "Dieses Angebot ist 14 Tage gültig. Alle Preise netto zzgl. gesetzlicher USt und Pfand. Wir freuen uns auf Ihre Bestellung!"
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__delivery
+msgid "Delivery slip"
+msgstr "Delivery slip"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_account_followup_followup_line__display_name
@@ -191,14 +171,22 @@ msgid "Display Name"
 msgstr "Display Name"
 
 #. module: magyc_documents
-#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__intro
-msgid "Einleitungstext"
-msgstr "Einleitungstext"
+#: model:ir.model,name:magyc_documents.model_magyc_document_text
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
+msgid "Document text"
+msgstr "Document text"
 
 #. module: magyc_documents
-#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
-msgid "Einleitungstext…"
-msgstr "Einleitungstext…"
+#: model:ir.actions.act_window,name:magyc_documents.action_magyc_document_text
+#: model:ir.ui.menu,name:magyc_documents.menu_magyc_document_text
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_list
+msgid "Document texts"
+msgstr "Document texts"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__doc_type
+msgid "Document type"
+msgstr "Document type"
 
 #. module: magyc_documents
 #: model:mail.template,description:magyc_documents.tpl_reminder_2
@@ -216,23 +204,30 @@ msgid "Freundliche Zahlungserinnerung (MAGYC)"
 msgstr "Freundliche Zahlungserinnerung (MAGYC)"
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_kiosk
-msgid ""
-"Gemäß Ihrer Abverkaufsmeldung für den Zeitraum [Monat] rechnen wir den "
-"Verkauf unserer Kommissionsware wie folgt ab (Getränk und Pfand je 19 % "
-"USt):"
-msgstr "Gemäß Ihrer Abverkaufsmeldung für den Zeitraum [Monat] rechnen wir den Verkauf unserer Kommissionsware wie folgt ab (Getränk und Pfand je 19 % USt):"
-
-#. module: magyc_documents
-#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__credit
-msgid "Gutschrift / Storno"
-msgstr "Gutschrift / Storno"
+#: model_terms:ir.ui.view,arch_db:magyc_documents.report_delivery_magyc_text
+msgid "Goods received complete and undamaged:"
+msgstr "Goods received complete and undamaged:"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_account_followup_followup_line__id
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__id
 msgid "ID"
 msgstr "ID"
+
+#. module: magyc_documents
+#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__intro
+msgid "Introduction text"
+msgstr "Introduction text"
+
+#. module: magyc_documents
+#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
+msgid "Introduction text…"
+msgstr "Introduction text…"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice_kiosk
+msgid "Kiosk invoice (sell-through)"
+msgstr "Kiosk invoice (sell-through)"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__write_uid
@@ -243,11 +238,6 @@ msgstr "Last Updated by"
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__write_date
 msgid "Last Updated on"
 msgstr "Last Updated on"
-
-#. module: magyc_documents
-#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__delivery
-msgid "Lieferschein"
-msgstr "Lieferschein"
 
 #. module: magyc_documents
 #: model:mail.template,name:magyc_documents.tpl_reminder_2
@@ -270,29 +260,33 @@ msgid "MAGYC Zahlungserinnerung"
 msgstr "MAGYC Zahlungserinnerung"
 
 #. module: magyc_documents
-#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice
-msgid "Rechnung B2B"
-msgstr "Rechnung B2B"
-
-#. module: magyc_documents
-#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice_kiosk
-msgid "Rechnung Kiosk (Abverkauf)"
-msgstr "Rechnung Kiosk (Abverkauf)"
-
-#. module: magyc_documents
 #: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice_shop
-msgid "Rechnung Onlineshop"
-msgstr "Rechnung Onlineshop"
+msgid "Online shop invoice"
+msgstr "Online shop invoice"
 
 #. module: magyc_documents
-#: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__outro
-msgid "Schlusstext"
-msgstr "Schlusstext"
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__order
+msgid "Order confirmation"
+msgstr "Order confirmation"
 
 #. module: magyc_documents
-#: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_form
-msgid "Schlusstext…"
-msgstr "Schlusstext…"
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice
+msgid "Payable within 14 days without deduction."
+msgstr "Payable within 14 days without deduction."
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_kiosk
+msgid ""
+"Please transfer the amount within 14 days quoting the invoice number. Thank "
+"you for your cooperation!"
+msgstr ""
+"Please transfer the amount within 14 days quoting the invoice number. "
+"Thank you for your cooperation!"
+
+#. module: magyc_documents
+#: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__sale
+msgid "Quotation (B2B)"
+msgstr "Quotation (B2B)"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__sequence
@@ -301,39 +295,52 @@ msgstr "Sequence"
 
 #. module: magyc_documents
 #: model_terms:magyc.document.text,intro:magyc_documents.doc_sale
-msgid "Vielen Dank für Ihr Interesse an MAGYC. Gerne bieten wir Ihnen an:"
-msgstr "Vielen Dank für Ihr Interesse an MAGYC. Gerne bieten wir Ihnen an:"
+msgid "Thank you for your interest in MAGYC. We are pleased to offer you:"
+msgstr "Thank you for your interest in MAGYC. We are pleased to offer you:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice_shop
+msgid "Thank you for your order at MAGYC!"
+msgstr "Thank you for your order at MAGYC!"
 
 #. module: magyc_documents
 #: model_terms:magyc.document.text,intro:magyc_documents.doc_order
+msgid "Thank you for your order. We confirm your order as follows:"
+msgstr "Thank you for your order. We confirm your order as follows:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_credit
+msgid "The amount is offset against open items or refunded."
+msgstr "The amount is offset against open items or refunded."
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice_shop
+msgid "The amount was already paid at the time of ordering. Stay MAGYC."
+msgstr "The amount was already paid at the time of ordering. Stay MAGYC."
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,outro:magyc_documents.doc_sale
 msgid ""
-"Vielen Dank für Ihre Bestellung. Wir bestätigen Ihren Auftrag wie folgt:"
-msgstr "Vielen Dank für Ihre Bestellung. Wir bestätigen Ihren Auftrag wie folgt:"
-
-#. module: magyc_documents
-#: model_terms:ir.ui.view,arch_db:magyc_documents.report_delivery_magyc_text
-msgid "Ware vollständig und unbeschädigt erhalten:"
-msgstr "Ware vollständig und unbeschädigt erhalten:"
-
-#. module: magyc_documents
-#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice
-msgid "Wir berechnen Ihnen wie folgt:"
-msgstr "Wir berechnen Ihnen wie folgt:"
-
-#. module: magyc_documents
-#: model_terms:magyc.document.text,intro:magyc_documents.doc_delivery
-msgid "Wir liefern Ihnen heute:"
-msgstr "Wir liefern Ihnen heute:"
+"This quotation is valid for 14 days. All prices are net plus statutory VAT "
+"and deposit. We look forward to your order!"
+msgstr ""
+"This quotation is valid for 14 days. All prices are net plus "
+"statutory VAT and deposit. We look forward to your order!"
 
 #. module: magyc_documents
 #: model_terms:magyc.document.text,intro:magyc_documents.doc_credit
-msgid "Wir schreiben Ihnen folgenden Betrag gut (Bezug: Rechnung [Nr.]):"
-msgstr "Wir schreiben Ihnen folgenden Betrag gut (Bezug: Rechnung [Nr.]):"
+msgid "We credit you the following amount (reference: invoice [no.]):"
+msgstr "We credit you the following amount (reference: invoice [no.]):"
 
 #. module: magyc_documents
-#: model_terms:magyc.document.text,outro:magyc_documents.doc_invoice
-msgid "Zahlbar innerhalb von 14 Tagen ohne Abzug."
-msgstr "Zahlbar innerhalb von 14 Tagen ohne Abzug."
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_delivery
+msgid "We deliver to you today:"
+msgstr "We deliver to you today:"
+
+#. module: magyc_documents
+#: model_terms:magyc.document.text,intro:magyc_documents.doc_invoice
+msgid "We invoice you as follows:"
+msgstr "We invoice you as follows:"
 
 #. module: magyc_documents
 #: model:mail.template,subject:magyc_documents.tpl_reminder_1
@@ -347,5 +354,5 @@ msgstr "Zweite Mahnung (MAGYC)"
 
 #. module: magyc_documents
 #: model_terms:ir.ui.view,arch_db:magyc_documents.report_delivery_magyc_text
-msgid "____________________________________ (Unterschrift)"
-msgstr "____________________________________ (Unterschrift)"
+msgid "____________________________________ (signature)"
+msgstr "____________________________________ (signature)"

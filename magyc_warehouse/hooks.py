@@ -72,6 +72,21 @@ def post_init_hook(env):
             })
         product.magyc_pick_location_id = bin_loc
 
+    # Putaway: Wareneingang legt die Sorte direkt in ihr Pickfach
+    for product in env["product.template"].search([("sale_ok", "=", True), ("is_pfand", "=", False)]):
+        if not product.magyc_pick_location_id:
+            continue
+        rule = env["stock.putaway.rule"].search([
+            ("product_id", "=", product.product_variant_id.id),
+            ("location_out_id", "=", product.magyc_pick_location_id.id),
+        ], limit=1)
+        if not rule:
+            env["stock.putaway.rule"].create({
+                "product_id": product.product_variant_id.id,
+                "location_in_id": warehouse.lot_stock_id.id,
+                "location_out_id": product.magyc_pick_location_id.id,
+            })
+
     existing = set(Location.search([("magyc_bin_code", "!=", False)]).mapped("magyc_bin_code"))
     vals = [{
         "name": code, "usage": "internal", "location_id": general.id,

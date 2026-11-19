@@ -5,3 +5,5 @@ from . import stock_picking
 from . import stock_quant
 from . import res_company
 from . import magyc_ops_warehouse
+from . import delivery_carrier
+from . import account_move
