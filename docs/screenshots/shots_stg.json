@@ -1,0 +1,386 @@
+[
+ {
+  "file": "s01-bestellung.png",
+  "title": "Einkauf: Bestellung bei Eko-Vit",
+  "intro": "Die Bestellung wird im Einkauf angelegt und bestätigt. Daraus entsteht der erwartete Wareneingang.",
+  "example": "Beispiel: P00001, Eko-Vit, 2.880 Dosen Lemon und 1.440 Dosen Berry zu 0,27 EUR.",
+  "legend": [
+   [
+    1,
+    "Lieferant"
+   ],
+   [
+    2,
+    "Status Bestellung"
+   ],
+   [
+    3,
+    "Positionen"
+   ]
+  ]
+ },
+ {
+  "file": "s02-wareneingang.png",
+  "title": "Lager: Wareneingang gebucht",
+  "intro": "Der Wareneingang zeigt Charge, MHD und Stellplatz je Position. Gebucht wird mit dem Assistenten.",
+  "example": "Beispiel: RAN/IN/00001, Lemon in R01-01-00 und R01-02-00, Berry in R02-01-00.",
+  "legend": [
+   [
+    1,
+    "Status Erledigt"
+   ],
+   [
+    2,
+    "Bestellung"
+   ],
+   [
+    3,
+    "Assistent Wareneingang"
+   ]
+  ]
+ },
+ {
+  "file": "s03-bestand-stellplatz.png",
+  "title": "Lager: Bestand nach Stellplatz",
+  "intro": "Die Bestandsanzeige listet Artikel, Charge, MHD und Stellplatz. Filter und Gruppierung nach Zone sind möglich.",
+  "example": "Beispiel: DEMO-LEM-B (MHD 17.02.2027) liegt vor DEMO-LEM-A (MHD 16.08.2027) und wird zuerst genommen.",
+  "legend": [
+   [
+    1,
+    "Suche und Filter"
+   ],
+   [
+    2,
+    "Spalten Charge, MHD, Stellplatz"
+   ],
+   [
+    3,
+    "Bestand je Charge"
+   ]
+  ]
+ },
+ {
+  "file": "s04-umlagerung.png",
+  "title": "Lager: Umlagerung von Fach zu Fach",
+  "intro": "Von Stellplatz, auf Stellplatz, Artikel und Menge eintragen oder scannen.",
+  "example": "Beispiel: 480 Dosen Lemon von R01-02-00 nach PICK-MAG-LEM-250.",
+  "legend": [
+   [
+    1,
+    "Von Stellplatz"
+   ],
+   [
+    2,
+    "Auf Stellplatz"
+   ],
+   [
+    3,
+    "Artikel"
+   ],
+   [
+    4,
+    "Menge"
+   ]
+  ]
+ },
+ {
+  "file": "s05-etiketten.png",
+  "title": "Lager: Stellplatz-Etiketten drucken",
+  "intro": "Zone und Anzahl wählen oder einzelne Plätze auswählen. Jedes Etikett trägt Code und Strichcode.",
+  "example": "Beispiel: Zone Pickzone, Etiketten PICK-MAG-LEM-250 und PICK-MAG-BER-250.",
+  "legend": [
+   [
+    1,
+    "Zone"
+   ],
+   [
+    2,
+    "Anzahl, 0 = alle"
+   ],
+   [
+    3,
+    "Etiketten erzeugen"
+   ]
+  ]
+ },
+ {
+  "file": "s06-postfach-liste.png",
+  "title": "Kiosk-Postfach: Eingänge",
+  "intro": "Jede Flixcheck-Mail erscheint als Eintrag. Status Kiosk angelegt oder Prüfen.",
+  "example": "Beispiel: drei Kioske angelegt, zwei Einträge stehen auf Prüfen (Dublette und fehlende Pflichtfelder).",
+  "legend": [
+   [
+    1,
+    "Spalten"
+   ],
+   [
+    2,
+    "Eintrag"
+   ],
+   [
+    3,
+    "Menü Kommission"
+   ]
+  ]
+ },
+ {
+  "file": "s07-postfach-kiosk.png",
+  "title": "Kiosk-Postfach: automatisch angelegter Kiosk",
+  "intro": "Aus der Mail entsteht Kiosk, Kommissionslager und Lieferauftrag.",
+  "example": "Beispiel: DEMO Späti Kreuzberg, Oranienstraße 12, K-BER-0024.",
+  "legend": [
+   [
+    1,
+    "Status Kiosk angelegt"
+   ],
+   [
+    2,
+    "Angelegter Kiosk"
+   ],
+   [
+    3,
+    "IBAN aus der Mail"
+   ]
+  ]
+ },
+ {
+  "file": "s08-postfach-dublette.png",
+  "title": "Kiosk-Postfach: Dublette erkannt",
+  "intro": "Gleiche E-Mail wie ein bestehender Kiosk. Es entsteht kein zweiter Kiosk, sondern eine Prüfaufgabe.",
+  "example": "Beispiel: zweite Mail von kreuzberg@example.com.",
+  "legend": [
+   [
+    1,
+    "Status Prüfen"
+   ],
+   [
+    2,
+    "Dublette von"
+   ]
+  ]
+ },
+ {
+  "file": "s09-kontakt-kiosk.png",
+  "title": "Kontakt: Kiosk mit Status aktiv",
+  "intro": "Der Kontakt zeigt Kiosk-ID, Status und Akquisiteur.",
+  "example": "Beispiel: K-BER-0024, Status aktiv, Startprämie ausgezahlt.",
+  "legend": [
+   [
+    1,
+    "Reiter MAGYC"
+   ],
+   [
+    2,
+    "Kiosk-Status"
+   ],
+   [
+    3,
+    "Kiosk-ID"
+   ],
+   [
+    4,
+    "Akquisiteur Primewave"
+   ]
+  ]
+ },
+ {
+  "file": "s10-uebergabe.png",
+  "title": "Lieferung: Übergabeprotokoll mit Unterschrift und Foto",
+  "intro": "Erst Unterschrift und Kühlschrank-Foto buchen die Ware. Ohne beides bleibt die Lieferung offen.",
+  "example": "Beispiel: RAN/OUT/00036, 192 Dosen in das Kommissionslager K-BER-0024.",
+  "legend": [
+   [
+    1,
+    "Status Erledigt"
+   ],
+   [
+    2,
+    "Unterschrift Kiosk"
+   ],
+   [
+    3,
+    "Foto Kühlschrank"
+   ]
+  ]
+ },
+ {
+  "file": "s11-erstbestueckung-offen.png",
+  "title": "Lieferung: Erstbestückung geplant, noch nicht gebucht",
+  "intro": "Stufe 1 legt nur den Lieferauftrag an. Der Kiosk hat noch keine Ware.",
+  "example": "Beispiel: RAN/OUT/00037 für K-BER-0025, wartet auf den Fahrer.",
+  "legend": [
+   [
+    1,
+    "Status Bereit"
+   ],
+   [
+    2,
+    "Kiosk"
+   ],
+   [
+    3,
+    "Herkunft"
+   ]
+  ]
+ },
+ {
+  "file": "s12-abverkauf.png",
+  "title": "Abverkauf: Zählung und Rechnung",
+  "intro": "Der SSM zählt. Abverkauf ist Soll minus gezählt. Der Preis kommt aus der Preisliste und ist nicht änderbar.",
+  "example": "Beispiel: 96 Soll, 60 gezählt = 36 Lemon, 26 Berry, je 0,75 EUR netto.",
+  "legend": [
+   [
+    1,
+    "Status Abgerechnet"
+   ],
+   [
+    2,
+    "Zeile mit Soll, gezählt, Abverkauf"
+   ],
+   [
+    3,
+    "Rechnung"
+   ]
+  ]
+ },
+ {
+  "file": "s13-abverkauf-differenz.png",
+  "title": "Abverkauf: Bestandsdifferenz geklärt",
+  "intro": "Bei einer Differenz sperrt das System die Bestätigung, bis sie geklärt ist.",
+  "example": "Beispiel: Zählung mit 40 Dosen Differenz, erst nach Klärung bestätigt, unter 24 Dosen keine Rechnung.",
+  "legend": [
+   [
+    1,
+    "Status"
+   ],
+   [
+    2,
+    "Differenz geklärt"
+   ],
+   [
+    3,
+    "Differenz gesamt"
+   ]
+  ]
+ },
+ {
+  "file": "s14-rechnung.png",
+  "title": "Rechnung nach Abverkauf mit Pfandzeile",
+  "intro": "Getränk und Pfand stehen als getrennte Zeilen, beide mit 19 % USt.",
+  "example": "Beispiel: INV/2026/00001, 36 Lemon + 26 Berry zu 0,75, Pfand 62 x 0,25, netto 62,00, brutto 73,78.",
+  "legend": [
+   [
+    1,
+    "Status Gebucht"
+   ],
+   [
+    2,
+    "Kiosk"
+   ],
+   [
+    3,
+    "Pfandzeile"
+   ]
+  ]
+ },
+ {
+  "file": "s15-pfand-ruecknahme.png",
+  "title": "Pfand: Rücknahme B2B",
+  "intro": "Zurückgenommenes Pfand erzeugt eine Gutschrift. Kioske sind ausgenommen.",
+  "example": "Beispiel: DEMO Bistro B2B, 20 x 0,25, Gutschrift RINV/2026/00001 über 5,00 netto.",
+  "legend": [
+   [
+    1,
+    "Spalten"
+   ],
+   [
+    2,
+    "Rücknahme"
+   ]
+  ]
+ },
+ {
+  "file": "s16-pfand-rueckstellung.png",
+  "title": "Pfand: Rückstellung netto gebucht",
+  "intro": "1.000 Dosen in Verkehr, 500 zurück: 125,00 brutto offen, Rückstellung 105,04 netto. Die Buchung entsteht im Assistenten Pfand-Rückstellung.",
+  "example": "Beispiel: Soll 4000 105,04 gegen Haben 3071 105,04, wie im Schreiben der Kanzlei.",
+  "legend": [
+   [
+    1,
+    "Suche nach Buchung Pfandrückstellung"
+   ],
+   [
+    2,
+    "Soll Konto 4000"
+   ],
+   [
+    3,
+    "Haben Konto 3071"
+   ]
+  ]
+ },
+ {
+  "file": "s17-tour.png",
+  "title": "Tour: Stopps nach Postleitzahl",
+  "intro": "Offene Kiosk-Lieferungen des Gebiets werden übernommen und nach PLZ sortiert.",
+  "example": "Beispiel: Tour Berlin, 2 Stopps: 10999 Kreuzberg, 12045 Neukölln. Tour Köln: nur Ehrenfeld.",
+  "legend": [
+   [
+    1,
+    "Gebiet"
+   ],
+   [
+    2,
+    "Fahrer"
+   ],
+   [
+    3,
+    "Stopp"
+   ]
+  ]
+ },
+ {
+  "file": "s18-spedition.png",
+  "title": "Speditionstransfer Rangsdorf nach Köln",
+  "intro": "Eine Palette sind 12 Trays je Sorte.",
+  "example": "Beispiel: 1 Palette = 576 Dosen (12 Trays Lemon und 12 Trays Berry).",
+  "legend": [
+   [
+    1,
+    "Quelle"
+   ],
+   [
+    2,
+    "Ziel"
+   ],
+   [
+    3,
+    "Paletten"
+   ]
+  ]
+ },
+ {
+  "file": "s19-nachschub.png",
+  "title": "Nachschub anfordern",
+  "intro": "Mindestens 4 Trays. Bei überfälliger Rechnung ist die Lieferung gesperrt.",
+  "example": "Beispiel: K-BER-0024, 2 + 2 Trays = 96 Dosen. 1 + 1 Tray wird abgelehnt, K-BER-0025 ist wegen offener Rechnung gesperrt.",
+  "legend": [
+   [
+    1,
+    "Kiosk"
+   ],
+   [
+    2,
+    "Nachschub oder Erstbestückung"
+   ],
+   [
+    3,
+    "Trays Lemon"
+   ],
+   [
+    4,
+    "Trays Berry"
+   ]
+  ]
+ }
+]

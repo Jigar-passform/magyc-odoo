@@ -1,0 +1,51 @@
+RES|A1|PASS|Akquisiteur Primewave und Gebuehr 50 EUR hinterlegt|Akquisiteur Primewave Media UG (Haysam Sououd), Gebuehr 50.0
+RES|A2|PASS|Je Artikel ein Pickplatz|Pick Lemon PICK-MAG-LEM-250, Pick Berry PICK-MAG-BER-250
+RES|A3|PASS|Pfandartikel der Firma zeigt auf PFAND-025, Pickplaetze haben Scan-Code|Firmen-Pfandartikel war: Pfand 0,25 EUR active=False, jetzt PFAND-025. Pickplaetze mit Code: ['PICK-MAG-LEM-250', 'PICK-MAG-BER-250']
+RES|A4|PASS|MHD je Artikel aktiv (war auf Staging nicht gesetzt)|[True, True]
+RES|B1|PASS|Bestellung bei Eko-Vit: 2880 Lemon, 1440 Berry|P00001 -> RAN/IN/00001 assigned
+RES|B2|PASS|Wareneingang-Assistent: zwei Chargen Lemon + eine Berry auf je eigenen Stellplatz|R01-01-00=1440.0, R01-02-00=1440.0, R02-01-00=1440.0
+RES|B3|PASS|Chargen mit MHD angelegt|{'DEMO-BER-A': '2027-07-17', 'DEMO-LEM-A': '2027-08-16', 'DEMO-LEM-B': '2027-02-17'}
+RES|B4|PASS|MHD-Cron: abgelaufene Charge wandert automatisch in die Quarantaene|Pickings ['RAN/QC/00007'], Quarantaene 48.0 Dosen
+RES|C1|PASS|Umlagerung Reservefach -> Pickplatz Lemon per Scanner-Assistent|Pickplatz Lemon: 480.0
+RES|C2|PASS|Umlagerung Reservefach -> Pickplatz Berry|Pickplatz Berry: 480.0
+RES|C3|PASS|FEFO: beim Umlagern wird die Charge mit kuerzestem MHD zuerst genommen|Pickplatz enthaelt ['DEMO-LEM-B']
+RES|C4|PASS|Umlagerung auf dasselbe Fach wird abgelehnt|blockiert: Quelle und Ziel sind identisch.
+RES|C5|PASS|Verbrauch abschreiben ins Verbrauchslager|6.0 Dosen in RAN/Verbrauchslager
+RES|C6|PASS|Stellplatz-Etikett mit Strichcode druckbar|Etikett gerendert, 5480 Zeichen
+RES|D1|PASS|Flixcheck-Mail -> Kiosk, Kommissionslager, Erstbestueckung geplant|K-BER-0024 DEMO Späti Kreuzberg, Status erstbestueckung_geplant, Lager Kommissionsware Kunden/K-BER-0024, Lieferauftrag RAN/OUT/00036 (assigned), Akquisiteur Primewave Media UG (Haysam Sououd)
+RES|D2|PASS|Kioskdaten korrekt uebernommen, Kommissionslager zunaechst leer|IBAN uebernommen, Lager leer
+RES|D3|PASS|Dublette (gleiche E-Mail) -> Pruefen statt zweitem Kiosk|Dublette erkannt, Status Pruefen
+RES|D4|PASS|Mail ohne Pflichtfelder -> kein Kiosk, Pruefaufgabe|Status check, kein Kiosk angelegt
+RES|D5|PASS|Zwei weitere Kioske per Mail: Berlin-Neukoelln und Koeln-Ehrenfeld|K-BER-0025 (Berlin), K-KOE-0004 (Koeln)
+RES|D6|PASS|Kiosk-ID und Gebiet je Kiosk vergeben (BER/KOE)|Kiosk-IDs K-BER-0024 K-BER-0025 K-KOE-0004, Gebiete BER BER KOE
+RES|E1|PASS|Fahrer laedt Ware aus der Pickzone ins Fahrzeuglager|Fahrzeug BER: Lemon 96.0, Berry 96.0
+RES|E2|PASS|Ohne Unterschrift bucht die Erstbestueckung nicht|blockiert: Ohne Unterschrift im Uebergabeprotokoll wird nicht gebucht.
+RES|E3|PASS|Mit Unterschrift aber ohne Kuehlschrank-Foto bucht sie nicht|blockiert: Foto des bestueckten Kuehlschranks fehlt im Uebergabeprotokoll.
+RES|E4|PASS|Unterschrift + Foto -> Ware wird gebucht (192 Dosen), Kiosk wird aktiv|Lieferung RAN/OUT/00036 done, Kiosk aktiv, Kommissionslager 192.0 Dosen
+RES|E5|PASS|Startpraemie 50 EUR Kiosk offen und 50 EUR Primewave als Aufgabe|Startpraemie open, Provisions-Aufgaben Primewave 1, Aufgaben am Kiosk ['Startprämie zahlen (K-BER-0024)']
+RES|E6|PASS|Startpraemie als ausgezahlt markieren|von open auf paid am 2026-11-19
+RES|F1|PASS|SSM zaehlt: Bestandsaufnahme wird mit Sollbestand und Preis aus der Preisliste angelegt|K-BER-0024 2026-11-01–2026-11-19 mit 2 Zeilen, erwartet [('MAG-LEM-250', 96.0), ('MAG-BER-250', 96.0)]
+RES|F2|PASS|Abverkauf = Soll minus gezaehlt (36 Lemon, 26 Berry), Preis 0,75|Abverkauf {'MAG-LEM-250': 36.0, 'MAG-BER-250': 26.0}, Preis 0,75 je Dose, netto 46.5
+RES|F3|PASS|Abverkauf bestaetigen: verkaufte Menge geht aus dem Kommissionslager|Status done, Rest im Kommissionslager 130.0
+RES|F4|PASS|Rechnung: Getraenk + Pfand als eigene Zeile (62 x 0,25), 19 % USt|INV/2026/00001 netto 62.00 brutto 73.78, Zeilen {'MAG-LEM-250': (36.0, 0.75), 'MAG-BER-250': (26.0, 0.75), 'PFAND-025': (62.0, 0.25)}
+RES|F5|PASS|Rechnungsbetrag stimmt rechnerisch (62 x 1,00 netto, 19 % USt)|netto 62.00, USt 11.78, brutto 73.78
+RES|F6|PASS|Nach der Rechnung bleibt unverkaufte Kommissionsware im Kiosk-Lager|Kommissionslager nach Rechnung: 130.0
+RES|F7|PASS|Bestandsdifferenz sperrt Bestaetigung bis sie geklaert ist|blockiert: Bestandsdifferenz offen. Bitte zuerst prüfen und freigeben.
+RES|F8|PASS|Differenz geklaert -> Abverkauf laesst sich bestaetigen|nach Klaerung bestaetigt, Status done
+RES|F9|PASS|Unter 24 verkauften Dosen entsteht keine Rechnung|blockiert: Rechnung erst ab 24 Dosen. Aktuell sind 10 Stück erfasst, die Meldung bleibt offen.
+RES|G1|PASS|Nachschub unter 4 Trays wird abgelehnt|blockiert: Nachschub erst ab 4 Trays. Aktuell 2.
+RES|G2|PASS|Liefersperre: offene ueberfaellige Rechnung blockiert den Nachschub|blockiert: Liefersperre: offene überfällige Rechnung bei DEMO Späti Neukölln Berry.
+RES|G3|PASS|SSM loest Nachschub aus (4 Trays) wenn alles frei ist|RAN/OUT/00041 assigned, 96.0 Dosen
+RES|H1|PASS|Pfandzeile je Dose automatisch: B2B netto 0,25, Onlineshop 0,25 brutto|B2B 48 x 0.2500 netto, Shop 24 x 0.2101 netto (0,25 brutto)
+RES|H2|PASS|Pfandruecknahme B2B -> Gutschrift 20 x 0,25|RINV/2026/00001 netto 5.00
+RES|H3|PASS|Keine Pfandrueckgabe an Kioske (Ablauf: Abrechnung ueber DPG)|blockiert: Keine Pfandrückgabe an Kioske. Das Pfand wird mit der Abverkaufsrechnung abgerechnet, die DPG-Rücknahme erfolg
+RES|H4|PASS|Pfandrueckstellung netto: 1000 raus, 500 zurueck = 125,00 brutto, 105,04 netto (Beispiel TU Treuhand)|MISC/2026/11/0002 Soll 4000 105.04 / Haben 3071 105.04 (Beispiel der Kanzlei: 105,04)
+RES|I1|PASS|B2B-Auftrag bestaetigen -> Lieferschein (Pickzonen-Regel greift)|RAN/OUT/00042 assigned, Quellzone {'pick'}
+RES|J1|PASS|Tour Berlin: offene Lieferungen automatisch, Reihenfolge nach PLZ|2 Stopps, PLZ ['10999', '12045']
+RES|J2|PASS|Tour Koeln nimmt nur Koelner Kioske|1 Stopps Koeln: ['DEMO Kiosk Ehrenfeld Köln']
+RES|K1|PASS|Speditionstransfer Rangsdorf -> Koeln, 1 Palette|RAN/QC/00012 done, 576.0 Dosen (1 Palette = 12 Trays je Sorte)
+RES|L1|PASS|Monatsrechnung Primewave: eine Zeile je uebergebenem Kiosk, 50 EUR|Entwurf von Primewave Media UG (Haysam Sououd), 1 Zeile(n) [('K-BER-0024 10/2026', 50.0)], Summe 50.00
+RES|L2|PASS|Zweiter Lauf erzeugt keine doppelte Abrechnung|zweiter Lauf legt nichts an
+RES|M1|PASS|6-Monats-Ruecknahme: alte Kommissionsware geht in die Qualitaetssperre|['RAN/QC/00013'] -> Qualitaetssperre
+RES|N1|PASS|Belegvorlagen Lieferschein und Uebergabeprotokoll vorhanden|[('magyc_commission.report_lieferschein', True), ('magyc_commission.report_uebergabeprotokoll', True)]
+RES|N2|PASS|Belegtexte und Mahnvorlagen aus der Vorlage geladen|7 Belegtexte, Mahnvorlagen ['MAGYC 1. Mahnung', 'MAGYC 2. Mahnung', 'MAGYC Zahlungserinnerung']
