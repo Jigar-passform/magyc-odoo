@@ -21,8 +21,10 @@ class MagycPfandProvision(models.TransientModel):
         string="Pfand je Dose brutto", default=0.25, currency_field="currency_id",
     )
     tax_rate = fields.Float(string="USt-Satz %", default=19.0)
-    currency_id = fields.Many2one("res.company", string="Währung",
-                                  compute="_compute_currency")
+    currency_id = fields.Many2one(
+        "res.currency", string="Währung",
+        default=lambda self: self.env.company.currency_id,
+    )
     gross_open = fields.Monetary(compute="_compute_amounts", currency_field="currency_id")
     net_open = fields.Monetary(compute="_compute_amounts", currency_field="currency_id")
     account_liability_id = fields.Many2one(
@@ -46,11 +48,6 @@ class MagycPfandProvision(models.TransientModel):
             open_cans = max((rec.issued_cans or 0) - (rec.returned_cans or 0), 0)
             rec.gross_open = open_cans * (rec.deposit_per_can or 0.0)
             rec.net_open = rec.gross_open / (1.0 + (rec.tax_rate or 0.0) / 100.0)
-
-    @api.depends("date")
-    def _compute_currency(self):
-        for rec in self:
-            rec.currency_id = self.env.company
 
     def action_book(self):
         self.ensure_one()

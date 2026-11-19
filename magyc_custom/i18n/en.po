@@ -24,7 +24,7 @@ msgid ""
 "hier."
 msgstr ""
 "13-digit GLN of the kiosk. The item GTIN is stored on the product, "
-"not not not here."
+"not here."
 
 #. module: magyc_custom
 #: model:ir.model.fields,field_description:magyc_custom.field_res_partner__akquisiteur
@@ -50,7 +50,7 @@ msgid ""
 "bestätigt."
 msgstr ""
 "Exception: orders for this customer are confirmed despite overdue "
-"invoices. invoices. invoices."
+"invoices."
 
 #. module: magyc_custom
 #: model:ir.model.fields.selection,name:magyc_custom.selection__res_partner__kundentyp__b2b
@@ -64,7 +64,7 @@ msgid ""
 "Rechnungen hat."
 msgstr ""
 "Confirming an order is blocked when the customer has overdue "
-"invoices. invoices. invoices."
+"invoices."
 
 #. module: magyc_custom
 #: model:ir.model,name:magyc_custom.model_res_company

@@ -163,7 +163,7 @@ msgstr "Subject"
 msgid "Bruttopreis im Onlineshop. Kiosk und B2B rechnen 0,25 EUR netto ab."
 msgstr ""
 "Gross price in the online shop. Kiosk and B2B are billed 0.25 EUR "
-"net. net. net."
+"net."
 
 #. module: magyc_ops
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_partner_form_ops
@@ -267,7 +267,7 @@ msgid ""
 "Abrechnung."
 msgstr ""
 "Date of the signed handover protocol. Basis for the sales partner "
-"settlement. settlement. settlement."
+"settlement."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_kiosk_application__alias_defaults
@@ -379,7 +379,7 @@ msgid ""
 " lassen."
 msgstr ""
 "For the freight transfer. ponytail: assumption 12 trays; to be "
-"confirmed confirmed confirmed by MAGYC."
+"confirmed by MAGYC."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_res_partner__kiosk_area
@@ -949,7 +949,7 @@ msgid ""
 "Trays bei der Erstbestückung, je 24 Dosen, hälftig auf die Sorten verteilt."
 msgstr ""
 "Trays for the first fill, 24 cans each, split evenly between "
-"varieties. varieties. varieties."
+"varieties."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_transfer_wizard__trays_per_pallet
@@ -969,7 +969,7 @@ msgid ""
 "Akquisiteur-Provision aus."
 msgstr ""
 "Signed handover protocol is available. Triggers the start bonus and "
-"sales sales sales partner commission."
+"sales partner commission."
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_stock_move__magyc_loss_approved_by

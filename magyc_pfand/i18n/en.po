@@ -43,7 +43,7 @@ msgid ""
 "Menge anlegen."
 msgstr ""
 "When confirming an order, add a deposit line with the same quantity "
-"for for for each beverage line."
+"for each beverage line."
 
 #. module: magyc_pfand
 #: model_terms:ir.ui.view,arch_db:magyc_pfand.view_magyc_pfand_return_form

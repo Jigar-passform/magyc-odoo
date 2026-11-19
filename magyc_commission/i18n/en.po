@@ -506,7 +506,7 @@ msgid ""
 "Lagerort beim Kiosk, an dem die Kommissionsware bis zum Abverkauf liegt."
 msgstr ""
 "Storage location at the kiosk where the consignment goods are kept "
-"until until until sell-through."
+"until sell-through."
 
 #. module: magyc_commission
 #: model:ir.model.fields,help:magyc_commission.field_magyc_abverkauf__location_id
