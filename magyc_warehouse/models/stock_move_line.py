@@ -35,7 +35,9 @@ class StockMoveLine(models.Model):
         for line in self:
             lot = line.lot_id
             removal = lot.removal_date if lot else False
-            if not removal or line.location_dest_id.usage != "customer":
+            to_customer = (line.location_dest_id.usage == "customer"
+                           or line.location_dest_id.magyc_zone == "customer")
+            if not removal or not to_customer:
                 continue
             if removal < fields.Datetime.now() and line.location_id.magyc_zone != "quarantine":
                 raise UserError(

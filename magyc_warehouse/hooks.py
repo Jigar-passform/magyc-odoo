@@ -17,6 +17,12 @@ ROWS = {  # Regalreihe: (Stellplätze je Hoehe, Hoehen)
 R03_TOP_TO = 27
 
 
+def _set_shelf_life(env):
+    """Haltbarkeit der Getraenke: Standard 0 Tage laesst neue Chargen sofort ablaufen."""
+    products = env["product.template"].search([("default_code", "like", "MAG-%"), ("use_expiration_date", "=", True)])
+    products.filtered(lambda t: not t.expiration_time).write({"expiration_time": 270})
+
+
 def _route_deliveries_from_pick_zone(env, warehouse, pick):
     """Kundenauftraege kommissionieren aus der Pickzone, nicht aus dem Allgemeinlager.
 
@@ -104,6 +110,7 @@ def post_init_hook(env):
             })
 
     _route_deliveries_from_pick_zone(env, warehouse, pick)
+    _set_shelf_life(env)
 
     existing = set(Location.search([("magyc_bin_code", "!=", False)]).mapped("magyc_bin_code"))
     vals = [{

@@ -226,6 +226,11 @@ class StockPicking(models.Model):
                 picking._magyc_allocate_missing_lots()
                 picking.move_ids.picked = True
                 picking.with_context(skip_backorder=True, cancel_backorder=True, skip_sms=True).button_validate()
+                if picking.state != "done":
+                    raise UserError(
+                        "Die Lieferung %s konnte nicht gebucht werden (Status %s). "
+                        "Meist ist eine Charge abgelaufen: Ware pruefen und in die Quarantaene umlagern."
+                        % (picking.name, picking.state))
             kiosk = picking.partner_id
             kiosk.write({
                 "kiosk_status": "aktiv",
