@@ -396,13 +396,13 @@ def manual():
     note("Ein Artikel ohne Chargenverfolgung wird beim Liefern nicht nach MHD sortiert. "
          "Das ist der haeufigste Einrichtungsfehler.", "warn", s)
     para("7.2 Pfandartikel anlegen", s, H2)
-    steps(["<b>Lager &gt; Artikel</b>, <b>Neu</b>, Bezeichnung <b>Pfand 0,25 EUR</b>.",
+    steps(["<b>Lager &gt; Artikel</b>, <b>Neu</b>, Bezeichnung <b>Pfand Einweg (DPG) 0,25 &euro;</b>, Interne Referenz <b>PFAND-025</b>.",
            "Typ <b>Dienstleistung</b>, damit kein Lagerbestand entsteht.",
-           "<b>Verkaufspreis 0,25</b>, Steuern wie beim Getraenk.",
+           "<b>Verkaufspreis 0,25</b>, Steuer <b>19 %</b>, Haken <b>Pfandartikel</b>, Ertragskonto <b>4401</b>.",
            "Kontrolle: Der Artikel wird beim Abverkauf als eigene Zeile vorgeschlagen."], s)
     para("7.3 Preislage pflegen", s, H2)
     steps(["<b>Verkauf &gt; Konfiguration &gt; Preislagen</b>, Preislage <b>Kiosk</b>.",
-           "Je Artikel eine Zeile mit <b>Mindestmenge 1</b> und Netto-Preis.",
+           "Ohne Zeile gilt der Verkaufspreis des Artikels (0,75 EUR netto). Abweichende Preise je Artikel als Zeile mit <b>Mindestmenge 1</b> eintragen.",
            "Kontrolle: Im Abverkauf ist der Preis ausgegraut und nicht aenderbar."], s)
     para("Der Abverkauf uebernimmt den Preis aus der Preislage. Wer einen Preis aendern "
          "will, aendert ihn dort. Damit ist ausgeschlossen, dass zwei Kioske "
@@ -870,27 +870,29 @@ def open_items():
     para("<b>Offene Angaben</b>", s, ParagraphStyle("ot", parent=BODY, fontName="Helvetica-Bold",
                                                   fontSize=12, textColor=NAVY, spaceAfter=10))
     para("Diese Liste enthaelt nur, was in den vorliegenden Unterlagen fehlt oder sich widerspricht. "
-         "Beraternummer, Mandantennummer, Pfandkonten, DPG-Buendelung und Anlagekonten stehen im Schreiben "
-         "der Kanzlei vom 13.11. und sind im System hinterlegt. Jede Zeile nennt, wofuer die Angabe gebraucht wird und was solange "
+         "Beraternummer, Mandantennummer, Sachkontenlaenge, Pfandkonten, DPG-Buendelung und Anlagekonten stehen im Schreiben "
+         "der Kanzlei vom 13.11. und sind im System hinterlegt. Alle Zeilen sind gegen die Onboarding-Unterlagen vom 28.10. abgeglichen. Jede Zeile nennt, wofuer die Angabe gebraucht wird und was solange "
          "nicht funktioniert. Die Reihenfolge ist eine Empfehlung.", s)
     table(["Nr.", "Angabe", "Wer", "wofuer", "was solange nicht geht"],
-          [["1", "Kontenrahmen SKR04: Konto 4000 ist im SKR04 Umsatzerloese, im Schreiben vom 13.11. aber Bestandsveraenderung Pfand. Konten 4401 und 3071 gibt es im SKR04 nicht. 560, 630, 670 haben 3 statt 4 Stellen", "TU Treuhand", "Pfandbuchung, Anlagekonten, Umstellung von SKR03", "SKR04 laedt fehlerfrei (auf Kopie geprueft), die Pfandkonten brauchen vorher eine verbindliche Nummer"],
-           ["2", "USt-IdNr. und Steuernummer MAGYC", "MAGYC", "Rechnungskopf, Belegtexte", "nicht in den Unterlagen, die Fusszeile endet bei der HRB-Nummer"],
-           ["3", "IBAN: Konto Berliner Sparkasse ist in Eroeffnung, Qonto lief bis 11.11.", "MAGYC", "Rechnung, Zahlungsabgleich", "Zahlungen manuell zuordnen"],
-           ["4", "Einkaufspreis je Dose (Eko-Vit, Karl, Queen of Beverage)", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
-           ["5", "Echte Gewichte Dose, Tray, Palette und Palettenmasse vom Abfueller", "Eko-Vit", "Versandgewicht, Frachtkosten", "hinterlegt sind Schaetzwerte (0,35 kg, 8,4 kg, 25 kg)"],
-           ["6", "Anschrift Lager Koeln-Rodenkirchen", "MAGYC", "Lager KOE, Lieferscheine", "Anschrift steht noch auf Berlin"],
-           ["7", "Anschriften und Bankdaten der Lieferanten (Eko-Vit, Karl, Queen of Beverage, Ardagh, DPG, Clearing Solution)", "MAGYC", "Kreditorenstamm, Zahlung", "Lieferanten ohne Adresse und IBAN"],
-           ["8", "B2B-Preislisten und Endkundenpreise Shop", "MAGYC", "Preislagen", "nur der Kioskpreis 0,75 EUR ist gepflegt"],
-           ["9", "Zahlungsziel B2B (Belegtexte: OFFEN)", "MAGYC", "Rechnung B2B", "kein Zahlungsziel auf B2B-Rechnungen"],
-           ["10", "Eine echte Flixcheck-Mail", "MAGYC", "Felder der Kiosk-Mail zuordnen", "Postfach legt Kiosk nach Standardfeldern an"],
-           ["11", "Zugaenge DSV, UPS, DPD, DHL, Shopify, Marktplaetze", "MAGYC", "Versandetiketten, Shop", "Etikettenaufruf meldet fehlende Zugangsdaten"]],
+          [["1", "SKR04: 4000 ist im SKR04 Umsatzerloese, 4401 und 3071 gibt es dort nicht, 560/630/670 sind dreistellig bei Kontenlaenge 4. Kanzlei nennt verbindliche Nummern", "TU Treuhand", "Pfandbuchung, Anlagekonten, Umstellung SKR03 auf SKR04", "SKR04 laedt fehlerfrei (auf Kopie geprueft), Konten bleiben bis zur Antwort im SKR03"],
+           ["2", "Konto fuer Startpraemie 50 EUR (Kiosk und Primewave)", "TU Treuhand", "Buchung der Praemien", "Praemien werden als Aufgabe angelegt, ohne Kontenzuordnung"],
+           ["3", "USt-IdNr. und Steuernummer MAGYC", "MAGYC", "Rechnungskopf, Fusszeile", "Fusszeile zeigt USt-IdNr. offen"],
+           ["4", "IBAN Berliner Sparkasse (Konto in Eroeffnung, Qonto lief bis 11.11.)", "MAGYC", "Rechnung, Zahlungsabgleich, Fusszeile", "Fusszeile zeigt Bank offen"],
+           ["5", "Einkaufspreis je Dose. Rechnung von Queen of Beverage nennt 0,27 EUR Berry, Rolle ungeklaert", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
+           ["6", "Gewichte Dose, Tray, Palette und Palettenmasse vom Abfueller", "Eko-Vit", "Versandgewicht, Fracht", "hinterlegt sind Schaetzwerte (0,35 kg, 8,4 kg, 25 kg)"],
+           ["7", "Anschrift Lager Koeln-Rodenkirchen (Nachreichung zugesagt)", "MAGYC", "Lager KOE, Lieferscheine", "Anschrift steht noch auf Berlin"],
+           ["8", "Lieferanten: Adresse, USt-IdNr., IBAN fuer Eko-Vit, Karl, Queen of Beverage, Ardagh, DPG, Clearing Solution, Gastro-Michel, Vermieter. Rolle von Karl, Queen, Ardagh klaeren", "MAGYC", "Kreditorenstamm, Zahlung", "Lieferanten ohne Adresse und IBAN"],
+           ["9", "B2B-Preisliste und Shop-Endkundenpreise brutto", "MAGYC", "Preislagen B2B und Shop", "alle drei Preislagen liefern 0,75 EUR aus dem Artikel"],
+           ["10", "Zahlungsziel B2B und Du/Sie-Entscheidung fuer Belegtexte (Entwurf: Sie)", "MAGYC", "Rechnung B2B, Belegtexte", "B2B-Rechnung ohne Zahlungsziel"],
+           ["11", "Regalplan nur fuer Rangsdorf geliefert, Regalplan Koeln fehlt", "MAGYC", "Stellplaetze Koeln", "Koeln hat einen Sammellagerort"],
+           ["12", "Eine echte Flixcheck-Mail", "MAGYC", "Felder der Kiosk-Mail zuordnen", "Postfach legt Kiosk nach Standardfeldern an"],
+           ["13", "Zugaenge DHL, UPS, DPD, DSV, Online-Shop, Marktplatz (Datei Zugaenge ist leer)", "MAGYC", "Versandetiketten, Shop", "Etikettenaufruf meldet fehlende Zugangsdaten"]],
           [9 * mm, 40 * mm, 20 * mm, 34 * mm, 65 * mm], s)
     note("<b>Was trotzdem laeuft.</b> Kioskverwaltung, Erstbestueckung, Nachschub, "
          "Touren, Abverkauf, Pfand, Rueckgabe, Lagerzonen, Stellplaetze und DATEV-Export sind "
          "funktionsfaehig. Ohne die Angaben oben fehlen Pflichtangaben auf Belegen, die "
          "kaufmaennische Bewertung und die Anbindung an Dritte.", "ok", s)
-    para("<b>Empfohlene Reihenfolge.</b> Zuerst Punkt 1 bei der Kanzlei, weil "
+    para("<b>Empfohlene Reihenfolge.</b> Zuerst die Punkte 1 und 2 bei der Kanzlei, weil "
          "sie den Monatsabschluss blockieren. Danach 5 bis 7 von MAGYC, weil sie auf "
          "jedem Beleg stehen. Die Punkte 8 bis 12 sind Ausbaustufen und blockieren den "
          "Start nicht.", s)

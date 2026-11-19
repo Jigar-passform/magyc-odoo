@@ -146,11 +146,24 @@ cd "/d/Program Files/Odoo/20/server"
 | Rollen | MAGYC Warehouse, Driver, Store Success Manager |
 | Konten | Pfand brutto auf 4401, Rückstellung netto 3071 gegen 4000 (Beispiel 1000/500 Dosen: 125,00 brutto, 105,04 netto) |
 
+## 9b. Abgleich mit den Onboarding-Unterlagen (28.10.)
+
+| Unterlage | Auf Staging |
+| --- | --- |
+| Sachkontenlänge 4 (Schreiben 13.11.) | `l10n_de_datev_account_length = 4` (stand auf 8) |
+| Lieferanten GS1, PassForm, TU Treuhand | Adressen, USt-IdNr. und IBAN eingetragen. Übrige Lieferanten in der Datei OFFEN |
+| Lager Rangsdorf | Anschrift Werk 2, Mittenwalder Straße 9A, 15834 Rangsdorf |
+| Beispielorte R01-G01-P01 bis R02-G02-P03 | 12 Orte archiviert, echter Plan aus `Lagerplatz belegung.xlsx` |
+| Verpackung Tray 24er | GTIN 4262572740043 (Lemon), 4262572740067 (Berry) als `product.uom` |
+| Europalette 2880 Dosen | Ohne GTIN laut Datei (SSCC/NVE), keine Barcodezeile |
+| Preislisten Kiosk, B2B, Shop | Keine Zeilen, Preis kommt aus dem Artikel (0,75 netto) |
+| Fußzeile | USt-IdNr. und Bank stehen auf offen, wie in der Belegtexte-Datei |
+
 ## 10. Bekannte Grenzen
 
 | Thema | Stand |
 | --- | --- |
-| Pfand-Artikel | Zwei Datensätze auf Staging: `Pfand 0,25 EUR` (bucht 4401) und `Pfand Einweg (DPG) 0,25 €` (`PFAND-025`, Stammdaten der Kanzlei). Zusammenführen offen |
+| Pfand-Artikel | Ein Artikel `PFAND-025` (Stammdaten der Kanzlei, Dienstleistung, 19 %, Haken `is_pfand`, Ertragskonto 4401). Duplikat `Pfand 0,25 EUR` archiviert |
 | `stock.scrap` | In Odoo 20 nicht vorhanden, Verluste laufen über `stock.move`, Verbrauch über `magyc_write_off_consumption` |
 | Palettenlogik | Transfer rechnet 24 Dosen je Tray als festen Wert, echte Palettenkonfiguration offen |
 | Köln | Lager mit Platzhalteradresse, Regalplan und echte Anlieferung offen |
