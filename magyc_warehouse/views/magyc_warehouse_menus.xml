@@ -8,4 +8,6 @@
               parent="menu_magyc_warehouse" action="action_magyc_bin" sequence="20"/>
     <menuitem id="menu_magyc_bin_transfer" name="Umlagerung"
               parent="menu_magyc_warehouse" action="action_magyc_bin_transfer" sequence="30"/>
+    <menuitem id="menu_magyc_labels" name="Etiketten drucken"
+              parent="menu_magyc_warehouse" action="action_magyc_label_wizard" sequence="40"/>
 </odoo>

@@ -27,6 +27,20 @@ class StockLocation(models.Model):
         for loc in self:
             loc.magyc_blocked_zone = loc.magyc_zone == "quarantine"
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        # Der Stellplatzcode ist zugleich der Barcode fuer die Barcode-App.
+        for vals in vals_list:
+            if vals.get("magyc_bin_code") and not vals.get("barcode"):
+                vals["barcode"] = vals["magyc_bin_code"]
+        locations = super().create(vals_list)
+        locations.filtered(lambda l: l.magyc_bin_code and not l.barcode).write(
+            {"barcode": False})
+        for loc in locations.filtered("magyc_bin_code"):
+            if not loc.barcode:
+                loc.barcode = loc.magyc_bin_code
+        return locations
+
     @api.constrains("magyc_bin_code")
     def _check_bin_code(self):
         for loc in self.filtered("magyc_bin_code"):
@@ -37,3 +51,7 @@ class StockLocation(models.Model):
             ])
             if twin:
                 raise ValidationError("Stellplatz %s ist doppelt vergeben." % loc.magyc_bin_code)
+
+    def action_magyc_print_labels(self):
+        return self.env.ref("magyc_warehouse.action_report_bin_label").report_action(
+            self, data={})

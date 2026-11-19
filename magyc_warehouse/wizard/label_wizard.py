@@ -1,23 +1,29 @@
-from odoo import fields, models
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class MagycLabelWizard(models.TransientModel):
-    """Anzahl Stellplatz-Etiketten drucken (Barcode = Stellplatz oder Kiosk-ID)."""
+    """Stellplatz-Etiketten fuer eine Auswahl von Faechern drucken."""
 
     _name = "magyc.label.wizard"
     _description = "Etiketten drucken"
 
-    res_model = fields.Char(required=True)
-    res_id = fields.Integer(required=True)
-    label_count = fields.Integer(string="Anzahl", default=1, required=True)
-    label_kind = fields.Selection(
-        [("bin", "Stellplatz"), ("product", "Artikel")],
-        string="Etikett", default="bin", required=True,
+    picking_id = fields.Many2one("stock.picking", string="Wareneingang")
+    filter_zone = fields.Selection(
+        [("general", "Allgemeinlager"), ("pick", "Pickzone"), ("quarantine", "Quarantänelager")],
+        string="Zone", default="general",
     )
-    start_number = fields.Integer(string="Ab Nummer", default=1)
+    label_count = fields.Integer(string="Anzahl Etiketten", default=0,
+                                 help="0 druckt alle Stellplaetze der Zone.")
+    location_ids = fields.Many2many("stock.location", string="Stellplaetze")
 
     def action_print(self):
         self.ensure_one()
-        return self.env.ref("magyc_warehouse.action_report_bin_label").report_action(
-            self, data={"count": self.label_count, "kind": self.label_kind,
-                        "start": self.start_number})
+        locations = self.location_ids
+        if not locations:
+            locations = self.env["stock.location"].search([
+                ("magyc_zone", "=", self.filter_zone), ("magyc_bin_code", "!=", False),
+            ], limit=self.label_count or None)
+        if not locations:
+            raise UserError("Keine Stellplaetze fuer diese Auswahl.")
+        return self.env.ref("magyc_warehouse.action_report_bin_label").report_action(locations)
