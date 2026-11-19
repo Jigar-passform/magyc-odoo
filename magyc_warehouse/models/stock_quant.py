@@ -14,11 +14,11 @@ class StockQuant(models.Model):
         quarantine = self.env["stock.location"].search(
             [("magyc_zone", "=", "quarantine"), ("usage", "=", "internal")], limit=1)
         if not quarantine:
-            raise UserError("Kein Quarantaenelager definiert.")
+            raise UserError("Kein Quarantänelager definiert.")
         lines = [(q.product_id, q.quantity) for q in self if q.quantity > 0]
         if not lines:
             return True
         self.env["stock.picking"]._magyc_transfer(
             self[0].location_id, quarantine, lines,
-            "Quarantaene %s" % fields.Date.context_today(self))
+            "Quarantäne %s" % fields.Date.context_today(self))
         return True

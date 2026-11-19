@@ -3,7 +3,7 @@ from odoo.exceptions import ValidationError
 
 ZONES = [
     ("general", "Allgemeinlager"),
-    ("quarantine", "Quarantaenelager"),
+    ("quarantine", "Quarantänelager"),
     ("pick", "Pickzone"),
     ("customer", "Kundenlager"),
     ("consumption", "Verbrauchslager"),
@@ -16,7 +16,7 @@ class StockLocation(models.Model):
     magyc_zone = fields.Selection(ZONES, string="Lagerzone", index=True)
     magyc_bin_code = fields.Char(
         string="Stellplatz", index=True,
-        help="Regal-Fach-Hoehe, z. B. R08-01-20. Wird auf dem Etikett gescannt.",
+        help="Regal-Fach-Höhe, z. B. R08-01-20. Wird auf dem Etikett gescannt.",
     )
     magyc_blocked_zone = fields.Boolean(
         string="Gesperrte Zone", compute="_compute_blocked_zone", store=True,

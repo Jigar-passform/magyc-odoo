@@ -1,0 +1,364 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* magyc_warehouse
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20261016\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-19 09:10+0000\n"
+"PO-Revision-Date: 2026-11-19 09:10+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: magyc_warehouse
+#: model:ir.actions.report,print_report_name:magyc_warehouse.action_report_bin_label
+msgid "'Etiketten'"
+msgstr "'Etiketten'"
+#. module: magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.report_bin_label
+msgid "ARTIKEL"
+msgstr "ARTIKEL"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__start_number
+msgid "Ab Nummer"
+msgstr "Ab Nummer"
+#. module: magyc_warehouse
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__general
+msgid "Allgemeinlager"
+msgstr "Allgemeinlager"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__label_count
+msgid "Anzahl"
+msgstr "Anzahl"
+#. module: magyc_warehouse
+#: model:ir.model.fields,help:magyc_warehouse.field_magyc_receipt_wizard__label_count
+msgid "Anzahl Stellplatz-Etiketten nach der Buchung (ohne Charge und MHD)."
+msgstr "Anzahl Stellplatz-Etiketten nach der Buchung (ohne Charge und MHD)."
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__product_id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__product_id
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__magyc_label_wizard__label_kind__product
+msgid "Artikel"
+msgstr "Artikel"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__dest_bin
+msgid "Auf Stellplatz"
+msgstr "Auf Stellplatz"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__magyc_pick_from_zone
+msgid "Aus Pickzone"
+msgstr "Aus Pickzone"
+#. module: magyc_warehouse
+#: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin_stock
+#: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_bin_stock
+msgid "Bestand nach Stellplatz"
+msgstr "Bestand nach Stellplatz"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__po_line_id
+msgid "Bestellposition"
+msgstr "Bestellposition"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__purchase_id
+msgid "Bestellung"
+msgstr "Bestellung"
+#. module: magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_magyc_receipt_wizard_form
+msgid "Buchen"
+msgstr "Buchen"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__lot_id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__lot_id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_lot_name
+msgid "Charge"
+msgstr "Charge"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__lot_name
+msgid "Charge neu"
+msgstr "Charge neu"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_res_company
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__company_id
+msgid "Company"
+msgstr "Company"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__create_uid
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__create_uid
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__create_uid
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__create_uid
+msgid "Created by"
+msgstr "Created by"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__create_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__create_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__create_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__create_date
+msgid "Created on"
+msgstr "Created on"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_ops__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_product_template__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_res_company__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__display_name
+msgid "Display Name"
+msgstr "Display Name"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__label_kind
+msgid "Etikett"
+msgstr "Etikett"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_magyc_label_wizard
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__label_count
+msgid "Etiketten drucken"
+msgstr "Etiketten drucken"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_res_company__magyc_label_printer
+msgid "Etikettendrucker"
+msgstr "Etikettendrucker"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__magyc_blocked_zone
+msgid "Gesperrte Zone"
+msgstr "Gesperrte Zone"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_ops__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_product_template__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_res_company__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_move_line__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__id
+msgid "ID"
+msgstr "ID"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_stock_location
+msgid "Inventory Location"
+msgstr "Inventory Location"
+#. module: magyc_warehouse
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__customer
+msgid "Kundenlager"
+msgstr "Kundenlager"
+#. module: magyc_warehouse
+#: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_warehouse
+msgid "Lager"
+msgstr "Lager"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__magyc_zone
+msgid "Lagerzone"
+msgstr "Lagerzone"
+#. module: magyc_warehouse
+#: model:ir.module.module,summary:base.module_magyc_warehouse
+msgid "Lagerzonen, Wareneingang mit Chargen, Etiketten, Umlagerung, Pickzone"
+msgstr "Lagerzonen, Wareneingang mit Chargen, Etiketten, Umlagerung, Pickzone"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__write_uid
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__write_uid
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__write_uid
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Last Updated by"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__write_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__write_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__write_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__write_date
+msgid "Last Updated on"
+msgstr "Last Updated on"
+#. module: magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_magyc_pick_list
+msgid "Lieferdatum"
+msgstr "Lieferdatum"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_magyc_ops
+msgid "MAGYC Abläufe (Cron)"
+msgstr "MAGYC Abläufe (Cron)"
+#. module: magyc_warehouse
+#: model:res.groups,name:magyc_warehouse.group_magyc_driver
+msgid "MAGYC Fahrer"
+msgstr "MAGYC Fahrer"
+#. module: magyc_warehouse
+#: model:ir.module.module,shortdesc:base.module_magyc_warehouse
+#: model:res.groups,name:magyc_warehouse.group_magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_location_form_warehouse
+msgid "MAGYC Lager"
+msgstr "MAGYC Lager"
+#. module: magyc_warehouse
+#: model:res.groups,name:magyc_warehouse.group_magyc_ssm
+msgid "MAGYC Store Success Manager"
+msgstr "MAGYC Store Success Manager"
+#. module: magyc_warehouse
+#: model:ir.actions.server,name:magyc_warehouse.cron_expired_to_quarantine_ir_actions_server
+msgid "MAGYC: abgelaufene Chargen in Quarantaene"
+msgstr "MAGYC: abgelaufene Chargen in Quarantaene"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__expiry_date
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_expiry_date
+msgid "MHD"
+msgstr "MHD"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__qty
+msgid "Menge"
+msgstr "Menge"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__qty
+msgid "Menge (Stk)"
+msgstr "Menge (Stk)"
+#. module: magyc_warehouse
+#: model:ir.model.fields,help:magyc_warehouse.field_res_company__magyc_label_printer
+msgid "Name des Etikettendruckers am Arbeitsplatz Wareneingang."
+msgstr "Name des Etikettendruckers am Arbeitsplatz Wareneingang."
+#. module: magyc_warehouse
+#: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_pick_list
+#: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_pick_list
+msgid "Pickliste"
+msgstr "Pickliste"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_product_product__magyc_pick_location_id
+#: model:ir.model.fields,field_description:magyc_warehouse.field_product_template__magyc_pick_location_id
+msgid "Pickplatz"
+msgstr "Pickplatz"
+#. module: magyc_warehouse
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__pick
+msgid "Pickzone"
+msgstr "Pickzone"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__line_ids
+msgid "Positionen"
+msgstr "Positionen"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_product_template
+msgid "Product"
+msgstr "Product"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Product Moves (Stock Move Line)"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_stock_quant
+msgid "Quant"
+msgstr "Quant"
+#. module: magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_stock_quant_list_warehouse
+msgid "Quarantäne"
+msgstr "Quarantäne"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_res_company__magyc_quarantine_location_id
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__quarantine
+msgid "Quarantänelager"
+msgstr "Quarantänelager"
+#. module: magyc_warehouse
+#: model:ir.model.fields,help:magyc_warehouse.field_stock_location__magyc_bin_code
+#: model:ir.model.fields,help:magyc_warehouse.field_stock_quant__magyc_bin_code
+msgid "Regal-Fach-Höhe, z. B. R08-01-20. Wird auf dem Etikett gescannt."
+msgstr "Regal-Fach-Höhe, z. B. R08-01-20. Wird auf dem Etikett gescannt."
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__res_id
+msgid "Res"
+msgstr "Res"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__res_model
+msgid "Res Model"
+msgstr "Res Model"
+#. module: magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.report_bin_label
+msgid "STELLPLATZ"
+msgstr "STELLPLATZ"
+#. module: magyc_warehouse
+#: model:res.groups,comment:magyc_warehouse.group_magyc_driver
+msgid "Sieht nur seine Tour und die Übergabeprotokolle."
+msgstr "Sieht nur seine Tour und die Übergabeprotokolle."
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__magyc_bin_code
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_bin_code
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__magyc_label_wizard__label_kind__bin
+msgid "Stellplatz"
+msgstr "Stellplatz"
+#. module: magyc_warehouse
+#: model:ir.actions.report,name:magyc_warehouse.action_report_bin_label
+msgid "Stellplatz-Etiketten"
+msgstr "Stellplatz-Etiketten"
+#. module: magyc_warehouse
+#: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin
+#: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_bins
+msgid "Stellplätze"
+msgstr "Stellplätze"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_stock_picking
+msgid "Transfer"
+msgstr "Transfer"
+#. module: magyc_warehouse
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_magyc_bin_transfer_form
+msgid "Umlagern"
+msgstr "Umlagern"
+#. module: magyc_warehouse
+#: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin_transfer
+#: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_bin_transfer
+msgid "Umlagerung"
+msgstr "Umlagerung"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_magyc_bin_transfer
+msgid "Umlagerung Stellplatz"
+msgstr "Umlagerung Stellplatz"
+#. module: magyc_warehouse
+#: model:ir.model.fields,help:magyc_warehouse.field_stock_quant__magyc_lot_name
+msgid "Unique Lot/Serial Number"
+msgstr "Unique Lot/Serial Number"
+#. module: magyc_warehouse
+#: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__consumption
+msgid "Verbrauchslager"
+msgstr "Verbrauchslager"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__magyc_tray_count
+msgid "Verpackte Trays"
+msgstr "Verpackte Trays"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__source_bin
+msgid "Von Stellplatz"
+msgstr "Von Stellplatz"
+#. module: magyc_warehouse
+#: model:ir.model.fields,help:magyc_warehouse.field_stock_picking__magyc_pick_from_zone
+msgid "Ware wird aus der Pickzone kommissioniert."
+msgstr "Ware wird aus der Pickzone kommissioniert."
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__picking_id
+msgid "Wareneingang"
+msgstr "Wareneingang"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_magyc_receipt_line
+msgid "Wareneingang Position"
+msgstr "Wareneingang Position"
+#. module: magyc_warehouse
+#: model:ir.model,name:magyc_warehouse.model_magyc_receipt_wizard
+#: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_picking_form_warehouse
+msgid "Wareneingang buchen"
+msgstr "Wareneingang buchen"
+#. module: magyc_warehouse
+#: model:res.groups,comment:magyc_warehouse.group_magyc_warehouse
+msgid "Wareneingang, Umlagerung, Pickliste, Stellplätze."
+msgstr "Wareneingang, Umlagerung, Pickliste, Stellplätze."
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__wizard_id
+msgid "Wizard"
+msgstr "Wizard"
+#. module: magyc_warehouse
+#: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_zone
+msgid "Zone"
+msgstr "Zone"
+#. module: magyc_warehouse
+#: model:res.groups,comment:magyc_warehouse.group_magyc_ssm
+msgid "Zählt Bestand beim Kiosk und fordert Nachschub an."
+msgstr "Zählt Bestand beim Kiosk und fordert Nachschub an."

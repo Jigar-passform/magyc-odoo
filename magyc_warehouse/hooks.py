@@ -1,9 +1,9 @@
-"""Lagerstruktur anlegen: Zonen und die 885 Stellplaetze aus der Belegungsliste."""
+"""Lagerstruktur anlegen: Zonen und die 885 Stellplätze aus der Belegungsliste."""
 import logging
 
 _logger = logging.getLogger(__name__)
 
-ROWS = {  # Regalreihe: (Stellplaetze je Hoehe, Hoehen)
+ROWS = {  # Regalreihe: (Stellplätze je Hoehe, Hoehen)
     "R08": (42, ("00", "10", "20")),
     "R07": (39, ("00", "10", "20")),
     "R06": (39, ("00", "10", "20")),
@@ -47,7 +47,7 @@ def post_init_hook(env):
             loc.magyc_zone = zone
         return loc
 
-    ensure("Quarantaenelager", "quarantine", view)
+    ensure("Quarantänelager", "quarantine", view)
     pick = ensure("Pickzone", "pick", view, usage="view")
     ensure("Verbrauchslager", "consumption", view)
     general = Location.search([("name", "=", "Lagerbestand")], limit=1) or view
@@ -57,6 +57,21 @@ def post_init_hook(env):
     if customer and customer.magyc_zone != "customer":
         customer.magyc_zone = "customer"
 
+    # Pickzone: je Sorte ein eigenes Fach (Vorgabe: "jeder Artikel bekommt eine eigene Pickzone")
+    for product in env["product.template"].search([("sale_ok", "=", True), ("is_pfand", "=", False)]):
+        if product.magyc_pick_location_id:
+            continue
+        code = product.default_code or product.name[:12]
+        bin_loc = Location.search([
+            ("name", "=", "PICK-%s" % code), ("usage", "=", "internal"),
+        ], limit=1)
+        if not bin_loc:
+            bin_loc = Location.create({
+                "name": "PICK-%s" % code, "usage": "internal", "location_id": pick.id,
+                "magyc_zone": "pick", "company_id": company.id,
+            })
+        product.magyc_pick_location_id = bin_loc
+
     existing = set(Location.search([("magyc_bin_code", "!=", False)]).mapped("magyc_bin_code"))
     vals = [{
         "name": code, "usage": "internal", "location_id": general.id,
@@ -64,4 +79,4 @@ def post_init_hook(env):
     } for code in _bin_codes() if code not in existing]
     if vals:
         Location.create(vals)
-    _logger.info("MAGYC Lager: %s Stellplaetze angelegt, %s vorhanden", len(vals), len(existing))
+    _logger.info("MAGYC Lager: %s Stellplätze angelegt, %s vorhanden", len(vals), len(existing))

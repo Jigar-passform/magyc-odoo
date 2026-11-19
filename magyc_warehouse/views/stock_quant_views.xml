@@ -13,7 +13,7 @@
                 <field name="quantity"/>
                 <field name="location_id"/>
                 <button name="action_magyc_move_to_quarantine" type="object"
-                        string="Quarantaene" icon="fa-ban" invisible="quantity &lt;= 0"/>
+                        string="Quarantäne" icon="fa-ban" invisible="quantity &lt;= 0"/>
             </list>
         </field>
     </record>

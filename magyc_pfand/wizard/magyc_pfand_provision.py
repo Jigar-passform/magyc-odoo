@@ -3,25 +3,25 @@ from odoo.exceptions import UserError
 
 
 class MagycPfandProvision(models.TransientModel):
-    """Rueckstellung fuer noch nicht zurueckgenommenes Pfand (TU Steuer, 13.11.2026).
+    """Rückstellung fuer noch nicht zurueckgenommenes Pfand (TU Steuer, 13.11.2026).
 
-    Bildung netto: 4000 Bestandsveraenderung Pfandverbindlichkeiten an
-    3071 Offene Pfandruecknahmen. Die Umsatzsteuer wird erst bei tatsaechlicher
+    Bildung netto: 4000 Bestandsveränderung Pfandverbindlichkeiten an
+    3071 Offene Pfandrücknahmen. Die Umsatzsteuer wird erst bei tatsaechlicher
     Rueckgabe gemindert, deshalb netto.
     """
 
     _name = "magyc.pfand.provision"
-    _description = "Pfand-Rueckstellung buchen"
+    _description = "Pfand-Rückstellung buchen"
 
     date = fields.Date(required=True, default=fields.Date.context_today)
     period_label = fields.Char(string="Periode", help="z. B. 11/2026")
     issued_cans = fields.Integer(string="In Verkehr gebracht (Dosen)")
-    returned_cans = fields.Integer(string="Zurueckgenommen (Dosen)")
+    returned_cans = fields.Integer(string="Zurückgenommen (Dosen)")
     deposit_per_can = fields.Monetary(
         string="Pfand je Dose brutto", default=0.25, currency_field="currency_id",
     )
     tax_rate = fields.Float(string="USt-Satz %", default=19.0)
-    currency_id = fields.Many2one("res.company", string="Waehrung",
+    currency_id = fields.Many2one("res.company", string="Währung",
                                   compute="_compute_currency")
     gross_open = fields.Monetary(compute="_compute_amounts", currency_field="currency_id")
     net_open = fields.Monetary(compute="_compute_amounts", currency_field="currency_id")
@@ -55,15 +55,15 @@ class MagycPfandProvision(models.TransientModel):
     def action_book(self):
         self.ensure_one()
         if self.net_open <= 0:
-            raise UserError("Keine offene Pfandrueckstellung fuer diese Periode.")
+            raise UserError("Keine offene Pfandrückstellung fuer diese Periode.")
         move = self.env["account.move"].create({
             "move_type": "entry",
             "journal_id": self.journal_id.id,
             "date": self.date,
-            "ref": "Pfandrueckstellung %s" % (self.period_label or self.date),
+            "ref": "Pfandrückstellung %s" % (self.period_label or self.date),
             "line_ids": [
                 (0, 0, {
-                    "name": "Bestandsveraenderung Pfandverbindlichkeiten %s" % (self.period_label or ""),
+                    "name": "Bestandsveränderung Pfandverbindlichkeiten %s" % (self.period_label or ""),
                     "account_id": self.account_change_id.id,
                     "debit": self.net_open,
                     "credit": 0.0,

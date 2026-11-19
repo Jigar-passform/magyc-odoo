@@ -4,7 +4,7 @@
               parent="magyc_commission.menu_magyc_root" sequence="25"/>
     <menuitem id="menu_magyc_bin_stock" name="Bestand nach Stellplatz"
               parent="menu_magyc_warehouse" action="action_magyc_bin_stock" sequence="10"/>
-    <menuitem id="menu_magyc_bins" name="Stellplaetze"
+    <menuitem id="menu_magyc_bins" name="Stellplätze"
               parent="menu_magyc_warehouse" action="action_magyc_bin" sequence="20"/>
     <menuitem id="menu_magyc_bin_transfer" name="Umlagerung"
               parent="menu_magyc_warehouse" action="action_magyc_bin_transfer" sequence="30"/>

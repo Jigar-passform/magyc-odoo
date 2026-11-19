@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_book" type="object" string="Rueckstellung buchen" class="btn-primary"/>
+                    <button name="action_book" type="object" string="Rückstellung buchen" class="btn-primary"/>
                 </header>
                 <sheet>
                     <group>
@@ -38,13 +38,13 @@
     </record>
 
     <record id="action_magyc_pfand_provision" model="ir.actions.act_window">
-        <field name="name">Pfand-Rueckstellung</field>
+        <field name="name">Pfand-Rückstellung</field>
         <field name="res_model">magyc.pfand.provision</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
 
-    <menuitem id="menu_magyc_pfand_provision" name="Pfand-Rueckstellung"
+    <menuitem id="menu_magyc_pfand_provision" name="Pfand-Rückstellung"
               parent="magyc_commission.menu_magyc_grp_abrechnung"
               action="action_magyc_pfand_provision" sequence="25"/>
 </odoo>

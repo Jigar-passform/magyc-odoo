@@ -5,6 +5,7 @@
     "summary": "Lagerzonen, Wareneingang mit Chargen, Etiketten, Umlagerung, Pickzone",
     "depends": ["stock", "purchase", "product_expiry", "magyc_ops"],
     "data": [
+        "security/magyc_groups.xml",
         "security/ir.access.csv",
         "views/stock_location_views.xml",
         "views/product_views.xml",
@@ -15,6 +16,7 @@
         "wizard/bin_transfer_views.xml",
         "reports/label_report.xml",
         "views/magyc_warehouse_menus.xml",
+        "data/magyc_warehouse_cron.xml",
     ],
     "post_init_hook": "post_init_hook",
     "installable": True,

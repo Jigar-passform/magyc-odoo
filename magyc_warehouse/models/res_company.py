@@ -9,6 +9,6 @@ class ResCompany(models.Model):
         help="Name des Etikettendruckers am Arbeitsplatz Wareneingang.",
     )
     magyc_quarantine_location_id = fields.Many2one(
-        "stock.location", string="Quarantaenelager",
+        "stock.location", string="Quarantänelager",
         domain="[('magyc_zone', '=', 'quarantine')]",
     )

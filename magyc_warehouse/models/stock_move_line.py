@@ -30,7 +30,7 @@ class StockMoveLine(models.Model):
             if removal < fields.Datetime.now() and line.location_id.magyc_zone != "quarantine":
                 raise UserError(
                     "Charge %s ist am %s abgelaufen und darf nicht ausgeliefert werden. "
-                    "Bitte ins Quarantaenelager umlagern." % (lot.name, removal.date())
+                    "Bitte ins Quarantänelager umlagern." % (lot.name, removal.date())
                 )
 
     @api.model_create_multi

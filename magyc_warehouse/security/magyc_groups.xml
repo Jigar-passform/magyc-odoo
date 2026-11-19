@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_magyc_warehouse" model="res.groups">
+        <field name="name">MAGYC Lager</field>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="comment">Wareneingang, Umlagerung, Pickliste, Stellplätze.</field>
+    </record>
+    <record id="group_magyc_driver" model="res.groups">
+        <field name="name">MAGYC Fahrer</field>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="comment">Sieht nur seine Tour und die Übergabeprotokolle.</field>
+    </record>
+    <record id="group_magyc_ssm" model="res.groups">
+        <field name="name">MAGYC Store Success Manager</field>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="comment">Zählt Bestand beim Kiosk und fordert Nachschub an.</field>
+    </record>
+</odoo>
