@@ -26,12 +26,14 @@ class MagycPfandProvision(models.TransientModel):
     gross_open = fields.Monetary(compute="_compute_amounts", currency_field="currency_id")
     net_open = fields.Monetary(compute="_compute_amounts", currency_field="currency_id")
     account_liability_id = fields.Many2one(
-        "account.account", string="Konto 3071",
-        domain="[('code', '=', '3071')]", required=True,
+        "account.account", string="Offene Pfandrücknahmen (3071 SKR04)", required=True,
+        help="TU Treuhand: 3071 Offene Pfandrücknahmen. Kontonummer haengt am "
+             "Kontenrahmen, deshalb keine feste Auswahl.",
     )
     account_change_id = fields.Many2one(
-        "account.account", string="Konto 4000",
-        domain="[('code', '=', '4000')]", required=True,
+        "account.account", string="Bestandsveränderung Pfand (4000 SKR04)", required=True,
+        help="TU Treuhand: 4000 Bestandsveränderung Pfandverbindlichkeiten. "
+             "Saldo muss dem Konto 4401 entsprechen.",
     )
     journal_id = fields.Many2one(
         "account.journal", string="Journal", required=True,
