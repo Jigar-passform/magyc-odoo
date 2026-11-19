@@ -92,7 +92,7 @@ msgstr ""
 #: model:ir.ui.menu,name:magyc_documents.menu_magyc_document_text
 #: model_terms:ir.ui.view,arch_db:magyc_documents.view_magyc_document_text_list
 msgid "Document texts"
-msgstr ""
+msgstr "Document texts"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__doc_type

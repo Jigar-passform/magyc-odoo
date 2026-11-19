@@ -183,7 +183,7 @@ msgstr ""
 #. module: magyc_commission
 #: model:ir.ui.menu,name:magyc_commission.menu_magyc_root
 msgid "Consignment"
-msgstr ""
+msgstr "Consignment"
 
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.view_company_form_magyc_commission
@@ -432,7 +432,7 @@ msgstr ""
 #. module: magyc_commission
 #: model:ir.ui.menu,name:magyc_commission.menu_magyc_abverkauf
 msgid "Kiosk sell-through"
-msgstr ""
+msgstr "Kiosk sell-through"
 
 #. module: magyc_commission
 #: model:ir.ui.menu,name:magyc_commission.menu_magyc_grp_kiosk

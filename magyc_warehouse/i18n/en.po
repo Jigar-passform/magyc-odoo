@@ -495,3 +495,8 @@ msgstr ""
 msgid "Zählt Bestand beim Kiosk und fordert Nachschub an."
 msgstr "Counts stock at the kiosk and requests refills."
 
+#. module: magyc_warehouse
+#: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_labels
+msgid "Etiketten drucken"
+msgstr "Print labels"
+
