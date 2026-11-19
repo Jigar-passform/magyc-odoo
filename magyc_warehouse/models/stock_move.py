@@ -15,13 +15,12 @@ class StockMove(models.Model):
         source = location or self.env["stock.warehouse"].search(
             [("company_id", "=", self.env.company.id)], limit=1).lot_stock_id
         move = self.create({
-            "name": reason or "Verbrauch %s" % product.display_name,
             "product_id": product.id,
             "product_uom_qty": qty,
             "uom_id": product.uom_id.id,
             "location_id": source.id,
             "location_dest_id": consumption.id,
-            "origin": reason or "Verbrauch",
+            "origin": reason or "Verbrauch %s" % product.display_name,
         })
         move._action_confirm()
         move.quantity = qty

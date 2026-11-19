@@ -21,10 +21,13 @@ class MagycReceiptWizard(models.TransientModel):
     def _onchange_purchase(self):
         self.line_ids = [(5, 0, 0)]
         for po_line in self.purchase_id.order_line.filtered(lambda l: not l.display_type):
+            default_bin = self.env.company.magyc_quarantine_location_id or self.env["stock.location"].search(
+                [("magyc_zone", "=", "general"), ("magyc_bin_code", "!=", False)], limit=1)
             self.line_ids = [(0, 0, {
                 "product_id": po_line.product_id.id,
                 "qty": po_line.product_qty - po_line.qty_received,
                 "po_line_id": po_line.id,
+                "location_dest_id": default_bin.id,
             })]
 
     def action_book(self):
@@ -43,6 +46,7 @@ class MagycReceiptWizard(models.TransientModel):
                     "company_id": self.company_id.id,
                     "expiration_date": line.expiry_date,
                 })
+                line.lot_id = lot  # Charge an der Position halten, sonst fehlt sie in der Buchung
             move = picking.move_ids.filtered(lambda m: m.product_id == line.product_id)[:1]
             if not move:
                 move = self.env["stock.move"].create({
@@ -52,16 +56,23 @@ class MagycReceiptWizard(models.TransientModel):
                     "uom_id": line.product_id.uom_id.id,
                     "picking_id": picking.id,
                     "location_id": picking.location_id.id,
-                    "location_dest_id": picking.location_dest_id.id,
+                    "location_dest_id": line.location_dest_id.id,
                 })
-            self.env["stock.move.line"].create({
-                "move_id": move.id,
+            move.location_dest_id = line.location_dest_id
+            # Bestehende Reservierungszeile weiterverwenden, sonst entsteht eine
+            # zweite Zeile ohne Charge und die Buchung scheitert.
+            move_lines = move.move_line_ids.filtered(lambda ml: ml.quantity > 0)[:1]
+            vals = {
                 "product_id": line.product_id.id,
                 "quantity": line.qty,
                 "lot_id": lot.id if lot else False,
                 "location_id": picking.location_id.id,
-                "location_dest_id": picking.location_dest_id.id,
-            })
+                "location_dest_id": line.location_dest_id.id,
+            }
+            if move_lines:
+                move_lines.write(vals)
+            else:
+                self.env["stock.move.line"].create(dict(vals, move_id=move.id))
         picking.move_ids.picked = True
         picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
         if self.label_count:
@@ -72,8 +83,7 @@ class MagycReceiptWizard(models.TransientModel):
                 "view_mode": "form",
                 "target": "new",
                 "context": {
-                    "default_res_model": "stock.picking",
-                    "default_res_id": picking.id,
+                    "default_picking_id": picking.id,
                     "default_label_count": self.label_count,
                 },
             }
@@ -91,3 +101,8 @@ class MagycReceiptLine(models.TransientModel):
     lot_name = fields.Char(string="Charge neu")
     expiry_date = fields.Datetime(string="MHD")
     qty = fields.Float(string="Menge (Stk)", default=0.0)
+    location_dest_id = fields.Many2one(
+        "stock.location", string="Stellplatz", required=True,
+        domain="[('magyc_bin_code','!=',False),('usage','=','internal')]",
+        help="Fach, in das die Ware eingeräumt wird. Bei unklarer Ware das Quarantänelager.",
+    )

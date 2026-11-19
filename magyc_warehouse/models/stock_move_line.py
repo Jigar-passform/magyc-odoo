@@ -5,16 +5,26 @@ from odoo.exceptions import UserError
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
+    def _magyc_is_customer_delivery(self, picking):
+        """Nur echte Kundenlieferungen pruefen, nicht Kiosk-Kommission.
+
+        Kiosk-Lieferungen gehen an ein Kommissionslager, nicht an einen Kunden
+        mit Pickzone. Reservierungen beim Bestaetigen duerfen nicht scheitern.
+        """
+        return (
+            picking.picking_type_code == "outgoing"
+            and picking.partner_id.kundentyp in (False, "b2b", "online")
+            and picking.location_dest_id.magyc_zone != "customer"
+        )
+
     def _magyc_check_pick_zone(self):
-        """Nur Pickzone oder Kundenlager als Quelle fuer Kundenlieferungen."""
+        """Kundenlieferungen nur aus Pickzone oder Kundenlager kommissionieren."""
         for line in self:
             picking = line.picking_id
-            if picking.picking_type_code != "outgoing" or not picking.partner_id:
+            if not picking or not self._magyc_is_customer_delivery(picking):
                 continue
             source = line.location_id
             if source.magyc_zone in ("pick", "customer"):
-                continue
-            if picking.location_id.magyc_zone == "customer":
                 continue
             raise UserError(
                 "Lieferung nur aus der Pickzone. %s liegt in %s. "

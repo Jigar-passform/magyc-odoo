@@ -24,6 +24,7 @@
                             <field name="lot_name"/>
                             <field name="expiry_date"/>
                             <field name="qty"/>
+                            <field name="location_dest_id" options="{'no_create': True}"/>
                         </list>
                     </field>
                 </sheet>
