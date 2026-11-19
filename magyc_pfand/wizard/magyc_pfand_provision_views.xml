@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_magyc_pfand_provision_form" model="ir.ui.view">
+        <field name="name">magyc.pfand.provision.form</field>
+        <field name="model">magyc.pfand.provision</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_book" type="object" string="Rueckstellung buchen" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="period_label"/>
+                            <field name="journal_id"/>
+                        </group>
+                        <group>
+                            <field name="issued_cans"/>
+                            <field name="returned_cans"/>
+                            <field name="deposit_per_can"/>
+                            <field name="tax_rate"/>
+                        </group>
+                    </group>
+                    <group string="Buchung netto">
+                        <group>
+                            <field name="account_change_id"/>
+                            <field name="account_liability_id"/>
+                        </group>
+                        <group>
+                            <field name="gross_open"/>
+                            <field name="net_open"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_magyc_pfand_provision" model="ir.actions.act_window">
+        <field name="name">Pfand-Rueckstellung</field>
+        <field name="res_model">magyc.pfand.provision</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_magyc_pfand_provision" name="Pfand-Rueckstellung"
+              parent="magyc_commission.menu_magyc_grp_abrechnung"
+              action="action_magyc_pfand_provision" sequence="25"/>
+</odoo>

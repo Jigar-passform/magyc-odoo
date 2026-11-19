@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_magyc_warehouse" name="Lager"
+              parent="magyc_commission.menu_magyc_root" sequence="25"/>
+    <menuitem id="menu_magyc_bin_stock" name="Bestand nach Stellplatz"
+              parent="menu_magyc_warehouse" action="action_magyc_bin_stock" sequence="10"/>
+    <menuitem id="menu_magyc_bins" name="Stellplaetze"
+              parent="menu_magyc_warehouse" action="action_magyc_bin" sequence="20"/>
+    <menuitem id="menu_magyc_bin_transfer" name="Umlagerung"
+              parent="menu_magyc_warehouse" action="action_magyc_bin_transfer" sequence="30"/>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_bin_label" model="ir.actions.report">
+        <field name="name">Stellplatz-Etiketten</field>
+        <field name="model">magyc.label.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">magyc_warehouse.report_bin_label</field>
+        <field name="print_report_name">'Etiketten'</field>
+    </record>
+
+    <template id="report_bin_label">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <t t-set="count" t-value="doc.label_count or 1"/>
+                    <t t-foreach="range(count)" t-as="i">
+                        <div style="border:2px solid #000; padding:10px; margin:6px; width:70mm; text-align:center; page-break-inside:avoid;">
+                            <div style="font-size:26px; font-weight:bold;">
+                                <t t-if="doc.label_kind == 'bin'">STELLPLATZ</t>
+                                <t t-else="">ARTIKEL</t>
+                            </div>
+                            <div style="font-size:34px; font-family:monospace; margin-top:6px;">
+                                <t t-out="(doc.start_number or 1) + i"/>
+                            </div>
+                            <div style="margin-top:8px;">
+                                <img t-att-src="'/report/barcode/?barcode_type=Code128&amp;value=%s&amp;width=400&amp;height=90' % ((doc.start_number or 1) + i)" style="width:60mm;"/>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

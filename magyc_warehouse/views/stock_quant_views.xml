@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_quant_list_warehouse" model="ir.ui.view">
+        <field name="name">stock.quant.list.magyc.bin</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0">
+                <field name="magyc_bin_code"/>
+                <field name="magyc_zone"/>
+                <field name="product_id"/>
+                <field name="magyc_lot_name"/>
+                <field name="magyc_expiry_date"/>
+                <field name="quantity"/>
+                <field name="location_id"/>
+                <button name="action_magyc_move_to_quarantine" type="object"
+                        string="Quarantaene" icon="fa-ban" invisible="quantity &lt;= 0"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_magyc_bin_stock" model="ir.actions.act_window">
+        <field name="name">Bestand nach Stellplatz</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[("location_id.magyc_bin_code", "!=", False), ("quantity", "!=", 0)]</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>

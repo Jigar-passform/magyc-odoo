@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_magyc_pick_list" model="ir.ui.view">
+        <field name="name">stock.picking.list.magyc.pick</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" decoration-info="state == 'assigned'">
+                <field name="scheduled_date" string="Lieferdatum"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="origin"/>
+                <field name="magyc_tray_count"/>
+                <field name="state" widget="badge"/>
+                <field name="priority" widget="priority" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_magyc_pick_list" model="ir.actions.act_window">
+        <field name="name">Pickliste</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_magyc_pick_list"/>
+        <field name="domain">[("picking_type_code", "=", "outgoing"), ("state", "in", ("confirmed", "assigned"))]</field>
+        <field name="context">{"search_default_scheduled_date": 1}</field>
+    </record>
+
+    <menuitem id="menu_magyc_pick_list" name="Pickliste"
+              parent="magyc_commission.menu_magyc_grp_logistik"
+              action="action_magyc_pick_list" sequence="25"/>
+</odoo>

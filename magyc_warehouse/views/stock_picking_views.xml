@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_warehouse" model="ir.ui.view">
+        <field name="name">stock.picking.form.magyc.warehouse</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_magyc_open_receipt" type="object"
+                        string="Wareneingang buchen" class="btn-primary"
+                        invisible="picking_type_code != 'incoming' or not origin"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
