@@ -17,6 +17,19 @@ ROWS = {  # Regalreihe: (Stellplätze je Hoehe, Hoehen)
 R03_TOP_TO = 27
 
 
+def _route_deliveries_from_pick_zone(env, warehouse, pick):
+    """Kundenauftraege kommissionieren aus der Pickzone, nicht aus dem Allgemeinlager.
+
+    Kioskauslieferungen geben ihre Quelle selbst vor und sind davon nicht betroffen.
+    """
+    rules = env["stock.rule"].search([
+        ("location_src_id", "=", warehouse.lot_stock_id.id),
+        ("location_dest_id.usage", "=", "customer"),
+        ("picking_type_id.code", "=", "outgoing"),
+    ])
+    rules.write({"location_src_id": pick.id})
+
+
 def _bin_codes():
     for row, (places, levels) in ROWS.items():
         for level in levels:
@@ -89,6 +102,8 @@ def post_init_hook(env):
                 "location_in_id": warehouse.lot_stock_id.id,
                 "location_out_id": product.magyc_pick_location_id.id,
             })
+
+    _route_deliveries_from_pick_zone(env, warehouse, pick)
 
     existing = set(Location.search([("magyc_bin_code", "!=", False)]).mapped("magyc_bin_code"))
     vals = [{

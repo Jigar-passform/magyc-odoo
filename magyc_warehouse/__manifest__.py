@@ -1,6 +1,6 @@
 {
     "name": "MAGYC Lager",
-    "version": "20.0.1.2.0",
+    "version": "20.0.1.3.0",
     "author": "PassForm Digital",
     "summary": "Lagerzonen, Wareneingang mit Chargen, Etiketten, Umlagerung, Pickzone",
     "depends": ["stock", "purchase", "product_expiry", "magyc_ops", "delivery"],
