@@ -81,8 +81,11 @@ class ResPartner(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("kundentyp") == "kiosk" and not vals.get("kiosk_id"):
-                vals["kiosk_id"] = self._magyc_next_kiosk_id(vals)
+            if vals.get("kundentyp") == "kiosk":
+                if not vals.get("kiosk_area"):
+                    vals["kiosk_area"] = self._magyc_area_code(vals)
+                if not vals.get("kiosk_id"):
+                    vals["kiosk_id"] = self._magyc_next_kiosk_id(vals)
         return super().create(vals_list)
 
     @api.constrains("kiosk_id", "kundentyp")

@@ -30,8 +30,11 @@ class MagycTour(models.Model):
                 ("partner_id.kundentyp", "=", "kiosk"),
             ]
             if tour.area:
-                domain.append(("partner_id.gebiet", "ilike", dict(
-                    self._fields["area"].selection)[tour.area]))
+                # Gebiet-Kuerzel am Kiosk, Freitext Gebiet nur als Rueckfall fuer Altdaten
+                domain += ["|", ("partner_id.kiosk_area", "=", tour.area),
+                           "&", ("partner_id.kiosk_area", "=", False),
+                           ("partner_id.gebiet", "ilike", dict(
+                               self._fields["area"].selection)[tour.area])]
             stops = picking.search(domain)
             # Geografische Reihenfolge: Postleitzahl aufsteigend, dann ID.
             stops = stops.sorted(lambda p: (p.partner_id.zip or "99999", p.partner_id.name or ""))

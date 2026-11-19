@@ -23,7 +23,16 @@ class StockMove(models.Model):
             "origin": reason or "Verbrauch %s" % product.display_name,
         })
         move._action_confirm()
-        move.quantity = qty
+        if product.tracking == "none":
+            move.quantity = qty
+        else:
+            move.move_line_ids.unlink()
+            for lot, part in self.env["stock.picking"]._magyc_lot_lines(product, source, qty):
+                self.env["stock.move.line"].create({
+                    "move_id": move.id, "product_id": product.id, "lot_id": lot.id,
+                    "quantity": part, "location_id": source.id,
+                    "location_dest_id": consumption.id,
+                })
         move.picked = True
         move._action_done()
         return move

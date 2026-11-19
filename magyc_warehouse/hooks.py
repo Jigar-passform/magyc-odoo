@@ -69,7 +69,10 @@ def post_init_hook(env):
             bin_loc = Location.create({
                 "name": "PICK-%s" % code, "usage": "internal", "location_id": pick.id,
                 "magyc_zone": "pick", "company_id": company.id,
+                "magyc_bin_code": "PICK-%s" % code, "barcode": "PICK-%s" % code,
             })
+        elif not bin_loc.magyc_bin_code:
+            bin_loc.write({"magyc_bin_code": bin_loc.name, "barcode": bin_loc.barcode or bin_loc.name})
         product.magyc_pick_location_id = bin_loc
 
     # Putaway: Wareneingang legt die Sorte direkt in ihr Pickfach

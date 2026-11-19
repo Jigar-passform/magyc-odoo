@@ -35,6 +35,7 @@ class MagycReceiptWizard(models.TransientModel):
         if not self.line_ids:
             raise UserError("Keine Positionen erfasst.")
         picking = self.picking_id
+        used = self.env["stock.move.line"]  # je Position eine eigene Bewegungszeile
         for line in self.line_ids:
             if line.qty <= 0:
                 continue
@@ -61,7 +62,7 @@ class MagycReceiptWizard(models.TransientModel):
             move.location_dest_id = line.location_dest_id
             # Bestehende Reservierungszeile weiterverwenden, sonst entsteht eine
             # zweite Zeile ohne Charge und die Buchung scheitert.
-            move_lines = move.move_line_ids.filtered(lambda ml: ml.quantity > 0)[:1]
+            move_lines = (move.move_line_ids - used).filtered(lambda ml: ml.quantity > 0)[:1]
             vals = {
                 "product_id": line.product_id.id,
                 "quantity": line.qty,
@@ -72,7 +73,8 @@ class MagycReceiptWizard(models.TransientModel):
             if move_lines:
                 move_lines.write(vals)
             else:
-                self.env["stock.move.line"].create(dict(vals, move_id=move.id))
+                move_lines = self.env["stock.move.line"].create(dict(vals, move_id=move.id))
+            used |= move_lines
         picking.move_ids.picked = True
         picking.with_context(skip_backorder=True, cancel_backorder=True).button_validate()
         if self.label_count:
