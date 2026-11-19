@@ -228,7 +228,7 @@ def cover(canvas, doc):
     canvas.drawString(22 * mm, A4[1] - 45 * mm, doc.subtitle_line)
     canvas.setFillColor(GREY)
     canvas.setFont("Helvetica", 8)
-    canvas.drawString(22 * mm, 14 * mm, "Projekt S00132, Stand 10.11.2026")
+    canvas.drawString(22 * mm, 14 * mm, "Projekt S00132, Stand 19.11.2026")
     canvas.restoreState()
 
 
@@ -241,7 +241,7 @@ def page(canvas, doc):
     canvas.setFont("Helvetica", 7.5)
     canvas.drawString(22 * mm, A4[1] - 13 * mm, "MAGYC DRINKS GmbH, " + doc.title_line)
     canvas.line(22 * mm, 15 * mm, A4[0] - 22 * mm, 15 * mm)
-    canvas.drawString(22 * mm, 10 * mm, "Projekt S00132, Stand 10.11.2026")
+    canvas.drawString(22 * mm, 10 * mm, "Projekt S00132, Stand 19.11.2026")
     canvas.drawRightString(A4[0] - 22 * mm, 10 * mm, "Seite %d" % doc.page)
     canvas.restoreState()
 
@@ -418,12 +418,54 @@ def manual():
     para("Das Fahrzeuglager ist noetig, weil Ware waehrend der Tour im Auto liegt. Wird "
          "sie direkt vom Hauptlager gebucht, stimmt der Bestand nicht mehr, sobald ein "
          "Kiosk nicht beliefert wird.", s)
-    para("8.1 Wareneingang mit MHD", s, H2)
-    steps(["<b>Lager &gt; Vorgaenge &gt; Wareneingang</b>, <b>Neu</b>, Lieferant und "
-           "Artikel waehlen.",
-           "Menge eintragen, <b>Charge</b> oeffnen, <b>MHD</b> setzen.",
-           "<b>Validieren</b>.",
-           "Kontrolle: <b>Lager &gt; Artikel &gt; Chargen</b> zeigt Charge und Datum."], s)
+    para("8.1 Wareneingang mit MHD und Stellplatz", s, H2)
+    steps(["<b>Einkauf &gt; Bestellung</b> bestaetigen. <b>Lager &gt; Vorgaenge &gt; Wareneingang</b> oeffnen, "
+           "<b>Wareneingang buchen</b> klicken.",
+           "Je Position <b>Charge neu</b>, <b>MHD</b>, <b>Menge</b> und <b>Stellplatz</b> eintragen. "
+           "Vorbelegt ist das Quarantaenelager oder das erste freie Fach. Eine Position darf auf "
+           "mehrere Zeilen mit je einer Charge aufgeteilt werden.",
+           "<b>Buchen</b>. Optional vorher <b>Etiketten drucken</b> mit Anzahl waehlen.",
+           "Kontrolle: <b>Lager &gt; Berichte &gt; Bestand</b> zeigt Menge, Charge, MHD und "
+           "Stellplatz in einer Zeile."], s)
+    para("8.2 Zonen und Stellplaetze", s, H2)
+    para("Das Lager ist in fuenf Zonen geteilt. Jede Zone ist ein Lagerort mit Feld <b>Lagerzone</b>.", s)
+    table(["Zone", "Zweck", "Regel"],
+          [["Allgemeinlager", "885 Stellplaetze im Muster R08-01-20 (Regal, Fach, Hoehe)", "Einlagerung, Reserve"],
+           ["Quarantaenelager", "gesperrte oder abgelaufene Ware", "keine Auslieferung"],
+           ["Pickzone", "je Artikel ein Pickplatz, z. B. PICK-MAG-LEM-250", "einzige Quelle fuer Kundenlieferungen"],
+           ["Kundenlager", "Ware beim Kunden", "Kommission"],
+           ["Verbrauchslager", "Material und Verpackung", "Abschreibung ohne Wert"]],
+          [34 * mm, 80 * mm, 54 * mm], s)
+    para("Der Stellplatzcode ist zugleich der Barcode. Das Regal R03 hat oberhalb von Platz 27 "
+         "nur Hoehe 10. Die Plaetze legt die Installation einmalig an.", s)
+    para("8.3 Etiketten drucken", s, H2)
+    steps(["<b>Lager &gt; Etiketten drucken</b>, Zone waehlen, Anzahl eintragen (0 = alle) oder Plaetze auswaehlen.",
+           "<b>Drucken</b>. Jedes Etikett zeigt Code und Strichcode (Code128).",
+           "Kontrolle: Scan des Etiketts in der Lager-Barcode-App oeffnet den Stellplatz."], s)
+    para("8.4 Umlagerung von Fach zu Fach", s, H2)
+    steps(["<b>Lager &gt; Umlagerung</b>.",
+           "<b>Von Stellplatz</b>, <b>Auf Stellplatz</b>, <b>Artikel</b>, <b>Menge</b> eintragen.",
+           "<b>Umlagern</b>. Der Vorgang bucht einen internen Transfer und erledigt ihn sofort.",
+           "Kontrolle: Bestand der beiden Plaetze unter <b>Lager &gt; Berichte &gt; Bestand</b>."], s)
+    note("Der Scanner ist nicht angebunden. Die Codes werden getippt oder ueber die "
+         "Barcode-App gescannt.", "warn", s)
+    para("8.5 Regeln, die das System erzwingt", s, H2)
+    bullets(["<b>FEFO</b>: die Ware mit dem fruehesten MHD wird zuerst reserviert (Kategorie Getraenke).",
+             "<b>Pickzone</b>: Kundenlieferungen werden nur aus der Pickzone kommissioniert, sonst Fehler mit Hinweis auf Umlagerung. Kiosk-Kommission ist ausgenommen.",
+             "<b>Abgelaufene Chargen</b> duerfen nicht an Kunden gehen. Ein taeglicher Lauf verschiebt sie in die Quarantaene.",
+             "<b>Tray-Pruefung</b>: Anzahl Trays mal 24 muss der gelieferten Dosenzahl entsprechen.",
+             "<b>Verpackung</b>: Dose 0,35 kg, Tray 24er 8,4 kg (40 x 27 x 13 cm), Europalette 25 kg (120 x 80 x 15 cm)."], s)
+    para("8.6 Rollen im Lager", s, H2)
+    table(["Rolle", "Darf"],
+          [["MAGYC Warehouse", "Wareneingang, Umlagerung, Etiketten, Quarantaene"],
+           ["MAGYC Driver", "Lieferung und Uebergabe, keine Abrechnung"],
+           ["MAGYC Store Success Manager", "Zaehlung, Nachschub anfordern"]],
+          [60 * mm, 108 * mm], s)
+    para("8.7 Verbrauch abschreiben und Pfandrueckstellung", s, H2)
+    para("Verbrauchsmaterial wird in das Verbrauchslager gebucht und ist damit ohne Wert aus dem "
+         "Bestand. Die Pfandrueckstellung bucht den nicht zurueckgenommenen Teil netto auf Konto "
+         "3071 gegen 4000. Beispiel: 1000 Dosen, 500 zurueck, 125,00 EUR brutto offen, Rueckstellung "
+         "105,04 EUR netto. Pfand in Verkehr bucht brutto auf 4401, die USt entsteht ueber das Automatikkonto.", s)
 
     para("9. Kioskstammdaten", s, H1)
     para("Ein Kiosk ist ein Kontakt mit Kundentyp Kiosk. Alle kioskspezifischen Felder "
@@ -751,6 +793,7 @@ def manual():
            ["Qualitaetssperre und Rueckgabe", "Fahrer-App"],
            ["Kommissionierliste, Mahntexte", "Anbindung Speditionen und Shop"],
            ["Touren, Akquisiteurprovision", "Lager Koeln ueber Platzhalter hinaus"],
+           ["Lagerzonen, 885 Stellplaetze, Etiketten, FEFO", "Scanner-Hardware, Labeldrucker-Anbindung"],
            ["DATEV-Export", ""]],
           [84 * mm, 84 * mm], s)
 
@@ -759,6 +802,7 @@ def manual():
            "und Mandantennummer, Konten fuer Pfand und DPG.",
            "Testkiosk anlegen und einen Monat durchbuchen: Erstbestueckung, zwei "
            "Abverkaeufe, eine Pfandruecknahme, DATEV-Export.",
+           "Entscheidung der Kanzlei: Kontenrahmen SKR03 oder SKR04 (siehe Offene Angaben, Punkt 1).",
            "Benutzer anlegen: zwei GF, Lagerleitung, ein SSM, zwei Fahrer.",
            "Schulung von 90 Minuten anhand dieses Handbuchs, danach zwei Wochen "
            "Begleitung im Tagesgeschaeft.",
@@ -788,6 +832,7 @@ def manual():
            ["Magyc > Belegtexte", "11"],
            ["Buchhaltung > DATEV DTVF Export", "25"],
            ["Lager > Scrap", "20"],
+           ["Lager > Wareneingang, Umlagerung, Etiketten", "8.1 bis 8.4"],
            ["Lager > Berichte > Bestand", "15, 26"]],
           [84 * mm, 84 * mm], s)
     illustrated(s)
@@ -828,24 +873,24 @@ def open_items():
          "vorliegt. Jede Zeile nennt, wofuer die Angabe gebraucht wird und was solange "
          "nicht funktioniert. Die Reihenfolge ist eine Empfehlung.", s)
     table(["Nr.", "Angabe", "Wer", "wofuer", "was solange nicht geht"],
-          [["1", "DATEV Berater- und Mandantennummer", "TU Treuhand", "DATEV-Export", "Dateien sind fuer die Kanzlei nicht importierbar"],
-           ["2", "Sachkonten Pfand und Pfandrueckzahlung", "TU Treuhand", "Buchung der Pfandzeilen", "Pfand wird gebucht, Konten muessen nachgezogen werden"],
-           ["3", "Sachkonten DPG-Clearing (Paragraf 17 UStG)", "TU Treuhand", "Clearing DPG", "Clearing nur manuell ausserhalb des Systems"],
-           ["4", "DATEV-Schluessel je Sachkonto (SKR04)", "TU Treuhand", "Kontenbeschriftung", "Kontenbeschriftungen unvollstaendig"],
-           ["5", "USt-IdNr. und Steuernummer", "MAGYC", "Rechnungskopf", "Rechnungen ohne vollstaendige Pflichtangaben"],
-           ["6", "IBAN und Bankverbindung", "MAGYC", "Rechnung, Zahlungsabgleich", "Zahlungen manuell zuordnen"],
-           ["7", "Einkaufspreise je Artikel", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
-           ["8", "Gewichte und Palettenmasse", "MAGYC", "Speditionstransfer", "Palettenrechnung nur mit Schaetzwerten"],
-           ["9", "Anschrift Lager Koeln-Rodenkirchen", "MAGYC", "Lager KOE, Lieferscheine", "Platzhalteranschrift in Belegen"],
-           ["10", "Regalplan je Kiosktyp", "MAGYC", "Platzierung, Kuehlschrankreihen", "Platzierung nur als Freitext und Foto"],
-           ["11", "Preislisten B2B und Onlineshop", "MAGYC", "Preislagen", "nur Kioskpreise gepflegt"],
-           ["12", "Zugaenge DHL, UPS, DPD, Shopify, Marktplaetze", "MAGYC", "Versand und Shop", "keine Anbindung, Belege manuell"]],
+          [["1", "Kontenrahmen: Mandant nutzt SKR04, System laeuft auf SKR03. Entscheidung und Umstellung", "TU Treuhand", "Pfand- und Steuerkonten nach Schreiben vom 13.11.", "Konten 4401, 3071, 4000, 3806 sind angelegt, aber im SKR03-Rahmen"],
+           ["2", "Bestaetigung DPG-Clearing: eigene Konten oder gebuendelt mit Pfand", "TU Treuhand", "Clearing DPG", "Clearing nur ueber die Pfandkonten"],
+           ["3", "DATEV-Schluessel je Sachkonto", "TU Treuhand", "Kontenbeschriftung", "Kanzlei wusste nicht, was gemeint ist, Rueckfrage noetig"],
+           ["4", "USt-IdNr. und Steuernummer", "MAGYC", "Rechnungskopf", "Rechnungen ohne vollstaendige Pflichtangaben"],
+           ["5", "IBAN und Bankverbindung", "MAGYC", "Rechnung, Zahlungsabgleich", "Zahlungen manuell zuordnen"],
+           ["6", "Einkaufspreise je Artikel", "MAGYC", "Wareneingang, Marge", "Marge nicht auswertbar"],
+           ["7", "Anschrift Lager Koeln-Rodenkirchen", "MAGYC", "Lager KOE, Lieferscheine", "Platzhalteranschrift in Belegen"],
+           ["8", "Regalplan je Kiosktyp", "MAGYC", "Platzierung, Kuehlschrankreihen", "Platzierung nur als Freitext und Foto"],
+           ["9", "Preislisten B2B und Onlineshop", "MAGYC", "Preislagen", "nur Kioskpreise gepflegt"],
+           ["10", "Eine echte Flixcheck-Mail", "MAGYC", "Felder der Kiosk-Mail zuordnen", "Postfach legt Kiosk nach Standardfeldern an"],
+           ["11", "Eingehende Mail (Catch-all) auf der Testumgebung", "MAGYC", "Test des Kiosk-Postfachs", "Postfach nur lokal getestet"],
+           ["12", "Zugaenge DSV, UPS, DPD, DHL, Shopify, Marktplaetze", "MAGYC", "Versandetiketten, Shop", "Etikettenaufruf meldet fehlende Zugangsdaten, Belege manuell"]],
           [9 * mm, 40 * mm, 20 * mm, 34 * mm, 65 * mm], s)
     note("<b>Was trotzdem laeuft.</b> Kioskverwaltung, Erstbestueckung, Nachschub, "
-         "Touren, Abverkauf, Pfand, Rueckgabe, Belegtexte und DATEV-Export sind "
+         "Touren, Abverkauf, Pfand, Rueckgabe, Lagerzonen, Stellplaetze und DATEV-Export sind "
          "funktionsfaehig. Ohne die Angaben oben fehlen Pflichtangaben auf Belegen, die "
          "kaufmaennische Bewertung und die Anbindung an Dritte.", "ok", s)
-    para("<b>Empfohlene Reihenfolge.</b> Zuerst die Punkte 1 bis 4 bei der Kanzlei, weil "
+    para("<b>Empfohlene Reihenfolge.</b> Zuerst die Punkte 1 bis 3 bei der Kanzlei, weil "
          "sie den Monatsabschluss blockieren. Danach 5 bis 7 von MAGYC, weil sie auf "
          "jedem Beleg stehen. Die Punkte 8 bis 12 sind Ausbaustufen und blockieren den "
          "Start nicht.", s)

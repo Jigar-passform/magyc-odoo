@@ -132,14 +132,32 @@ cd "/d/Program Files/Odoo/20/server"
   < /c/Users/ABC/magyc-odoo/tools/demo_seed.py
 ```
 
+## 9a. Modul magyc_warehouse
+
+| Teil | Inhalt |
+| --- | --- |
+| Zonen | `stock.location.magyc_zone`: general, quarantine, pick, customer, consumption |
+| Stellplätze | `magyc_bin_code` = `barcode`, 885 Plätze per `post_init_hook` (`R03_TOP_TO = 27`) |
+| Wareneingang | `magyc.receipt.wizard`, Stellplatz je Zeile, Charge bleibt an der Zeile, Reservierungszeile wird weiterverwendet |
+| Umlagerung | `magyc.bin.transfer` ruft `stock.picking._magyc_transfer` aus `magyc_ops` |
+| Etiketten | `magyc.label.wizard`, Bericht `magyc_warehouse.report_bin_label` auf `stock.location` (Code128) |
+| Regeln | FEFO auf Kategorie Getränke, Pickzonenprüfung nur für Kundenlieferungen, Ablaufsperre, Tray-Prüfung, Cron `_cron_expired_to_quarantine` |
+| Verbrauch | `stock.move.magyc_write_off_consumption(product, qty, location, reason)` |
+| Rollen | MAGYC Warehouse, Driver, Store Success Manager |
+| Konten | Pfand brutto auf 4401, Rückstellung netto 3071 gegen 4000 (Beispiel 1000/500 Dosen: 125,00 brutto, 105,04 netto) |
+
 ## 10. Bekannte Grenzen
 
 | Thema | Stand |
 | --- | --- |
-| `stock.scrap` | In Odoo 20 nicht vorhanden, Verluste laufen über `stock.move` |
+| `stock.scrap` | In Odoo 20 nicht vorhanden, Verluste laufen über `stock.move`, Verbrauch über `magyc_write_off_consumption` |
 | Palettenlogik | Transfer rechnet 24 Dosen je Tray als festen Wert, echte Palettenkonfiguration offen |
 | Köln | Lager mit Platzhalteradresse, Regalplan und echte Anlieferung offen |
+| Kontenrahmen | Staging läuft auf SKR03, Schreiben der Kanzlei nennt SKR04. Konten 4401, 3071, 4000, 3806 sind angelegt, Entscheidung offen |
 | Pfand-Clearing | DPG-Konten nach Paragraf 17 UStG fehlen |
+| Versand | DSV/UPS/DPD/DHL: Felder und `magyc_create_label` vorhanden, ohne Zugangsdaten Fehlermeldung |
+| Scanner | Kein Hardwareanschluss, Stellplatzcodes sind zugleich Barcodes für `stock_barcode` |
+| Kiosk-Postfach | `message_new` lokal getestet, Staging ohne eingehende Mail, Flixcheck-Feldformat unbekannt |
 | Deployment | Instanz ohne SSH, Ausrollen über Upload der Modulpakete |
 | DATEV | Strukturell geprüft, Import in DATEV mit echten Nummern noch offen |
 
