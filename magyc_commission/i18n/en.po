@@ -456,7 +456,7 @@ msgstr "Kiosk"
 #. module: magyc_commission
 #: model_terms:ir.ui.view,arch_db:magyc_commission.report_kiosk_contract_document
 msgid "Kiosk ID"
-msgstr ""
+msgstr "Kiosk ID"
 
 #. module: magyc_commission
 #: model:ir.actions.report,name:magyc_commission.action_report_kiosk_contract

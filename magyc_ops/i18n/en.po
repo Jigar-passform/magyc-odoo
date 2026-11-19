@@ -161,7 +161,7 @@ msgstr "Subject"
 #. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_pfand_shop_price
 msgid "Bruttopreis im Onlineshop. Kiosk und B2B rechnen 0,25 EUR netto ab."
-msgstr ""
+msgstr "Gross price in the online shop. Kiosk and B2B settle 0.25 EUR net."
 "Gross price in the online shop. Kiosk and B2B are billed 0.25 EUR "
 "net."
 
@@ -465,7 +465,7 @@ msgstr "Kiosk created"
 #. module: magyc_ops
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_company_form_magyc_ops
 msgid "Kiosk process (MAGYC)"
-msgstr ""
+msgstr "Kiosk process (MAGYC)"
 
 #. module: magyc_ops
 #: model:ir.module.module,summary:base.module_magyc_ops
@@ -936,12 +936,12 @@ msgstr ""
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__berry_trays
 msgid "Trays Berry"
-msgstr ""
+msgstr "Berry trays"
 
 #. module: magyc_ops
 #: model:ir.model.fields,field_description:magyc_ops.field_magyc_delivery_wizard__lemon_trays
 msgid "Trays Lemon"
-msgstr ""
+msgstr "Lemon trays"
 
 #. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_res_company__magyc_first_fill_trays
@@ -960,7 +960,7 @@ msgstr "Trays per pallet"
 #. module: magyc_ops
 #: model_terms:ir.ui.view,arch_db:magyc_ops.view_magyc_delivery_wizard_form
 msgid "Trays."
-msgstr ""
+msgstr "trays."
 
 #. module: magyc_ops
 #: model:ir.model.fields,help:magyc_ops.field_stock_picking__magyc_handover_confirmed

@@ -31,34 +31,34 @@ msgstr "ARTIKEL"
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_bin_code
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__magyc_label_wizard__label_kind__bin
 msgid "Bin location"
-msgstr "Bin location"
+msgstr "Stellplatz"
 
 #. module: magyc_warehouse
 #: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin
 #: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_bins
 msgid "Bin locations"
-msgstr "Bin locations"
+msgstr "Stellplätze"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_magyc_bin_transfer
 msgid "Bin transfer"
-msgstr "Bin transfer"
+msgstr "Umlagerung"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__magyc_blocked_zone
 msgid "Blocked zone"
-msgstr "Blocked zone"
+msgstr "Gesperrte Zone"
 
 #. module: magyc_warehouse
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_magyc_receipt_wizard_form
 msgid "Book"
-msgstr "Book"
+msgstr "Buchen"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_magyc_receipt_wizard
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_picking_form_warehouse
 msgid "Book goods receipt"
-msgstr "Book goods receipt"
+msgstr "Wareneingang buchen"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_res_company
@@ -69,17 +69,17 @@ msgstr "Company"
 #. module: magyc_warehouse
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__consumption
 msgid "Consumption stock"
-msgstr "Consumption stock"
+msgstr "Verbrauchslager"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__label_count
 msgid "Count"
-msgstr "Count"
+msgstr "Anzahl"
 
 #. module: magyc_warehouse
 #: model:res.groups,comment:magyc_warehouse.group_magyc_ssm
 msgid "Counts stock at the kiosk and requests refills."
-msgstr "Counts stock at the kiosk and requests refills."
+msgstr "Zählt Bestand beim Kiosk und fordert Nachschub an."
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__create_uid
@@ -100,12 +100,12 @@ msgstr "Created on"
 #. module: magyc_warehouse
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__customer
 msgid "Customer stock"
-msgstr "Customer stock"
+msgstr "Kundenlager"
 
 #. module: magyc_warehouse
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_magyc_pick_list
 msgid "Delivery date"
-msgstr "Delivery date"
+msgstr "Lieferdatum"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__display_name
@@ -134,37 +134,37 @@ msgstr ""
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__source_bin
 msgid "From bin"
-msgstr "From bin"
+msgstr "Von Stellplatz"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__start_number
 msgid "From number"
-msgstr "From number"
+msgstr "Ab Nummer"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__magyc_pick_from_zone
 msgid "From pick zone"
-msgstr "From pick zone"
+msgstr "Aus Pickzone"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__general
 msgid "General stock"
-msgstr "General stock"
+msgstr "Allgemeinlager"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_stock_picking__magyc_pick_from_zone
 msgid "Goods are picked from the pick zone."
-msgstr "Goods are picked from the pick zone."
+msgstr "Ware wird aus der Pickzone kommissioniert."
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__picking_id
 msgid "Goods receipt"
-msgstr "Goods receipt"
+msgstr "Wareneingang"
 
 #. module: magyc_warehouse
 #: model:res.groups,comment:magyc_warehouse.group_magyc_warehouse
 msgid "Goods receipt, transfers, pick list, bin locations."
-msgstr "Goods receipt, transfers, pick list, bin locations."
+msgstr "Wareneingang, Umlagerung, Pickliste, Stellplätze."
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__id
@@ -189,12 +189,12 @@ msgstr "Inventory Location"
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__label_kind
 msgid "Label"
-msgstr "Label"
+msgstr "Etikett"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_res_company__magyc_label_printer
 msgid "Label printer"
-msgstr "Label printer"
+msgstr "Etikettendrucker"
 
 #. module: magyc_warehouse
 #: model:ir.module.module,summary:base.module_magyc_warehouse
@@ -222,12 +222,12 @@ msgstr "Last Updated on"
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__lot_id
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_lot_name
 msgid "Lot"
-msgstr "Lot"
+msgstr "Charge"
 
 #. module: magyc_warehouse
 #: model:res.groups,name:magyc_warehouse.group_magyc_driver
 msgid "MAGYC Driver"
-msgstr "MAGYC Driver"
+msgstr "MAGYC Fahrer"
 
 #. module: magyc_warehouse
 #: model:ir.module.module,shortdesc:base.module_magyc_warehouse
@@ -243,12 +243,12 @@ msgstr "MAGYC Store Success Manager"
 #: model:res.groups,name:magyc_warehouse.group_magyc_warehouse
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_location_form_warehouse
 msgid "MAGYC Warehouse"
-msgstr "MAGYC Warehouse"
+msgstr "MAGYC Lager"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_magyc_ops
 msgid "MAGYC processes (cron)"
-msgstr "MAGYC processes (cron)"
+msgstr "MAGYC Abläufe (Cron)"
 
 #. module: magyc_warehouse
 #: model:ir.actions.server,name:magyc_warehouse.cron_expired_to_quarantine_ir_actions_server
@@ -264,44 +264,44 @@ msgstr "MHD"
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_res_company__magyc_label_printer
 msgid "Name of the label printer at the goods-in workplace."
-msgstr "Name of the label printer at the goods-in workplace."
+msgstr "Name des Etikettendruckers am Arbeitsplatz Wareneingang."
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__lot_name
 msgid "New lot"
-msgstr "New lot"
+msgstr "Charge neu"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_magyc_receipt_wizard__label_count
 msgid "Number of bin labels after booking (no lot and no expiry)."
-msgstr "Number of bin labels after booking (no lot and no expiry)."
+msgstr "Anzahl Stellplatz-Etiketten nach der Buchung (ohne Charge und MHD)."
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__po_line_id
 msgid "PO line"
-msgstr "PO line"
+msgstr "Bestellposition"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__magyc_tray_count
 msgid "Packed trays"
-msgstr "Packed trays"
+msgstr "Verpackte Trays"
 
 #. module: magyc_warehouse
 #: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_pick_list
 #: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_pick_list
 msgid "Pick list"
-msgstr "Pick list"
+msgstr "Pickliste"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_product_product__magyc_pick_location_id
 #: model:ir.model.fields,field_description:magyc_warehouse.field_product_template__magyc_pick_location_id
 msgid "Pick location"
-msgstr "Pick location"
+msgstr "Pickplatz"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__pick
 msgid "Pick zone"
-msgstr "Pick zone"
+msgstr "Pickzone"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__line_ids
@@ -312,7 +312,7 @@ msgstr "Positionen"
 #: model:ir.model,name:magyc_warehouse.model_magyc_label_wizard
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__label_count
 msgid "Print labels"
-msgstr "Print labels"
+msgstr "Etiketten drucken"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_product_template
@@ -320,7 +320,7 @@ msgstr "Print labels"
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__product_id
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__magyc_label_wizard__label_kind__product
 msgid "Product"
-msgstr "Product"
+msgstr "Artikel"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_stock_move_line
@@ -330,7 +330,7 @@ msgstr "Product Moves (Stock Move Line)"
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__purchase_id
 msgid "Purchase order"
-msgstr "Purchase order"
+msgstr "Bestellung"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_stock_quant
@@ -340,25 +340,25 @@ msgstr "Quant"
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__qty
 msgid "Quantity"
-msgstr "Quantity"
+msgstr "Menge"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__qty
 msgid "Quantity (pcs)"
-msgstr "Quantity (pcs)"
+msgstr "Menge (Stk)"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_res_company__magyc_quarantine_location_id
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__quarantine
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_stock_quant_list_warehouse
 msgid "Quarantine"
-msgstr "Quarantine"
+msgstr "Quarantäne"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_stock_location__magyc_bin_code
 #: model:ir.model.fields,help:magyc_warehouse.field_stock_quant__magyc_bin_code
 msgid "Rack-shelf-level, e.g. R08-01-20. Scanned from the label."
-msgstr "Rack-shelf-level, e.g. R08-01-20. Scanned from the label."
+msgstr "Regal-Fach-Höhe, z. B. R08-01-20. Wird auf dem Etikett gescannt."
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__res_id
@@ -378,7 +378,7 @@ msgstr "STELLPLATZ"
 #. module: magyc_warehouse
 #: model:res.groups,comment:magyc_warehouse.group_magyc_driver
 msgid "Sees only his tour and the handover protocols."
-msgstr "Sees only his tour and the handover protocols."
+msgstr "Sieht nur seine Tour und die Übergabeprotokolle."
 
 #. module: magyc_warehouse
 #: model:ir.actions.report,name:magyc_warehouse.action_report_bin_label
@@ -389,12 +389,12 @@ msgstr "Stellplatz-Etiketten"
 #: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin_stock
 #: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_bin_stock
 msgid "Stock by bin"
-msgstr "Stock by bin"
+msgstr "Bestand nach Stellplatz"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_location__magyc_zone
 msgid "Storage zone"
-msgstr "Storage zone"
+msgstr "Lagerzone"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_stock_quant__magyc_expiry_date
@@ -410,7 +410,7 @@ msgstr ""
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__dest_bin
 msgid "To bin"
-msgstr "To bin"
+msgstr "Auf Stellplatz"
 
 #. module: magyc_warehouse
 #: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin_transfer
@@ -418,7 +418,7 @@ msgstr "To bin"
 #: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_bin_transfer
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.view_magyc_bin_transfer_form
 msgid "Transfer"
-msgstr "Transfer"
+msgstr "Umlagerung"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_stock_quant__magyc_lot_name
@@ -428,7 +428,7 @@ msgstr "Unique Lot/Serial Number"
 #. module: magyc_warehouse
 #: model:ir.ui.menu,name:magyc_warehouse.menu_magyc_warehouse
 msgid "Warehouse"
-msgstr "Warehouse"
+msgstr "Lager"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_magyc_receipt_line

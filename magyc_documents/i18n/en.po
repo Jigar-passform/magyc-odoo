@@ -115,7 +115,7 @@ msgstr ""
 #. module: magyc_documents
 #: model:ir.module.module,summary:base.module_magyc_documents
 msgid "Belegtexte je Belegtyp (Angebot, AB, Rechnung, Gutschrift)"
-msgstr ""
+msgstr "Document texts per document type (quotation, order confirmation, invoice, credit note)"
 "Document texts per document type (quotation, order confirmation, "
 "invoice, credit note)"
 
@@ -224,7 +224,7 @@ msgstr ""
 #. module: magyc_documents
 #: model:ir.model.fields.selection,name:magyc_documents.selection__magyc_document_text__doc_type__invoice_kiosk
 msgid "Kiosk invoice (sell-through)"
-msgstr ""
+msgstr "Kiosk invoice (sell-through)"
 
 #. module: magyc_documents
 #: model:ir.model.fields,field_description:magyc_documents.field_magyc_document_text__write_uid

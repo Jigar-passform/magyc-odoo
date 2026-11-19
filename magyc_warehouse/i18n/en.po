@@ -438,4 +438,4 @@ msgstr ""
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_zone
 msgid "Zone"
-msgstr ""
+msgstr "Zone"
