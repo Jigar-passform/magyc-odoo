@@ -284,12 +284,16 @@ class TestMagycOps(TransactionCase):
         tour = self.env["magyc.tour"].create({
             "name": "Tour Test", "area": "BER", "date": fields.Date.context_today(self)})
         tour.action_fill_open_pickings()
+        # Auf einer Datenbank mit echten Lieferungen stehen weitere Stopps in der Tour:
+        # geprueft wird die Reihenfolge der beiden Teststopps, nicht ihre absolute Nummer.
         stops = tour.picking_ids.filtered(
             lambda p: p.partner_id in (near | far)).sorted("magyc_stop_sequence")
         self.assertEqual(len(stops), 2)
         self.assertEqual(stops[0].partner_id, near)
-        self.assertEqual(stops[0].magyc_stop_sequence, 10)
-        self.assertEqual(stops[1].magyc_stop_sequence, 20)
+        self.assertEqual(stops[1].partner_id, far)
+        self.assertLess(stops[0].magyc_stop_sequence, stops[1].magyc_stop_sequence)
+        zips = [p.partner_id.zip or "99999" for p in tour.picking_ids.sorted("magyc_stop_sequence")]
+        self.assertEqual(zips, sorted(zips))
 
     def test_14_kiosk_postfach(self):
         application = self.env["magyc.kiosk.application"].create({
