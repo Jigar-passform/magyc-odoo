@@ -70,7 +70,7 @@ msgstr "Aus Pickzone"
 #. module: magyc_warehouse
 #: model_terms:ir.ui.view,arch_db:magyc_warehouse.report_bin_label
 msgid "BIN LOCATION"
-msgstr "BIN LOCATION"
+msgstr "STELLPLATZ"
 
 #. module: magyc_warehouse
 #: model:ir.actions.act_window,name:magyc_warehouse.action_magyc_bin_stock
@@ -109,7 +109,7 @@ msgstr "Charge neu"
 #: model:ir.model,name:magyc_warehouse.model_res_company
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_wizard__company_id
 msgid "Company"
-msgstr "Company"
+msgstr "Firma"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_bin_transfer__create_uid
@@ -145,7 +145,7 @@ msgstr "DSV (UPS)"
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_delivery_carrier
 msgid "Delivery Method"
-msgstr "Delivery Method"
+msgstr "Versandart"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_account_move__display_name
@@ -162,7 +162,7 @@ msgstr "Delivery Method"
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__display_name
 msgid "Display Name"
-msgstr "Display Name"
+msgstr "Anzeigename"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_label_wizard__label_kind
@@ -210,12 +210,12 @@ msgstr "ITEM"
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_stock_location
 msgid "Inventory Location"
-msgstr "Inventory Location"
+msgstr "Lagerort"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_account_move
 msgid "Journal Entry"
-msgstr "Journal Entry"
+msgstr "Buchungssatz"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__customer
@@ -351,7 +351,7 @@ msgstr "Artikel"
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr "Product Moves (Stock Move Line)"
+msgstr "Lagerbewegungen (Bewegungszeile)"
 
 #. module: magyc_warehouse
 #: model:ir.model,name:magyc_warehouse.model_stock_quant
@@ -437,7 +437,7 @@ msgstr "Umlagerung Stellplatz"
 #. module: magyc_warehouse
 #: model:ir.model.fields,help:magyc_warehouse.field_stock_quant__magyc_lot_name
 msgid "Unique Lot/Serial Number"
-msgstr "Unique Lot/Serial Number"
+msgstr "Eindeutige Charge/Seriennummer"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields.selection,name:magyc_warehouse.selection__stock_location__magyc_zone__consumption
@@ -483,7 +483,7 @@ msgstr "Wareneingang, Umlagerung, Pickliste, Stellplätze."
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_magyc_receipt_line__wizard_id
 msgid "Wizard"
-msgstr "Wizard"
+msgstr "Assistent"
 
 #. module: magyc_warehouse
 #: model:ir.model.fields,field_description:magyc_warehouse.field_stock_quant__magyc_zone
