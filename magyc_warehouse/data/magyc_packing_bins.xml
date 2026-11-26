@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Packplaetze laut Lagerleitung (Pascal Truemper, 26.11.2026):
+         R03-31-00 bis R03-42-00, ausschliesslich zum Verpacken.
+         Die Plaetze existieren bereits aus der Belegungsliste und werden nur
+         der Zone Packplaetze zugeordnet, es entstehen keine Dubletten. -->
+    <function model="stock.location" name="magyc_apply_packing_bins"/>
+</odoo>

@@ -104,6 +104,6 @@ class MagycReceiptLine(models.TransientModel):
     qty = fields.Float(string="Menge (Stk)", default=0.0)
     location_dest_id = fields.Many2one(
         "stock.location", string="Stellplatz", required=True,
-        domain="[('magyc_bin_code','!=',False),('usage','=','internal')]",
+        domain="[('magyc_bin_code','!=',False),('usage','=','internal'),('magyc_zone','!=','packing')]",
         help="Fach, in das die Ware eingeräumt wird. Bei unklarer Ware das Quarantänelager.",
     )

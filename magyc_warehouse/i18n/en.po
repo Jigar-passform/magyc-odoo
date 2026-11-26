@@ -500,3 +500,22 @@ msgstr "Counts stock at the kiosk and requests refills."
 msgid "Etiketten drucken"
 msgstr "Print labels"
 
+#. module: magyc_warehouse
+msgid "Packplaetze"
+msgstr "Packing bins"
+
+#. module: magyc_warehouse
+msgid "Nur Packplatz"
+msgstr "Packing bin only"
+
+#. module: magyc_warehouse
+msgid "Packplatz"
+msgstr "Packing bin"
+
+#. module: magyc_warehouse
+msgid "Ausschliesslich die Packplaetze R03-31-00 bis R03-42-00."
+msgstr "Only packing bins R03-31-00 to R03-42-00."
+
+#. module: magyc_warehouse
+msgid "In Packplatz umlagern"
+msgstr "Move to packing bin"

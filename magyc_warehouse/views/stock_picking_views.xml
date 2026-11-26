@@ -9,6 +9,14 @@
                 <button name="action_magyc_open_receipt" type="object"
                         string="Wareneingang buchen" class="btn-primary"
                         invisible="picking_type_code != 'incoming' or not origin"/>
+                <button name="action_magyc_move_to_packing" type="object"
+                        string="In Packplatz umlagern" class="btn-primary"
+                        invisible="picking_type_code != 'outgoing' or state in ('done', 'cancel')"/>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="magyc_packing_bin_id"
+                       invisible="picking_type_code != 'outgoing'"
+                       options="{'no_create': True}"/>
             </xpath>
         </field>
     </record>

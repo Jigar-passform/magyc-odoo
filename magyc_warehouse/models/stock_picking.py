@@ -6,10 +6,27 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     magyc_tray_count = fields.Integer(string="Verpackte Trays")
+    magyc_packing_bin_id = fields.Many2one(
+        "stock.location", string="Packplatz", copy=False,
+        domain="[('magyc_zone', '=', 'packing'), ('usage', '=', 'internal')]",
+        help="Ausschliesslich die Packplaetze R03-31-00 bis R03-42-00.",
+    )
     magyc_pick_from_zone = fields.Boolean(
         string="Aus Pickzone", copy=False,
         help="Ware wird aus der Pickzone kommissioniert.",
     )
+
+    def action_magyc_move_to_packing(self):
+        """Kommissionierte Ware in den gewaehlten Packplatz umlagern."""
+        self.ensure_one()
+        if not self.magyc_packing_bin_id:
+            raise UserError("Bitte zuerst einen Packplatz waehlen.")
+        lines = [(move.product_id, move.product_uom_qty) for move in self.move_ids
+                 if move.product_id and move.product_uom_qty]
+        if not lines:
+            raise UserError("Dieser Vorgang hat keine Positionen.")
+        return self._magyc_transfer(self.location_id, self.magyc_packing_bin_id, lines,
+                                    "Packen %s" % self.name).id
 
     def action_magyc_open_receipt(self):
         self.ensure_one()

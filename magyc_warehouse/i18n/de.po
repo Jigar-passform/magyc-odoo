@@ -500,3 +500,22 @@ msgstr "Zählt Bestand beim Kiosk und fordert Nachschub an."
 msgid "Etiketten drucken"
 msgstr "Etiketten drucken"
 
+#. module: magyc_warehouse
+msgid "Packplaetze"
+msgstr "Packplätze"
+
+#. module: magyc_warehouse
+msgid "Nur Packplatz"
+msgstr "Nur Packplatz"
+
+#. module: magyc_warehouse
+msgid "Packplatz"
+msgstr "Packplatz"
+
+#. module: magyc_warehouse
+msgid "Ausschliesslich die Packplaetze R03-31-00 bis R03-42-00."
+msgstr "Ausschließlich die Packplätze R03-31-00 bis R03-42-00."
+
+#. module: magyc_warehouse
+msgid "In Packplatz umlagern"
+msgstr "In Packplatz umlagern"

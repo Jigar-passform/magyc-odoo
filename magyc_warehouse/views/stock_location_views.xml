@@ -9,6 +9,7 @@
                 <group string="MAGYC Lager">
                     <field name="magyc_zone"/>
                     <field name="magyc_bin_code"/>
+                    <field name="magyc_packing_only"/>
                 </group>
             </xpath>
         </field>
@@ -29,6 +30,7 @@
             <list create="0">
                 <field name="magyc_bin_code"/>
                 <field name="magyc_zone"/>
+                <field name="magyc_packing_only"/>
                 <field name="complete_name"/>
                 <field name="usage"/>
             </list>
